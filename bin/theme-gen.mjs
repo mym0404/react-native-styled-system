@@ -136,7 +136,7 @@ const outputFile =
   './node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts';
 
 try {
-  await $`chakra-cli tokens --no-format --out ${tmpFile} ${source}`;
+  await $`npx @chakra-ui/cli tokens --no-format --out ${tmpFile} ${source}`;
 
   /**
    * export interface ThemedTypings {

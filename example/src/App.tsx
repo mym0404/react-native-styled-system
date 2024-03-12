@@ -19,15 +19,15 @@ import Theme from './Theme.ts';
 const Box = (props: PropsWithChildren<ThemedViewProps>) => {
   const { viewStyle } = useConstructThemedStyle(props);
 
-  return <View {...props} {...viewStyle()} style={{ height: 100, width: 100 }} />;
+  console.log(JSON.stringify(viewStyle(), null, 2));
+
+  return <View {...props} {...viewStyle()} />;
 };
 
 function App(): React.JSX.Element {
   return (
     <StyledSystemProvider theme={Theme}>
-      <Box bg={'violet700'} mt={'48'}>
-        <Box w={24} h={24} bg={'blue100'} />
-      </Box>
+      <Box w={'100%'} h={24} bg={'blue100'} mx={4} />
     </StyledSystemProvider>
   );
 }
