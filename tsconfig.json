@@ -2,18 +2,20 @@
   "compilerOptions": {
     "lib": ["ES6", "ESNext"],
     "noResolve": false,
-    "jsx": "react-native",
+    "jsx": "react-jsx",
+    "types": ["node"],
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "target": "ESNext",
     "noEmit": false,
     "declaration": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "skipLibCheck": true
   },
   "compileOnSave": true,
   "include": ["src/**/*.ts", "src/**/*.tsx"],

@@ -1,16 +1,16 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React Native Styled System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
-    "c": "yarn lint --cache && yarn tsc",
+    "t": "yarn lint --cache && yarn tsc",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
-    "release": "yarn lint && yarn tsc && zx tool/publish.mjs",
-    "build": "yarn c && rm -rf dist && rm -rf esm && yarn rollup --config rollup.config.mjs"
+    "release": "zx tool/publish.mjs",
+    "build": "rm -rf dist && rm -rf esm && yarn rollup --config rollup.config.mjs"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,7 @@
     "react": "*",
     "react-native": "*",
     "rollup": "^4.12.1",
-    "rollup-plugin-banner2": "^1.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-preserve-directives": "^0.4.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.1.2",
     "typescript": "5.3.3"
@@ -58,5 +56,8 @@
       }
     }
   },
-  "packageManager": "yarn@4.1.1"
+  "packageManager": "yarn@4.1.1",
+  "dependencies": {
+    "@mj-studio/js-util": "^1.0.28"
+  }
 }

@@ -1,5 +1,6 @@
 # tsc outDir, build directory
 dist/
+esm/
 
 # Webstorm(or any other Intellij IDE) config
 .idea/

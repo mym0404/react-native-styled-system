@@ -1,4 +1,4 @@
 export interface ThemedTypings {
-  space: number | string;
+  space: number | `${number}%`;
   colors: string;
 }

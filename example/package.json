@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mj-studio/react-native-styled-system": "portal:..",
+    "@mj-studio/react-native-styled-system": "file:..",
     "react": "18.2.0",
     "react-native": "0.73.6"
   },
@@ -18,8 +18,8 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@mj-studio/eslint-config-react": "^1.0.4",
     "@react-native/babel-preset": "0.73.21",
-    "@react-native/eslint-config": "0.73.2",
     "@react-native/metro-config": "0.73.5",
     "@react-native/typescript-config": "0.73.1",
     "@types/react": "^18.2.6",
@@ -27,7 +27,7 @@
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
-    "prettier": "2.8.8",
+    "prettier": "3.2.5",
     "react-test-renderer": "18.2.0",
     "typescript": "5.0.4"
   },
