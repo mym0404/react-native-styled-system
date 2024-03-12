@@ -130,7 +130,9 @@ if (!source) {
 
 print(`Generation Start, Source: ${source}`);
 
-const tmpFile = 'bin/ret.ts';
+const tmpFile = '.tmpThemeGen.ts';
+const outputFile =
+  './node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts';
 
 try {
   await $`chakra-cli tokens --no-format --out ${tmpFile} ${source}`;
@@ -161,7 +163,7 @@ try {
   result = result.replaceAll('space:', 'space: number |');
 
   write(tmpFile, result);
-  await $`mv ${tmpFile} ./node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts`;
+  await $`mv ${tmpFile} ${outputFile}`;
   printSuccess('Done!');
 } catch (e) {
   printError(e);
