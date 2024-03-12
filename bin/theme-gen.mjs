@@ -161,14 +161,15 @@ try {
   result = result.replace(/lineHeights.*/, '');
   result = result.replace(/radii.*/, '');
   result = result.replace(/shadows.*/, '');
-  result = result.replace(/sizes.*/, '');
   result = result.replace(/textStyles.*/, '');
   result = result.replace(/transition.*/, '');
   result = result.replace(/zIndices.*/, '');
   result = result.replace(/components.*\n.*\n.*/, '');
   result = result.replaceAll('| (string & {});', '');
   result = result.replaceAll('string & {}', '');
-  result = result.replaceAll('space:', 'space: number |');
+
+  result = result.replaceAll('space:', 'space: number | `${string}%`');
+  result = result.replace(/sizes.*/, '');
 
   write(tmpFile, result);
   await $`mv ${tmpFile} ${outputFile}`;
