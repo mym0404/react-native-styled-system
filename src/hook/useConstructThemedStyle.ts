@@ -63,15 +63,19 @@ export const useConstructThemedStyle = (props: Props) => {
       return spaces[token] as DimensionValue;
     }
 
+    // Parse is number
     if (is.number(token)) {
       const stringKey = `${token}`;
       if (stringKey in spaces) {
         return spaces[stringKey] as DimensionValue;
       }
-    }
 
-    if (is.numberString(token)) {
-      return Number(token);
+      const negativeStringKey =
+        stringKey.charAt(0) === '-' ? stringKey.substring(1) : `-${stringKey}`;
+
+      if (negativeStringKey in spaces) {
+        return spaces[negativeStringKey] as DimensionValue;
+      }
     }
 
     // Parse prefix minus token string
@@ -87,6 +91,10 @@ export const useConstructThemedStyle = (props: Props) => {
 
       // don't return malformed string. It is not acceptable as DimensionValue
       return;
+    }
+
+    if (is.numberString(token)) {
+      return Number(token);
     }
 
     return token;
