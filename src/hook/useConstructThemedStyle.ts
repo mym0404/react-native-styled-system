@@ -22,6 +22,15 @@ function fillViewStyleIfNeeded<T extends keyof ViewStyle>(
   into[key] = value;
 }
 
+function parsePixelSuffixNumber(value: any): number | undefined {
+  if (is.string(value) && value.endsWith('px')) {
+    const sub = value.substring(0, value.length - 2);
+    if (is.numberString(sub)) {
+      return Number(sub);
+    }
+  }
+}
+
 export const useConstructThemedStyle = (props: Props) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
@@ -43,16 +52,21 @@ export const useConstructThemedStyle = (props: Props) => {
       return;
     }
 
+    const px = parsePixelSuffixNumber(token);
+    if (is.number(px)) {
+      return px;
+    }
+
     const spaces = styledSystemContext.theme.space;
 
     if ((is.string(token) || is.number(token)) && token in spaces) {
-      return spaces[token];
+      return spaces[token] as DimensionValue;
     }
 
     if (is.number(token)) {
       const stringKey = `${token}`;
       if (stringKey in spaces) {
-        return spaces[stringKey];
+        return spaces[stringKey] as DimensionValue;
       }
     }
 
@@ -81,16 +95,21 @@ export const useConstructThemedStyle = (props: Props) => {
       return;
     }
 
+    const px = parsePixelSuffixNumber(token);
+    if (is.number(px)) {
+      return px;
+    }
+
     const sizes = styledSystemContext.theme.sizes;
 
     if ((is.string(token) || is.number(token)) && token in sizes) {
-      return sizes[token];
+      return sizes[token] as DimensionValue;
     }
 
     if (is.number(token)) {
       const stringKey = `${token}`;
       if (stringKey in sizes) {
-        return sizes[stringKey];
+        return sizes[stringKey] as DimensionValue;
       }
     }
 
