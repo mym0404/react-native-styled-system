@@ -74,6 +74,21 @@ export const useConstructThemedStyle = (props: Props) => {
       return Number(token);
     }
 
+    // Parse prefix minus token string
+    if (is.string(token) && token.startsWith('-')) {
+      const originalToken = token.substring(1);
+      if (originalToken in spaces) {
+        const value = spaces[originalToken];
+        if (is.number(value)) {
+          return -value;
+        }
+        // not invert sign percent string yet(will be supported).
+      }
+
+      // don't return malformed string. It is not acceptable as DimensionValue
+      return;
+    }
+
     return token;
   };
 
