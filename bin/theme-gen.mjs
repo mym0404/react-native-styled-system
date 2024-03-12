@@ -144,7 +144,7 @@ try {
    */
 
   let result = read(tmpFile);
-  result = result.replace(/import.*/, '');
+  result = result.replace(/import.*/, "import type { DimensionValue } from 'react-native';\n");
   result = result.replace(/export.*/, 'export interface ThemedTypings {');
   result = result.replace(/\/\/.*/g, '');
   result = result.replace(/blur.*/, '');
@@ -168,8 +168,8 @@ try {
   result = result.replace(/\|? ?\(?string & {}\)?;/g, '');
   result = result.replaceAll('string & {}', '');
 
-  result = result.replace('space:', 'space: number | `${number}%` | ');
-  result = result.replace('sizes:', 'sizes: number | `${number}%` | ');
+  result = result.replace('space:', 'space: DimensionValue | ');
+  result = result.replace('sizes:', 'sizes: DimensionValue | ');
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 

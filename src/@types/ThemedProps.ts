@@ -2,6 +2,12 @@ import type { ViewStyle } from 'react-native';
 
 import type { Token } from './Token';
 
+export type ThemedColorTokenProps = {
+  backgroundColor: Token<'colors'>;
+  bg: Token<'colors'>; // backgroundColor
+  borderColor: Token<'colors'>;
+};
+
 type ThemedSpaceTokenProps = {
   m: Token<'space'>;
   mt: Token<'space'>;
@@ -36,12 +42,9 @@ type ThemedSpaceSizeProps = {
   minH: Token<'sizes'>; // minHeight
   maxHeight: Token<'sizes'>;
   maxH: Token<'sizes'>; // maxHeight
-};
-
-export type ThemedColorTokenProps = {
-  backgroundColor: Token<'colors'>;
-  bg: Token<'colors'>; // backgroundColor
-  borderColor: Token<'colors'>;
+  gap: ViewStyle['gap'];
+  columnGap: ViewStyle['columnGap'];
+  rowGap: ViewStyle['rowGap'];
 };
 
 export type ThemedViewProps = Partial<
@@ -49,7 +52,7 @@ export type ThemedViewProps = Partial<
     flex: ViewStyle['flex'];
     alignItems: ViewStyle['alignItems'];
     alignContent: ViewStyle['alignContent'];
-    justifyItems: ViewStyle['justifyContent'];
+    justifyContent: ViewStyle['justifyContent'];
     flexWrap: ViewStyle['flexWrap'];
     flexDirection: ViewStyle['flexDirection'];
     flexGrow: ViewStyle['flexGrow'];
@@ -58,6 +61,9 @@ export type ThemedViewProps = Partial<
     alignSelf: ViewStyle['alignSelf'];
     position: ViewStyle['position'];
     pos: ViewStyle['position']; // position
+    borderWidth: ViewStyle['borderWidth'];
+    borderRadius: ViewStyle['borderRadius'];
+    radius: ViewStyle['borderRadius']; // borderRadius
   } & ThemedSpaceTokenProps &
     ThemedSpaceSizeProps &
     ThemedColorTokenProps

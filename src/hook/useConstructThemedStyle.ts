@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { is } from '@mj-studio/js-util';
 
 import type { ThemedViewProps } from '../@types/ThemedProps';
 import type { Token } from '../@types/Token';
@@ -9,12 +10,24 @@ import { StyledSystemContext } from '../provider/StyledSystemProvider';
 
 type Props = { style?: StyleProp<any> } & ThemedViewProps;
 
+function fillViewStyleIfNeeded<T extends keyof ViewStyle>(
+  into: ViewStyle,
+  key: T,
+  value?: ViewStyle[T] | null,
+) {
+  if (is.undefined(value) || is.null(value)) {
+    return;
+  }
+
+  into[key] = value;
+}
+
 export const useConstructThemedStyle = (props: Props) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
   const styleProp: ViewStyle = !props.style ? {} : StyleSheet.flatten(props.style);
 
-  const parseColor = (token: Token<'colors'>): string | undefined => {
+  const parseColor = (token?: Token<'colors'>): string | undefined => {
     if (!token || !styledSystemContext) {
       return;
     }
@@ -22,15 +35,150 @@ export const useConstructThemedStyle = (props: Props) => {
     return styledSystemContext.theme.colors[token];
   };
 
-  // const parseSpace = (token: Token<'space'>): number => {};
+  /**
+   * Space should be handle negative string like '-1' as well
+   */
+  const parseSpace = (token?: Token<'space'>): DimensionValue | undefined => {
+    if (!styledSystemContext || is.nullOrUndefined(token)) {
+      return;
+    }
+
+    const spaces = styledSystemContext.theme.space;
+
+    if (token in spaces) {
+      return spaces[token];
+    }
+
+    // if value is string and not found in dict, then return undefined
+    if (is.string(token)) {
+      return;
+    }
+
+    if (is.number(token)) {
+      const stringKey = `${token}`;
+      if (stringKey in spaces) {
+        return spaces[stringKey];
+      }
+    }
+  };
 
   const viewStyle = useStableCallback((): ViewStyle => {
-    const backgroundColor =
-      styleProp.backgroundColor ?? parseColor(props.backgroundColor ?? props.bg);
+    const ret: ViewStyle = {};
+    fillViewStyleIfNeeded(
+      ret,
+      'backgroundColor',
+      styleProp.backgroundColor ?? parseColor(props.backgroundColor ?? props.bg),
+    );
 
-    return {
-      backgroundColor,
-    };
+    fillViewStyleIfNeeded(
+      ret,
+      'borderColor',
+      styleProp.borderColor ?? parseColor(props.borderColor),
+    );
+    fillViewStyleIfNeeded(ret, 'margin', styleProp.margin ?? parseSpace(props.m));
+    fillViewStyleIfNeeded(
+      ret,
+      'marginTop',
+      styleProp.marginTop ?? parseSpace(props.mt ?? props.my),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'marginRight',
+      styleProp.marginRight ?? parseSpace(props.mr ?? props.mx),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'marginBottom',
+      styleProp.marginBottom ?? parseSpace(props.mb ?? props.my),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'marginLeft',
+      styleProp.marginLeft ?? parseSpace(props.ml ?? props.mx),
+    );
+
+    fillViewStyleIfNeeded(ret, 'padding', styleProp.padding ?? parseSpace(props.p));
+    fillViewStyleIfNeeded(
+      ret,
+      'paddingTop',
+      styleProp.paddingTop ?? parseSpace(props.pt ?? props.py),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'paddingRight',
+      styleProp.paddingRight ?? parseSpace(props.pr ?? props.px),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'paddingBottom',
+      styleProp.paddingBottom ?? parseSpace(props.pb ?? props.py),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'paddingLeft',
+      styleProp.paddingLeft ?? parseSpace(props.pl ?? props.px),
+    );
+
+    fillViewStyleIfNeeded(ret, 'top', styleProp.top ?? parseSpace(props.t));
+    fillViewStyleIfNeeded(ret, 'right', styleProp.right ?? parseSpace(props.r));
+    fillViewStyleIfNeeded(ret, 'bottom', styleProp.bottom ?? parseSpace(props.b));
+    fillViewStyleIfNeeded(ret, 'left', styleProp.left ?? parseSpace(props.l));
+
+    fillViewStyleIfNeeded(ret, 'width', styleProp.width ?? parseSpace(props.width ?? props.w));
+    fillViewStyleIfNeeded(
+      ret,
+      'minWidth',
+      styleProp.minWidth ?? parseSpace(props.minWidth ?? props.minW),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'maxWidth',
+      styleProp.maxWidth ?? parseSpace(props.maxWidth ?? props.maxW),
+    );
+
+    fillViewStyleIfNeeded(ret, 'height', styleProp.height ?? parseSpace(props.height ?? props.h));
+    fillViewStyleIfNeeded(
+      ret,
+      'minHeight',
+      styleProp.minHeight ?? parseSpace(props.minHeight ?? props.minH),
+    );
+
+    fillViewStyleIfNeeded(
+      ret,
+      'maxHeight',
+      styleProp.maxHeight ?? parseSpace(props.maxHeight ?? props.maxH),
+    );
+
+    fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? props.gap);
+    fillViewStyleIfNeeded(ret, 'columnGap', styleProp.columnGap ?? props.columnGap);
+    fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? props.rowGap);
+
+    fillViewStyleIfNeeded(ret, 'flex', styleProp.flex ?? props.flex);
+    fillViewStyleIfNeeded(ret, 'alignItems', styleProp.alignItems ?? props.alignItems);
+    fillViewStyleIfNeeded(ret, 'alignContent', styleProp.alignContent ?? props.alignContent);
+    fillViewStyleIfNeeded(ret, 'justifyContent', styleProp.justifyContent ?? props.justifyContent);
+    fillViewStyleIfNeeded(ret, 'flexWrap', styleProp.flexWrap ?? props.flexWrap);
+    fillViewStyleIfNeeded(ret, 'flexDirection', styleProp.flexDirection ?? props.flexDirection);
+    fillViewStyleIfNeeded(ret, 'flexGrow', styleProp.flexGrow ?? props.flexGrow);
+    fillViewStyleIfNeeded(ret, 'flexShrink', styleProp.flexShrink ?? props.flexShrink);
+    fillViewStyleIfNeeded(ret, 'flexBasis', styleProp.flexBasis ?? props.flexBasis);
+    fillViewStyleIfNeeded(ret, 'alignSelf', styleProp.alignSelf ?? props.alignSelf);
+    fillViewStyleIfNeeded(ret, 'position', styleProp.position ?? props.position ?? props.pos);
+    fillViewStyleIfNeeded(ret, 'borderWidth', styleProp.borderWidth ?? props.borderWidth);
+    fillViewStyleIfNeeded(
+      ret,
+      'borderRadius',
+      styleProp.borderRadius ?? props.borderRadius ?? props.radius,
+    );
+
+    return ret;
   });
 
   return { viewStyle };
