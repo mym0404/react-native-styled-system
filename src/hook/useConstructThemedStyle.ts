@@ -94,7 +94,7 @@ export const useConstructThemedStyle = (props: Props) => {
   };
 
   const viewStyle = useStableCallback((): ViewStyle => {
-    const ret: ViewStyle = {};
+    const ret: ViewStyle = styleProp;
 
     // region colors
     fillViewStyleIfNeeded(
