@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/mym0404/mj-studio-js-util"
   },
-  "author": "MJ Studio <mym0404@gmail.com>",
+  "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
   "devDependencies": {
     "@mj-studio/eslint-config-react": "^1.0.4",

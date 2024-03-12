@@ -7,8 +7,7 @@
 
 import React from 'react';
 import type { ViewStyle } from 'react-native';
-import { useColorScheme, View } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { View } from 'react-native';
 import {
   StyledSystemProvider,
   useConstructThemedStyle,
@@ -23,15 +22,9 @@ const Box = (props: ThemedViewProps & ViewStyle) => {
 };
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <StyledSystemProvider theme={{ colors: { red: 'blue' }, space: {} }}>
-      <Box bg={'red'} />
+    <StyledSystemProvider theme={{ colors: { myColor: 'blue' }, space: {} }}>
+      <Box bg={'myColor'} />
     </StyledSystemProvider>
   );
 }
