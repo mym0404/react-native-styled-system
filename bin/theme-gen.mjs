@@ -130,4 +130,33 @@ if (!source) {
 
 print(`Theme path: ${source}`);
 
-await $`chakra-cli tokens ${source}`;
+const tmpFile = 'bin/ret.ts';
+await $`chakra-cli tokens --no-format --out ${tmpFile} ${source}`;
+
+let result = read(tmpFile);
+result = result.replace(/\/\/.*/, '');
+result = result.replace(/blur.*/, '');
+result = result.replace(/borders.*/, '');
+result = result.replace(/borderStyles.*/, '');
+result = result.replace(/borderWidths.*/, '');
+result = result.replace(/breakpoints.*/, '');
+result = result.replace(/colorSchemes.*/, '');
+result = result.replace(/fonts.*/, '');
+result = result.replace(/fontSizes.*/, '');
+result = result.replace(/fontWeights.*/, '');
+result = result.replace(/layerStyles.*/, '');
+result = result.replace(/letterSpacings.*/, '');
+result = result.replace(/lineHeights.*/, '');
+result = result.replace(/radii.*/, '');
+result = result.replace(/shadows.*/, '');
+result = result.replace(/sizes.*/, '');
+result = result.replace(/textStyles.*/, '');
+result = result.replace(/transition.*/, '');
+result = result.replace(/zIndices.*/, '');
+result = result.replace(/components.*\n.*\n.*/, '');
+result = result.replaceAll('| (string & {});', '');
+result = result.replaceAll('string & {}', '');
+result = result.replaceAll('space:', 'space: number |');
+
+write(tmpFile, result);
+await $`mv ${tmpFile} ./node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts`;
