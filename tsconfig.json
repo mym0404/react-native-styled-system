@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "lib": ["ES6", "dom"],
+    "noResolve": false,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "noEmit": false,
+    "declaration": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "compileOnSave": true,
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "**/*.test.tsx", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx"],
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "skipBabel": true
+        // "tsConfigFile": "my-tsconfig.json"
+      }
+    }
+  }
+}
