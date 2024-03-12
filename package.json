@@ -1,6 +1,6 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "React Native Styled System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -63,6 +63,6 @@
     "@mj-studio/js-util": "^1.0.28"
   },
   "bin": {
-    "t": "zx bin/theme-gen.mjs"
+    "t": "./bin/theme-gen.mjs"
   }
 }
