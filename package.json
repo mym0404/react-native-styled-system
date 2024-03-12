@@ -1,6 +1,6 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "React Native Styled System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
