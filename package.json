@@ -1,6 +1,6 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "React Native Styled System",
   "main": "dist/src/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mym0404/mj-studio-js-util"
+    "url": "https://github.com/mj-studio-library/react-native-styled-system"
   },
   "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
@@ -60,7 +60,7 @@
   },
   "packageManager": "yarn@4.1.1",
   "dependencies": {
-    "@mj-studio/js-util": "^1.0.28"
+    "@mj-studio/js-util": "^1.0.29"
   },
   "bin": "./bin/theme-gen.mjs"
 }

@@ -56,6 +56,10 @@ export const useConstructThemedStyle = (props: Props) => {
       }
     }
 
+    if (is.numberString(token)) {
+      return Number(token);
+    }
+
     return token;
   };
 
@@ -88,6 +92,10 @@ export const useConstructThemedStyle = (props: Props) => {
       if (stringKey in sizes) {
         return sizes[stringKey];
       }
+    }
+
+    if (is.numberString(token)) {
+      return Number(token);
     }
 
     return token;

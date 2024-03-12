@@ -1801,10 +1801,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mj-studio/js-util@npm:^1.0.28":
-  version: 1.0.28
-  resolution: "@mj-studio/js-util@npm:1.0.28"
-  checksum: 10c0/26364b7294fc3fc7f6e71ebb1443ba6599315f12584f95ca06fbc26944035074acacfbefa2a88a91ce7b347d798591a3a33623c638f7e636338d0b7452fb576b
+"@mj-studio/js-util@npm:^1.0.29":
+  version: 1.0.29
+  resolution: "@mj-studio/js-util@npm:1.0.29"
+  checksum: 10c0/37d75741b15cba96b5c1033f0643a090a1caf668bdf35e2fba9351d4a06d3f0c0068f4138a8f330ca4909a3344973299277eccedd440e92b93c9aaed291ff00b
   languageName: node
   linkType: hard
 
@@ -1814,7 +1814,7 @@ __metadata:
   dependencies:
     "@chakra-ui/cli": "npm:^2.4.1"
     "@mj-studio/eslint-config-react": "npm:^1.0.4"
-    "@mj-studio/js-util": "npm:^1.0.28"
+    "@mj-studio/js-util": "npm:^1.0.29"
     "@rollup/plugin-commonjs": "npm:^25.0.7"
     "@rollup/plugin-node-resolve": "npm:^15.2.3"
     "@rollup/plugin-terser": "npm:^0.4.4"
