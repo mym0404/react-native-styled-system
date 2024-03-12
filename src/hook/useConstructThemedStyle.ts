@@ -195,13 +195,13 @@ export const useConstructThemedStyle = (props: Props) => {
       styleProp.maxHeight ?? parseSizes(props.maxHeight ?? props.maxH),
     );
 
-    fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? parseSpaceAsNumberOnly(props.gap));
+    // fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? parseSpaceAsNumberOnly(props.gap));
     fillViewStyleIfNeeded(
       ret,
       'columnGap',
-      styleProp.columnGap ?? parseSpaceAsNumberOnly(props.columnGap),
+      styleProp.columnGap ?? parseSpaceAsNumberOnly(props.gapX),
     );
-    fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? parseSpaceAsNumberOnly(props.rowGap));
+    fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? parseSpaceAsNumberOnly(props.gapY));
     // endregion
 
     // region styles

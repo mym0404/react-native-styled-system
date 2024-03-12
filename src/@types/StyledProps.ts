@@ -27,9 +27,8 @@ type ThemedSpaceTokenProps = {
   r: Token<'space'>;
   b: Token<'space'>;
   l: Token<'space'>;
-  gap: Token<'space'>;
-  columnGap: Token<'space'>;
-  rowGap: Token<'space'>;
+  gapX: Token<'space'>;
+  gapY: Token<'space'>;
 };
 
 type ThemedSizeTokenProps = {
