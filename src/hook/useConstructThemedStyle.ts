@@ -3,12 +3,12 @@ import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
-import type { ThemedViewProps } from '../@types/ThemedProps';
+import type { StyledProps } from '../@types/StyledProps';
 import type { Token } from '../@types/Token';
 import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 
-type Props = { style?: StyleProp<any> } & ThemedViewProps;
+type Props = { style?: StyleProp<any> } & StyledProps;
 
 function fillViewStyleIfNeeded<T extends keyof ViewStyle>(
   into: ViewStyle,
@@ -45,13 +45,8 @@ export const useConstructThemedStyle = (props: Props) => {
 
     const spaces = styledSystemContext.theme.space;
 
-    if (token in spaces) {
+    if ((is.string(token) || is.number(token)) && token in spaces) {
       return spaces[token];
-    }
-
-    // if value is string and not found in dict, then return undefined
-    if (is.string(token)) {
-      return;
     }
 
     if (is.number(token)) {
@@ -59,8 +54,18 @@ export const useConstructThemedStyle = (props: Props) => {
       if (stringKey in spaces) {
         return spaces[stringKey];
       }
+    }
 
-      return token;
+    return token;
+  };
+
+  /**
+   * handle like gap (number only prop)
+   */
+  const parseSpaceAsNumberOnly = (token?: Token<'space'>): number | undefined => {
+    const ret = parseSpace(token);
+    if (is.number(ret)) {
+      return ret;
     }
   };
 
@@ -74,13 +79,8 @@ export const useConstructThemedStyle = (props: Props) => {
 
     const sizes = styledSystemContext.theme.sizes;
 
-    if (token in sizes) {
+    if ((is.string(token) || is.number(token)) && token in sizes) {
       return sizes[token];
-    }
-
-    // if value is string and not found in dict, then return undefined
-    if (is.string(token)) {
-      return;
     }
 
     if (is.number(token)) {
@@ -88,9 +88,9 @@ export const useConstructThemedStyle = (props: Props) => {
       if (stringKey in sizes) {
         return sizes[stringKey];
       }
-
-      return token;
     }
+
+    return token;
   };
 
   const viewStyle = useStableCallback((): ViewStyle => {
@@ -195,9 +195,13 @@ export const useConstructThemedStyle = (props: Props) => {
       styleProp.maxHeight ?? parseSizes(props.maxHeight ?? props.maxH),
     );
 
-    fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? props.gap);
-    fillViewStyleIfNeeded(ret, 'columnGap', styleProp.columnGap ?? props.columnGap);
-    fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? props.rowGap);
+    fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? parseSpaceAsNumberOnly(props.gap));
+    fillViewStyleIfNeeded(
+      ret,
+      'columnGap',
+      styleProp.columnGap ?? parseSpaceAsNumberOnly(props.columnGap),
+    );
+    fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? parseSpaceAsNumberOnly(props.rowGap));
     // endregion
 
     // region styles

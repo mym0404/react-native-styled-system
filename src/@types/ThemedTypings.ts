@@ -1,5 +1,7 @@
+import type { DimensionValue } from 'react-native';
+
 export interface ThemedTypings {
-  space: number | `${number}%`;
-  sizes: number | `${number}%`;
+  space: DimensionValue;
+  sizes: DimensionValue;
   colors: string;
 }

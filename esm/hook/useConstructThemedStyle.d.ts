@@ -1,8 +1,8 @@
 import type { StyleProp, ViewStyle } from 'react-native';
-import type { ThemedViewProps } from '../@types/ThemedProps';
+import type { StyledProps } from '../@types/StyledProps';
 type Props = {
     style?: StyleProp<any>;
-} & ThemedViewProps;
+} & StyledProps;
 export declare const useConstructThemedStyle: (props: Props) => {
     viewStyle: () => ViewStyle;
 };

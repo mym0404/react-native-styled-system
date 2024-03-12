@@ -27,9 +27,12 @@ type ThemedSpaceTokenProps = {
   r: Token<'space'>;
   b: Token<'space'>;
   l: Token<'space'>;
+  gap: Token<'space'>;
+  columnGap: Token<'space'>;
+  rowGap: Token<'space'>;
 };
 
-type ThemedSpaceSizeProps = {
+type ThemedSizeTokenProps = {
   width: Token<'sizes'>;
   w: Token<'sizes'>; // width
   minWidth: Token<'sizes'>;
@@ -42,12 +45,9 @@ type ThemedSpaceSizeProps = {
   minH: Token<'sizes'>; // minHeight
   maxHeight: Token<'sizes'>;
   maxH: Token<'sizes'>; // maxHeight
-  gap: ViewStyle['gap'];
-  columnGap: ViewStyle['columnGap'];
-  rowGap: ViewStyle['rowGap'];
 };
 
-export type ThemedViewProps = Partial<
+export type StyledProps = Partial<
   {
     flex: ViewStyle['flex'];
     alignItems: ViewStyle['alignItems'];
@@ -65,6 +65,6 @@ export type ThemedViewProps = Partial<
     borderRadius: ViewStyle['borderRadius'];
     radius: ViewStyle['borderRadius']; // borderRadius
   } & ThemedSpaceTokenProps &
-    ThemedSpaceSizeProps &
+    ThemedSizeTokenProps &
     ThemedColorTokenProps
 >;
