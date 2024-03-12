@@ -22,7 +22,7 @@ const Box = (props: ThemedViewProps) => {
 function App(): React.JSX.Element {
   return (
     <StyledSystemProvider theme={{ colors: { myColor: 'blue' }, space: {} }}>
-      <Box />
+      <Box bg={''} />
     </StyledSystemProvider>
   );
 }
