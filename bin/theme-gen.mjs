@@ -132,13 +132,21 @@ print(`Generation Start, Source: ${source}`);
 
 const tmpFile = '.tmpThemeGen.ts';
 const outputFile =
+  argv.output ||
   './node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts';
 
 try {
   await $`chakra-cli tokens --no-format --out ${tmpFile} ${source}`;
 
+  /**
+   * export interface ThemedTypings {
+   * @type {string}
+   */
+
   let result = read(tmpFile);
-  result = result.replace(/\/\/.*/, '');
+  result = result.replace(/import.*/, '');
+  result = result.replace(/export.*/, 'export interface ThemedTypings {');
+  result = result.replace(/\/\/.*/g, '');
   result = result.replace(/blur.*/, '');
   result = result.replace(/borders.*/, '');
   result = result.replace(/borderStyles.*/, '');
@@ -164,7 +172,8 @@ try {
 
   write(tmpFile, result);
   await $`mv ${tmpFile} ${outputFile}`;
-  printSuccess('Done!');
+  await fixLint(outputFile);
+  printSuccess(`🎉 Theme Typing Generated in '${outputFile}'`);
 } catch (e) {
   printError(e);
   remove(tmpFile);
