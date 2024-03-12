@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["ES6", "dom"],
+    "lib": ["ES6", "ESNext"],
     "noResolve": false,
+    "jsx": "react-native",
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": true,

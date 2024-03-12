@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@mj-studio/react-native-styled-system": "portal:..",
     "react": "18.2.0",
     "react-native": "0.73.6"
   },

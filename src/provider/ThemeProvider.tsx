@@ -1,3 +1,10 @@
+import type { ReactElement } from 'react';
 import React from 'react';
 
-const ThemeProvider = React.createContext();
+const ThemeContext = React.createContext({});
+
+type Props = { children: ReactElement | null };
+
+export const ThemeProvider = ({ children }: Props) => {
+  return children;
+};
