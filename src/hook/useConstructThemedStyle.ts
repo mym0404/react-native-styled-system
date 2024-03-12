@@ -70,6 +70,14 @@ export const useConstructThemedStyle = (props: Props) => {
         return spaces[stringKey] as DimensionValue;
       }
 
+      const negativeNumberKey = -token;
+      if (negativeNumberKey in spaces) {
+        const value = spaces[negativeNumberKey];
+        if (is.number(value)) {
+          return -value;
+        }
+      }
+
       const negativeStringKey =
         stringKey.charAt(0) === '-' ? stringKey.substring(1) : `-${stringKey}`;
 
