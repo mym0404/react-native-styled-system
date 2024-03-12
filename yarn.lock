@@ -1835,7 +1835,7 @@ __metadata:
     react: "*"
     react-native: "*"
   bin:
-    "t:gen": bin/theme-gen.mjs
+    theme-gen: zx bin/theme-gen.mjs
   languageName: unknown
   linkType: soft
 

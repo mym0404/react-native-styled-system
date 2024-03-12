@@ -2104,15 +2104,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mj-studio/react-native-styled-system@npm:0.0.6":
-  version: 0.0.6
-  resolution: "@mj-studio/react-native-styled-system@npm:0.0.6"
+"@mj-studio/react-native-styled-system@npm:0.0.7":
+  version: 0.0.7
+  resolution: "@mj-studio/react-native-styled-system@npm:0.0.7"
   dependencies:
     "@mj-studio/js-util": "npm:^1.0.28"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/82d9befc114136cff11a61cf8ae40ec6ec12e82690eb7ee6c7dedcde27c5bd206a208e448ca9367ed10049f0d7ab415fc8be1713279afa7504396674c03398b8
+  bin:
+    gen: zx bin/theme-gen.mjs
+  checksum: 10/2d8a36ecd3291d7155e5a5c0c62209e18b032c099de80b0338a38056b13ece1ecab062891ae0cbac9b4381305f2fa3112853c57a0db3a5c1bb3e9769cf2b79a6
   languageName: node
   linkType: hard
 
@@ -4676,7 +4678,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
     "@mj-studio/eslint-config-react": "npm:^1.0.4"
-    "@mj-studio/react-native-styled-system": "npm:0.0.6"
+    "@mj-studio/react-native-styled-system": "npm:0.0.7"
     "@react-native/babel-preset": "npm:0.73.21"
     "@react-native/metro-config": "npm:0.73.5"
     "@react-native/typescript-config": "npm:0.73.1"
