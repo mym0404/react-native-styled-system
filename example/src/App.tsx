@@ -6,24 +6,20 @@
  */
 
 import React from 'react';
-import type {ViewStyle} from 'react-native';
+import type { ViewStyle } from 'react-native';
+import { useColorScheme, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-import {StyledSystemProvider} from '@mj-studio/react-native-styled-system';
+  StyledSystemProvider,
+  useConstructThemedStyle,
+} from '@mj-studio/react-native-styled-system';
 
-import {useConstructThemedStyle} from '../../src';
-import type {ThemedViewProps} from '../../src/@types/ThemedProps';
+import type { ThemedViewProps } from '../../src/@types/ThemedProps';
 
 const Box = (props: ThemedViewProps & ViewStyle) => {
-  const {viewStyle} = useConstructThemedStyle(props);
+  const { viewStyle } = useConstructThemedStyle(props);
 
-  return <View {...props} {...viewStyle()} />;
+  return <View {...props} {...viewStyle()} style={{ height: 100, width: 100 }} />;
 };
 
 function App(): React.JSX.Element {
@@ -34,24 +30,8 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <StyledSystemProvider theme={{colors: {}, space: {}}}>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior={'automatic'}
-          style={backgroundStyle}>
-          <Header />
-          <View
-            style={{
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            }}
-          />
-          <Box />
-        </ScrollView>
-      </SafeAreaView>
+    <StyledSystemProvider theme={{ colors: { red: 'blue' }, space: {} }}>
+      <Box bg={'red'} />
     </StyledSystemProvider>
   );
 }

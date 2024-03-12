@@ -22,6 +22,8 @@ export const useConstructThemedStyle = (props: Props) => {
     return styledSystemContext.theme.colors[token];
   };
 
+  // const parseSpace = (token: Token<'space'>): number => {};
+
   const viewStyle = useStableCallback((): ViewStyle => {
     const backgroundColor =
       styleProp.backgroundColor ?? parseColor(props.backgroundColor ?? props.bg);

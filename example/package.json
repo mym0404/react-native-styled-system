@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mj-studio/react-native-styled-system": "file:..",
+    "@mj-studio/react-native-styled-system": "0.0.1",
     "react": "18.2.0",
     "react-native": "0.73.6"
   },

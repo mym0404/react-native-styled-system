@@ -1,6 +1,5 @@
 #!/usr/bin/env zx
 
-await $`yarn t`;
 const pkg = JSON.parse(await fs.readFile('package.json', 'utf-8'));
 
 let [a, b, c] = pkg.version.split('.');

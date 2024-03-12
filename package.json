@@ -9,7 +9,7 @@
     "t": "yarn lint --cache && yarn tsc",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
-    "release": "zx tool/publish.mjs",
+    "release": "yarn lint && yarn tsc && zx tool/publish.mjs",
     "build": "rm -rf dist && rm -rf esm && yarn rollup --config rollup.config.mjs"
   },
   "repository": {
