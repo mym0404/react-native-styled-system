@@ -25,7 +25,7 @@ const Box = (props: PropsWithChildren<ThemedViewProps>) => {
 function App(): React.JSX.Element {
   return (
     <StyledSystemProvider theme={Theme}>
-      <Box bg={'violet700'} mt={2}>
+      <Box bg={'violet700'} mt={'48'}>
         <Box w={24} h={24} bg={'blue100'} />
       </Box>
     </StyledSystemProvider>

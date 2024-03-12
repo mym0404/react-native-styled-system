@@ -59,11 +59,44 @@ export const useConstructThemedStyle = (props: Props) => {
       if (stringKey in spaces) {
         return spaces[stringKey];
       }
+
+      return token;
+    }
+  };
+
+  /**
+   * Space should be handle negative string like '-1' as well
+   */
+  const parseSizes = (token?: Token<'sizes'>): DimensionValue | undefined => {
+    if (!styledSystemContext || is.nullOrUndefined(token)) {
+      return;
+    }
+
+    const sizes = styledSystemContext.theme.sizes;
+
+    if (token in sizes) {
+      return sizes[token];
+    }
+
+    // if value is string and not found in dict, then return undefined
+    if (is.string(token)) {
+      return;
+    }
+
+    if (is.number(token)) {
+      const stringKey = `${token}`;
+      if (stringKey in sizes) {
+        return sizes[stringKey];
+      }
+
+      return token;
     }
   };
 
   const viewStyle = useStableCallback((): ViewStyle => {
     const ret: ViewStyle = {};
+
+    // region colors
     fillViewStyleIfNeeded(
       ret,
       'backgroundColor',
@@ -75,6 +108,9 @@ export const useConstructThemedStyle = (props: Props) => {
       'borderColor',
       styleProp.borderColor ?? parseColor(props.borderColor),
     );
+    // endregion
+
+    // region space
     fillViewStyleIfNeeded(ret, 'margin', styleProp.margin ?? parseSpace(props.m));
     fillViewStyleIfNeeded(
       ret,
@@ -130,35 +166,41 @@ export const useConstructThemedStyle = (props: Props) => {
     fillViewStyleIfNeeded(ret, 'bottom', styleProp.bottom ?? parseSpace(props.b));
     fillViewStyleIfNeeded(ret, 'left', styleProp.left ?? parseSpace(props.l));
 
-    fillViewStyleIfNeeded(ret, 'width', styleProp.width ?? parseSpace(props.width ?? props.w));
+    // endregion
+
+    // region sizes
+    fillViewStyleIfNeeded(ret, 'width', styleProp.width ?? parseSizes(props.width ?? props.w));
     fillViewStyleIfNeeded(
       ret,
       'minWidth',
-      styleProp.minWidth ?? parseSpace(props.minWidth ?? props.minW),
+      styleProp.minWidth ?? parseSizes(props.minWidth ?? props.minW),
     );
 
     fillViewStyleIfNeeded(
       ret,
       'maxWidth',
-      styleProp.maxWidth ?? parseSpace(props.maxWidth ?? props.maxW),
+      styleProp.maxWidth ?? parseSizes(props.maxWidth ?? props.maxW),
     );
 
-    fillViewStyleIfNeeded(ret, 'height', styleProp.height ?? parseSpace(props.height ?? props.h));
+    fillViewStyleIfNeeded(ret, 'height', styleProp.height ?? parseSizes(props.height ?? props.h));
     fillViewStyleIfNeeded(
       ret,
       'minHeight',
-      styleProp.minHeight ?? parseSpace(props.minHeight ?? props.minH),
+      styleProp.minHeight ?? parseSizes(props.minHeight ?? props.minH),
     );
 
     fillViewStyleIfNeeded(
       ret,
       'maxHeight',
-      styleProp.maxHeight ?? parseSpace(props.maxHeight ?? props.maxH),
+      styleProp.maxHeight ?? parseSizes(props.maxHeight ?? props.maxH),
     );
 
     fillViewStyleIfNeeded(ret, 'gap', styleProp.gap ?? props.gap);
     fillViewStyleIfNeeded(ret, 'columnGap', styleProp.columnGap ?? props.columnGap);
     fillViewStyleIfNeeded(ret, 'rowGap', styleProp.rowGap ?? props.rowGap);
+    // endregion
+
+    // region styles
 
     fillViewStyleIfNeeded(ret, 'flex', styleProp.flex ?? props.flex);
     fillViewStyleIfNeeded(ret, 'alignItems', styleProp.alignItems ?? props.alignItems);
@@ -177,6 +219,8 @@ export const useConstructThemedStyle = (props: Props) => {
       'borderRadius',
       styleProp.borderRadius ?? props.borderRadius ?? props.radius,
     );
+
+    // endregion
 
     return ret;
   });
