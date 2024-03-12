@@ -3,7 +3,8 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import ts from 'rollup-plugin-typescript2';
 
-export default [
+/** @type{import('rollup').RollupOptions[]} */
+const options = [
   {
     input: 'src/index.ts',
     output: [
@@ -18,7 +19,7 @@ export default [
         preserveModules: true,
       },
     ],
-    // external: ['react', 'react-native'],
+    external: ['react', 'react-native'],
     plugins: [
       nodeResolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       commonjs(),
@@ -27,3 +28,4 @@ export default [
     ],
   },
 ];
+export default options;

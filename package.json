@@ -1,8 +1,8 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "React Native Styled System",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "types": "dist/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
@@ -50,11 +50,11 @@
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
-        "default": "./esm/index.js"
+        "default": "./esm/src/index.js"
       },
       "require": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "default": "./dist/src/index.js"
       }
     }
   },

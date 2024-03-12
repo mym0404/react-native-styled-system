@@ -109,7 +109,7 @@ async function input(message) {
 }
 
 async function fixLint(path) {
-  await $`yarn prettier ${path} --write --loglevel silent`;
+  await $`yarn prettier ${path} --write --log-level silent`;
   await $`yarn eslint ${path} --fix --quiet --max-warnings 100`;
 }
 

@@ -1,5 +1,5 @@
 .idea/
 node_modules/
 tsconfig.tsbuildinfo
-index.ts
+src/index.ts
 tsconfig.json
