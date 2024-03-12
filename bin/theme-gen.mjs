@@ -165,11 +165,13 @@ try {
   result = result.replace(/transition.*/, '');
   result = result.replace(/zIndices.*/, '');
   result = result.replace(/components.*\n.*\n.*/, '');
-  result = result.replaceAll('| (string & {});', '');
+  result = result.replace(/\|? ?\(?string & {}\)?;/g, '');
   result = result.replaceAll('string & {}', '');
 
-  result = result.replaceAll('space:', 'space: number | `${string}%`');
-  result = result.replace(/sizes.*/, '');
+  result = result.replace('space:', 'space: number | `${number}%` | ');
+  result = result.replace('sizes:', 'sizes: number | `${number}%` | ');
+
+  result = result.replace(/\|[\s ]*\n/g, ';');
 
   write(tmpFile, result);
   await $`mv ${tmpFile} ${outputFile}`;

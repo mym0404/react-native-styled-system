@@ -23,6 +23,21 @@ type ThemedSpaceTokenProps = {
   l: Token<'space'>;
 };
 
+type ThemedSpaceSizeProps = {
+  width: Token<'sizes'>;
+  w: Token<'sizes'>; // width
+  minWidth: Token<'sizes'>;
+  minW: Token<'sizes'>; // minWidth
+  maxWidth: Token<'sizes'>;
+  maxW: Token<'sizes'>; // maxWidth
+  height: Token<'sizes'>;
+  h: Token<'sizes'>; // height
+  minHeight: Token<'sizes'>;
+  minH: Token<'sizes'>; // minHeight
+  maxHeight: Token<'sizes'>;
+  maxH: Token<'sizes'>; // maxHeight
+};
+
 export type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
@@ -44,5 +59,6 @@ export type ThemedViewProps = Partial<
     position: ViewStyle['position'];
     pos: ViewStyle['position']; // position
   } & ThemedSpaceTokenProps &
+    ThemedSpaceSizeProps &
     ThemedColorTokenProps
 >;
