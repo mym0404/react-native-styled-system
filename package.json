@@ -1,6 +1,6 @@
 {
   "name": "@mj-studio/react-native-styled-system",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React Native Styled System",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,7 @@
   "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
   "devDependencies": {
+    "@chakra-ui/cli": "^2.4.1",
     "@mj-studio/eslint-config-react": "^1.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -34,7 +35,8 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.1.2",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "zx": "^7.2.3"
   },
   "peerDependencies": {
     "react": "*",
@@ -59,5 +61,8 @@
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@mj-studio/js-util": "^1.0.28"
+  },
+  "bin": {
+    "t:gen": "zx bin/theme-gen.mjs"
   }
 }

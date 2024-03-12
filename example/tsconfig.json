@@ -2,5 +2,7 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "include": ["src/**/*.ts", "src/**/*.tsx", "test/**.*.ts" ],
   "exclude": ["node_modules", "**/__mocks__/*"],
-  "files": ["./src/types/environment.d.ts"]
+  "files": [
+    "./src/types/ThemedTypings.d.ts"
+  ]
 }
