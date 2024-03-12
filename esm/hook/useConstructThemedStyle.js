@@ -12,6 +12,7 @@ const useConstructThemedStyle = (props) => {
         }
         return styledSystemContext.theme.colors[token];
     };
+    // const parseSpace = (token: Token<'space'>): number => {};
     const viewStyle = useStableCallback(() => {
         const backgroundColor = styleProp.backgroundColor ?? parseColor(props.backgroundColor ?? props.bg);
         return {
