@@ -74,7 +74,10 @@ export const useConstructThemedStyle = (props: Props) => {
         stringKey.charAt(0) === '-' ? stringKey.substring(1) : `-${stringKey}`;
 
       if (negativeStringKey in spaces) {
-        return spaces[negativeStringKey] as DimensionValue;
+        const value = spaces[negativeStringKey];
+        if (is.number(value)) {
+          return -value;
+        }
       }
     }
 
