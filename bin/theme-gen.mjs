@@ -168,8 +168,8 @@ try {
   result = result.replace(/\|? ?\(?string & {}\)?;/g, '');
   result = result.replaceAll('string & {}', '');
 
-  result = result.replace('space:', 'space: DimensionValue | `${number}` | ');
-  result = result.replace('sizes:', 'sizes: DimensionValue | `${number}` | ');
+  result = result.replace('space:', 'space: DimensionValue | `${number}` | `${number}px` | ');
+  result = result.replace('sizes:', 'sizes: DimensionValue | `${number}` | `${number}px` | ');
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 
