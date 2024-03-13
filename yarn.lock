@@ -1808,37 +1808,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mj-studio/react-native-styled-system@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@mj-studio/react-native-styled-system@workspace:."
-  dependencies:
-    "@chakra-ui/cli": "npm:^2.4.1"
-    "@mj-studio/eslint-config-react": "npm:^1.0.4"
-    "@mj-studio/js-util": "npm:^1.0.29"
-    "@rollup/plugin-commonjs": "npm:^25.0.7"
-    "@rollup/plugin-node-resolve": "npm:^15.2.3"
-    "@rollup/plugin-terser": "npm:^0.4.4"
-    "@types/jest": "npm:^29.5.12"
-    "@types/react": "npm:^18.2.65"
-    eslint: "npm:^8.2.0"
-    jest: "npm:^29.7.0"
-    prettier: "npm:^3.2.5"
-    react: "npm:*"
-    react-native: "npm:*"
-    rollup: "npm:^4.12.1"
-    rollup-plugin-peer-deps-external: "npm:^2.2.4"
-    rollup-plugin-typescript2: "npm:^0.36.0"
-    ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
-    zx: "npm:^7.2.3"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  bin:
-    react-native-styled-system: ./bin/theme-gen.mjs
-  languageName: unknown
-  linkType: soft
-
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -8332,6 +8301,37 @@ __metadata:
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
   languageName: node
   linkType: hard
+
+"react-native-themed-styled-system@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "react-native-themed-styled-system@workspace:."
+  dependencies:
+    "@chakra-ui/cli": "npm:^2.4.1"
+    "@mj-studio/eslint-config-react": "npm:^1.0.4"
+    "@mj-studio/js-util": "npm:^1.0.29"
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
+    "@rollup/plugin-terser": "npm:^0.4.4"
+    "@types/jest": "npm:^29.5.12"
+    "@types/react": "npm:^18.2.65"
+    eslint: "npm:^8.2.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.2.5"
+    react: "npm:*"
+    react-native: "npm:*"
+    rollup: "npm:^4.12.1"
+    rollup-plugin-peer-deps-external: "npm:^2.2.4"
+    rollup-plugin-typescript2: "npm:^0.36.0"
+    ts-jest: "npm:^29.1.2"
+    typescript: "npm:5.3.3"
+    zx: "npm:^7.2.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  bin:
+    react-native-themed-styled-system: ./bin/theme-gen.mjs
+  languageName: unknown
+  linkType: soft
 
 "react-native@npm:*":
   version: 0.73.6

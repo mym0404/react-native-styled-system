@@ -6,26 +6,6 @@ import clsx from 'clsx';
 
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className={'container'}>
-        <Heading as={'h1'} className={'hero__title'}>
-          {siteConfig.title}
-        </Heading>
-        <p className={'hero__subtitle'}>{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link className={'button button--secondary button--lg'} to={'/docs/intro'}>
-            {'Docusaurus Tutorial - 5min ⏱️'}
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
@@ -34,8 +14,20 @@ export default function Home(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description={'Description will go into a meta tag in <head />'}
     >
-      <HomepageHeader />
-      <main />
+      <main style={{ flex: 1, justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
+        <div className={clsx(styles.heroBanner, 'container')} style={{ paddingBottom: '120px' }}>
+          <img src={'img/logo.svg'} width={64} height={64} alt={'logo'} />
+          <Heading as={'h1'} className={'hero__title'}>
+            {siteConfig.title}
+          </Heading>
+          <p className={'hero__subtitle'}>{siteConfig.tagline}</p>
+          <div className={styles.buttons}>
+            <Link className={'button button--secondary button--lg'} to={'/docs/intro'}>
+              {'Getting Started ⏱️'}
+            </Link>
+          </div>
+        </div>
+      </main>
     </Layout>
   );
 }

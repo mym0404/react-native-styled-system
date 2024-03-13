@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Usage": {
+    "message": "사용법",
+    "description": "The label for category Usage in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Usage.link.generated-index.description": {
+    "message": "Learn the most important concepts.",
+    "description": "The generated-index page description for category Usage in sidebar tutorialSidebar"
+  }
+}

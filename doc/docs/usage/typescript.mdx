@@ -1,0 +1,57 @@
+---
+sidebar_position: 5
+title: TypeScript
+---
+
+
+
+
+
+
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+# TypeScript
+
+React Native Styled System은 Type Safe한 사용을 지향합니다.
+
+`ThemedDict` 가 `default export`된 모듈의 경로를 커맨드의 인자로 넣어주세요.
+
+```shell
+react-native-themed-styled-system src/AppTheme.ts
+```
+
+`package.json`의 `scripts`로 더 편리한 사용이 가능합니다.
+
+```json title="package.json"
+{
+  ...
+  "scripts": {
+    "theme:gen": "react-native-themed-styled-system src/AppTheme.ts"
+  }
+}
+```
+
+<Tabs>
+  <TabItem value="npm" label="npm" default>
+    ```sh
+    npm run theme:gen
+    ```
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```sh
+    yarn theme:gen
+    ```
+  </TabItem>
+</Tabs>
+
+:::warning
+항상 패키지의 버전을 변경하거나 새롭게 설치할 시에는 타입 생성 커맨드를 실행시켜야 합니다.
+:::
+
+## 동작 방식
+
+내부적으로 `node_modules/`

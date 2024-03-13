@@ -1,0 +1,81 @@
+---
+sidebar_position: 2
+title: 설정
+---
+
+# 설정
+
+## 1. `StyledSystemProvider` 선언
+
+`StyledSystemProvider`는 다른 디자인 패키지들의 `ThemeProvider`와 비슷한 사용자 정의 테마를 인자로 받아 앱 내의 컴포넌트들이나 Hook에서 값들을 가져올 수 있게 하는 `React.Provider`입니다.
+
+```tsx title="App.tsx"
+<App>
+  <StyledSystemProvider theme={theme}>
+     {...others}
+  </StyledSystemProvider>
+</App>
+```
+
+인자로 전달되는 `theme`는 다음 단락에서 기술됩니다.
+
+:::warning
+
+`StyledSystemProvider`가 존재하지 않는 Render Context에서 테마를 활용하려고 하면 에러는 발생하지 않지만 제대로 스타일이 적용이 되지 않을 수 있습니다.
+
+:::
+
+## 2. 사용자 정의 `ThemedDict` 객체 생성
+
+`ThemedDict`는 우리의 테마에 전달해야 하는 디자인 토큰 값들입니다.
+
+`space`, `sizes`, `colors` 등이 있습니다.
+
+추후 CLI를 이용한 Type Generation과정에서 `ThemedDict`를 `default export`하는 모듈이 필요하기 때문에 다음과 같이 정의하는 것을 추천드립니다.
+
+```ts title="Theme.ts"
+const unit = 4;
+const spacing = {
+  0: 0 * unit, // 0px
+  px: 1, // 1px
+  0.5: 0.5 * unit, // 2px
+  1: 1 * unit, // 4px
+  2: 2 * unit, // 8px
+  3: 3 * unit, // 12px
+  // others
+} as const;
+
+const AppTheme = {
+  colors: {
+    white: '#FFFFFF',
+    black: '#000000',
+    transparent: '#FFFFFF00',
+    gray50: '#F9FAFB',
+    gray100: '#F3F4F6',
+    gray200: '#E5E7EB',
+    // others
+  },
+  space: { ...spacing, sidePadding: 0 /* injected from outer */ },
+  sizes: { ...spacing, sidePadding: 0 /* injected from outer */ },
+}
+```
+
+:::info
+실제 이 `ThemedDict` 객체는 `StyledSystemProvider` 에 전달되는 값으로써 쓰이기도 하지만 CLI를 이용한 Type Generation에서 이 객체를 기반으로 타입을 생성하기 때문에 추후에 주입되는 값들이 생성된 타입에 존재하게 하기 위해 존재하는 키들 중 당장 알 수 없는 값들은 아무 값을 넣어두고 추후에 주입을 시켜주면 됩니다.
+:::
+
+## 3. `StyledSystemProvider` 에 `ThemedDict` 객체 전달
+
+```tsx title="App.tsx"
+import theme from './AppTheme'
+
+...
+
+const sidePadding = useResponsiveSidePadding();
+
+<App>
+  <StyledSystemProvider theme={{ ...theme, sidePadding }}>
+     {...others}
+  </StyledSystemProvider>
+</App>
+```
