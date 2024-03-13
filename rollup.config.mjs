@@ -1,6 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import ts from 'rollup-plugin-typescript2';
 
@@ -26,7 +25,7 @@ const options = [
       commonjs(),
       peerDepsExternal(),
       ts({ tsconfig: './tsconfig.json' }),
-      terser(),
+      // terser(),
     ],
   },
 ];
