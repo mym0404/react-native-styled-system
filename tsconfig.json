@@ -13,7 +13,8 @@
     "declaration": true,
     "esModuleInterop": true,
     "rootDir": "src",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": true
   },
   "compileOnSave": true,
   "include": ["src/**/*.ts", "src/**/*.tsx"],
