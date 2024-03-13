@@ -118,3 +118,45 @@ There is no need to add `style` as a prop to `style` of `View`.
 2. Always pass all `props` objects themselves to `useSx` to avoid missing any properties. `useSx`
 Properties that are not used internally are ignored and not changed.
 3. `viewStyle` can receive `SxProps` as an argument and consider it in the result.
+
+## Example without Props destruction
+
+If you need a style object that can control multiple views in a component's props or do not want props destruction,
+You can define a component using the `sx` prop as follows.
+
+```tsx title="StyledScrollView.tsx"
+import { PropsWithChildren, forwardRef, Ref } from 'react';
+import { ScrollViewProps, ScrollView } from 'react-native';
+import { SxProps, useSx } from 'react-native-themed-styled-system';
+
+type StyledScrollViewProps = PropsWithChildren<
+  {
+    contentContainerSx?: SxProps;
+  } & Omit<ScrollViewProps, 'contentContainerStyle'> &
+    SxProps
+>;
+const StyledScrollView = forwardRef((props: StyledScrollViewProps, ref: Ref<ScrollView>) => {
+  const { viewStyle, filteredProps } = useSx(props);
+  const { viewStyle: contentContainerStyle } = useSx(props.contentContainerSx ?? {});
+  return (
+    <ScrollView ref={ref} style={viewStyle()} contentContainerStyle={contentContainerStyle()} {...filteredProps} />
+  );
+});
+
+export { StyledScrollView };
+export type { StyledScrollViewProps };
+```
+
+This is a redefinition of `ScrollView`.
+
+In addition to `style`, `ScrollView` has one more style prop called `contentContainerStyle`.
+
+Therefore, it is accepted as a field called `contentContainerSx` as a `SxProps` type, and the `contentContainerStyle` of the original `ScrollViewProps` is created using `Omit`.
+Be prepared for any possible bugs.
+
+:::info
+
+I still feel like there is a lot of code that needs to be written in this example, so I recommend improving it to a simpler Helper API.
+We also plan to support several props of `ScrollView` separately.
+
+:::
