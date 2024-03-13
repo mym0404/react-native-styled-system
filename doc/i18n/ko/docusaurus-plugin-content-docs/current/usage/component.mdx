@@ -112,6 +112,7 @@ const ScreenErrorFallback = (props: Props) => {
 2. 누락되는 속성이 없게 항상 모든 `props` 객체 자체를 `useSx`로 넘기도록 합니다. `useSx`는
 내부적으로 쓰이지 않는 속성들은 무시하고 변경시키지 않습니다.
 3. `viewStyle`은 `SxProps`를 인자로 받아 결과에 고려시킬 수 있습니다.
+4. `style` prop을 `{...props}` 구문보다 뒤에 삽입해 `props.style`로 인해
 
 ## Props destruction을 사용하지 않는 예시
 

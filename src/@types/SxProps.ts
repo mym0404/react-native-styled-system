@@ -2,6 +2,65 @@ import type { ViewStyle } from 'react-native';
 
 import type { Token } from './Token';
 
+export type SxPropKeys = keyof SxProps;
+
+/**
+ * Always modify if you change API
+ */
+export const allPropNameList = [
+  'backgroundColor',
+  'bg',
+  'borderColor',
+  'm',
+  'mt',
+  'mr',
+  'mb',
+  'ml',
+  'mx',
+  'my',
+  'p',
+  'pt',
+  'pr',
+  'pb',
+  'pl',
+  'px',
+  'py',
+  't',
+  'r',
+  'b',
+  'l',
+  'gapX',
+  'gapY',
+  'width',
+  'w',
+  'minW',
+  'minWidth',
+  'maxW',
+  'maxWidth',
+  'height',
+  'h',
+  'minH',
+  'minHeight',
+  'maxH',
+  'maxHeight',
+  'sx',
+  'flex',
+  'alignItems',
+  'alignContent',
+  'justifyContent',
+  'flexWrap',
+  'flexDirection',
+  'flexGrow',
+  'flexShrink',
+  'flexBasis',
+  'alignSelf',
+  'position',
+  'pos',
+  'borderWidth',
+  'borderRadius',
+  'radius',
+] satisfies SxPropKeys[];
+
 export type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
