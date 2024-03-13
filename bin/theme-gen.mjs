@@ -132,8 +132,7 @@ print(`Generation Start, Source: ${source}`);
 
 const tmpFile = '.tmpThemeGen.ts';
 const outputFile =
-  argv.output ||
-  './node_modules/@mj-studio/react-native-styled-system/dist/@types/ThemedTypings.d.ts';
+  argv.output || './node_modules/react-native-themed-styled-system/dist/@types/ThemedTypings.d.ts';
 
 try {
   await $`npx @chakra-ui/cli tokens --no-format --out ${tmpFile} ${source}`;
