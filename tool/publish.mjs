@@ -2,6 +2,11 @@
 
 const pkg = JSON.parse(await fs.readFile('package.json', 'utf-8'));
 
+cd('doc');
+await $`yarn && yarn deploy`;
+cd('..');
+
+// eslint-disable-next-line prefer-const
 let [a, b, c] = pkg.version.split('.');
 c = Number(c) + 1 + '';
 pkg.version = `${a}.${b}.${c}`;

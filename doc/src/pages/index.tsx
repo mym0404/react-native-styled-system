@@ -26,6 +26,11 @@ export default function Home(): JSX.Element {
               {'Getting Started ⏱️'}
             </Link>
           </div>
+          <div style={{ marginTop: 64 }}>
+            <code style={{ padding: 20, borderWidth: 1 }}>
+              {'npm install react-native-themed-styled-system'}
+            </code>
+          </div>
         </div>
       </main>
     </Layout>
