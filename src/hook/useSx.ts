@@ -7,7 +7,7 @@ import { propsToStyle } from '../internal/propsToStyle';
 import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 
-type Props = { style?: StyleProp<any>; sx?: SxProps } & SxProps;
+type Props = { style?: StyleProp<any> } & SxProps;
 
 export const useSx = (props: Props) => {
   const styledSystemContext = useContext(StyledSystemContext);

@@ -1,0 +1,27 @@
+---
+sidebar_position: 4
+title: 스타일을 전달하는 방식과 파싱 우선순위
+---
+
+# 스타일을 전달하는 방식과 파싱 우선순위
+
+`useSx`가 스타일을 파싱하고 결과물을 산출하는데 사용되는 방식은 다양합니다.
+
+Props이 다음과 같이 생겼다고 해보겠습니다.
+
+```tsx
+const props = {
+  style: { marginTop: 24 }, // 1
+  mt: '24px', // 2
+  sx: { mt: '24px' }, // 3
+}
+```
+
+1. Props의 `style` prop
+2. Props의 `ml`, `w` 같은 `SxProps`의 스타일들
+3. Props의 `sx` prop 내부의 스타일들
+4. `viewStyle(sx?: SxProps)`의 첫 인자
+
+**이에 따른 우선순위는 1 > 3 > 2 > 4 로 계산됩니다.**
+
+1이 가장 우선순위가 높습니다.

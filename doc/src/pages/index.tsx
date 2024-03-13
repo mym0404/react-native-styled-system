@@ -10,10 +10,7 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
 
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description={'Description will go into a meta tag in <head />'}
-    >
+    <Layout title={`${siteConfig.title}`} description={'Mimic styled-system for React Native'}>
       <main style={{ flex: 1, justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
         <div className={clsx(styles.heroBanner, 'container')} style={{ paddingBottom: '120px' }}>
           <img src={'img/logo.svg'} width={64} height={64} alt={'logo'} />
@@ -27,7 +24,7 @@ export default function Home(): JSX.Element {
             </Link>
           </div>
           <div style={{ marginTop: 64 }}>
-            <code style={{ padding: 20, borderWidth: 1 }}>
+            <code style={{ borderWidth: 1, padding: 5, whiteSpace: 'pre-wrap' }}>
               {'npm install react-native-themed-styled-system'}
             </code>
           </div>

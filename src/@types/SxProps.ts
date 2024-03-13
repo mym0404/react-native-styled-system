@@ -47,7 +47,7 @@ type ThemedSizeTokenProps = {
 };
 
 export type SxProps = Partial<
-  {
+  { sx?: Omit<SxProps, 'sx'> } & {
     flex: ViewStyle['flex'];
     alignItems: ViewStyle['alignItems'];
     alignContent: ViewStyle['alignContent'];
