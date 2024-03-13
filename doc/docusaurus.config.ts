@@ -64,6 +64,11 @@ const config: Config = {
 
   themeConfig: {
     image: coverImage,
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     navbar: {
       title: title,
       logo: {

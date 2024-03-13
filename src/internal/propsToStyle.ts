@@ -18,7 +18,7 @@ export const propsToStyle = ({
   theme?: ThemedDict;
   props?: SxProps;
 }): ViewStyle => {
-  const styleProp = StyleSheet.flatten(baseStyle);
+  const styleProp = StyleSheet.flatten(baseStyle) || {};
   const ret: ViewStyle = { ...styleProp };
   if (!theme) {
     return ret;

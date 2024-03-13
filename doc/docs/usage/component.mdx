@@ -1,0 +1,39 @@
+---
+sidebar_position: 3
+title: 컴포넌트
+---
+
+
+# 컴포넌트
+
+React Native Styled System는 내부적으로 기본 Component를 만들어두지 않았습니다.
+
+대신, **단순하고 확장가능한 API로 직접 테마를 사용할 컴포넌트를 정의**할 수 있습니다.
+
+## `View` 예시
+
+React Native의 `View` 컴포넌트를 Styled System처럼 사용할 수 있는 컴포넌트를 만들어봅시다.
+
+완성된 컴포넌트의 사용법은 다음과 같습니다.
+
+```tsx
+
+```
+
+다음과 같이 정의할 수 있습니다.
+
+```tsx title="StyledView.tsx"
+import { forwardRef, Ref, PropsWithChildren } from 'react';
+import { View, ViewProps } from 'react-native';
+import { SxProps, useSx } from 'react-native-themed-styled-system';
+
+type BoxProps = PropsWithChildren<ViewProps & SxProps>;
+const Box = forwardRef((props: BoxProps, ref: Ref<View>) => {
+  const { viewStyle } = useSx(props);
+  return <View ref={ref} {...props} style={viewStyle()} />;
+});
+
+export { Box };
+export type { BoxProps };
+
+```

@@ -127,6 +127,7 @@
   },
   "active": "9384a2460d4b3356",
   "lastOpenFiles": [
+    "docs/usage/component.mdx",
     "docs/usage/typescript.mdx",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/typescript.mdx",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/cli.mdx",
@@ -138,7 +139,6 @@
     "i18n/ko/docusaurus-plugin-content-blog/options.json",
     "i18n/ko/docusaurus-plugin-content-blog",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/create-a-page.md",
-    "i18n/ko/docusaurus-plugin-content-docs/current/usage/_category_.json",
     "docs/usage/create-a-page.md",
     "i18n/ko/docusaurus-plugin-content-docs/current/tutorial-basics/deploy-your-site.md",
     "i18n/ko/docusaurus-plugin-content-docs/current/tutorial-basics/create-a-page.md",
