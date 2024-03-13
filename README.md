@@ -2,6 +2,9 @@
 
 [Documentation](https://mj-studio-library.github.io/react-native-styled-system/)
 
+![ogimage](https://github.com/mj-studio-library/react-native-styled-system/assets/33388801/13d03f17-cc7a-45a8-8f63-24b75dade0ff)
+
+
 `React Native Styled System` is a React Native implementation
 of the `styled-system` package commonly used on the web.
 
