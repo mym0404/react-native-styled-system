@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8837],{9795:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/react-native-styled-system/blog/tags/facebook","allTagsPath":"/react-native-styled-system/blog/tags","count":1,"unlisted":false}')}}]);
