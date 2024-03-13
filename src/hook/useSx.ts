@@ -4,13 +4,17 @@ import { StyleSheet } from 'react-native';
 
 import type { SxProps } from '../@types/SxProps';
 import { allPropNameList } from '../@types/SxProps';
+import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 type Props<T> = T & { style?: StyleProp<any> } & SxProps;
 
-export const useSx = <T>(props: Props<T>) => {
+export type UseSxOptions = {
+  theme?: ThemedDict;
+};
+export const useSx = <T>(props: Props<T>, { theme: optionTheme }: UseSxOptions = {}) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
   const styleProp: ViewStyle = !props.style ? undefined : StyleSheet.flatten(props.style);
@@ -19,7 +23,7 @@ export const useSx = <T>(props: Props<T>) => {
     const mergedSx: SxProps = { ...sx, ...props, ...props.sx };
 
     return propsToThemedStyle({
-      theme: styledSystemContext?.theme,
+      theme: optionTheme ?? styledSystemContext?.theme,
       sx: mergedSx,
       baseStyle: styleProp,
     });

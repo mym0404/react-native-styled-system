@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["ESNext"],
     "jsx": "react",
-    "types": ["node"],
+    "types": ["node", "jest"],
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": true,
@@ -14,13 +14,5 @@
     "rootDir": "src",
     "skipLibCheck": true,
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "jest": {
-    "globals": {
-      "ts-jest": {
-        "skipBabel": true
-        // "tsConfigFile": "my-tsconfig.json"
-      }
-    }
-  }
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
