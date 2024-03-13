@@ -10,18 +10,6 @@ title: TypeScript
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -60,9 +48,20 @@ react-native-themed-styled-system src/AppTheme.ts
   </TabItem>
 </Tabs>
 
-:::warning
+:::tip
 항상 패키지의 버전을 변경하거나 새롭게 설치할 시에는 타입 생성 커맨드를 실행시켜야 합니다.
+
+다음과 같이 CI에서도 문제없이 동작할 수 있도록 `postinstall`스크립트를 사용하는 것을 추천합니다.
+
+```json title="package.json"
+{
+  "postinstall": "yarn theme:gen"
+}
+```
 :::
+
+
+
 
 ## 동작 방식
 

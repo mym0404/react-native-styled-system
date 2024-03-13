@@ -6,6 +6,7 @@ title: TypeScript
 
 
 
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -44,8 +45,16 @@ More convenient use is possible with `scripts` in `package.json`.
   </TabItem>
 </Tabs>
 
-:::warning
+:::tip
 When changing the version of a package or installing a new one, you must always execute the type creation command.
+
+We recommend using the `postinstall` script so that it can operate without problems in CI as follows.
+
+```json title="package.json"
+{
+  "postinstall": "yarn theme:gen"
+}
+```
 :::
 
 ## How it works
