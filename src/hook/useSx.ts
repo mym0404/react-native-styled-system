@@ -15,7 +15,7 @@ export const useSx = <T>(props: Props<T>) => {
 
   const styleProp: ViewStyle = !props.style ? undefined : StyleSheet.flatten(props.style);
 
-  const viewStyle = useStableCallback((sx?: SxProps): ViewStyle => {
+  const viewStyle = useStableCallback((sx?: SxProps): StyleProp<ViewStyle> | undefined => {
     const mergedSx: SxProps = { ...sx, ...props, ...props.sx };
 
     return propsToThemedStyle({
