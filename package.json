@@ -1,15 +1,15 @@
 {
   "name": "react-native-themed-styled-system",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
-    "t": "yarn lint --cache && yarn tsc",
+    "t": "yarn lint --cache && yarn tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
-    "release": "yarn lint && yarn tsc && zx tool/publish.mjs",
+    "release": "yarn lint && yarn tsc --noEmit && zx tool/publish.mjs",
     "build": "bob build",
     "prepare": "bob build"
   },
