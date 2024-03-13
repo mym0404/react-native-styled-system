@@ -1,6 +1,6 @@
 {
   "name": "react-native-themed-styled-system",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "React Native Styled System",
   "main": "dist/src/index.js",
   "types": "dist/index.d.ts",
@@ -43,21 +43,8 @@
     "react-native": "*"
   },
   "files": [
-    "dist",
-    "esm"
+    "dist"
   ],
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./esm/src/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/src/index.js"
-      }
-    }
-  },
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@mj-studio/js-util": "^1.0.29"

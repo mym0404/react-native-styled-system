@@ -13,11 +13,11 @@ const options = [
         format: 'cjs',
         preserveModules: true,
       },
-      {
-        dir: 'esm',
-        format: 'esm',
-        preserveModules: true,
-      },
+      // {
+      //   dir: 'esm',
+      //   format: 'esm',
+      //   preserveModules: true,
+      // },
     ],
     external: ['react', 'react-native'],
     plugins: [
