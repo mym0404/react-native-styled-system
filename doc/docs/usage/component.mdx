@@ -42,8 +42,8 @@ import { SxProps, useSx } from 'react-native-themed-styled-system';
 
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
-  const { viewStyle } = useSx(props);
-  return <View ref={ref} {...props} style={viewStyle()} />;
+  const { viewStyle, filteredProps } = useSx(props);
+  return <View ref={ref} style={viewStyle()} {...filteredProps} />;
 });
 
 export { StyledView };
@@ -59,6 +59,12 @@ The prop type of a component containing the `SxProps` type includes all the keys
 
 Therefore, if all props from the parent are passed through object destruction like in the existing `{...props}`, the keys do not overlap.
 You need to be careful not to do so.
+
+Also, when using `props` as is, it must always come before `style` so as not to overwrite the `style` of `viewStyle()`.
+
+To prevent this, you can use `filteredProps` in the return value of `useSx`.
+
+`filteredProps` represents a new prop that filters all style-related fields such as `style`, `sx`, `w`, and `width`.
 :::
 
 ## Example of refactoring an existing component
