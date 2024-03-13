@@ -10,10 +10,8 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ESNext",
-    "noEmit": false,
     "declaration": true,
     "esModuleInterop": true,
-    "outDir": "dist",
     "rootDir": "src",
     "skipLibCheck": true
   },

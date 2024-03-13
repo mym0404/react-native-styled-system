@@ -1,16 +1,17 @@
 {
   "name": "react-native-themed-styled-system",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "React Native Styled System",
-  "main": "dist/src/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "types": "lib/typescript/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "t": "yarn lint --cache && yarn tsc",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
     "release": "yarn lint && yarn tsc && zx tool/publish.mjs",
-    "build": "rm -rf dist && rm -rf esm && yarn rollup --config rollup.config.mjs"
+    "build": "bob build",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,6 @@
   "devDependencies": {
     "@chakra-ui/cli": "^2.4.1",
     "@mj-studio/eslint-config-react": "^1.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.65",
     "eslint": "^8.2.0",
@@ -31,9 +29,7 @@
     "prettier": "^3.2.5",
     "react": "*",
     "react-native": "*",
-    "rollup": "^4.12.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript2": "^0.36.0",
+    "react-native-builder-bob": "^0.23.2",
     "ts-jest": "^29.1.2",
     "typescript": "5.3.3",
     "zx": "^7.2.3"
@@ -43,11 +39,32 @@
     "react-native": "*"
   },
   "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__",
     "dist"
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {
     "@mj-studio/js-util": "^1.0.29"
   },
-  "bin": "./bin/theme-gen.mjs"
+  "bin": "./bin/theme-gen.mjs",
+  "react-native": "src/index.ts",
+  "source": "src/index.ts",
+  "module": "lib/module/index.js",
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }
