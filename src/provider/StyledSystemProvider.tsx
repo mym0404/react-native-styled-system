@@ -4,11 +4,13 @@ import React from 'react';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { emptyThemedDict } from '../@types/ThemedDict';
 
-type ContextType = {
+export type StyledSystemContextValue = {
   theme: ThemedDict;
 };
 
-export const StyledSystemContext = React.createContext<ContextType>({ theme: emptyThemedDict });
+export const StyledSystemContext = React.createContext<StyledSystemContextValue>({
+  theme: emptyThemedDict,
+});
 type Props = { children: ReactElement | null; theme: ThemedDict };
 
 export const StyledSystemProvider = ({ children, theme }: Props) => {

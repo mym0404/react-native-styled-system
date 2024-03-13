@@ -46,7 +46,7 @@ type ThemedSizeTokenProps = {
   maxH: Token<'sizes'>; // maxHeight
 };
 
-export type StyledProps = Partial<
+export type SxProps = Partial<
   {
     flex: ViewStyle['flex'];
     alignItems: ViewStyle['alignItems'];
