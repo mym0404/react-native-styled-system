@@ -7,10 +7,11 @@
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "t": "yarn lint --cache && yarn tsc --noEmit && yarn test",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
     "release": "zx tool/publish.mjs",
     "build": "yarn t && bob build",
-    "prepare": "yarn t && bob build"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,6 @@
   "license": "MIT",
   "devDependencies": {
     "@chakra-ui/cli": "^2.4.1",
-    "@commitlint/cli": "^19.1.0",
-    "@commitlint/config-conventional": "^19.1.0",
     "@mj-studio/eslint-config-react": "^1.0.4",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^29.5.12",
@@ -67,9 +66,5 @@
       "module",
       "typescript"
     ]
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ]
+  }
 }
