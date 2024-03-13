@@ -59,7 +59,9 @@ export const allPropNameList = [
   'borderWidth',
   'borderRadius',
   'radius',
-] satisfies SxPropKeys[];
+  'style',
+  'contentContainerStyle',
+] satisfies (SxPropKeys | 'style' | 'contentContainerStyle')[];
 
 export type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
