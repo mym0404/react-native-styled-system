@@ -5,11 +5,10 @@ import { is } from '@mj-studio/js-util';
 import type { SxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import type { Token } from '../@types/Token';
+import { fillViewStyleIfNotNullish } from '../internal/util/fillViewStyleIfNotNullish';
+import { parsePxSuffixNumber } from '../internal/util/parsePxSuffixNumber';
 
-import { fillViewStyleIfNotNullish } from './util/fillViewStyleIfNotNullish';
-import { parsePxSuffixNumber } from './util/parsePxSuffixNumber';
-
-export const propsToStyle = ({
+export const propsToThemedStyle = ({
   baseStyle,
   theme,
   sx,

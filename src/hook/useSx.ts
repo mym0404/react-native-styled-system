@@ -4,9 +4,9 @@ import { StyleSheet } from 'react-native';
 
 import type { SxProps } from '../@types/SxProps';
 import { allPropNameList } from '../@types/SxProps';
-import { propsToStyle } from '../internal/propsToStyle';
 import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
+import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 type Props<T> = T & { style?: StyleProp<any> } & SxProps;
 
@@ -18,7 +18,7 @@ export const useSx = <T>(props: Props<T>) => {
   const viewStyle = useStableCallback((sx?: SxProps): ViewStyle => {
     const mergedSx: SxProps = { ...sx, ...props, ...props.sx };
 
-    return propsToStyle({
+    return propsToThemedStyle({
       theme: styledSystemContext?.theme,
       sx: mergedSx,
       baseStyle: styleProp,
