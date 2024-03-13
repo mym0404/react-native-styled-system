@@ -75,6 +75,14 @@ describe('space parsing', () => {
   it('negative works', () => {
     expectResult(baseTheme, { m: -1 }, { margin: -4 });
   });
+
+  it('negative number as key', () => {
+    expectResult(baseTheme, { m: -1 }, { margin: -4 });
+  });
+
+  it('minus prefixed string', () => {
+    expectResult(baseTheme, { m: '-pagePadding' as any }, { margin: -20 });
+  });
 });
 
 describe('sizes parsing', () => {
@@ -90,5 +98,9 @@ describe('shortcut priority', () => {
 
   it('w', () => {
     expectResult(emptyTheme, { w: 1, width: 2 }, { width: 2 });
+  });
+
+  it('radius', () => {
+    expectResult(emptyTheme, { radius: 1, borderRadius: 2 }, { borderRadius: 2 });
   });
 });

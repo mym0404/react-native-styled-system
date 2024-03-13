@@ -9,6 +9,7 @@
     "t": "yarn lint --cache && yarn tsc --noEmit && yarn test",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "release": "zx tool/publish.mjs",
     "build": "yarn t && bob build",
     "prepare": "husky"
