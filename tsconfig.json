@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["ES6", "ESNext"],
-    "noResolve": false,
-    "jsx": "react-jsx",
+    "lib": ["ESNext"],
+    "jsx": "react",
     "types": ["node"],
     "noImplicitAny": false,
     "removeComments": false,
@@ -18,7 +17,6 @@
   },
   "compileOnSave": true,
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules", "**/*.test.tsx", "**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx"],
   "jest": {
     "globals": {
       "ts-jest": {
