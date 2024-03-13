@@ -1,6 +1,6 @@
 {
   "name": "react-native-themed-styled-system",
-  "version": "0.0.20",
+  "version": "0.0.19",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
