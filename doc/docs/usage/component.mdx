@@ -10,14 +10,22 @@ React Native Styled System는 내부적으로 기본 Component를 만들어두�
 
 대신, **단순하고 확장가능한 API로 직접 테마를 사용할 컴포넌트를 정의**할 수 있습니다.
 
-## `View` 예시
+## `StyledView` 예시
 
 React Native의 `View` 컴포넌트를 Styled System처럼 사용할 수 있는 컴포넌트를 만들어봅시다.
 
-완성된 컴포넌트의 사용법은 다음과 같습니다.
+완성된 `StyledView` 컴포넌트의 사용법은 다음과 같습니다.
+
+![image.png](https://raw.githubusercontent.com/mym0404/image-archive/master/202403131245340.png)
 
 ```tsx
-
+<StyledView w={48} h={48}>
+  <StyledView w={'100%'} h={24} radius={12} bg={'red500'} t={0} />
+  <StyledView w={24} h={24} radius={12} bg={'blue400'} pos={'absolute'} t={0} r={'-24'} />
+  <StyledView w={24} h={24} radius={12} bg={'yellow300'} pos={'absolute'} b={0} r={-24} />
+  <StyledView w={24} h={24} radius={12} bg={'violet400'} pos={'absolute'} b={0} r={'-48'} />
+  <StyledView w={24} h={24} radius={12} bg={'violet50'} pos={'absolute'} b={0} l={'sidePadding'} />
+</StyledView>
 ```
 
 다음과 같이 정의할 수 있습니다.
@@ -27,13 +35,12 @@ import { forwardRef, Ref, PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';
 import { SxProps, useSx } from 'react-native-themed-styled-system';
 
-type BoxProps = PropsWithChildren<ViewProps & SxProps>;
-const Box = forwardRef((props: BoxProps, ref: Ref<View>) => {
+type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
+const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
   const { viewStyle } = useSx(props);
   return <View ref={ref} {...props} style={viewStyle()} />;
 });
 
-export { Box };
-export type { BoxProps };
-
+export { StyledView };
+export type { StyledViewProps };
 ```

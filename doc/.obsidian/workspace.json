@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "i18n/ko/docusaurus-plugin-content-docs/current/intro.mdx",
+                "file": "docs/usage/component.mdx",
                 "mode": "source",
                 "backlinks": false,
                 "source": true
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 216.5,
-    "collapsed": true
+    "width": 341.5
   },
   "right": {
     "id": "465428516897b8dc",
@@ -127,6 +126,7 @@
   },
   "active": "9384a2460d4b3356",
   "lastOpenFiles": [
+    "i18n/ko/docusaurus-plugin-content-docs/current/intro.mdx",
     "docs/usage/component.mdx",
     "docs/usage/typescript.mdx",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/typescript.mdx",
@@ -137,7 +137,6 @@
     "docs/usage/install.mdx",
     "docs/usage/create-a-page.mdx",
     "i18n/ko/docusaurus-plugin-content-blog/options.json",
-    "i18n/ko/docusaurus-plugin-content-blog",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/create-a-page.md",
     "docs/usage/create-a-page.md",
     "i18n/ko/docusaurus-plugin-content-docs/current/tutorial-basics/deploy-your-site.md",

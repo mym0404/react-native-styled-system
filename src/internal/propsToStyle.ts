@@ -12,13 +12,13 @@ import { parsePxSuffixNumber } from './util/parsePxSuffixNumber';
 export const propsToStyle = ({
   baseStyle,
   theme,
-  props,
+  sx,
 }: {
   baseStyle?: ViewStyle;
   theme?: ThemedDict;
-  props?: SxProps;
+  sx?: SxProps;
 }): ViewStyle => {
-  const styleProp = StyleSheet.flatten(baseStyle) || {};
+  const styleProp: ViewStyle = StyleSheet.flatten(baseStyle) || {};
   const ret: ViewStyle = { ...styleProp };
   if (!theme) {
     return ret;
@@ -146,132 +146,116 @@ export const propsToStyle = ({
   fillViewStyleIfNotNullish(
     ret,
     'backgroundColor',
-    styleProp.backgroundColor ?? parseColor(props.backgroundColor ?? props.bg),
+    styleProp.backgroundColor ?? parseColor(sx.backgroundColor ?? sx.bg),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'borderColor',
-    styleProp.borderColor ?? parseColor(props.borderColor),
+    styleProp.borderColor ?? parseColor(sx.borderColor),
   );
   // endregion
 
   // region space
-  fillViewStyleIfNotNullish(ret, 'margin', styleProp.margin ?? parseSpace(props.m));
-  fillViewStyleIfNotNullish(
-    ret,
-    'marginTop',
-    styleProp.marginTop ?? parseSpace(props.mt ?? props.my),
-  );
+  fillViewStyleIfNotNullish(ret, 'margin', styleProp.margin ?? parseSpace(sx.m));
+  fillViewStyleIfNotNullish(ret, 'marginTop', styleProp.marginTop ?? parseSpace(sx.mt ?? sx.my));
 
   fillViewStyleIfNotNullish(
     ret,
     'marginRight',
-    styleProp.marginRight ?? parseSpace(props.mr ?? props.mx),
+    styleProp.marginRight ?? parseSpace(sx.mr ?? sx.mx),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'marginBottom',
-    styleProp.marginBottom ?? parseSpace(props.mb ?? props.my),
+    styleProp.marginBottom ?? parseSpace(sx.mb ?? sx.my),
   );
 
-  fillViewStyleIfNotNullish(
-    ret,
-    'marginLeft',
-    styleProp.marginLeft ?? parseSpace(props.ml ?? props.mx),
-  );
+  fillViewStyleIfNotNullish(ret, 'marginLeft', styleProp.marginLeft ?? parseSpace(sx.ml ?? sx.mx));
 
-  fillViewStyleIfNotNullish(ret, 'padding', styleProp.padding ?? parseSpace(props.p));
-  fillViewStyleIfNotNullish(
-    ret,
-    'paddingTop',
-    styleProp.paddingTop ?? parseSpace(props.pt ?? props.py),
-  );
+  fillViewStyleIfNotNullish(ret, 'padding', styleProp.padding ?? parseSpace(sx.p));
+  fillViewStyleIfNotNullish(ret, 'paddingTop', styleProp.paddingTop ?? parseSpace(sx.pt ?? sx.py));
 
   fillViewStyleIfNotNullish(
     ret,
     'paddingRight',
-    styleProp.paddingRight ?? parseSpace(props.pr ?? props.px),
+    styleProp.paddingRight ?? parseSpace(sx.pr ?? sx.px),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'paddingBottom',
-    styleProp.paddingBottom ?? parseSpace(props.pb ?? props.py),
+    styleProp.paddingBottom ?? parseSpace(sx.pb ?? sx.py),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'paddingLeft',
-    styleProp.paddingLeft ?? parseSpace(props.pl ?? props.px),
+    styleProp.paddingLeft ?? parseSpace(sx.pl ?? sx.px),
   );
 
-  fillViewStyleIfNotNullish(ret, 'top', styleProp.top ?? parseSpace(props.t));
-  fillViewStyleIfNotNullish(ret, 'right', styleProp.right ?? parseSpace(props.r));
-  fillViewStyleIfNotNullish(ret, 'bottom', styleProp.bottom ?? parseSpace(props.b));
-  fillViewStyleIfNotNullish(ret, 'left', styleProp.left ?? parseSpace(props.l));
+  fillViewStyleIfNotNullish(ret, 'top', styleProp.top ?? parseSpace(sx.t));
+  fillViewStyleIfNotNullish(ret, 'right', styleProp.right ?? parseSpace(sx.r));
+  fillViewStyleIfNotNullish(ret, 'bottom', styleProp.bottom ?? parseSpace(sx.b));
+  fillViewStyleIfNotNullish(ret, 'left', styleProp.left ?? parseSpace(sx.l));
 
   // endregion
 
   // region sizes
-  fillViewStyleIfNotNullish(ret, 'width', styleProp.width ?? parseSizes(props.width ?? props.w));
+  fillViewStyleIfNotNullish(ret, 'width', styleProp.width ?? parseSizes(sx.width ?? sx.w));
   fillViewStyleIfNotNullish(
     ret,
     'minWidth',
-    styleProp.minWidth ?? parseSizes(props.minWidth ?? props.minW),
+    styleProp.minWidth ?? parseSizes(sx.minWidth ?? sx.minW),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'maxWidth',
-    styleProp.maxWidth ?? parseSizes(props.maxWidth ?? props.maxW),
+    styleProp.maxWidth ?? parseSizes(sx.maxWidth ?? sx.maxW),
   );
 
-  fillViewStyleIfNotNullish(ret, 'height', styleProp.height ?? parseSizes(props.height ?? props.h));
+  fillViewStyleIfNotNullish(ret, 'height', styleProp.height ?? parseSizes(sx.height ?? sx.h));
   fillViewStyleIfNotNullish(
     ret,
     'minHeight',
-    styleProp.minHeight ?? parseSizes(props.minHeight ?? props.minH),
+    styleProp.minHeight ?? parseSizes(sx.minHeight ?? sx.minH),
   );
 
   fillViewStyleIfNotNullish(
     ret,
     'maxHeight',
-    styleProp.maxHeight ?? parseSizes(props.maxHeight ?? props.maxH),
+    styleProp.maxHeight ?? parseSizes(sx.maxHeight ?? sx.maxH),
   );
 
   // fillViewStyleIfNotNullish(ret, 'gap', styleProp.gap ?? parseSpaceAsNumberOnly(props.gap));
   fillViewStyleIfNotNullish(
     ret,
     'columnGap',
-    styleProp.columnGap ?? parseSpaceAsNumberOnly(props.gapX),
+    styleProp.columnGap ?? parseSpaceAsNumberOnly(sx.gapX),
   );
-  fillViewStyleIfNotNullish(ret, 'rowGap', styleProp.rowGap ?? parseSpaceAsNumberOnly(props.gapY));
+  fillViewStyleIfNotNullish(ret, 'rowGap', styleProp.rowGap ?? parseSpaceAsNumberOnly(sx.gapY));
   // endregion
 
   // region styles
 
-  fillViewStyleIfNotNullish(ret, 'flex', styleProp.flex ?? props.flex);
-  fillViewStyleIfNotNullish(ret, 'alignItems', styleProp.alignItems ?? props.alignItems);
-  fillViewStyleIfNotNullish(ret, 'alignContent', styleProp.alignContent ?? props.alignContent);
-  fillViewStyleIfNotNullish(
-    ret,
-    'justifyContent',
-    styleProp.justifyContent ?? props.justifyContent,
-  );
-  fillViewStyleIfNotNullish(ret, 'flexWrap', styleProp.flexWrap ?? props.flexWrap);
-  fillViewStyleIfNotNullish(ret, 'flexDirection', styleProp.flexDirection ?? props.flexDirection);
-  fillViewStyleIfNotNullish(ret, 'flexGrow', styleProp.flexGrow ?? props.flexGrow);
-  fillViewStyleIfNotNullish(ret, 'flexShrink', styleProp.flexShrink ?? props.flexShrink);
-  fillViewStyleIfNotNullish(ret, 'flexBasis', styleProp.flexBasis ?? props.flexBasis);
-  fillViewStyleIfNotNullish(ret, 'alignSelf', styleProp.alignSelf ?? props.alignSelf);
-  fillViewStyleIfNotNullish(ret, 'position', styleProp.position ?? props.position ?? props.pos);
-  fillViewStyleIfNotNullish(ret, 'borderWidth', styleProp.borderWidth ?? props.borderWidth);
+  fillViewStyleIfNotNullish(ret, 'flex', styleProp.flex ?? sx.flex);
+  fillViewStyleIfNotNullish(ret, 'alignItems', styleProp.alignItems ?? sx.alignItems);
+  fillViewStyleIfNotNullish(ret, 'alignContent', styleProp.alignContent ?? sx.alignContent);
+  fillViewStyleIfNotNullish(ret, 'justifyContent', styleProp.justifyContent ?? sx.justifyContent);
+  fillViewStyleIfNotNullish(ret, 'flexWrap', styleProp.flexWrap ?? sx.flexWrap);
+  fillViewStyleIfNotNullish(ret, 'flexDirection', styleProp.flexDirection ?? sx.flexDirection);
+  fillViewStyleIfNotNullish(ret, 'flexGrow', styleProp.flexGrow ?? sx.flexGrow);
+  fillViewStyleIfNotNullish(ret, 'flexShrink', styleProp.flexShrink ?? sx.flexShrink);
+  fillViewStyleIfNotNullish(ret, 'flexBasis', styleProp.flexBasis ?? sx.flexBasis);
+  fillViewStyleIfNotNullish(ret, 'alignSelf', styleProp.alignSelf ?? sx.alignSelf);
+  fillViewStyleIfNotNullish(ret, 'position', styleProp.position ?? sx.position ?? sx.pos);
+  fillViewStyleIfNotNullish(ret, 'borderWidth', styleProp.borderWidth ?? sx.borderWidth);
   fillViewStyleIfNotNullish(
     ret,
     'borderRadius',
-    styleProp.borderRadius ?? props.borderRadius ?? props.radius,
+    styleProp.borderRadius ?? sx.borderRadius ?? sx.radius,
   );
 
   // endregion
