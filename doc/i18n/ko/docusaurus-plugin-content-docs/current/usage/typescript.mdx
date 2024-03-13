@@ -11,6 +11,7 @@ title: TypeScript
 
 
 
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -67,12 +68,12 @@ react-native-themed-styled-system src/AppTheme.ts
 ## 동작 방식
 
 패키지에서 내부적으로 사용되는
-`./node_modules/react-native-themed-styled-system/lib/commonjs/@types/ThemedTypings.d.ts` 경로의 파일을
+`./node_modules/react-native-themed-styled-system/src/@types/ThemedTypings.ts` 경로의 파일을
 직접 재생성합니다.
 
 그럼 다음과 같이 생성됩니다.
 
-```ts title="./node_modules/react-native-themed-styled-system/lib/commonjs/@types/ThemedTypings.d.ts"
+```ts title="./node_modules/react-native-themed-styled-system/src/@types/ThemedTypings.ts"
 import type {DimensionValue} from 'react-native';
 
 export interface ThemedTypings {
