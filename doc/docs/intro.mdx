@@ -1,47 +1,30 @@
 ---
 sidebar_position: 1
+title: Getting Started
 ---
 
-# Tutorial Intro
+# Get Started
 
-Let's discover **Docusaurus in less than 5 minutes**.
+`React Native Styled System` is a React Native implementation
+of the `styled-system` package commonly used on the web.
 
-## Getting Started
 
-Get started by **creating a new site**.
+:::info
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+It does not fully support the grammar of `styled-system` and there are some grammars that are not currently supported, but this is not a technical limitation and will be added as needed.
 
-### What you'll need
+Styles such as `justifySelf` that are not yet supported in React Native obviously cannot be added in the future.
+:::
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Supported features
 
-## Generate a new site
+- Allows arguments such as `m, px, py, bg, flex, flexDirection, position` to be passed directly to Props according to the grammar of `styled-system`.
+- Users can define the design system by directly defining and delivering themes.
+- TypeScript can be fully used through the Type Generation process using CLI.
+- Logical or responsive values such as `safeAreaTop` and `sidePadding` can be injected into the theme and used as token values.
 
-Generate a new Docusaurus site using the **classic template**.
+## Limit
 
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- The only tokens currently supported are `space`, `sizes`, and `colors`, and tokens such as `fontSize` and `zIndices` will be added in the future.
+- Not all `View` style fields or props are supported yet.
+- The dark mode function does not exist yet.

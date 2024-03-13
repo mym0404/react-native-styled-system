@@ -27,8 +27,8 @@ type ThemedSpaceTokenProps = {
   r: Token<'space'>;
   b: Token<'space'>;
   l: Token<'space'>;
-  gapX: Token<'space'>;
-  gapY: Token<'space'>;
+  gapX: Token<'space'>; // only works if parsed result is number
+  gapY: Token<'space'>; // only works if parsed result is number
 };
 
 type ThemedSizeTokenProps = {

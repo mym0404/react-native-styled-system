@@ -5,21 +5,38 @@ title: TypeScript
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-#TypeScript
+# TypeScript
 
-React Native Styled System aims for type-safe use.
+React Native Styled System은 Type Safe한 사용을 지향합니다.
 
-Please enter the path to the module where `ThemedDict` is `default exported` as an argument to the command.
+`ThemedDict` 가 `default export`된 모듈의 경로를 커맨드의 인자로 넣어주세요.
 
 ```shell
 react-native-themed-styled-system src/AppTheme.ts
 ```
 
-More convenient use is possible with `scripts` in `package.json`.
+`package.json`의 `scripts`로 더 편리한 사용이 가능합니다.
 
 ```json title="package.json"
 {
@@ -44,16 +61,16 @@ More convenient use is possible with `scripts` in `package.json`.
 </Tabs>
 
 :::warning
-When changing the version of a package or installing a new one, you must always execute the type creation command.
+항상 패키지의 버전을 변경하거나 새롭게 설치할 시에는 타입 생성 커맨드를 실행시켜야 합니다.
 :::
 
-## How it works
+## 동작 방식
 
-used internally in the package
-File in the path `node_modules/react-native-themed-styled-system/dist/@types/ThemedTypings.d.ts`
-Regenerate it yourself.
+패키지에서 내부적으로 사용되는
+`node_modules/react-native-themed-styled-system/dist/@types/ThemedTypings.d.ts` 경로의 파일을
+직접 재생성합니다.
 
-Then it is created as follows:
+그럼 다음과 같이 생성됩니다.
 
 ```ts title="node_modules/react-native-themed-styled-system/dist/@types/ThemedTypings.d.ts"
 import type {DimensionValue} from 'react-native';
@@ -65,4 +82,4 @@ export interface ThemedTypings {
 }
 ```
 
-Type creation is performed internally using `@chakra-ui/cli`.
+내부적으로 `@chakra-ui/cli`를 써서 타입 생성을 진행합니다.
