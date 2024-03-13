@@ -174,7 +174,7 @@ try {
 
   write(tmpFile, result);
   await $`mv ${tmpFile} ${outputFile}`;
-  await fixLint(outputFile);
+  // await fixLint(outputFile);
   printSuccess(`🎉 Theme Typing Generated in '${outputFile}'`);
 } catch (e) {
   printError(e);
