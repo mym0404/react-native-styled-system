@@ -150,8 +150,8 @@ type ThemedSizeTokenProps = {
   maxH: Token<'sizes'>; // maxHeight
 };
 
-export type SxProps = Partial<
-  { sx?: Omit<SxProps, 'sx'> } & {
+type BaseSxProps = Partial<
+  {
     flex: ViewStyle['flex'];
     alignItems: ViewStyle['alignItems'];
     alignContent: ViewStyle['alignContent'];
@@ -180,3 +180,5 @@ export type SxProps = Partial<
     ThemedSizeTokenProps &
     ThemedColorTokenProps
 >;
+
+export type SxProps = BaseSxProps & { sx?: BaseSxProps };
