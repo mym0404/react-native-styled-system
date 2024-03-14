@@ -4,15 +4,15 @@
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "My Site Logo",
+    "message": "로고",
     "description": "The alt text of navbar logo"
   },
   "item.label.Tutorial": {
-    "message": "Tutorial",
+    "message": "튜토리얼",
     "description": "Navbar item with label Tutorial"
   },
   "item.label.GitHub": {
-    "message": "GitHub",
+    "message": "깃허브",
     "description": "Navbar item with label GitHub"
   }
 }

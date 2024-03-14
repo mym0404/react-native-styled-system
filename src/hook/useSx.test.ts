@@ -52,6 +52,13 @@ describe('simple usages', () => {
 });
 
 describe('edge case', () => {
+  it('invalid px suffix', () => {
+    expectResult(baseTheme, { w: 'undefinedpx' as any }, {});
+    expectResult(baseTheme, { w: 'nullpx' as any }, {});
+    expectResult(baseTheme, { w: '-px' as any }, {});
+    expectResult(baseTheme, { w: '-1px' as any }, { width: -1 });
+  });
+
   it('if token is undefined, baseStyle is returned', () => {
     expectResult(undefined as any, {}, {});
     expectResult(undefined as any, { style: { width: 1 } }, { width: 1 });
