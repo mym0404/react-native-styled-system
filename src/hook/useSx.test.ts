@@ -51,6 +51,13 @@ describe('simple usages', () => {
   });
 });
 
+describe('edge case', () => {
+  it('if token is undefined, baseStyle is returned', () => {
+    expectResult(undefined as any, {}, {});
+    expectResult(undefined as any, { style: { width: 1 } }, { width: 1 });
+  });
+});
+
 describe('space parsing', () => {
   it('if number token not found, return itself', () => {
     expectResult(emptyTheme, { m: 1 }, { margin: 1 });
