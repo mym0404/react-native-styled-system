@@ -80,11 +80,11 @@ function print(...args) {
 }
 
 function printSuccess(...args) {
-  echo(`\x1B[36m\x1B[46m✅  [${_printTag}]`, ...args, '\x1B[0m');
+  echo(`✅  [${_printTag}]`, ...args);
 }
 
 function printError(...args) {
-  echo(`\x1B[31m\x1b[43m⚠️ [${_printTag}]`, ...args, '\x1B[0m');
+  echo(`⚠️ [${_printTag}]`, ...args);
 }
 
 const tKey = {};
