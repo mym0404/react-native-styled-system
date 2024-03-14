@@ -8,11 +8,12 @@
     "sourceMap": true,
     "module": "ESNext",
     "moduleResolution": "node",
+    "strict": true,
     "target": "ESNext",
     "declaration": true,
     "esModuleInterop": true,
     "rootDir": "src",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
