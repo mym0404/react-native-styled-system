@@ -36,6 +36,9 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
+      - name: Build
+        run: yarn build
+
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         env:
