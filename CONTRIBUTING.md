@@ -94,6 +94,8 @@ https://www.conventionalcommits.org/ or check out the
    [commit convention](https://github.com/mj-studio-library/react-native-styled-system/blob/main/CONTRIBUTING.md#commit-convention).
    As you develop, you can run `yarn t` and to make sure everything works as expected.
 
+4. You should base branch of PR as `develop`.
+
 ### Tests
 
 All commits that fix bugs or add features need a test.
