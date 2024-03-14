@@ -1,6 +1,6 @@
 {
   "name": "react-native-themed-styled-system",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
@@ -12,7 +12,6 @@
     "test:coverage": "jest --coverage",
     "release": "zx tool/publish.mjs",
     "build": "yarn t && bob build",
-    "prepare": "husky",
     "gen": "zx bin/theme-gen.mjs bin/theme.ts --output bin/ret.d.ts"
   },
   "repository": {
