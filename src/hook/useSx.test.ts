@@ -56,6 +56,26 @@ describe('edge case', () => {
     expectResult(undefined as any, {}, {});
     expectResult(undefined as any, { style: { width: 1 } }, { width: 1 });
   });
+
+  it('if prop and viewStyle sx parameter are nullish, return undefined', () => {
+    const {
+      result: {
+        current: { viewStyle },
+      },
+    } = renderHook(() => useSx(null, { theme: baseTheme }));
+
+    return expect(viewStyle()).toEqual(undefined);
+  });
+
+  it('if prop is nullish and viewStyle sx parameter is not nullish, return style', () => {
+    const {
+      result: {
+        current: { viewStyle },
+      },
+    } = renderHook(() => useSx(null, { theme: baseTheme }));
+
+    return expect(viewStyle({ width: 1 })).toEqual({ width: 4 });
+  });
 });
 
 describe('space parsing', () => {

@@ -14,7 +14,7 @@ export const propsToThemedStyle = ({
   theme,
   sx,
 }: {
-  baseStyle?: ViewStyle;
+  baseStyle?: StyleProp<ViewStyle>;
   theme?: ThemedDict;
   sx?: SxProps;
 }): StyleProp<ViewStyle> | undefined => {
