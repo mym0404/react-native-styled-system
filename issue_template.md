@@ -1,4 +1,4 @@
-### Version of dooboo-hooks
+### Version of react-native-themed-styled-system
 
 ### Version of react-native
 

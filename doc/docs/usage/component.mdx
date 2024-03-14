@@ -106,7 +106,7 @@ const ScreenErrorFallback = (props: Props) => {
   return (
     <View
 //highlight-next-line
-      style={viewStyle({ alignItems: 'center', justifyContent: 'center' })}
+      style={viewStyle({ center: true })}
       pointerEvents={'box-none'}
     >
 ```
@@ -118,6 +118,7 @@ There is no need to add `style` as a prop to `style` of `View`.
 2. Always pass all `props` objects themselves to `useSx` to avoid missing any properties. `useSx`
 Properties that are not used internally are ignored and not changed.
 3. `viewStyle` can receive `SxProps` as an argument and consider it in the result.
+4. `center` is a shortcut for `justifyContent: center`, `alignItems: center`.
 
 ## Example without Props destruction
 
