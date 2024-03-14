@@ -13,10 +13,23 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/usage/configuration.mdx",
+                "file": "i18n/ko/docusaurus-plugin-content-docs/current/usage/configuration.mdx",
                 "mode": "source",
                 "backlinks": false,
                 "source": true
+              }
+            }
+          },
+          {
+            "id": "2caa96477171883b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/usage/configuration.mdx",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
               }
             }
           }
@@ -126,9 +139,10 @@
   },
   "active": "9384a2460d4b3356",
   "lastOpenFiles": [
+    "build/ko/blog/rss.xml",
+    "build/ko/blog/atom.xml",
     "build/ko/sitemap.xml",
     "build/ko/index.html",
-    "build/ko/404.html",
     "build/ko/docs/usage/typescript/index.html",
     "build/ko/docs/usage/token/index.html",
     "build/ko/docs/usage/sx-props/index.html",
@@ -136,11 +150,10 @@
     "build/ko/docs/usage/install/index.html",
     "build/ko/docs/usage/configuration/index.html",
     "build/ko/docs/usage/component/index.html",
-    "build/ko/docs/category/usage/index.html",
     "build/ko/img/undraw_docusaurus_tree.svg",
     "build/ko/img/undraw_docusaurus_react.svg",
-    "build/ko/img/undraw_docusaurus_mountain.svg",
     "build/ko/img/ogimage.png",
+    "build/ko/img/undraw_docusaurus_mountain.svg",
     "build/ko/img/logo.svg",
     "build/ko/img/docusaurus.png",
     "build/ko/img/docusaurus-social-card.jpg",
