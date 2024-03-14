@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/usage/sx-props.mdx",
+                "file": "docs/usage/configuration.mdx",
                 "mode": "source",
                 "backlinks": false,
                 "source": true
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 341.5,
-    "collapsed": true
+    "width": 341.5
   },
   "right": {
     "id": "465428516897b8dc",
@@ -129,8 +128,7 @@
   "lastOpenFiles": [
     "build/ko/sitemap.xml",
     "build/ko/index.html",
-    "build/ko/markdown-page/index.html",
-    "build/ko/markdown-page",
+    "build/ko/404.html",
     "build/ko/docs/usage/typescript/index.html",
     "build/ko/docs/usage/token/index.html",
     "build/ko/docs/usage/sx-props/index.html",
@@ -138,16 +136,17 @@
     "build/ko/docs/usage/install/index.html",
     "build/ko/docs/usage/configuration/index.html",
     "build/ko/docs/usage/component/index.html",
+    "build/ko/docs/category/usage/index.html",
     "build/ko/img/undraw_docusaurus_tree.svg",
     "build/ko/img/undraw_docusaurus_react.svg",
-    "build/ko/img/ogimage.png",
     "build/ko/img/undraw_docusaurus_mountain.svg",
+    "build/ko/img/ogimage.png",
     "build/ko/img/logo.svg",
     "build/ko/img/docusaurus.png",
     "build/ko/img/docusaurus-social-card.jpg",
     "build/ko/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg",
     "build/img/undraw_docusaurus_tree.svg",
-    "build/img/ogimage.png",
+    "build/img/undraw_docusaurus_react.svg",
     "i18n/ko/docusaurus-plugin-content-docs/current/usage/create-a-page.md",
     "docs/usage/create-a-page.md",
     "i18n/ko/docusaurus-plugin-content-docs/current/tutorial-basics/deploy-your-site.md",
