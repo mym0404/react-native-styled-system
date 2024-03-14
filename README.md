@@ -25,3 +25,12 @@ Styles such as `justifySelf` that are not yet supported in React Native obviousl
 - The only tokens currently supported are `space`, `sizes`, and `colors`, and tokens such as `fontSize` and `zIndices` will be added in the future.
 - Not all `View` style fields or props are supported yet.
 - The dark mode function does not exist yet.
+
+## Contributing
+
+Feel like contributing? That's awesome! We have a
+[contributing guide](./CONTRIBUTING.md) to help guide you.
+
+## Lincese
+
+MIT
