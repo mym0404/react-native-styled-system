@@ -87,13 +87,13 @@ export const _allPropList = [
   'zIndex',
 ] satisfies (SxPropKeys | 'style')[];
 
-interface ThemedColorTokenProps {
+type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
   borderColor: Token<'colors'>;
-}
+};
 
-interface ThemedSpaceTokenProps {
+type ThemedSpaceTokenProps = {
   margin: Token<'space'>;
   m: Token<'space'>; // margin
   marginTop: Token<'space'>;
@@ -133,7 +133,7 @@ interface ThemedSpaceTokenProps {
   gap: Token<'space'>; // only works if parsed result is number
   gapX: Token<'space'>; // only works if parsed result is number
   gapY: Token<'space'>; // only works if parsed result is number
-}
+};
 
 type ThemedSizeTokenProps = {
   width: Token<'sizes'>;

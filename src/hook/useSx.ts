@@ -9,12 +9,12 @@ import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
-type Props<T> = T & { style?: StyleProp<any> } & SxProps;
+type Props = { style?: StyleProp<any> } & SxProps;
 
 export type UseSxOptions = {
   theme?: ThemedDict;
 };
-export const useSx = <T>(props: Props<T>, { theme: optionTheme }: UseSxOptions = {}) => {
+export const useSx = <P extends Props>(props: P, { theme: optionTheme }: UseSxOptions = {}) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
   const styleProp: ViewStyle = !props.style ? undefined : StyleSheet.flatten(props.style);
@@ -29,7 +29,7 @@ export const useSx = <T>(props: Props<T>, { theme: optionTheme }: UseSxOptions =
     });
   });
 
-  const filteredProps: T = useMemo(() => {
+  const filteredProps: Omit<P, keyof SxProps | 'style'> = useMemo(() => {
     const ret = { ...props };
     _allPropList.forEach((keyName) => delete ret[keyName]);
 
