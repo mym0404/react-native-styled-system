@@ -43,6 +43,10 @@ export const propsToThemedStyle = ({
     if (is.number(px)) {
       return px;
     }
+    // end with px but not number parsed
+    if (is.string(token) && token.endsWith('px')) {
+      return;
+    }
 
     const spaces = theme.space;
 
@@ -119,6 +123,11 @@ export const propsToThemedStyle = ({
     const px = parsePxSuffixNumber(token);
     if (is.number(px)) {
       return px;
+    }
+
+    // end with px but not number parsed
+    if (is.string(token) && token.endsWith('px')) {
+      return;
     }
 
     const sizes = theme.sizes;
