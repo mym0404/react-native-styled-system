@@ -1,3 +1,4 @@
+/* eslint-disable padding-line-between-statements */
 import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
@@ -142,68 +143,92 @@ export const propsToThemedStyle = ({
 
   // region colors
   fillViewStyleIfNotNullish(ret, 'backgroundColor', parseColor(sx.backgroundColor ?? sx.bg));
-
   fillViewStyleIfNotNullish(ret, 'borderColor', parseColor(sx.borderColor));
   // endregion
 
   // region space
-  fillViewStyleIfNotNullish(ret, 'margin', parseSpace(sx.m));
-  fillViewStyleIfNotNullish(ret, 'marginTop', parseSpace(sx.mt ?? sx.my));
+  fillViewStyleIfNotNullish(ret, 'margin', parseSpace(sx.margin ?? sx.m));
+  fillViewStyleIfNotNullish(ret, 'marginTop', parseSpace(sx.marginTop ?? sx.mt));
+  fillViewStyleIfNotNullish(ret, 'marginRight', parseSpace(sx.marginRight ?? sx.mr));
+  fillViewStyleIfNotNullish(ret, 'marginBottom', parseSpace(sx.marginBottom ?? sx.mb));
+  fillViewStyleIfNotNullish(ret, 'marginLeft', parseSpace(sx.marginLeft ?? sx.ml));
+  fillViewStyleIfNotNullish(ret, 'marginVertical', parseSpace(sx.marginY ?? sx.my));
+  fillViewStyleIfNotNullish(ret, 'marginHorizontal', parseSpace(sx.marginX ?? sx.mx));
 
-  fillViewStyleIfNotNullish(ret, 'marginRight', parseSpace(sx.mr ?? sx.mx));
+  fillViewStyleIfNotNullish(ret, 'padding', parseSpace(sx.padding ?? sx.p));
+  fillViewStyleIfNotNullish(ret, 'paddingTop', parseSpace(sx.paddingTop ?? sx.pt));
+  fillViewStyleIfNotNullish(ret, 'paddingRight', parseSpace(sx.paddingRight ?? sx.pr));
+  fillViewStyleIfNotNullish(ret, 'paddingBottom', parseSpace(sx.paddingBottom ?? sx.pb));
+  fillViewStyleIfNotNullish(ret, 'paddingLeft', parseSpace(sx.paddingLeft ?? sx.pl));
+  fillViewStyleIfNotNullish(ret, 'paddingVertical', parseSpace(sx.paddingY ?? sx.py));
+  fillViewStyleIfNotNullish(ret, 'paddingHorizontal', parseSpace(sx.paddingX ?? sx.px));
 
-  fillViewStyleIfNotNullish(ret, 'marginBottom', parseSpace(sx.mb ?? sx.my));
-
-  fillViewStyleIfNotNullish(ret, 'marginLeft', parseSpace(sx.ml ?? sx.mx));
-
-  fillViewStyleIfNotNullish(ret, 'padding', parseSpace(sx.p));
-  fillViewStyleIfNotNullish(ret, 'paddingTop', parseSpace(sx.pt ?? sx.py));
-
-  fillViewStyleIfNotNullish(ret, 'paddingRight', parseSpace(sx.pr ?? sx.px));
-
-  fillViewStyleIfNotNullish(ret, 'paddingBottom', parseSpace(sx.pb ?? sx.py));
-
-  fillViewStyleIfNotNullish(ret, 'paddingLeft', parseSpace(sx.pl ?? sx.px));
-
-  fillViewStyleIfNotNullish(ret, 'top', parseSpace(sx.t));
-  fillViewStyleIfNotNullish(ret, 'right', parseSpace(sx.r));
-  fillViewStyleIfNotNullish(ret, 'bottom', parseSpace(sx.b));
-  fillViewStyleIfNotNullish(ret, 'left', parseSpace(sx.l));
+  fillViewStyleIfNotNullish(
+    ret,
+    'top',
+    parseSpace(sx.top ?? sx.t ?? (sx.absoluteFill ? 0 : undefined)),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'right',
+    parseSpace(sx.right ?? sx.r ?? (sx.absoluteFill ? 0 : undefined)),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'bottom',
+    parseSpace(sx.bottom ?? sx.b ?? (sx.absoluteFill ? 0 : undefined)),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'left',
+    parseSpace(sx.left ?? sx.l ?? (sx.absoluteFill ? 0 : undefined)),
+  );
 
   // endregion
 
   // region sizes
   fillViewStyleIfNotNullish(ret, 'width', parseSizes(sx.width ?? sx.w));
   fillViewStyleIfNotNullish(ret, 'minWidth', parseSizes(sx.minWidth ?? sx.minW));
-
   fillViewStyleIfNotNullish(ret, 'maxWidth', parseSizes(sx.maxWidth ?? sx.maxW));
 
   fillViewStyleIfNotNullish(ret, 'height', parseSizes(sx.height ?? sx.h));
   fillViewStyleIfNotNullish(ret, 'minHeight', parseSizes(sx.minHeight ?? sx.minH));
-
   fillViewStyleIfNotNullish(ret, 'maxHeight', parseSizes(sx.maxHeight ?? sx.maxH));
 
-  // fillViewStyleIfNotNullish(ret, 'gap',  parseSpaceAsNumberOnly(props.gap));
+  fillViewStyleIfNotNullish(ret, 'gap', parseSpaceAsNumberOnly(sx.gap));
   fillViewStyleIfNotNullish(ret, 'columnGap', parseSpaceAsNumberOnly(sx.gapX));
   fillViewStyleIfNotNullish(ret, 'rowGap', parseSpaceAsNumberOnly(sx.gapY));
   // endregion
 
   // region styles
-
   fillViewStyleIfNotNullish(ret, 'flex', sx.flex);
-  fillViewStyleIfNotNullish(ret, 'alignItems', sx.alignItems);
+  fillViewStyleIfNotNullish(ret, 'alignItems', sx.alignItems ?? (sx.center ? 'center' : undefined));
   fillViewStyleIfNotNullish(ret, 'alignContent', sx.alignContent);
-  fillViewStyleIfNotNullish(ret, 'justifyContent', sx.justifyContent);
+  fillViewStyleIfNotNullish(
+    ret,
+    'justifyContent',
+    sx.justifyContent ?? (sx.center ? 'center' : undefined),
+  );
   fillViewStyleIfNotNullish(ret, 'flexWrap', sx.flexWrap);
   fillViewStyleIfNotNullish(ret, 'flexDirection', sx.flexDirection);
   fillViewStyleIfNotNullish(ret, 'flexGrow', sx.flexGrow);
   fillViewStyleIfNotNullish(ret, 'flexShrink', sx.flexShrink);
   fillViewStyleIfNotNullish(ret, 'flexBasis', sx.flexBasis);
   fillViewStyleIfNotNullish(ret, 'alignSelf', sx.alignSelf);
-  fillViewStyleIfNotNullish(ret, 'position', sx.position ?? sx.pos);
+  fillViewStyleIfNotNullish(
+    ret,
+    'position',
+    sx.position ?? sx.pos ?? (sx.absoluteFill ? 'absolute' : undefined),
+  );
   fillViewStyleIfNotNullish(ret, 'borderWidth', sx.borderWidth);
   fillViewStyleIfNotNullish(ret, 'borderRadius', sx.borderRadius ?? sx.radius);
-
+  fillViewStyleIfNotNullish(ret, 'opacity', sx.opacity);
+  fillViewStyleIfNotNullish(ret, 'overflow', sx.overflow);
+  fillViewStyleIfNotNullish(ret, 'transform', sx.transform);
+  fillViewStyleIfNotNullish(ret, 'aspectRatio', sx.aspectRatio);
+  fillViewStyleIfNotNullish(ret, 'display', sx.display);
+  fillViewStyleIfNotNullish(ret, 'elevation', sx.elevation);
+  fillViewStyleIfNotNullish(ret, 'zIndex', sx.zIndex);
   // endregion
 
   return StyleSheet.compose(baseStyle, ret);

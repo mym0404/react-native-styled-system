@@ -25,3 +25,22 @@ const props = {
 **이에 따른 우선순위는 3 > 2 > 4 > 1 로 계산됩니다.**
 
 3이 가장 우선순위가 높습니다.
+
+<details>
+  <summary>이를 보여주는 테스트 코드</summary>
+```tsx
+describe('style parse priority', () => {
+  it('sx prop property > prop property', () => {
+    expectResult(emptyTheme, { w: 1, sx: { w: 2 } }, { width: 2 });
+  });
+
+  it('prop property > viewStyle parameter', () => {
+    expectResult(emptyTheme, { w: 1, viewStyleSx: { w: 2 } }, { width: 1 });
+  });
+
+  it('viewStyle parameter > style prop property', () => {
+    expectResult(emptyTheme, { style: { width: 1 }, viewStyleSx: { w: 2 } }, { width: 2 });
+  });
+});
+```
+</details>

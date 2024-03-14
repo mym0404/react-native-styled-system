@@ -1,6 +1,13 @@
-import type { DimensionValue } from 'react-native';
+// regenerate by running
+// npx @chakra-ui/cli tokens path/to/your/theme.(js|ts)
+import type { BaseThemeTypings } from './shared.types.js';
 
-export interface ThemedTypings {
+export interface ThemeTypings extends BaseThemeTypings {
+  blur: string & {};
+  borders: string & {};
+  borderStyles: string & {};
+  borderWidths: string & {};
+  breakpoints: string & {};
   colors:
     | 'white'
     | 'black'
@@ -55,10 +62,18 @@ export interface ThemedTypings {
     | 'blue600'
     | 'blue700'
     | 'blue800'
-    | 'blue900';
-
+    | 'blue900'
+    | (string & {});
+  colorSchemes: string & {};
+  fonts: string & {};
+  fontSizes: string & {};
+  fontWeights: string & {};
+  layerStyles: string & {};
+  letterSpacings: string & {};
+  lineHeights: string & {};
+  radii: string & {};
+  shadows: string & {};
   sizes:
-    | DimensionValue
     | '0'
     | '1'
     | '2'
@@ -82,9 +97,9 @@ export interface ThemedTypings {
     | '40'
     | '48'
     | 'px'
-    | '0.5';
+    | '0.5'
+    | (string & {});
   space:
-    | DimensionValue
     | '0'
     | '-0'
     | '1'
@@ -132,5 +147,10 @@ export interface ThemedTypings {
     | 'px'
     | '-px'
     | '0.5'
-    | '-0.5';
+    | '-0.5'
+    | (string & {});
+  textStyles: string & {};
+  transition: string & {};
+  zIndices: string & {};
+  components: {};
 }

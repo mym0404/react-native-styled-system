@@ -173,7 +173,7 @@ try {
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 
-  write(tmpFile, result);
+  // write(tmpFile, result);
   await $`mv ${tmpFile} ${outputFile}`;
   // await fixLint(outputFile);
   printSuccess(`🎉 Theme Typing Generated in '${outputFile}'`);

@@ -1,4 +1,5 @@
 import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { renderHook } from '@testing-library/react-hooks';
 
 import type { SxProps } from '../@types/SxProps';
@@ -8,7 +9,7 @@ import { useSx } from './useSx';
 
 export function expectResult(
   theme: ThemedDict,
-  props: { style?: StyleProp<any> } & SxProps,
+  props: { style?: StyleProp<any>; viewStyleSx?: SxProps } & SxProps,
   expectation: ViewStyle,
 ) {
   const {
@@ -17,7 +18,7 @@ export function expectResult(
     },
   } = renderHook(() => useSx(props, { theme }));
 
-  return expect(viewStyle()).toEqual(expectation);
+  return expect(StyleSheet.flatten(viewStyle(props.viewStyleSx))).toEqual(expectation);
 }
 
 const emptyTheme: ThemedDict = {
@@ -102,5 +103,19 @@ describe('shortcut priority', () => {
 
   it('radius', () => {
     expectResult(emptyTheme, { radius: 1, borderRadius: 2 }, { borderRadius: 2 });
+  });
+});
+
+describe('style parse priority', () => {
+  it('sx prop property > prop property', () => {
+    expectResult(emptyTheme, { w: 1, sx: { w: 2 } }, { width: 2 });
+  });
+
+  it('prop property > viewStyle parameter', () => {
+    expectResult(emptyTheme, { w: 1, viewStyleSx: { w: 2 } }, { width: 1 });
+  });
+
+  it('viewStyle parameter > style prop property', () => {
+    expectResult(emptyTheme, { style: { width: 1 }, viewStyleSx: { w: 2 } }, { width: 2 });
   });
 });

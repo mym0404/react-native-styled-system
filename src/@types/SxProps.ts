@@ -3,32 +3,51 @@ import type { ViewStyle } from 'react-native';
 import type { Token } from './Token';
 
 export type SxPropKeys = keyof SxProps;
-
 /**
  * Always modify if you change API
  */
-export const allPropNameList = [
+export const _allPropList = [
+  'style',
   'backgroundColor',
   'bg',
   'borderColor',
+  'margin',
   'm',
+  'marginTop',
   'mt',
+  'marginRight',
   'mr',
+  'marginBottom',
   'mb',
+  'marginLeft',
   'ml',
+  'marginX',
   'mx',
+  'marginY',
   'my',
+  'padding',
   'p',
+  'paddingTop',
   'pt',
+  'paddingRight',
   'pr',
+  'paddingBottom',
   'pb',
+  'paddingLeft',
   'pl',
+  'paddingX',
   'px',
+  'paddingY',
   'py',
+  'top',
   't',
+  'right',
   'r',
+  'bottom',
   'b',
+  'left',
   'l',
+  'gap',
   'gapX',
   'gapY',
   'width',
@@ -59,37 +78,62 @@ export const allPropNameList = [
   'borderWidth',
   'borderRadius',
   'radius',
-  'style',
+  'opacity',
+  'overflow',
+  'transform',
+  'aspectRatio',
+  'display',
+  'elevation',
+  'zIndex',
 ] satisfies (SxPropKeys | 'style')[];
 
-export type ThemedColorTokenProps = {
+interface ThemedColorTokenProps {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
   borderColor: Token<'colors'>;
-};
+}
 
-type ThemedSpaceTokenProps = {
-  m: Token<'space'>;
-  mt: Token<'space'>;
-  mr: Token<'space'>;
-  mb: Token<'space'>;
-  ml: Token<'space'>;
-  mx: Token<'space'>;
-  my: Token<'space'>;
-  p: Token<'space'>;
-  pt: Token<'space'>;
-  pr: Token<'space'>;
-  pb: Token<'space'>;
-  pl: Token<'space'>;
-  px: Token<'space'>;
-  py: Token<'space'>;
-  t: Token<'space'>;
-  r: Token<'space'>;
-  b: Token<'space'>;
-  l: Token<'space'>;
+interface ThemedSpaceTokenProps {
+  margin: Token<'space'>;
+  m: Token<'space'>; // margin
+  marginTop: Token<'space'>;
+  mt: Token<'space'>; // marginTop
+  marginRight: Token<'space'>;
+  mr: Token<'space'>; // marginRight
+  marginBottom: Token<'space'>;
+  mb: Token<'space'>; // marginBottom
+  marginLeft: Token<'space'>;
+  ml: Token<'space'>; // marginLeft
+  marginX: Token<'space'>;
+  mx: Token<'space'>; // marginX
+  marginY: Token<'space'>;
+  my: Token<'space'>; // marginY
+  padding: Token<'space'>;
+  p: Token<'space'>; // padding
+  paddingTop: Token<'space'>;
+  pt: Token<'space'>; // paddingTop
+  paddingRight: Token<'space'>;
+  pr: Token<'space'>; // paddingRight
+  paddingBottom: Token<'space'>;
+  pb: Token<'space'>; // paddingBottom
+  paddingLeft: Token<'space'>;
+  pl: Token<'space'>; // paddingLeft
+  paddingX: Token<'space'>;
+  px: Token<'space'>; // paddingX
+  paddingY: Token<'space'>;
+  py: Token<'space'>; // paddingY
+  top: Token<'space'>;
+  t: Token<'space'>; // top
+  right: Token<'space'>;
+  r: Token<'space'>; // right
+  bottom: Token<'space'>;
+  b: Token<'space'>; // bottom
+  left: Token<'space'>;
+  l: Token<'space'>; // left
+  gap: Token<'space'>; // only works if parsed result is number
   gapX: Token<'space'>; // only works if parsed result is number
   gapY: Token<'space'>; // only works if parsed result is number
-};
+}
 
 type ThemedSizeTokenProps = {
   width: Token<'sizes'>;
@@ -123,6 +167,15 @@ export type SxProps = Partial<
     borderWidth: ViewStyle['borderWidth'];
     borderRadius: ViewStyle['borderRadius'];
     radius: ViewStyle['borderRadius']; // borderRadius
+    opacity: ViewStyle['opacity'];
+    overflow: ViewStyle['overflow'];
+    transform: ViewStyle['transform'];
+    aspectRatio: ViewStyle['aspectRatio'];
+    display: ViewStyle['display'];
+    elevation: ViewStyle['elevation'];
+    zIndex: ViewStyle['zIndex'];
+    absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0
+    center?: boolean; // shortcut - justifyContent, alignItems: center
   } & ThemedSpaceTokenProps &
     ThemedSizeTokenProps &
     ThemedColorTokenProps

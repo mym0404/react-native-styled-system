@@ -6,6 +6,10 @@ title: SxProps References
 
 # SxProps References
 
+Short name fields have lower priority than full name fields.
+
+In other words, when `marginTop` and `mt` are used together, the value of `marginTop` win.
+
 ## colors
 
 ```tsx
@@ -17,61 +21,110 @@ borderColor: Token<'colors'>;
 ## space
 
 ```tsx
-m: Token<'space'>;
-mt: Token<'space'>;
-mr: Token<'space'>;
-mb: Token<'space'>;
-ml: Token<'space'>;
-mx: Token<'space'>;
-my: Token<'space'>;
-p: Token<'space'>;
-pt: Token<'space'>;
-pr: Token<'space'>;
-pb: Token<'space'>;
-pl: Token<'space'>;
-px: Token<'space'>;
-py: Token<'space'>;
-t: Token<'space'>;
-r: Token<'space'>;
-b: Token<'space'>;
-l: Token<'space'>;
-gapX: Token<'space'>; // only works if parsed result is number
+margin: Token<'space'>;  
+m: Token<'space'>; // margin  
+marginTop: Token<'space'>;  
+mt: Token<'space'>; // marginTop  
+marginRight: Token<'space'>;  
+mr: Token<'space'>; // marginRight  
+marginBottom: Token<'space'>;  
+mb: Token<'space'>; // marginBottom  
+marginLeft: Token<'space'>;  
+ml: Token<'space'>; // marginLeft  
+marginX: Token<'space'>;  
+mx: Token<'space'>; // marginX  
+marginY: Token<'space'>;  
+my: Token<'space'>; // marginY  
+padding: Token<'space'>;  
+p: Token<'space'>; // padding  
+paddingTop: Token<'space'>;  
+pt: Token<'space'>; // paddingTop  
+paddingRight: Token<'space'>;  
+pr: Token<'space'>; // paddingRight  
+paddingBottom: Token<'space'>;  
+pb: Token<'space'>; // paddingBottom  
+paddingLeft: Token<'space'>;  
+pl: Token<'space'>; // paddingLeft  
+paddingX: Token<'space'>;  
+px: Token<'space'>; // paddingX  
+paddingY: Token<'space'>;  
+py: Token<'space'>; // paddingY  
+top: Token<'space'>;  
+t: Token<'space'>; // top  
+right: Token<'space'>;  
+r: Token<'space'>; // right  
+bottom: Token<'space'>;  
+b: Token<'space'>; // bottom  
+left: Token<'space'>;  
+l: Token<'space'>; // left  
+gap: Token<'space'>; // only works if parsed result is number  
+gapX: Token<'space'>; // only works if parsed result is number  
 gapY: Token<'space'>; // only works if parsed result is number
 ```
 
 ## sizes
 
 ```tsx
-width: Token<'sizes'>;
-w: Token<'sizes'>; // width
-minWidth: Token<'sizes'>;
-minW: Token<'sizes'>; // minWidth
-maxWidth: Token<'sizes'>;
-maxW: Token<'sizes'>; // maxWidth
-height: Token<'sizes'>;
-h: Token<'sizes'>; // height
-minHeight: Token<'sizes'>;
-minH: Token<'sizes'>; // minHeight
-maxHeight: Token<'sizes'>;
+width: Token<'sizes'>;  
+w: Token<'sizes'>; // width  
+minWidth: Token<'sizes'>;  
+minW: Token<'sizes'>; // minWidth  
+maxWidth: Token<'sizes'>;  
+maxW: Token<'sizes'>; // maxWidth  
+height: Token<'sizes'>;  
+h: Token<'sizes'>; // height  
+minHeight: Token<'sizes'>;  
+minH: Token<'sizes'>; // minHeight  
+maxHeight: Token<'sizes'>;  
 maxH: Token<'sizes'>; // maxHeight
 ```
 
 ## ViewStyle & ViewProps
 
 ```tsx
-flex: ViewStyle['flex'];
-alignItems: ViewStyle['alignItems'];
-alignContent: ViewStyle['alignContent'];
-justifyContent: ViewStyle['justifyContent'];
-flexWrap: ViewStyle['flexWrap'];
-flexDirection: ViewStyle['flexDirection'];
-flexGrow: ViewStyle['flexGrow'];
-flexShrink: ViewStyle['flexShrink'];
-flexBasis: ViewStyle['flexBasis'];
-alignSelf: ViewStyle['alignSelf'];
-position: ViewStyle['position'];
-pos: ViewStyle['position']; // position
-borderWidth: ViewStyle['borderWidth'];
-borderRadius: ViewStyle['borderRadius'];
-radius: ViewStyle['borderRadius']; // borderRadius
+flex: ViewStyle['flex'];  
+alignItems: ViewStyle['alignItems'];  
+alignContent: ViewStyle['alignContent'];  
+justifyContent: ViewStyle['justifyContent'];  
+flexWrap: ViewStyle['flexWrap'];  
+flexDirection: ViewStyle['flexDirection'];  
+flexGrow: ViewStyle['flexGrow'];  
+flexShrink: ViewStyle['flexShrink'];  
+flexBasis: ViewStyle['flexBasis'];  
+alignSelf: ViewStyle['alignSelf'];  
+position: ViewStyle['position'];  
+pos: ViewStyle['position']; // position  
+borderWidth: ViewStyle['borderWidth'];  
+borderRadius: ViewStyle['borderRadius'];  
+radius: ViewStyle['borderRadius']; // borderRadius  
+opacity: ViewStyle['opacity'];  
+overflow: ViewStyle['overflow'];  
+transform: ViewStyle['transform'];  
+aspectRatio: ViewStyle['aspectRatio'];  
+display: ViewStyle['display'];  
+elevation: ViewStyle['elevation'];  
+zIndex: ViewStyle['zIndex'];  
+absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0  
+center?: boolean; // shortcut - justifyContent, alignItems: center
 ```
+
+:::warning
+In the case of shortcuts such as `absoluteFill` or `center`, it is required to not reuse the affected style fields.
+
+**The priority for individual fields in shortcut fields is lower than the prop for that field alone.**
+
+For example, `absoluteFill` affects `position`, `top`, `left`, `right`, and `bottom`.
+
+If you have `absoluteFill: true` and you pass `top: 5`, the result is: `top` has higher priority, so the result is:
+
+```
+{
+  "position": "absolute",
+  "top": 5,
+  "left": 0,
+  "right": 0,
+  "bottom": 0,
+}
+```
+
+:::

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/usage/component.mdx",
+                "file": "docs/usage/sx-props.mdx",
                 "mode": "source",
                 "backlinks": false,
                 "source": true
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 341.5
+    "width": 341.5,
+    "collapsed": true
   },
   "right": {
     "id": "465428516897b8dc",
@@ -128,15 +129,15 @@
   "lastOpenFiles": [
     "build/ko/sitemap.xml",
     "build/ko/index.html",
-    "build/ko/docs/usage/typescript/index.html",
     "build/ko/docs/usage/token/index.html",
+    "build/ko/docs/usage/typescript/index.html",
     "build/ko/docs/usage/sx-props/index.html",
     "build/ko/docs/usage/style-parsing/index.html",
     "build/ko/docs/usage/install/index.html",
     "build/ko/docs/usage/configuration/index.html",
     "build/ko/docs/usage/component/index.html",
     "build/ko/docs/category/usage/index.html",
-    "build/ko/docs/usage/typescript",
+    "build/ko/docs/intro/index.html",
     "build/ko/img/undraw_docusaurus_tree.svg",
     "build/ko/img/undraw_docusaurus_react.svg",
     "build/ko/img/undraw_docusaurus_mountain.svg",

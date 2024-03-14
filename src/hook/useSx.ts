@@ -3,7 +3,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 import type { SxProps } from '../@types/SxProps';
-import { allPropNameList } from '../@types/SxProps';
+import { _allPropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
@@ -31,7 +31,7 @@ export const useSx = <T>(props: Props<T>, { theme: optionTheme }: UseSxOptions =
 
   const filteredProps: T = useMemo(() => {
     const ret = { ...props };
-    allPropNameList.forEach((keyName) => delete ret[keyName]);
+    _allPropList.forEach((keyName) => delete ret[keyName]);
 
     return ret;
   }, [props]);
