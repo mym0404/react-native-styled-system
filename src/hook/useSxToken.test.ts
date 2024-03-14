@@ -43,3 +43,5 @@
 //     expectResult(baseTheme, 'colors', 'red', 'red');
 //   });
 // });
+
+it('', () => {});
