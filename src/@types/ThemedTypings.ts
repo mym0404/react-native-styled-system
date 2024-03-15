@@ -1,8 +1,8 @@
-import type { DimensionValue } from 'react-native';
+import type { ColorsValue, RadiiValue, SizesValue, SpaceValue } from './Token';
 
 export interface ThemedTypings {
-  space: DimensionValue | `${number}` | `${number}px` | `${any}px`;
-  sizes: DimensionValue | `${number}` | `${number}px` | `${any}px`;
-  colors: string;
-  radii: number | `${number}` | `${number}px` | `${any}px`;
+  space: SpaceValue | `${number}` | `${number}px` | `${any}px`;
+  sizes: SizesValue | `${number}` | `${number}px` | `${any}px`;
+  colors: ColorsValue;
+  radii: RadiiValue | `${number}` | `${number}px` | `${any}px`;
 }

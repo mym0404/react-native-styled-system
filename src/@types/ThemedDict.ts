@@ -1,10 +1,10 @@
-import type { DimensionValue } from 'react-native';
+import type { ColorsValue, RadiiValue, SizesValue, SpaceValue } from './Token';
 
 export interface ThemedDict {
-  space: Record<string | number, DimensionValue>;
-  sizes: Record<string | number, DimensionValue>;
-  colors: Record<string, string>;
-  radii: Record<string | number, number>;
+  space: Record<string | number, SpaceValue>;
+  sizes: Record<string | number, SizesValue>;
+  colors: Record<string | number, ColorsValue>;
+  radii: Record<string | number, RadiiValue>;
 }
 export const emptyThemedDict = {
   space: {},
