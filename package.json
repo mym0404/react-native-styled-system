@@ -67,13 +67,15 @@
   "source": "src/index.ts",
   "module": "lib/module/index.js",
   "react-native-builder-bob": {
+    "declarationMap": false,
     "source": "src",
     "output": "lib",
     "targets": [
       "commonjs",
       "module",
       "typescript"
-    ]
+    ],
+    "exclude": ["**/{__tests__,__fixtures__,__mocks__}/**", "**/*.test.*"]
   },
   "config": {
     "commitizen": {
