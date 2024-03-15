@@ -5,6 +5,7 @@ export const fillNullishThemeKey = (theme: Partial<ThemedDict>): ThemedDict => {
     colors: {},
     space: {},
     sizes: {},
+    radii: {},
     ...theme,
   };
 };

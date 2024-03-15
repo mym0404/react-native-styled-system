@@ -1,3 +1,5 @@
+import type { ThemedDict } from '../src';
+
 const unit = 4;
 
 const space = {
@@ -86,4 +88,10 @@ export default {
   },
   space,
   sizes: { ...space },
-};
+  radii: {
+    1: 4,
+    2: 8,
+    sm: 48,
+    md: 12,
+  },
+} satisfies ThemedDict;

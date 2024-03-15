@@ -25,6 +25,7 @@ const emptyTheme: ThemedDict = {
   colors: {},
   sizes: {},
   space: {},
+  radii: {},
 };
 
 const baseTheme: ThemedDict = {
@@ -37,8 +38,14 @@ const baseTheme: ThemedDict = {
     1: 4,
     2: 8,
     pagePadding: 20,
+    full: '100%',
   },
-  space: { 1: 4, 2: 8, pagePadding: 20 },
+  space: { 1: 4, 2: 8, pagePadding: 20, full: '100%' },
+  radii: {
+    sm: 8,
+    md: 12,
+    lg: 20,
+  },
 };
 
 describe('simple usages', () => {
@@ -83,6 +90,10 @@ describe('edge case', () => {
 
     return expect(viewStyle({ width: 1 })).toEqual({ width: 4 });
   });
+
+  it("gap doesn't accept not number value", () => {
+    expectResult(baseTheme, { gap: 'full' as any }, {});
+  });
 });
 
 describe('space parsing', () => {
@@ -118,6 +129,10 @@ describe('space parsing', () => {
   it('minus prefixed string', () => {
     expectResult(baseTheme, { m: '-pagePadding' as any }, { margin: -20 });
   });
+
+  it('gap accepts number value', () => {
+    expectResult(baseTheme, { gap: 1 }, { gap: 4 });
+  });
 });
 
 describe('sizes parsing', () => {
@@ -151,5 +166,23 @@ describe('style parse priority', () => {
 
   it('viewStyle parameter > style prop property', () => {
     expectResult(emptyTheme, { style: { width: 1 }, viewStyleSx: { w: 2 } }, { width: 2 });
+  });
+});
+
+it('border widths should be match', () => {
+  expectResult(
+    emptyTheme,
+    { borderTopWidth: 1, borderWidth: 1 },
+    { borderTopWidth: 1, borderWidth: 1 },
+  );
+
+  expectResult(baseTheme, { borderLeftWidth: 1 }, { borderLeftWidth: 1 });
+});
+
+describe('radii', () => {
+  it('simple case check', () => {
+    expectResult(baseTheme, { topLeftRadius: '1px' }, { borderTopLeftRadius: 1 });
+    expectResult(baseTheme, { topLeftRadius: '1' }, { borderTopLeftRadius: 1 });
+    expectResult(baseTheme, { topLeftRadius: 'sm' as any }, { borderTopLeftRadius: 8 });
   });
 });

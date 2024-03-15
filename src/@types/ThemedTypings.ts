@@ -4,4 +4,5 @@ export interface ThemedTypings {
   space: DimensionValue | `${number}` | `${number}px` | `${any}px`;
   sizes: DimensionValue | `${number}` | `${number}px` | `${any}px`;
   colors: string;
+  radii: number | `${number}` | `${number}px` | `${any}px`;
 }

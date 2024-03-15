@@ -103,7 +103,7 @@ export const propsToThemedStyle = ({
   };
 
   /**
-   * handle like gap (number only prop)
+   * Parse space and filter if it is number for number only prop like gap
    */
   const parseSpaceAsNumberOnly = (token?: Token<'space'>): number | undefined => {
     const ret = parseSpace(token);
@@ -112,9 +112,6 @@ export const propsToThemedStyle = ({
     }
   };
 
-  /**
-   * Space should be handle negative string like '-1' as well
-   */
   const parseSizes = (token?: Token<'sizes'>): DimensionValue | undefined => {
     if (is.nullOrUndefined(token)) {
       return;
@@ -140,6 +137,41 @@ export const propsToThemedStyle = ({
       const stringKey = `${token}`;
       if (stringKey in sizes) {
         return sizes[stringKey] as DimensionValue;
+      }
+    }
+
+    if (is.numberString(token)) {
+      return Number(token);
+    }
+
+    return token;
+  };
+
+  const parseRadii = (token?: Token<'radii'>): number | undefined => {
+    if (is.nullOrUndefined(token)) {
+      return;
+    }
+
+    const px = parsePxSuffixNumber(token);
+    if (is.number(px)) {
+      return px;
+    }
+
+    // end with px but not number parsed
+    if (is.string(token) && token.endsWith('px')) {
+      return;
+    }
+
+    const radii = theme.radii;
+
+    if ((is.string(token) || is.number(token)) && token in radii) {
+      return radii[token] as number;
+    }
+
+    if (is.number(token)) {
+      const stringKey = `${token}`;
+      if (stringKey in radii) {
+        return radii[stringKey] as number;
       }
     }
 
@@ -209,6 +241,31 @@ export const propsToThemedStyle = ({
   fillViewStyleIfNotNullish(ret, 'rowGap', parseSpaceAsNumberOnly(sx.gapY));
   // endregion
 
+  // region radii
+  fillViewStyleIfNotNullish(ret, 'borderRadius', parseRadii(sx.borderRadius ?? sx.radius));
+  fillViewStyleIfNotNullish(
+    ret,
+    'borderTopLeftRadius',
+    parseRadii(sx.borderTopLeftRadius ?? sx.topLeftRadius),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'borderTopRightRadius',
+    parseRadii(sx.borderTopRightRadius ?? sx.topRightRadius),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'borderBottomLeftRadius',
+    parseRadii(sx.borderBottomLeftRadius ?? sx.bottomLeftRadius),
+  );
+  fillViewStyleIfNotNullish(
+    ret,
+    'borderBottomRightRadius',
+    parseRadii(sx.borderBottomRightRadius ?? sx.bottomRightRadius),
+  );
+
+  // endregion
+
   // region styles
   fillViewStyleIfNotNullish(ret, 'flex', sx.flex);
   fillViewStyleIfNotNullish(ret, 'alignItems', sx.alignItems ?? (sx.center ? 'center' : undefined));
@@ -230,7 +287,11 @@ export const propsToThemedStyle = ({
     sx.position ?? sx.pos ?? (sx.absoluteFill ? 'absolute' : undefined),
   );
   fillViewStyleIfNotNullish(ret, 'borderWidth', sx.borderWidth);
-  fillViewStyleIfNotNullish(ret, 'borderRadius', sx.borderRadius ?? sx.radius);
+  fillViewStyleIfNotNullish(ret, 'borderTopWidth', sx.borderTopWidth);
+  fillViewStyleIfNotNullish(ret, 'borderRightWidth', sx.borderRightWidth);
+  fillViewStyleIfNotNullish(ret, 'borderBottomWidth', sx.borderBottomWidth);
+  fillViewStyleIfNotNullish(ret, 'borderLeftWidth', sx.borderLeftWidth);
+
   fillViewStyleIfNotNullish(ret, 'opacity', sx.opacity);
   fillViewStyleIfNotNullish(ret, 'overflow', sx.overflow);
   fillViewStyleIfNotNullish(ret, 'transform', sx.transform);
