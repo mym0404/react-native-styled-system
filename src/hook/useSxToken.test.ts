@@ -24,10 +24,10 @@ const theme: ThemedDict = {
   },
 };
 
-export function expectResult<T extends keyof ThemedTypings>(
+export function expectResult<T extends keyof ThemedTypings, V extends ThemedTypings[T]>(
   theme: ThemedDict,
   tokenGroup: T,
-  tokenValue: keyof ThemedDict[T],
+  tokenValue: Exclude<V, null | undefined>,
   expectation: any,
 ) {
   const {
@@ -43,16 +43,16 @@ describe('valid case', () => {
   });
 
   it('radii', () => {
-    expectResult(theme, 'radii', 'sm', 8);
+    expectResult(theme, 'radii', 'sm' as any, 8);
   });
 });
 
 describe('edge case', () => {
   it('cannot find value if tokenValue is not in tokenType', () => {
-    expectResult(theme, 'radii', '', undefined);
+    expectResult(theme, 'radii', '' as any, undefined);
   });
 
   it('cannot find value if theme is undefined', () => {
-    expectResult(undefined as any, 'radii', '', undefined);
+    expectResult(undefined as any, 'radii', '' as any, undefined);
   });
 });

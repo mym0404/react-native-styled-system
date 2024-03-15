@@ -8,11 +8,11 @@ import { StyledSystemContext } from '../provider/StyledSystemProvider';
 export type UseSxTokenOptions = {
   theme?: ThemedDict;
 };
-export const useSxToken = <T extends keyof ThemedTypings>(
+export const useSxToken = <T extends keyof ThemedTypings, V extends ThemedTypings[T]>(
   tokenType: T,
-  tokenValue: keyof ThemedDict[T],
+  tokenValue: Exclude<V, null | undefined>,
   { theme: optionTheme }: UseSxTokenOptions = {},
-): ThemedDict[T][typeof tokenValue] => {
+): ThemedDict[T][keyof ThemedDict[T]] => {
   const styledSystemContext = useContext(StyledSystemContext);
 
   const theme = optionTheme ?? styledSystemContext?.theme;
