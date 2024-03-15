@@ -6,6 +6,7 @@ import fs from 'fs-extra';
 const join = path.join;
 const filename = path.basename(__filename);
 const _printTag = 'Theme Gen' || filename;
+$.verbose = false;
 
 function exist(path) {
   return fs.existsSync(path);
@@ -159,7 +160,6 @@ try {
   result = result.replace(/layerStyles.*/, '');
   result = result.replace(/letterSpacings.*/, '');
   result = result.replace(/lineHeights.*/, '');
-  result = result.replace(/radii.*/, '');
   result = result.replace(/shadows.*/, '');
   result = result.replace(/textStyles.*/, '');
   result = result.replace(/transition.*/, '');
@@ -177,6 +177,7 @@ try {
     'sizes:',
     'sizes: DimensionValue | `${number}` | `${number}px` | `${any}px` | ',
   );
+  result = result.replace('radii:', 'radii: number | `${number}` | `${number}px` | `${any}px` | ');
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 

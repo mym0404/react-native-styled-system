@@ -76,6 +76,10 @@ export const _allPropList = [
   'position',
   'pos',
   'borderWidth',
+  'borderTopWidth',
+  'borderRightWidth',
+  'borderBottomWidth',
+  'borderLeftWidth',
   'borderRadius',
   'radius',
   'opacity',
@@ -85,6 +89,10 @@ export const _allPropList = [
   'display',
   'elevation',
   'zIndex',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
 ] satisfies (SxPropKeys | 'style')[];
 
 type ThemedColorTokenProps = {
@@ -150,6 +158,19 @@ type ThemedSizeTokenProps = {
   maxH: Token<'sizes'>; // maxHeight
 };
 
+type ThemedRadiiTokenProps = {
+  borderRadius: Token<'radii'>;
+  radius: Token<'radii'>; // borderRadius
+  borderTopLeftRadius: Token<'radii'>;
+  topLeftRadius: Token<'radii'>; // borderTopLeftRadius
+  borderTopRightRadius: Token<'radii'>;
+  topRightRadius: Token<'radii'>; // borderTopRightRadius
+  borderBottomLeftRadius: Token<'radii'>;
+  bottomLeftRadius: Token<'radii'>; // borderBottomLeftRadius
+  borderBottomRightRadius: Token<'radii'>;
+  bottomRightRadius: Token<'radii'>; // borderBottomRightRadius
+};
+
 type BaseSxProps = Partial<
   {
     flex: ViewStyle['flex'];
@@ -165,8 +186,10 @@ type BaseSxProps = Partial<
     position: ViewStyle['position'];
     pos: ViewStyle['position']; // position
     borderWidth: ViewStyle['borderWidth'];
-    borderRadius: ViewStyle['borderRadius'];
-    radius: ViewStyle['borderRadius']; // borderRadius
+    borderTopWidth: ViewStyle['borderTopWidth'];
+    borderRightWidth: ViewStyle['borderRightWidth'];
+    borderBottomWidth: ViewStyle['borderBottomWidth'];
+    borderLeftWidth: ViewStyle['borderLeftWidth'];
     opacity: ViewStyle['opacity'];
     overflow: ViewStyle['overflow'];
     transform: ViewStyle['transform'];
@@ -178,7 +201,8 @@ type BaseSxProps = Partial<
     center?: boolean; // shortcut - justifyContent, alignItems: center
   } & ThemedSpaceTokenProps &
     ThemedSizeTokenProps &
-    ThemedColorTokenProps
+    ThemedColorTokenProps &
+    ThemedRadiiTokenProps
 >;
 
 export type SxProps = BaseSxProps & { sx?: BaseSxProps };
