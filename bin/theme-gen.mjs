@@ -145,7 +145,10 @@ try {
    */
 
   let result = read(tmpFile);
-  result = result.replace(/import.*/, "import type { DimensionValue } from 'react-native';\n");
+  result = result.replace(
+    /import.*/,
+    "import type { RadiiValue, SizesValue, SpaceValue } from './Token';\n",
+  );
   result = result.replace(/export.*/, 'export interface ThemedTypings {');
   result = result.replace(/\/\/.*/g, '');
   result = result.replace(/blur.*/, '');
@@ -170,14 +173,18 @@ try {
 
   result = result.replace(
     'space:',
-    'space: DimensionValue | `${number}` | `${number}px` | `${any}px` | ',
+    'space: SpaceValue | `${number}` | `${number}px` | `${any}px` | ',
   );
 
   result = result.replace(
     'sizes:',
-    'sizes: DimensionValue | `${number}` | `${number}px` | `${any}px` | ',
+    'sizes: SizesValue | `${number}` | `${number}px` | `${any}px` | ',
   );
-  result = result.replace('radii:', 'radii: number | `${number}` | `${number}px` | `${any}px` | ');
+
+  result = result.replace(
+    'radii:',
+    'radii: RadiiValue | `${number}` | `${number}px` | `${any}px` | ',
+  );
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 
