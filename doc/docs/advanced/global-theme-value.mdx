@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+title: Get Theme value in global
+---
+
+
+
+# Get Theme Value Globally
+
+The React Native Styled System does not provide a way to retrieve themes from globally outside of React's Context.
+
+However, when you pass a theme to `StyledSystemProvider`, you can store the theme as a global object and reference it in your code where this theme changes.
+
+Let's say you have a Wrapper component in your code that wraps a `StyledSystemProvider` like this:
+
+```tsx
+import...
+import StyledSystemTheme from './AppTheme'
+
+export const StyledSystemAppThemeProvider = ({ children }: PropsWithChildren<{}>) => {
+  const { sfTop, sfBottom, sfLeft, sfRight } = useSafeAreaValues();
+
+  const theme = useMemo(() => {
+    const safeArea = { sfTop, sfRight, sfBottom, sfLeft };
+    return {
+      ...StyledSystemTheme,
+      sizes: { ...StyledSystemTheme.sizes, ...safeArea },
+      space: { ...StyledSystemTheme.space, ...safeArea },
+    };
+  }, [sfLeft, sfTop, sfRight, sfBottom]);
+
+  return <StyledSystemProvider theme={theme}>{children}</StyledSystemProvider>;
+};
+```
+
+Now, when the `theme` object changes, we save it for reference as a global variable.
+
+```tsx
+import...
+import StyledSystemTheme from './AppTheme'
+
+//highlight-start
+let _globalTheme: ThemedDict = StyledSystemTheme;
+export const getGlobalTheme = () => _globalTheme;
+//highlight-end
+
+export const StyledSystemAppThemeProvider = ({ children }: PropsWithChildren<{}>) => {
+  const { sfTop, sfBottom, sfLeft, sfRight } = useSafeAreaValues();
+
+  const theme = useMemo(() => {
+    const safeArea = { sfTop, sfRight, sfBottom, sfLeft };
+    return {
+      ...StyledSystemTheme,
+      sizes: { ...StyledSystemTheme.sizes, ...safeArea },
+      space: { ...StyledSystemTheme.space, ...safeArea },
+    };
+  }, [sfLeft, sfTop, sfRight, sfBottom]);
+
+//highlight-start
+  useEffect(() => {
+    globalTheme = theme;
+  }, [theme]);
+//highlight-end
+
+  return <StyledSystemProvider theme={theme}>{children}</StyledSystemProvider>;
+};
+```
+
+We can now reference the theme via `getGlobalTheme()` in our code.
+
+:::warning
+Note that the latest `theme` value may not always be referenced.
+
+For example, save the value returned by `getGlobalTheme()` in a variable and then
+If you try to use it after the theme value has changed, it will point to the old value.
+:::
