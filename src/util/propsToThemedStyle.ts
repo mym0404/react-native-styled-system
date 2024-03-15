@@ -8,6 +8,7 @@ import type { ThemedDict } from '../@types/ThemedDict';
 import type { Token } from '../@types/Token';
 import { fillViewStyleIfNotNullish } from '../internal/util/fillViewStyleIfNotNullish';
 import { parsePxSuffixNumber } from '../internal/util/parsePxSuffixNumber';
+import { printWarning } from '../internal/util/printWarning';
 
 export const propsToThemedStyle = ({
   baseStyle,
@@ -19,7 +20,13 @@ export const propsToThemedStyle = ({
   sx?: SxProps;
 }): StyleProp<ViewStyle> | undefined => {
   const ret: ViewStyle = {};
-  if (!theme || !sx) {
+
+  if (!theme) {
+    printWarning('theme not found');
+    return baseStyle;
+  }
+
+  if (!sx) {
     return baseStyle;
   }
 

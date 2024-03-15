@@ -4,6 +4,7 @@ import { renderHook } from '@testing-library/react-hooks';
 
 import type { SxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
+import { emptyThemedDict } from '../@types/ThemedDict';
 
 import { useSx } from './useSx';
 
@@ -21,12 +22,7 @@ export function expectResult(
   return expect(StyleSheet.flatten(viewStyle(props.viewStyleSx))).toEqual(expectation);
 }
 
-const emptyTheme: ThemedDict = {
-  colors: {},
-  sizes: {},
-  space: {},
-  radii: {},
-};
+const emptyTheme = emptyThemedDict;
 
 const baseTheme: ThemedDict = {
   colors: {
