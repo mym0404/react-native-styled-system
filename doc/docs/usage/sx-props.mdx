@@ -79,6 +79,21 @@ maxHeight: Token<'sizes'>;
 maxH: Token<'sizes'>; // maxHeight
 ```
 
+## radii
+
+```tsx
+borderRadius: Token<'radii'>;
+radius: Token<'radii'>; // borderRadius
+borderTopLeftRadius: Token<'radii'>;
+topLeftRadius: Token<'radii'>; // borderTopLeftRadius
+borderTopRightRadius: Token<'radii'>;
+topRightRadius: Token<'radii'>; // borderTopRightRadius
+borderBottomLeftRadius: Token<'radii'>;
+bottomLeftRadius: Token<'radii'>; // borderBottomLeftRadius
+borderBottomRightRadius: Token<'radii'>;
+bottomRightRadius: Token<'radii'>; // borderBottomRightRadius
+```
+
 ## ViewStyle & ViewProps
 
 ```tsx
@@ -94,9 +109,11 @@ flexBasis: ViewStyle['flexBasis'];
 alignSelf: ViewStyle['alignSelf'];  
 position: ViewStyle['position'];  
 pos: ViewStyle['position']; // position  
-borderWidth: ViewStyle['borderWidth'];  
-borderRadius: ViewStyle['borderRadius'];  
-radius: ViewStyle['borderRadius']; // borderRadius  
+borderWidth: ViewStyle['borderWidth'];
+borderTopWidth: ViewStyle['borderTopWidth'];
+borderRightWidth: ViewStyle['borderRightWidth'];
+borderBottomWidth: ViewStyle['borderBottomWidth'];
+borderLeftWidth: ViewStyle['borderLeftWidth'];
 opacity: ViewStyle['opacity'];  
 overflow: ViewStyle['overflow'];  
 transform: ViewStyle['transform'];  
