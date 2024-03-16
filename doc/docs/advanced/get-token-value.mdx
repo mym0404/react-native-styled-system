@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Get token value with useSxToken
+# Get token value with useSxTokens
 
-To get individual token values for a theme, you can use the `useSxToken` hook.
+To get individual token values for a theme, you can use the `useSxTokens` hook.
 
 This is useful when it is cumbersome to get the style by passing `SxProps` to the `useSx` hook or when individual token values are needed.
 
@@ -17,14 +17,16 @@ const MyView = (
     disabled?: boolean;
     readonly?: boolean;
   }) => {
-  const backgroundColor = useSxToken('colors', readonly || disabled ? 'gray500' : 'gray200');
+  const [backgroundColor, error] = useSxTokens('colors', [readonly || disabled ? 'gray500' : 'gray200', 'red500']);
 g
-  return <View style={{ backgroundColor }} />
+  return <View style={{ backgroundColor, borderColor: error, ... }} />
 }
 ```
 
 :::info
 To operate properly, you must use it in the Context inside `StyledSystemProvider` or pass the theme object as an option.
 
-Additionally, `undefined` is returned when attempting to reference a key that does not exist.
+Otherwise, `undefined` is returned for every position in the returned array.
+
+Additionally, `undefined` is returned at that index when attempting to reference a key that does not exist.
 :::

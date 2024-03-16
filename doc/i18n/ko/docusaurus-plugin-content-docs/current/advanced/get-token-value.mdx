@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# useSxToken를 이용해 토큰값 얻기
+# useSxTokens를 이용해 토큰값 얻기
 
-테마의 개별적인 토큰 값을 얻으려면 `useSxToken` 훅을 사용할 수 있습니다.
+테마의 개별적인 토큰 값을 얻으려면 `useSxTokens` 훅을 사용할 수 있습니다.
 
 이는 `SxProps`를 `useSx` 훅에 전달해 style을 얻기 번거롭거나 개별적인 토큰 값이 필요할 때 유용합니다.
 
@@ -17,14 +17,16 @@ const MyView = (
     disabled?: boolean;
     readonly?: boolean;
   }) => {
-  const backgroundColor = useSxToken('colors', readonly || disabled ? 'gray500' : 'gray200');
-
-  return <View style={{ backgroundColor }} />
+  const [backgroundColor, error] = useSxTokens('colors', [readonly || disabled ? 'gray500' : 'gray200', 'red500']);
+g
+  return <View style={{ backgroundColor, borderColor: error, ... }} />
 }
 ```
 
 :::info
 `StyledSystemProvider`내부의 Context에서 사용하거나 옵션으로 테마 객체를 전달해야 정상적으로 동작합니다.
 
-또한, 존재하지 않는 키를 참조하려고 할 시에도 `undefined`가 반환됩니다.
+그렇지 않다면 반환 배열의 모든 자리에 `undefined`가 반환됩니다.
+
+또한, 존재하지 않는 키를 참조하려고 할 시에도 해당 인덱스의 자리에 `undefined`가 반환됩니다.
 :::
