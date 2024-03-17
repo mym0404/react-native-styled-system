@@ -1,5 +1,5 @@
 {
-  "name": "react-native-themed-styled-system",
+  "name": "react-native-styled-system",
   "version": "0.0.30",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
