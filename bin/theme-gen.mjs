@@ -147,7 +147,7 @@ try {
   let result = read(tmpFile);
   result = result.replace(
     /import.*/,
-    "import type { RadiiValue, SizesValue, SpaceValue } from './Token';\n",
+    "import type { ColorsValue, RadiiValue, SizesValue, SpaceValue } from './Token';\n",
   );
   result = result.replace(/export.*/, 'export interface ThemedTypings {');
   result = result.replace(/\/\/.*/g, '');
@@ -184,6 +184,11 @@ try {
   result = result.replace(
     'radii:',
     'radii: RadiiValue | `${number}` | `${number}px` | `${any}px` | ',
+  );
+  
+  result = result.replace(
+    'colors:',
+    'colors: ColorsValue | ',
   );
 
   result = result.replace(/\|[\s ]*\n/g, ';');

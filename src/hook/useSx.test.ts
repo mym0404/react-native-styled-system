@@ -51,6 +51,7 @@ describe('simple usages', () => {
 
   it('color', () => {
     expectResult(baseTheme, { bg: 'red' }, { backgroundColor: 'red' });
+    expectResult(baseTheme, { bg: '#ffffff' }, { backgroundColor: '#ffffff' });
   });
 });
 
@@ -140,6 +141,11 @@ describe('sizes parsing', () => {
 describe('shortcut priority', () => {
   it('bg', () => {
     expectResult(baseTheme, { bg: 'red', backgroundColor: 'blue' }, { backgroundColor: 'blue' });
+    expectResult(
+      baseTheme,
+      { bg: 'red', backgroundColor: '#ffffff' },
+      { backgroundColor: '#ffffff' },
+    );
   });
 
   it('w', () => {
