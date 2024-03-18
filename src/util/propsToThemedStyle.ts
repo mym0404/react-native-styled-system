@@ -35,7 +35,11 @@ export const propsToThemedStyle = ({
       return;
     }
 
-    return theme.colors[token];
+    if (token in theme.colors) {
+      return theme.colors[token];
+    } else {
+      return token;
+    }
   };
 
   /**
