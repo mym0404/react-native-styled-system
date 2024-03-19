@@ -3646,6 +3646,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/invariant@npm:^2.2.37":
+  version: 2.2.37
+  resolution: "@types/invariant@npm:2.2.37"
+  checksum: 10c0/f57ed8445036ebda8bc93804f088c2a13050bbeef4e4bc6ed531a70e2869250dbe59413f2a9ed7d8f3efa960f191e8dfca9d25414d63cbf604d348428f8c5b75
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.6
   resolution: "@types/istanbul-lib-coverage@npm:2.0.6"
@@ -11657,12 +11664,14 @@ __metadata:
     "@mj-studio/eslint-config-react": "npm:^1.0.4"
     "@mj-studio/js-util": "npm:^1.0.29"
     "@testing-library/react-hooks": "npm:^8.0.1"
+    "@types/invariant": "npm:^2.2.37"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:^18.2.65"
     "@types/react-test-renderer": "npm:^18"
     cz-conventional-changelog: "npm:^3.3.0"
     eslint: "npm:^8.2.0"
     husky: "npm:^9.0.11"
+    invariant: "npm:^2.2.4"
     jest: "npm:^29.7.0"
     metro-react-native-babel-preset: "npm:^0.77.0"
     prettier: "npm:^3.2.5"
