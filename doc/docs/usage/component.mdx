@@ -42,8 +42,8 @@ import { SxProps, useSx } from 'react-native-themed-styled-system';
 
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
-  const { viewStyle, filteredProps } = useSx(props);
-  return <View ref={ref} style={viewStyle()} {...filteredProps} />;
+  const { getStyle, filteredProps } = useSx(props);
+  return <View ref={ref} style={getStyle()} {...filteredProps} />;
 });
 
 export { StyledView };
@@ -52,7 +52,7 @@ export type { StyledViewProps };
 
 `useSx` is responsible for receiving `SxProps` and converting it to `ViewStyle`.
 
-You can call the `viewStyle` function returned by `useSx` and pass it to the `style` prop of the desired view.
+You can call the `getStyle` function returned by `useSx` and pass it to the `style` prop of the desired view.
 
 :::warning
 The prop type of a component containing the `SxProps` type includes all the keys included in `SxProps`.
@@ -60,7 +60,7 @@ The prop type of a component containing the `SxProps` type includes all the keys
 Therefore, if all props from the parent are passed through object destruction like in the existing `{...props}`, the keys do not overlap.
 You need to be careful not to do so.
 
-Also, when using `props` as is, it must always come before `style` so as not to overwrite the `style` of `viewStyle()`.
+Also, when using `props` as is, it must always come before `style` so as not to overwrite the `style` of `getStyle()`.
 
 To prevent this, you can use `filteredProps` in the return value of `useSx`.
 
@@ -102,11 +102,11 @@ const ScreenErrorFallback = (props: Props) => {
 //highlight-next-line
   const { title, body } = props;
 //highlight-next-line
-  const { viewStyle } = useSx(props);
+  const { getStyle } = useSx(props);
   return (
     <View
 //highlight-next-line
-      style={viewStyle({ center: true })}
+      style={getStyle({ center: true })}
       pointerEvents={'box-none'}
     >
 ```
@@ -117,7 +117,7 @@ There are a few things to keep in mind.
 There is no need to add `style` as a prop to `style` of `View`.
 2. Always pass all `props` objects themselves to `useSx` to avoid missing any properties. `useSx`
 Properties that are not used internally are ignored and not changed.
-3. `viewStyle` can receive `SxProps` as an argument and consider it in the result.
+3. `getStyle` can receive `SxProps` as an argument and consider it in the result.
 4. `center` is a shortcut for `justifyContent: center`, `alignItems: center`.
 
 ## Example without Props destruction
@@ -137,10 +137,10 @@ type StyledScrollViewProps = PropsWithChildren<
     SxProps
 >;
 const StyledScrollView = forwardRef((props: StyledScrollViewProps, ref: Ref<ScrollView>) => {
-  const { viewStyle, filteredProps } = useSx(props);
-  const { viewStyle: contentContainerStyle } = useSx(props.contentContainerSx);
+  const { getStyle, filteredProps } = useSx(props);
+  const { getStyle: contentContainerStyle } = useSx(props.contentContainerSx);
   return (
-    <ScrollView ref={ref} style={viewStyle()} contentContainerStyle={contentContainerStyle()} {...filteredProps} />
+    <ScrollView ref={ref} style={getStyle()} contentContainerStyle={contentContainerStyle()} {...filteredProps} />
   );
 });
 
