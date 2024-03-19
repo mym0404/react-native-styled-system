@@ -31,6 +31,9 @@ jobs:
             ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
             ${{ runner.os }}-node-
 
+      - name: Upgrade CLI
+        run: yarn up cli@file:./cli.tgz
+
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
