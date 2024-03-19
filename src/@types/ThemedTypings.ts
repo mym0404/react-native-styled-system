@@ -5,4 +5,5 @@ export interface ThemedTypings {
   sizes: SizesValue | `${number}` | `${number}px` | `${any}px`;
   colors: ColorsValue;
   radii: RadiiValue | `${number}` | `${number}px` | `${any}px`;
+  typography: string;
 }

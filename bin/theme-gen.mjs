@@ -6,7 +6,7 @@ import fs from 'fs-extra';
 const join = path.join;
 const filename = path.basename(__filename);
 const _printTag = 'Theme Gen' || filename;
-$.verbose = false;
+// $.verbose = false;
 
 function exist(path) {
   return fs.existsSync(path);
@@ -137,7 +137,7 @@ const outputFile =
   './node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts';
 
 try {
-  await $`npx @chakra-ui/cli tokens --no-format --out ${tmpFile} ${source}`;
+  await $`yarn cli generate --out ${tmpFile} ${source}`;
 
   /**
    * export interface ThemedTypings {
@@ -151,23 +151,6 @@ try {
   );
   result = result.replace(/export.*/, 'export interface ThemedTypings {');
   result = result.replace(/\/\/.*/g, '');
-  result = result.replace(/blur.*/, '');
-  result = result.replace(/borders.*/, '');
-  result = result.replace(/borderStyles.*/, '');
-  result = result.replace(/borderWidths.*/, '');
-  result = result.replace(/breakpoints.*/, '');
-  result = result.replace(/colorSchemes.*/, '');
-  result = result.replace(/fonts.*/, '');
-  result = result.replace(/fontSizes.*/, '');
-  result = result.replace(/fontWeights.*/, '');
-  result = result.replace(/layerStyles.*/, '');
-  result = result.replace(/letterSpacings.*/, '');
-  result = result.replace(/lineHeights.*/, '');
-  result = result.replace(/shadows.*/, '');
-  result = result.replace(/textStyles.*/, '');
-  result = result.replace(/transition.*/, '');
-  result = result.replace(/zIndices.*/, '');
-  result = result.replace(/components.*\n.*\n.*/, '');
   result = result.replace(/\|? ?\(?string & {}\)?;/g, '');
   result = result.replaceAll('string & {}', '');
 
@@ -185,11 +168,8 @@ try {
     'radii:',
     'radii: RadiiValue | `${number}` | `${number}px` | `${any}px` | ',
   );
-  
-  result = result.replace(
-    'colors:',
-    'colors: ColorsValue | ',
-  );
+
+  result = result.replace('colors:', 'colors: ColorsValue | ');
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 

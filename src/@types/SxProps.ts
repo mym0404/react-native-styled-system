@@ -110,6 +110,9 @@ export const _textStylePropList = [
   'textShadowRadius',
   'textTransform',
   'userSelect',
+  'includeFontPadding',
+  'typography',
+  't',
 ] satisfies (Omit<TextSxPropsKey, keyof TextSxPropsKey> | 'style')[];
 type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
@@ -233,6 +236,9 @@ type ThemedTextStyleProps = {
   textShadowRadius: TextStyle['textShadowRadius'];
   textTransform: TextStyle['textTransform'];
   userSelect: TextStyle['userSelect'];
+  includeFontPadding: TextStyle['includeFontPadding'];
+  typography: Token<'typography'>;
+  t: Token<'typography'>; // typography
 };
 
 type BaseSxProps = Partial<

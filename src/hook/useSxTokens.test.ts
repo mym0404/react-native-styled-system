@@ -22,6 +22,7 @@ const theme: ThemedDict = {
     md: 12,
     lg: 20,
   },
+  typography: {},
 };
 
 export function expectResult<T extends keyof ThemedTypings, V extends ThemedTypings[T]>(
