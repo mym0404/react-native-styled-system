@@ -34,8 +34,11 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
+        run: yarn up cli@file:./cli.tgz
+
+      - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable --update-checksum
+        run: yarn install --immutable
 
       - name: Build
         run: yarn build
