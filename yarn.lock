@@ -5160,9 +5160,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli@file:./cli.tgz::locator=react-native-themed-styled-system%40workspace%3A.":
+"cli@file:./cli::locator=react-native-themed-styled-system%40workspace%3A.":
   version: 0.0.0
-  resolution: "cli@file:./cli.tgz#./cli.tgz::hash=3ac8be&locator=react-native-themed-styled-system%40workspace%3A."
+  resolution: "cli@file:./cli#./cli::hash=217fa0&locator=react-native-themed-styled-system%40workspace%3A."
   dependencies:
     bundle-n-require: "npm:^1.0.1"
     chokidar: "npm:^3.5.3"
@@ -5173,7 +5173,7 @@ __metadata:
     update-notifier: "npm:^6.0.2"
   bin:
     cli: bin/index.js
-  checksum: 10c0/99d7314feb28c6e42d1b293a12c307935e70a1ecb0a27929b4c6db460df9cc2c325e4c0aa4d0831e4561b080e2b76a29135711bb0492a5860746fd47838c0c5f
+  checksum: 10c0/e8df130bd720301f784babd3780413f91b633d98d12eeb8569c534248a7fe4b599545666a3ec60999121b594df0478d25e781aea9d780765a3df67d87b86078b
   languageName: node
   linkType: hard
 
@@ -12042,7 +12042,7 @@ __metadata:
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:^18.2.65"
     "@types/react-test-renderer": "npm:^18"
-    cli: "file:./cli.tgz"
+    cli: "file:./cli"
     cz-conventional-changelog: "npm:^3.3.0"
     eslint: "npm:^8.2.0"
     husky: "npm:^9.0.11"

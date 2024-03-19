@@ -12,7 +12,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "build:cli": "(cd cli && yarn && yarn build && yarn pack && mv package.tgz ../cli.tgz)",
-    "build": "yarn build:cli && yarn t && bob build",
+    "build": "yarn t && bob build",
     "gen": "yarn build:cli && yarn up cli@file:./cli.tgz && zx bin/theme-gen.mjs bin/theme.ts --output bin/ret.d.ts",
     "prepare": "husky"
   },

@@ -2,7 +2,6 @@
 dist/
 esm/
 lib/
-package.tgz
 
 # Webstorm(or any other Intellij IDE) config
 .idea/
