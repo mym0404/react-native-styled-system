@@ -5162,7 +5162,7 @@ __metadata:
 
 "cli@file:./cli::locator=react-native-themed-styled-system%40workspace%3A.":
   version: 0.0.0
-  resolution: "cli@file:./cli#./cli::hash=217fa0&locator=react-native-themed-styled-system%40workspace%3A."
+  resolution: "cli@file:./cli#./cli::hash=6f295c&locator=react-native-themed-styled-system%40workspace%3A."
   dependencies:
     bundle-n-require: "npm:^1.0.1"
     chokidar: "npm:^3.5.3"
@@ -5173,7 +5173,7 @@ __metadata:
     update-notifier: "npm:^6.0.2"
   bin:
     cli: bin/index.js
-  checksum: 10c0/e8df130bd720301f784babd3780413f91b633d98d12eeb8569c534248a7fe4b599545666a3ec60999121b594df0478d25e781aea9d780765a3df67d87b86078b
+  checksum: 10c0/73c5b657582b68e4c9deb02c465a4cf8ae168632af3cfc243295c1b0a384cbd070b4764a5059efa34151e5951f10c09eb0c5b0d6e829d1b5952c452dcf5b736f
   languageName: node
   linkType: hard
 
