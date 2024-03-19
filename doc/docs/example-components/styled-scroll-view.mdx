@@ -1,0 +1,27 @@
+---
+sidebar_position: 2
+title: StyledScrollView
+---
+
+```tsx
+import { PropsWithChildren, forwardRef, Ref } from 'react';
+import { ScrollViewProps, ScrollView } from 'react-native';
+import { SxProps, useSx } from 'react-native-themed-styled-system';
+
+type StyledScrollViewProps = PropsWithChildren<
+  {
+    contentContainerSx?: SxProps;
+  } & Omit<ScrollViewProps, 'contentContainerStyle'> &
+    SxProps
+>;
+const StyledScrollView = forwardRef((props: StyledScrollViewProps, ref: Ref<ScrollView>) => {
+  const { getStyle, filteredProps } = useSx(props);
+  const { getStyle: contentContainerStyle } = useSx(props.contentContainerSx);
+  return (
+    <ScrollView ref={ref} style={getStyle()} contentContainerStyle={contentContainerStyle()} {...filteredProps} />
+  );
+});
+
+export { StyledScrollView };
+export type { StyledScrollViewProps };
+```
