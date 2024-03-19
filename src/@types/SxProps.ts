@@ -40,13 +40,9 @@ export const _allPropList = [
   'paddingY',
   'py',
   'top',
-  't',
   'right',
-  'r',
   'bottom',
-  'b',
   'left',
-  'l',
   'gap',
   'gapX',
   'gapY',
@@ -131,13 +127,9 @@ type ThemedSpaceTokenProps = {
   paddingY: Token<'space'>;
   py: Token<'space'>; // paddingY
   top: Token<'space'>;
-  t: Token<'space'>; // top
   right: Token<'space'>;
-  r: Token<'space'>; // right
   bottom: Token<'space'>;
-  b: Token<'space'>; // bottom
   left: Token<'space'>;
-  l: Token<'space'>; // left
   gap: Token<'space'>; // only works if parsed result is number
   gapX: Token<'space'>; // only works if parsed result is number
   gapY: Token<'space'>; // only works if parsed result is number

@@ -215,26 +215,18 @@ export const propsToThemedStyle = ({
   fillViewStyleIfNotNullish(ret, 'paddingVertical', parseSpace(sx.paddingY ?? sx.py));
   fillViewStyleIfNotNullish(ret, 'paddingHorizontal', parseSpace(sx.paddingX ?? sx.px));
 
-  fillViewStyleIfNotNullish(
-    ret,
-    'top',
-    parseSpace(sx.top ?? sx.t ?? (sx.absoluteFill ? 0 : undefined)),
-  );
+  fillViewStyleIfNotNullish(ret, 'top', parseSpace(sx.top ?? (sx.absoluteFill ? 0 : undefined)));
   fillViewStyleIfNotNullish(
     ret,
     'right',
-    parseSpace(sx.right ?? sx.r ?? (sx.absoluteFill ? 0 : undefined)),
+    parseSpace(sx.right ?? (sx.absoluteFill ? 0 : undefined)),
   );
   fillViewStyleIfNotNullish(
     ret,
     'bottom',
-    parseSpace(sx.bottom ?? sx.b ?? (sx.absoluteFill ? 0 : undefined)),
+    parseSpace(sx.bottom ?? (sx.absoluteFill ? 0 : undefined)),
   );
-  fillViewStyleIfNotNullish(
-    ret,
-    'left',
-    parseSpace(sx.left ?? sx.l ?? (sx.absoluteFill ? 0 : undefined)),
-  );
+  fillViewStyleIfNotNullish(ret, 'left', parseSpace(sx.left ?? (sx.absoluteFill ? 0 : undefined)));
 
   // endregion
 
