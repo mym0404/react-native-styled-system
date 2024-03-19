@@ -1,13 +1,15 @@
-import type { ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 
 import type { Token } from './Token';
 
-export type SxPropKeys = keyof SxProps;
+export type SxPropsKeys = keyof SxProps;
+export type TextSxPropsKey = keyof TextSxProps;
 /**
  * Always modify if you change API
  */
-export const _allPropList = [
+export const _viewStylePropList = [
   'style',
+  'sx',
   'backgroundColor',
   'bg',
   'borderColor',
@@ -58,7 +60,6 @@ export const _allPropList = [
   'minHeight',
   'maxH',
   'maxHeight',
-  'sx',
   'flex',
   'alignItems',
   'alignContent',
@@ -89,12 +90,36 @@ export const _allPropList = [
   'borderTopRightRadius',
   'borderBottomLeftRadius',
   'borderBottomRightRadius',
-] satisfies (SxPropKeys | 'style')[];
-
+] satisfies (SxPropsKeys | 'style')[];
+export const _textStylePropList = [
+  'color',
+  'textDecorationColor',
+  'textShadowColor',
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'weight',
+  'letterSpacing',
+  'lineHeight',
+  'textAlign',
+  'align',
+  'textDecorationLine',
+  'textDecorationStyle',
+  'textShadowOffset',
+  'textShadowRadius',
+  'textTransform',
+  'userSelect',
+] satisfies (Omit<TextSxPropsKey, keyof TextSxPropsKey> | 'style')[];
 type ThemedColorTokenProps = {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
   borderColor: Token<'colors'>;
+};
+type ThemedColorTokenTextProps = {
+  color: Token<'colors'>;
+  textDecorationColor: Token<'colors'>;
+  textShadowColor: Token<'colors'>;
 };
 
 type ThemedSpaceTokenProps = {
@@ -163,38 +188,60 @@ type ThemedRadiiTokenProps = {
   bottomRightRadius: Token<'radii'>; // borderBottomRightRadius
 };
 
+type ThemedViewStyleProps = {
+  flex: ViewStyle['flex'];
+  alignItems: ViewStyle['alignItems'];
+  alignContent: ViewStyle['alignContent'];
+  justifyContent: ViewStyle['justifyContent'];
+  flexWrap: ViewStyle['flexWrap'];
+  flexDirection: ViewStyle['flexDirection'];
+  flexGrow: ViewStyle['flexGrow'];
+  flexShrink: ViewStyle['flexShrink'];
+  flexBasis: ViewStyle['flexBasis'];
+  alignSelf: ViewStyle['alignSelf'];
+  position: ViewStyle['position'];
+  pos: ViewStyle['position']; // position
+  borderWidth: ViewStyle['borderWidth'];
+  borderTopWidth: ViewStyle['borderTopWidth'];
+  borderRightWidth: ViewStyle['borderRightWidth'];
+  borderBottomWidth: ViewStyle['borderBottomWidth'];
+  borderLeftWidth: ViewStyle['borderLeftWidth'];
+  opacity: ViewStyle['opacity'];
+  overflow: ViewStyle['overflow'];
+  transform: ViewStyle['transform'];
+  aspectRatio: ViewStyle['aspectRatio'];
+  display: ViewStyle['display'];
+  elevation: ViewStyle['elevation'];
+  zIndex: ViewStyle['zIndex'];
+  absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0
+  center?: boolean; // shortcut - justifyContent, alignItems: center
+};
+
+type ThemedTextStyleProps = {
+  fontFamily: TextStyle['fontFamily'];
+  fontSize: TextStyle['fontSize'];
+  fontStyle: TextStyle['fontStyle'];
+  fontWeight: TextStyle['fontWeight'];
+  weight: TextStyle['fontWeight']; // fontWeight
+  letterSpacing: TextStyle['letterSpacing'];
+  lineHeight: TextStyle['lineHeight'];
+  textAlign: TextStyle['textAlign'];
+  align: TextStyle['textAlign']; // textAlign
+  textDecorationLine: TextStyle['textDecorationLine'];
+  textDecorationStyle: TextStyle['textDecorationStyle'];
+  textShadowOffset: TextStyle['textShadowOffset'];
+  textShadowRadius: TextStyle['textShadowRadius'];
+  textTransform: TextStyle['textTransform'];
+  userSelect: TextStyle['userSelect'];
+};
+
 type BaseSxProps = Partial<
-  {
-    flex: ViewStyle['flex'];
-    alignItems: ViewStyle['alignItems'];
-    alignContent: ViewStyle['alignContent'];
-    justifyContent: ViewStyle['justifyContent'];
-    flexWrap: ViewStyle['flexWrap'];
-    flexDirection: ViewStyle['flexDirection'];
-    flexGrow: ViewStyle['flexGrow'];
-    flexShrink: ViewStyle['flexShrink'];
-    flexBasis: ViewStyle['flexBasis'];
-    alignSelf: ViewStyle['alignSelf'];
-    position: ViewStyle['position'];
-    pos: ViewStyle['position']; // position
-    borderWidth: ViewStyle['borderWidth'];
-    borderTopWidth: ViewStyle['borderTopWidth'];
-    borderRightWidth: ViewStyle['borderRightWidth'];
-    borderBottomWidth: ViewStyle['borderBottomWidth'];
-    borderLeftWidth: ViewStyle['borderLeftWidth'];
-    opacity: ViewStyle['opacity'];
-    overflow: ViewStyle['overflow'];
-    transform: ViewStyle['transform'];
-    aspectRatio: ViewStyle['aspectRatio'];
-    display: ViewStyle['display'];
-    elevation: ViewStyle['elevation'];
-    zIndex: ViewStyle['zIndex'];
-    absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0
-    center?: boolean; // shortcut - justifyContent, alignItems: center
-  } & ThemedSpaceTokenProps &
+  ThemedViewStyleProps &
+    ThemedSpaceTokenProps &
     ThemedSizeTokenProps &
     ThemedColorTokenProps &
     ThemedRadiiTokenProps
 >;
 
 export type SxProps = BaseSxProps & { sx?: BaseSxProps };
+export type TextSxProps = SxProps & Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
