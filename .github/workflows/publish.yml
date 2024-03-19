@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
+      - name: Upgrade CLI
         run: yarn up cli@file:./cli.tgz
 
       - name: Install dependencies
