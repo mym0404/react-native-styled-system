@@ -137,7 +137,7 @@ const outputFile =
   './node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts';
 
 try {
-  await $`npx react-native-themed-styled-system-cli generate --out ${tmpFile} ${source}`;
+  await $`npx -y react-native-themed-styled-system-cli generate --out ${tmpFile} ${source}`;
 
   /**
    * export interface ThemedTypings {
