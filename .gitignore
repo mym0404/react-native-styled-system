@@ -16,6 +16,9 @@ tsconfig.tsbuildinfo
 .jest/
 coverage/
 
+package.tgz
+package/
+
 # Yarn
 yarn-error.log
 

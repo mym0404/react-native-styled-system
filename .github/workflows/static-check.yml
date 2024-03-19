@@ -26,14 +26,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/cli.tgz') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/cli.tgz') }}
+            ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
             ${{ runner.os }}-node-
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn build:cli && yarn up cli@file:./cli.tgz && yarn install --immutable
+        run: yarn install --immutable
 
       - name: Check Lint
         run: yarn lint
