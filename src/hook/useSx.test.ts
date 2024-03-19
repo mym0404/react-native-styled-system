@@ -166,8 +166,8 @@ describe('style parse priority', () => {
     expectResult(emptyTheme, { w: 1, viewStyleSx: { w: 2 } }, { width: 1 });
   });
 
-  it('viewStyle parameter > style prop property', () => {
-    expectResult(emptyTheme, { style: { width: 1 }, viewStyleSx: { w: 2 } }, { width: 2 });
+  it('style prop property > viewStyle parameter', () => {
+    expectResult(emptyTheme, { style: { width: 1 }, viewStyleSx: { w: 2 } }, { width: 1 });
   });
 });
 
