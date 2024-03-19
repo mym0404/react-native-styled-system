@@ -1,22 +1,32 @@
 /* eslint-disable padding-line-between-statements */
-import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
-import { is } from '@mj-studio/js-util';
+import type { TextStyle, ViewStyle } from 'react-native';
 
-import type { SxProps } from '../@types/SxProps';
+import type { SxProps, TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
-import type { Token } from '../@types/Token';
-import { fillViewStyleIfNotNullish } from '../internal/util/fillViewStyleIfNotNullish';
-import { parsePxSuffixNumber } from '../internal/util/parsePxSuffixNumber';
+import { createTokenParsers } from '../internal/TokenParser/TokenParser';
+import {
+  fillTextStyleIfNotNullish,
+  fillViewStyleIfNotNullish,
+} from '../internal/util/fillStyleIfNotNullish';
 import { printWarning } from '../internal/util/printWarning';
 
+export type ThemedStyleType = 'ViewStyle' | 'TextStyle';
+export type InferStyleType<T extends ThemedStyleType | undefined | null> = T extends 'TextStyle'
+  ? TextStyle
+  : ViewStyle;
+export type InferSxPropsType<T extends ThemedStyleType | undefined | null> = T extends 'TextStyle'
+  ? TextSxProps
+  : SxProps;
 export const propsToThemedStyle = ({
   theme,
   sx,
+  styleType = 'ViewStyle',
 }: {
   theme?: ThemedDict;
-  sx?: SxProps;
-}): StyleProp<ViewStyle> | undefined => {
-  const ret: ViewStyle = {};
+  sx?: TextSxProps;
+  styleType?: ThemedStyleType;
+}): InferStyleType<typeof styleType> | undefined => {
+  const ret: InferStyleType<typeof styleType> = {};
 
   if (!theme) {
     printWarning('theme not found');
@@ -27,243 +37,72 @@ export const propsToThemedStyle = ({
     return;
   }
 
-  const parseColor = (token?: Token<'colors'>): string | undefined => {
-    if (!token) {
-      return;
-    }
-
-    if (token in theme.colors) {
-      return theme.colors[token];
-    } else {
-      return token;
-    }
-  };
-
-  /**
-   * Space should be handle negative string like '-1' as well
-   */
-  const parseSpace = (token?: Token<'space'>): DimensionValue | undefined => {
-    if (is.nullOrUndefined(token)) {
-      return;
-    }
-
-    const px = parsePxSuffixNumber(token);
-    if (is.number(px)) {
-      return px;
-    }
-    // end with px but not number parsed
-    if (is.string(token) && token.endsWith('px')) {
-      return;
-    }
-
-    const spaces = theme.space;
-
-    if ((is.string(token) || is.number(token)) && token in spaces) {
-      return spaces[token] as DimensionValue;
-    }
-
-    // Parse is number
-    if (is.number(token)) {
-      const stringKey = `${token}`;
-      if (stringKey in spaces) {
-        return spaces[stringKey] as DimensionValue;
-      }
-
-      const negativeNumberKey = -token;
-      if (negativeNumberKey in spaces) {
-        const value = spaces[negativeNumberKey];
-        if (is.number(value)) {
-          return -value;
-        }
-      }
-
-      const negativeStringKey =
-        stringKey.charAt(0) === '-' ? stringKey.substring(1) : `-${stringKey}`;
-
-      if (negativeStringKey in spaces) {
-        const value = spaces[negativeStringKey];
-        if (is.number(value)) {
-          return -value;
-        }
-      }
-    }
-
-    // Parse prefix minus token string
-    if (is.string(token) && token.startsWith('-')) {
-      const originalToken = token.substring(1);
-      if (originalToken in spaces) {
-        const value = spaces[originalToken];
-        if (is.number(value)) {
-          return -value;
-        }
-        // not invert sign percent string yet(will be supported).
-      }
-
-      // don't return malformed string. It is not acceptable as DimensionValue
-      return;
-    }
-
-    if (is.numberString(token)) {
-      return Number(token);
-    }
-
-    return token;
-  };
-
-  /**
-   * Parse space and filter if it is number for number only prop like gap
-   */
-  const parseSpaceAsNumberOnly = (token?: Token<'space'>): number | undefined => {
-    const ret = parseSpace(token);
-    if (is.number(ret)) {
-      return ret;
-    }
-  };
-
-  const parseSizes = (token?: Token<'sizes'>): DimensionValue | undefined => {
-    if (is.nullOrUndefined(token)) {
-      return;
-    }
-
-    const px = parsePxSuffixNumber(token);
-    if (is.number(px)) {
-      return px;
-    }
-
-    // end with px but not number parsed
-    if (is.string(token) && token.endsWith('px')) {
-      return;
-    }
-
-    const sizes = theme.sizes;
-
-    if ((is.string(token) || is.number(token)) && token in sizes) {
-      return sizes[token] as DimensionValue;
-    }
-
-    if (is.number(token)) {
-      const stringKey = `${token}`;
-      if (stringKey in sizes) {
-        return sizes[stringKey] as DimensionValue;
-      }
-    }
-
-    if (is.numberString(token)) {
-      return Number(token);
-    }
-
-    return token;
-  };
-
-  const parseRadii = (token?: Token<'radii'>): number | undefined => {
-    if (is.nullOrUndefined(token)) {
-      return;
-    }
-
-    const px = parsePxSuffixNumber(token);
-    if (is.number(px)) {
-      return px;
-    }
-
-    // end with px but not number parsed
-    if (is.string(token) && token.endsWith('px')) {
-      return;
-    }
-
-    const radii = theme.radii;
-
-    if ((is.string(token) || is.number(token)) && token in radii) {
-      return radii[token] as number;
-    }
-
-    if (is.number(token)) {
-      const stringKey = `${token}`;
-      if (stringKey in radii) {
-        return radii[stringKey] as number;
-      }
-    }
-
-    if (is.numberString(token)) {
-      return Number(token);
-    }
-
-    return token;
-  };
+  const { colors, radii, sizes, space, spaceAsNumberOnly } = createTokenParsers(theme);
 
   // region colors
-  fillViewStyleIfNotNullish(ret, 'backgroundColor', parseColor(sx.backgroundColor ?? sx.bg));
-  fillViewStyleIfNotNullish(ret, 'borderColor', parseColor(sx.borderColor));
+  fillViewStyleIfNotNullish(ret, 'backgroundColor', colors(sx.backgroundColor ?? sx.bg));
+  fillViewStyleIfNotNullish(ret, 'borderColor', colors(sx.borderColor));
   // endregion
 
   // region space
-  fillViewStyleIfNotNullish(ret, 'margin', parseSpace(sx.margin ?? sx.m));
-  fillViewStyleIfNotNullish(ret, 'marginTop', parseSpace(sx.marginTop ?? sx.mt));
-  fillViewStyleIfNotNullish(ret, 'marginRight', parseSpace(sx.marginRight ?? sx.mr));
-  fillViewStyleIfNotNullish(ret, 'marginBottom', parseSpace(sx.marginBottom ?? sx.mb));
-  fillViewStyleIfNotNullish(ret, 'marginLeft', parseSpace(sx.marginLeft ?? sx.ml));
-  fillViewStyleIfNotNullish(ret, 'marginVertical', parseSpace(sx.marginY ?? sx.my));
-  fillViewStyleIfNotNullish(ret, 'marginHorizontal', parseSpace(sx.marginX ?? sx.mx));
+  fillViewStyleIfNotNullish(ret, 'margin', space(sx.margin ?? sx.m));
+  fillViewStyleIfNotNullish(ret, 'marginTop', space(sx.marginTop ?? sx.mt));
+  fillViewStyleIfNotNullish(ret, 'marginRight', space(sx.marginRight ?? sx.mr));
+  fillViewStyleIfNotNullish(ret, 'marginBottom', space(sx.marginBottom ?? sx.mb));
+  fillViewStyleIfNotNullish(ret, 'marginLeft', space(sx.marginLeft ?? sx.ml));
+  fillViewStyleIfNotNullish(ret, 'marginVertical', space(sx.marginY ?? sx.my));
+  fillViewStyleIfNotNullish(ret, 'marginHorizontal', space(sx.marginX ?? sx.mx));
 
-  fillViewStyleIfNotNullish(ret, 'padding', parseSpace(sx.padding ?? sx.p));
-  fillViewStyleIfNotNullish(ret, 'paddingTop', parseSpace(sx.paddingTop ?? sx.pt));
-  fillViewStyleIfNotNullish(ret, 'paddingRight', parseSpace(sx.paddingRight ?? sx.pr));
-  fillViewStyleIfNotNullish(ret, 'paddingBottom', parseSpace(sx.paddingBottom ?? sx.pb));
-  fillViewStyleIfNotNullish(ret, 'paddingLeft', parseSpace(sx.paddingLeft ?? sx.pl));
-  fillViewStyleIfNotNullish(ret, 'paddingVertical', parseSpace(sx.paddingY ?? sx.py));
-  fillViewStyleIfNotNullish(ret, 'paddingHorizontal', parseSpace(sx.paddingX ?? sx.px));
+  fillViewStyleIfNotNullish(ret, 'padding', space(sx.padding ?? sx.p));
+  fillViewStyleIfNotNullish(ret, 'paddingTop', space(sx.paddingTop ?? sx.pt));
+  fillViewStyleIfNotNullish(ret, 'paddingRight', space(sx.paddingRight ?? sx.pr));
+  fillViewStyleIfNotNullish(ret, 'paddingBottom', space(sx.paddingBottom ?? sx.pb));
+  fillViewStyleIfNotNullish(ret, 'paddingLeft', space(sx.paddingLeft ?? sx.pl));
+  fillViewStyleIfNotNullish(ret, 'paddingVertical', space(sx.paddingY ?? sx.py));
+  fillViewStyleIfNotNullish(ret, 'paddingHorizontal', space(sx.paddingX ?? sx.px));
 
-  fillViewStyleIfNotNullish(ret, 'top', parseSpace(sx.top ?? (sx.absoluteFill ? 0 : undefined)));
-  fillViewStyleIfNotNullish(
-    ret,
-    'right',
-    parseSpace(sx.right ?? (sx.absoluteFill ? 0 : undefined)),
-  );
-  fillViewStyleIfNotNullish(
-    ret,
-    'bottom',
-    parseSpace(sx.bottom ?? (sx.absoluteFill ? 0 : undefined)),
-  );
-  fillViewStyleIfNotNullish(ret, 'left', parseSpace(sx.left ?? (sx.absoluteFill ? 0 : undefined)));
+  fillViewStyleIfNotNullish(ret, 'top', space(sx.top ?? (sx.absoluteFill ? 0 : undefined)));
+  fillViewStyleIfNotNullish(ret, 'right', space(sx.right ?? (sx.absoluteFill ? 0 : undefined)));
+  fillViewStyleIfNotNullish(ret, 'bottom', space(sx.bottom ?? (sx.absoluteFill ? 0 : undefined)));
+  fillViewStyleIfNotNullish(ret, 'left', space(sx.left ?? (sx.absoluteFill ? 0 : undefined)));
 
+  fillViewStyleIfNotNullish(ret, 'gap', spaceAsNumberOnly(sx.gap));
+  fillViewStyleIfNotNullish(ret, 'columnGap', spaceAsNumberOnly(sx.gapX));
+  fillViewStyleIfNotNullish(ret, 'rowGap', spaceAsNumberOnly(sx.gapY));
   // endregion
 
   // region sizes
-  fillViewStyleIfNotNullish(ret, 'width', parseSizes(sx.width ?? sx.w));
-  fillViewStyleIfNotNullish(ret, 'minWidth', parseSizes(sx.minWidth ?? sx.minW));
-  fillViewStyleIfNotNullish(ret, 'maxWidth', parseSizes(sx.maxWidth ?? sx.maxW));
+  fillViewStyleIfNotNullish(ret, 'width', sizes(sx.width ?? sx.w));
+  fillViewStyleIfNotNullish(ret, 'minWidth', sizes(sx.minWidth ?? sx.minW));
+  fillViewStyleIfNotNullish(ret, 'maxWidth', sizes(sx.maxWidth ?? sx.maxW));
 
-  fillViewStyleIfNotNullish(ret, 'height', parseSizes(sx.height ?? sx.h));
-  fillViewStyleIfNotNullish(ret, 'minHeight', parseSizes(sx.minHeight ?? sx.minH));
-  fillViewStyleIfNotNullish(ret, 'maxHeight', parseSizes(sx.maxHeight ?? sx.maxH));
-
-  fillViewStyleIfNotNullish(ret, 'gap', parseSpaceAsNumberOnly(sx.gap));
-  fillViewStyleIfNotNullish(ret, 'columnGap', parseSpaceAsNumberOnly(sx.gapX));
-  fillViewStyleIfNotNullish(ret, 'rowGap', parseSpaceAsNumberOnly(sx.gapY));
+  fillViewStyleIfNotNullish(ret, 'height', sizes(sx.height ?? sx.h));
+  fillViewStyleIfNotNullish(ret, 'minHeight', sizes(sx.minHeight ?? sx.minH));
+  fillViewStyleIfNotNullish(ret, 'maxHeight', sizes(sx.maxHeight ?? sx.maxH));
   // endregion
 
   // region radii
-  fillViewStyleIfNotNullish(ret, 'borderRadius', parseRadii(sx.borderRadius ?? sx.radius));
+  fillViewStyleIfNotNullish(ret, 'borderRadius', radii(sx.borderRadius ?? sx.radius));
   fillViewStyleIfNotNullish(
     ret,
     'borderTopLeftRadius',
-    parseRadii(sx.borderTopLeftRadius ?? sx.topLeftRadius),
+    radii(sx.borderTopLeftRadius ?? sx.topLeftRadius),
   );
   fillViewStyleIfNotNullish(
     ret,
     'borderTopRightRadius',
-    parseRadii(sx.borderTopRightRadius ?? sx.topRightRadius),
+    radii(sx.borderTopRightRadius ?? sx.topRightRadius),
   );
   fillViewStyleIfNotNullish(
     ret,
     'borderBottomLeftRadius',
-    parseRadii(sx.borderBottomLeftRadius ?? sx.bottomLeftRadius),
+    radii(sx.borderBottomLeftRadius ?? sx.bottomLeftRadius),
   );
   fillViewStyleIfNotNullish(
     ret,
     'borderBottomRightRadius',
-    parseRadii(sx.borderBottomRightRadius ?? sx.bottomRightRadius),
+    radii(sx.borderBottomRightRadius ?? sx.bottomRightRadius),
   );
-
   // endregion
 
   // region styles
@@ -300,6 +139,30 @@ export const propsToThemedStyle = ({
   fillViewStyleIfNotNullish(ret, 'elevation', sx.elevation);
   fillViewStyleIfNotNullish(ret, 'zIndex', sx.zIndex);
   // endregion
+
+  if (styleType === 'TextStyle') {
+    // region colors
+    fillTextStyleIfNotNullish(ret, 'color', colors(sx.color));
+    fillTextStyleIfNotNullish(ret, 'textDecorationColor', colors(sx.textDecorationColor));
+    fillTextStyleIfNotNullish(ret, 'textShadowColor', colors(sx.textShadowColor));
+    // endregion
+
+    // region styles
+    fillTextStyleIfNotNullish(ret, 'fontFamily', colors(sx.fontFamily));
+    fillTextStyleIfNotNullish(ret, 'fontSize', sx.fontSize);
+    fillTextStyleIfNotNullish(ret, 'fontStyle', sx.fontStyle);
+    fillTextStyleIfNotNullish(ret, 'fontWeight', sx.fontWeight ?? sx.weight);
+    fillTextStyleIfNotNullish(ret, 'letterSpacing', sx.letterSpacing);
+    fillTextStyleIfNotNullish(ret, 'lineHeight', sx.lineHeight);
+    fillTextStyleIfNotNullish(ret, 'textAlign', sx.textAlign ?? sx.align);
+    fillTextStyleIfNotNullish(ret, 'textDecorationLine', sx.textDecorationLine);
+    fillTextStyleIfNotNullish(ret, 'textDecorationStyle', sx.textDecorationStyle);
+    fillTextStyleIfNotNullish(ret, 'textShadowOffset', sx.textShadowOffset);
+    fillTextStyleIfNotNullish(ret, 'textShadowRadius', sx.textShadowRadius);
+    fillTextStyleIfNotNullish(ret, 'textTransform', sx.textTransform);
+    fillTextStyleIfNotNullish(ret, 'userSelect', sx.userSelect);
+    // endregion
+  }
 
   return ret;
 };
