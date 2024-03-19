@@ -8,7 +8,7 @@
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsup src --format esm --shims",
+    "build": "rm -rf dist && tsup src --format esm --shims && yarn pack",
     "check:type": "tsc --noEmit"
   },
   "dependencies": {
@@ -20,6 +20,10 @@
     "prettier": "^3.0.2",
     "update-notifier": "^6.0.2"
   },
+  "files": [
+    "dist",
+    "bin"
+  ],
   "bin": "bin/index.js",
   "devDependencies": {
     "@types/ora": "^3.2.0",
