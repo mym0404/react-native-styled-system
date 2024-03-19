@@ -1,6 +1,5 @@
 /* eslint-disable padding-line-between-statements */
 import type { DimensionValue, StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
 import type { SxProps } from '../@types/SxProps';
@@ -11,11 +10,9 @@ import { parsePxSuffixNumber } from '../internal/util/parsePxSuffixNumber';
 import { printWarning } from '../internal/util/printWarning';
 
 export const propsToThemedStyle = ({
-  baseStyle,
   theme,
   sx,
 }: {
-  baseStyle?: StyleProp<ViewStyle>;
   theme?: ThemedDict;
   sx?: SxProps;
 }): StyleProp<ViewStyle> | undefined => {
@@ -23,11 +20,11 @@ export const propsToThemedStyle = ({
 
   if (!theme) {
     printWarning('theme not found');
-    return baseStyle;
+    return;
   }
 
   if (!sx) {
-    return baseStyle;
+    return;
   }
 
   const parseColor = (token?: Token<'colors'>): string | undefined => {
@@ -304,5 +301,5 @@ export const propsToThemedStyle = ({
   fillViewStyleIfNotNullish(ret, 'zIndex', sx.zIndex);
   // endregion
 
-  return StyleSheet.compose(baseStyle, ret);
+  return ret;
 };

@@ -1,5 +1,6 @@
 import { useContext, useMemo } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import type { SxProps } from '../@types/SxProps';
 import { _allPropList } from '../@types/SxProps';
@@ -19,21 +20,30 @@ export const useSx = <P extends Props>(
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
-  const viewStyle = useStableCallback((sx?: SxProps): StyleProp<ViewStyle> | undefined => {
-    const skip = !props && !sx;
+  const viewStyle = useStableCallback(
+    (sx?: Omit<SxProps, 'sx'>): StyleProp<ViewStyle> | undefined => {
+      const skip = !props && !sx;
 
-    if (skip) {
-      return;
-    }
+      if (skip) {
+        return;
+      }
 
-    const mergedSx: SxProps = { ...sx, ...props, ...props?.sx };
+      const mergedSx: SxProps = { ...sx, ...props, ...props?.sx };
 
-    return propsToThemedStyle({
-      theme: optionTheme ?? styledSystemContext?.theme,
-      sx: mergedSx,
-      baseStyle: props?.style,
-    });
-  });
+      const ret = propsToThemedStyle({
+        theme: optionTheme ?? styledSystemContext?.theme,
+        sx: mergedSx,
+      });
+
+      if (!ret) {
+        return props?.style;
+      } else if (props?.style) {
+        return StyleSheet.compose(ret, props.style);
+      } else {
+        return ret;
+      }
+    },
+  );
 
   const filteredProps: Omit<P, keyof SxProps | 'style'> = useMemo(() => {
     const ret = { ...props };
