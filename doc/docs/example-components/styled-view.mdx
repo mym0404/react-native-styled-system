@@ -1,0 +1,19 @@
+---
+sidebar_position: 1
+title: StyledView
+---
+
+```tsx
+import { forwardRef, Ref, PropsWithChildren } from 'react';
+import { View, ViewProps } from 'react-native';
+import { SxProps, useSx } from 'react-native-themed-styled-system';
+
+type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
+const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
+  const { getStyle, filteredProps } = useSx(props);
+  return <View ref={ref} style={getStyle()} {...filteredProps} />;
+});
+
+export { StyledView };
+export type { StyledViewProps };
+```
