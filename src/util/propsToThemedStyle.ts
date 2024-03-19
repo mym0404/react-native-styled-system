@@ -161,6 +161,11 @@ export const propsToThemedStyle = ({
     fillTextStyleIfNotNullish(ret, 'textShadowRadius', sx.textShadowRadius);
     fillTextStyleIfNotNullish(ret, 'textTransform', sx.textTransform);
     fillTextStyleIfNotNullish(ret, 'userSelect', sx.userSelect);
+    // android
+    fillTextStyleIfNotNullish(ret, 'includeFontPadding', sx.includeFontPadding);
+    /* todo */
+    // ios
+    /* todo */
     // endregion
   }
 
