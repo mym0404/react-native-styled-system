@@ -1,0 +1,48 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - alpha
+
+jobs:
+  publish-packages:
+    name: Publish packages to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: '0'
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Set node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn build
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        with:
+          branches: 'alpha'
