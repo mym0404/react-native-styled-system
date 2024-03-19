@@ -94,4 +94,10 @@ export default {
     sm: 48,
     md: 12,
   },
+  typography: {
+    h1: {
+      fontFamily: 'Noto Sans',
+      fontSize: 20,
+    },
+  },
 } satisfies ThemedDict;

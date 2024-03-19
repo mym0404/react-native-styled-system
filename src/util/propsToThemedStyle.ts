@@ -37,7 +37,7 @@ export const propsToThemedStyle = ({
     return;
   }
 
-  const { colors, radii, sizes, space, spaceAsNumberOnly } = createTokenParsers(theme);
+  const { colors, radii, sizes, space, spaceAsNumberOnly, typography } = createTokenParsers(theme);
 
   // region colors
   fillViewStyleIfNotNullish(ret, 'backgroundColor', colors(sx.backgroundColor ?? sx.bg));
@@ -148,13 +148,14 @@ export const propsToThemedStyle = ({
     // endregion
 
     // region styles
-    fillTextStyleIfNotNullish(ret, 'fontFamily', colors(sx.fontFamily));
-    fillTextStyleIfNotNullish(ret, 'fontSize', sx.fontSize);
-    fillTextStyleIfNotNullish(ret, 'fontStyle', sx.fontStyle);
-    fillTextStyleIfNotNullish(ret, 'fontWeight', sx.fontWeight ?? sx.weight);
-    fillTextStyleIfNotNullish(ret, 'letterSpacing', sx.letterSpacing);
-    fillTextStyleIfNotNullish(ret, 'lineHeight', sx.lineHeight);
-    fillTextStyleIfNotNullish(ret, 'textAlign', sx.textAlign ?? sx.align);
+    const t = typography(sx.typography ?? sx.t);
+    fillTextStyleIfNotNullish(ret, 'fontFamily', sx.fontFamily ?? t?.fontFamily);
+    fillTextStyleIfNotNullish(ret, 'fontSize', sx.fontSize ?? t?.fontSize);
+    fillTextStyleIfNotNullish(ret, 'lineHeight', sx.lineHeight ?? t?.lineHeight);
+    fillTextStyleIfNotNullish(ret, 'fontWeight', sx.fontWeight ?? sx.weight ?? t?.fontWeight);
+    fillTextStyleIfNotNullish(ret, 'letterSpacing', sx.letterSpacing ?? t?.letterSpacing);
+    fillTextStyleIfNotNullish(ret, 'textAlign', sx.textAlign ?? sx.align ?? t?.textAlign);
+    fillTextStyleIfNotNullish(ret, 'fontStyle', sx.fontStyle ?? t?.fontStyle);
     fillTextStyleIfNotNullish(ret, 'textDecorationLine', sx.textDecorationLine);
     fillTextStyleIfNotNullish(ret, 'textDecorationStyle', sx.textDecorationStyle);
     fillTextStyleIfNotNullish(ret, 'textShadowOffset', sx.textShadowOffset);

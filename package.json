@@ -11,8 +11,9 @@
     "check:type": "yarn tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "build": "yarn t && bob build",
-    "gen": "zx bin/theme-gen.mjs bin/theme.ts --output bin/ret.d.ts",
+    "build:cli": "(cd cli && yarn && yarn build)",
+    "build": "yarn build:cli && yarn t && bob build",
+    "gen": "yarn build:cli && yarn up cli@file:./cli && zx bin/theme-gen.mjs bin/theme.ts --output bin/ret.d.ts",
     "prepare": "husky"
   },
   "repository": {
@@ -22,7 +23,6 @@
   "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
   "devDependencies": {
-    "@chakra-ui/cli": "^2.4.1",
     "@commitlint/cli": "^19.1.0",
     "@commitlint/config-conventional": "^19.1.0",
     "@mj-studio/eslint-config-react": "^1.0.4",
@@ -31,6 +31,7 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.65",
     "@types/react-test-renderer": "^18",
+    "cli": "file:./cli",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.2.0",
     "husky": "^9.0.11",
@@ -56,7 +57,10 @@
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
-    "dist"
+    "dist",
+    "cli/dist",
+    "cli/package.json",
+    "cli/bin"
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {

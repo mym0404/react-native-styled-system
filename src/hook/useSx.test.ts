@@ -58,6 +58,14 @@ const baseTheme: ThemedDict = {
     md: 12,
     lg: 20,
   },
+  typography: {
+    title: {
+      fontFamily: 'Noto Sans',
+      fontSize: 14,
+      fontStyle: 'normal',
+      fontWeight: '400',
+    },
+  },
 };
 
 describe('simple usages', () => {
@@ -269,6 +277,38 @@ describe('TextStyle', () => {
       { textShadowColor: 'red' },
       {
         expectation: { textShadowColor: 'red' },
+        styleType: 'TextStyle',
+      },
+    );
+  });
+
+  it('Typography', () => {
+    expectResult(
+      baseTheme,
+      { t: 'title' },
+      {
+        expectation: {
+          fontFamily: 'Noto Sans',
+          fontSize: 14,
+          fontStyle: 'normal',
+          fontWeight: '400',
+        },
+        styleType: 'TextStyle',
+      },
+    );
+  });
+
+  it('Typography has lower priority than general props', () => {
+    expectResult(
+      baseTheme,
+      { t: 'title', fontFamily: 'Test' },
+      {
+        expectation: {
+          fontFamily: 'Test',
+          fontSize: 14,
+          fontStyle: 'normal',
+          fontWeight: '400',
+        },
         styleType: 'TextStyle',
       },
     );
