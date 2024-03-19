@@ -170,7 +170,7 @@ try {
   );
 
   result = result.replace('colors:', 'colors: ColorsValue | ');
-  result = result.replace(/typography:\W*\n/, 'typography: string;');
+  result = result.replace(/typography:\W*?\n/, 'typography: string;');
 
   result = result.replace(/\|[\s ]*\n/g, ';');
 
