@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - alpha
 
 jobs:
   publish-packages:
@@ -45,4 +46,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
-          branches: 'main'
+          branches: |
+            [
+              'main',
+              {
+                name: 'alpha',
+                prerelease: true
+              }
+            ]
