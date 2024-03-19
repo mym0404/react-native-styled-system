@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn up cli@file:./cli.tgz && yarn install --immutable
+        run: yarn build:cli && yarn up cli@file:./cli.tgz && yarn install --immutable
 
       - name: Build
         run: yarn build
