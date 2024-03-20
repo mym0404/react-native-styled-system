@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[3358],{4443:e=>{e.exports=JSON.parse('{"label":"hola","permalink":"/react-native-styled-system/ko/blog/tags/hola","allTagsPath":"/react-native-styled-system/ko/blog/tags","count":1,"unlisted":false}')}}]);
