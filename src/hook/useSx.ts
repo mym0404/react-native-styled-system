@@ -1,20 +1,24 @@
 import { useContext, useMemo } from 'react';
-import type { StyleProp } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { is } from '@mj-studio/js-util';
 
-import type { SxProps, SxPropsKeys } from '../@types/SxProps';
+import type { SxProps, SxPropsKeys, TextSxProps } from '../@types/SxProps';
 import { _textStylePropList, _viewStylePropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
+import { printWarning } from '../internal/util/printWarning';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import type { InferStyleType, InferSxPropsType, ThemedStyleType } from '../util/propsToThemedStyle';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
-type Props = { style?: StyleProp<any> } & SxProps;
+type Props = { style?: StyleProp<any> } & TextSxProps;
 
+export type StyleTransform = (style: TextStyle) => TextSxProps;
 export type UseSxOptions = {
   theme?: ThemedDict;
   styleType?: ThemedStyleType;
+  transform?: StyleTransform;
 };
 const defaultUseSxOptions: UseSxOptions = { styleType: 'ViewStyle' };
 export const useSx = <P extends Props>(
@@ -22,6 +26,7 @@ export const useSx = <P extends Props>(
   {
     theme: optionTheme,
     styleType = defaultUseSxOptions.styleType,
+    transform = defaultUseSxOptions.transform,
   }: UseSxOptions = defaultUseSxOptions,
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
@@ -36,20 +41,36 @@ export const useSx = <P extends Props>(
         return;
       }
 
+      const theme = optionTheme ?? styledSystemContext?.theme;
+
+      if (!theme) {
+        printWarning('theme not found from useSx, undefined will be returned.');
+
+        return;
+      }
+
+      // todo handle default style
+      // causion: priority should be ordered correctly.
       const mergedSx: SxProps = { ...sx, ...props, ...props?.sx };
 
-      const ret = propsToThemedStyle({
-        theme: optionTheme ?? styledSystemContext?.theme,
+      const computedStyle = propsToThemedStyle({
+        theme,
         sx: mergedSx,
         styleType,
       });
 
-      if (!ret) {
-        return props?.style;
-      } else if (props?.style) {
-        return StyleSheet.compose(ret, props.style);
+      const composedStyle = !computedStyle
+        ? props?.style
+        : props?.style
+          ? StyleSheet.compose(computedStyle, props.style)
+          : computedStyle;
+
+      if (is.function(transform)) {
+        if (!computedStyle && !props?.style) {
+          return transform({});
+        }
       } else {
-        return ret;
+        return composedStyle;
       }
     },
   );
