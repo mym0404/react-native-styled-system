@@ -1,12 +1,26 @@
 #!/usr/bin/env node
 /* eslint-disable max-len */
 // region ZX Util
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
-const { moveSync } = require('fs-extra');
 
 const filename = path.basename(__filename);
 const _printTag = 'Theme Gen' || filename;
+
+const { exec } = require('child_process');
+
+function execa(command, ...args) {
+  return new Promise((resolve, reject) => {
+    const fullCommand = `${command} ${args.join(' ')}`;
+    exec(fullCommand, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(stdout.trim());
+      }
+    });
+  });
+}
 
 function exist(path) {
   return fs.existsSync(path);
@@ -60,7 +74,6 @@ function printError(...args) {
 // endregion
 
 const go = async () => {
-  const { $ } = await import('execa');
   const source = process.argv[2];
   if (!source) {
     printError('Source path is not passed');
@@ -75,7 +88,15 @@ const go = async () => {
     './node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts';
 
   try {
-    await $`npx -y react-native-themed-styled-system-cli generate --out ${tmpFile} ${source}`;
+    await execa(
+      'npx',
+      '-y',
+      'react-native-themed-styled-system-cli',
+      'generate',
+      '--out',
+      tmpFile,
+      source,
+    );
 
     /**
      * export interface ThemedTypings {
@@ -113,7 +134,7 @@ const go = async () => {
     result = result.replace(/\|[\s ]*\n/g, ';');
 
     write(tmpFile, result);
-    moveSync(tmpFile, outputFile, { overwrite: true });
+    fs.renameSync(tmpFile, outputFile);
     // await fixLint(outputFile);
     printSuccess(`🎉 Theme Typing Generated in '${outputFile}'`);
   } catch (e) {
