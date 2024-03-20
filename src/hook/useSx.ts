@@ -66,9 +66,12 @@ export const useSx = <P extends Props>(
           : computedStyle;
 
       if (is.function(transform)) {
-        if (!computedStyle && !props?.style) {
-          return transform({});
-        }
+        const transformedSx = transform(computedStyle ?? {});
+
+        return StyleSheet.compose(
+          composedStyle,
+          propsToThemedStyle({ theme, sx: transformedSx, styleType }),
+        );
       } else {
         return composedStyle;
       }
