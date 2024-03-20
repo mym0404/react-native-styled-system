@@ -111,6 +111,9 @@ We would love to support you any way we can.
 Our docsite lives in a `doc` directory in project. If you're
 interested in contributing to the documentation, create pr as manual.
 
+> [!NOTE]
+> Currently, the documentation project should be deployed by @mym0404 manually.
+
 ## License
 
 By contributing your code to the chakra-ui GitHub repository, you agree to
