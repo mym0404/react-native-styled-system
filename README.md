@@ -20,12 +20,6 @@ Styles such as `justifySelf` that are not yet supported in React Native obviousl
 - TypeScript can be fully used through the Type Generation process using CLI.
 - Logical or responsive values such as `safeAreaTop` and `sidePadding` can be injected into the theme and used as token values.
 
-## Limit
-
-- The only tokens currently supported are `space`, `sizes`, and `colors`, and tokens such as `fontSize` and `zIndices` will be added in the future.
-- Not all `View` style fields or props are supported yet.
-- The dark mode function does not exist yet.
-
 ## Contributing
 
 Feel like contributing? That's awesome! We have a
