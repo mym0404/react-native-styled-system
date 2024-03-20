@@ -55,7 +55,7 @@ We introduce **React Native Styled System** 🎉
 
 &nbsp;
 
-> [!INFO]
+> [!NOTE]
 > It does not fully support the grammar of `styled-system` and there are some grammars that are not currently supported, but this is not a technical limitation and will be added as needed.
 > 
 > Styles such as `justifySelf` that are not yet supported in React Native obviously cannot be added in the future.
