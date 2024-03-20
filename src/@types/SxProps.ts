@@ -249,5 +249,7 @@ type BaseSxProps = Partial<
     ThemedRadiiTokenProps
 >;
 
+type BaseTextSxProps = BaseSxProps & Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
+
 export type SxProps = BaseSxProps & { sx?: BaseSxProps };
-export type TextSxProps = SxProps & Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
+export type TextSxProps = BaseTextSxProps & { sx?: BaseTextSxProps };

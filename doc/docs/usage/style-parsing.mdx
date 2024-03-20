@@ -5,42 +5,57 @@ title: Pass styles and parsing priorities
 
 # Pass styles and parsing priorities
 
-There are various ways in which `useSx` is used to parse styles and produce output.
+There are **various ways** in which `useSx` is used to parse styles and produce output.
 
-Let's say Props looks like this:
+Let me show the following snippet.
 
 ```tsx
 const props = {
-  style: { marginTop: 24 }, // 1
-  mt: '24px', // 2
-  sx: { mt: '24px' }, // 3
+  style: { marginTop: 24 }, // #3
+  sx: { mt: '24px' }, // #4
+  mt: '24px', // #5
 }
-```
 
-1. Props’ `style` prop
-2. Styles of `SxProps`, such as `ml` and `w` of Props
-3. Styles inside the `sx` prop of Props
-4. First argument of `getStyle(sx?: SxProps)`
-
-**The priority is calculated as  1 > 3 > 2 > 4.**
-
-1 has the highest priority.
-
-<details>
-  <summary>Test code for the prove</summary>
-```tsx
-describe('style parse priority', () => {
-  it('sx prop property > prop property', () => {
-    expectResult(emptyTheme, { w: 1, sx: { w: 2 } }, { width: 2 });
-  });
-
-  it('prop property > getStyle parameter', () => {
-    expectResult(emptyTheme, { w: 1, getStyleSx: { w: 2 } }, { width: 1 });
-  });
-
-  it('style prop property > getStyle parameter', () => {
-    expectResult(emptyTheme, { style: { width: 1 }, getStyleSx: { w: 2 } }, { width: 1 });
-  });
+const { getStyle, filteredProps } = useSx(props, {
+  transform: ({ /* ... */ }) => ({ mt: 4 }), // #2
+  fallback: { mt: 8 }, // #6
 });
+
+return <View style={getStyle({ mt: 2 } /* #1 */ )} />
 ```
-</details>
+
+1. Argument `sx` of `getStyle(sx?: TextSxProps)`
+2. Parsed result of `transform` in the `useSx` options (To be added)
+3. Plain old `style` prop
+4. `sx` in props
+5. Plain properties in props, such as `ml` or `color`
+6. `fallback` in the `useSx` options (To be added)
+
+**The priority is calculated as  1 > 2 > 3 > 4 > 5 > 6.**
+
+> 1 has the highest priority.
+
+The reasons for this priority are as follows:
+
+**First of all, #6 should always have the lowest priority.**
+
+As the name suggests, it means `fallback`.
+
+**And #2 should have at least a higher priority than #3-5.**
+
+In the aspect of user of this component, they can only set #3-5.
+
+The reason `transform` is created is to calculate the value of another property based on the result of these or to change the value of the passed property. .
+
+**#3 should have higher priority than #4 and #5.**
+
+This is because when integrating this package, we want to maximize stability when refactoring existing code.
+
+:::warning To Be Discussed
+**We should decide that #1 is really needed in this package later**
+:::
+
+:::tip
+If you are not sure what to write and are confused,
+we recommend removing all of the code that was #3 in the beginning and introducing only #5 and #2 first.
+:::
