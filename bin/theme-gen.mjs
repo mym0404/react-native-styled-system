@@ -6,7 +6,7 @@ import fs from 'fs-extra';
 const join = path.join;
 const filename = path.basename(__filename);
 const _printTag = 'Theme Gen' || filename;
-// $.verbose = false;
+$.verbose = false;
 
 function exist(path) {
   return fs.existsSync(path);
