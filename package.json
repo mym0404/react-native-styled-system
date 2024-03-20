@@ -7,7 +7,7 @@
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "t": "yarn lint --cache && yarn check:type && yarn test",
-    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings=0",
     "check:type": "yarn tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage",
