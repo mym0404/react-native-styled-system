@@ -1,11 +1,11 @@
 import type { ThemedDict } from '../../@types/ThemedDict';
-import type { Token } from '../../@types/Token';
+import type { ColorsValue, Token } from '../../@types/Token';
 
 export const createColorsParser = (theme: ThemedDict) => {
   return (token?: Token<'colors'>) => parseColors(theme, token);
 };
 
-const parseColors = (theme: ThemedDict, token?: Token<'colors'>): string | undefined => {
+const parseColors = (theme: ThemedDict, token?: Token<'colors'>): ColorsValue | undefined => {
   if (!token) {
     return;
   }

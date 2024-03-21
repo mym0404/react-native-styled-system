@@ -117,6 +117,9 @@ To run the example app on iOS:
 yarn example ios
 ```
 
+> [!NOTE]
+> Currently, the example project doesn't support type for themed tokens. If you feel it is a serious proble, please PR for it!
+
 
 ### Tests
 

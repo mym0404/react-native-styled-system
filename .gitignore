@@ -150,7 +150,7 @@ example/ios/Pods
 example/vendor/
 
 # Expo
-.expo/
+**/.expo/
 
 # Android/IJ
 #

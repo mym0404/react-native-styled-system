@@ -1,14 +1,14 @@
 import { is } from '@mj-studio/js-util';
 
 import type { ThemedDict } from '../../@types/ThemedDict';
-import type { Token } from '../../@types/Token';
+import type { RadiiValue, Token } from '../../@types/Token';
 import { parsePxSuffixNumber } from '../util/parsePxSuffixNumber';
 
 export const createRadiiParser = (theme: ThemedDict) => {
   return (token?: Token<'radii'>) => parseRadii(theme, token);
 };
 
-const parseRadii = (theme: ThemedDict, token?: Token<'radii'>): number | undefined => {
+const parseRadii = (theme: ThemedDict, token?: Token<'radii'>): RadiiValue | undefined => {
   if (is.nullOrUndefined(token)) {
     return;
   }
