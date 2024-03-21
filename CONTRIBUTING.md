@@ -96,6 +96,28 @@ https://www.conventionalcommits.org/ or check out the
 
 4. You should base branch of PR as `develop`.
 
+### Example Project
+
+While developing, you can run the example app to test your changes.
+Any changes you make in your library's JavaScript code will be reflected in the example app without a rebuild.
+If you change any native code, then you'll need to rebuild the example app.
+
+To start the packager:
+```
+yarn example start
+```
+
+To run the example app on Android:
+```
+yarn example android
+```
+
+To run the example app on iOS:
+```
+yarn example ios
+```
+
+
 ### Tests
 
 All commits that fix bugs or add features need a test.
