@@ -6,8 +6,8 @@
   "types": "lib/typescript/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
-    "t": "yarn lint --cache && yarn check:type && yarn example:lint && yarn example:check:type && yarn test",
-    "lint": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings=0",
+    "t": "yarn lint --cache && yarn check:type && yarn test",
+    "lint": "eslint src example --ext .ts,.tsx,.js,.jsx --max-warnings=0",
     "check:type": "yarn tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -15,8 +15,6 @@
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
     "prepare": "husky",
     "example": "yarn --cwd example",
-    "example:lint": "eslint example/src --ext .ts,.tsx,.js,.jsx --max-warnings=0",
-    "example:check:type": "yarn tsc --noEmit --project example",
     "bootstrap": "yarn example && yarn install"
   },
   "repository": {
