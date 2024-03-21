@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "lib": ["ESNext"],
     "jsx": "react",
     "types": ["node", "jest"],
@@ -12,8 +13,12 @@
     "target": "ESNext",
     "declaration": true,
     "esModuleInterop": true,
-    "rootDir": "src",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "react-native-themed-styled-system": ["./src/index"]
+    },
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["**/*.test.*", "node_modules"]
