@@ -1,5 +1,6 @@
 import type { StyleProp } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { is } from '@mj-studio/js-util';
 import { renderHook } from '@testing-library/react-hooks';
 
 import type { SxProps, TextSxProps } from '../@types/SxProps';
@@ -7,6 +8,7 @@ import type { ThemedDict } from '../@types/ThemedDict';
 import { emptyThemedDict } from '../@types/ThemedDict';
 import type { ThemedStyleType } from '../util/propsToThemedStyle';
 
+import type { StyleTransform } from './useSx';
 import { useSx } from './useSx';
 
 export function expectResult(
@@ -17,17 +19,19 @@ export function expectResult(
     expectation,
     filteredPropsExpectation,
     styleType,
+    transform,
   }: {
     expectation: object;
     filteredPropsExpectation?: object;
     styleType?: ThemedStyleType;
+    transform?: StyleTransform;
   },
 ) {
   const {
     result: {
       current: { getStyle, filteredProps },
     },
-  } = renderHook(() => useSx(props, { theme, styleType }));
+  } = renderHook(() => useSx(props, { theme, styleType, transform }));
 
   if (expectation) {
     expect(StyleSheet.flatten(getStyle(props.getStyleSx))).toEqual(expectation);
@@ -310,6 +314,21 @@ describe('TextStyle', () => {
           fontWeight: '400',
         },
         styleType: 'TextStyle',
+      },
+    );
+  });
+});
+
+describe('transform', () => {
+  it('property should be transform', () => {
+    expectResult(
+      baseTheme,
+      { mt: 2, mb: 2 },
+      {
+        expectation: { marginTop: 8, marginBottom: 8, marginHorizontal: 16 },
+        transform: ({ marginTop, marginBottom }) => ({
+          mx: (is.number(marginTop) ? marginTop : 0) + (is.number(marginBottom) ? marginBottom : 0),
+        }),
       },
     );
   });
