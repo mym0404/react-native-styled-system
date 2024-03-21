@@ -14,12 +14,11 @@ const Home = ({}: HomeProps) => {
       <StyledView
         pt={'sfTop' as any}
         flexDirection={'row'}
-        alignItems={'center'}
         bg={'violet800'}
-        py={4}
+        alignItems={'center'}
         justifyContent={'center'}
       >
-        <Txt t={'title'} color={'white'}>
+        <Txt py={4} t={'title'} color={'white'}>
           {'Header'}
         </Txt>
       </StyledView>
