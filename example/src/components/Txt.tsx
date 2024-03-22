@@ -9,9 +9,7 @@ type TxtProps = {} & TextSxProps & TextProps;
 const Txt = (props: TxtProps) => {
   const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
 
-  return (
-    <Text style={getStyle({ color: 'white', includeFontPadding: false })} {...filteredProps} />
-  );
+  return <Text style={getStyle({ color: 'text', includeFontPadding: false })} {...filteredProps} />;
 };
 
 export { Txt };

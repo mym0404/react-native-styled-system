@@ -8,7 +8,7 @@ import { useSx } from 'react-native-themed-styled-system';
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 
 const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
-  const { getStyle, filteredProps } = useSx(props, { styleType: 'ViewStyle' });
+  const { getStyle, filteredProps } = useSx(props);
 
   return <View ref={ref} style={getStyle()} {...filteredProps} />;
 });
