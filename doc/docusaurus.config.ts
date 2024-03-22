@@ -113,8 +113,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} MJ Studio.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.oceanicNext,
+      darkTheme: prismThemes.oceanicNext,
     },
   } satisfies Preset.ThemeConfig,
 
