@@ -73,8 +73,8 @@ jobs:
         run: yarn build
 
       - name: Deploy Docs to GitHub Pages
-        working-directory: doc
         uses: peaceiris/actions-gh-pages@v3
+        working-directory: doc
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build
