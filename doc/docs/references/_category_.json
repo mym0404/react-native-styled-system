@@ -1,8 +1,8 @@
 {
-  "label": "References",
+  "label": "API",
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "Show references of core APIs"
+    "description": "Show references of constants or types"
   }
 }
