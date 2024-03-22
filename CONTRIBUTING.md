@@ -120,6 +120,19 @@ yarn example ios
 > [!NOTE]
 > Currently, the example project doesn't support type for themed tokens. If you feel it is a serious proble, please PR for it!
 
+<details>
+<summary>Issue on running example project?</summary>
+
+> In yarn example ios,
+
+- Command failed: osascript -e tell app “System Events” to count processes whose name is “Simulator”
+- resolved with turning on System settings > Privacy & Security > Automation > WebStorm(or terminal?) - System Events
+
+> In yarn example android
+
+- Watchman error: std::__1::system_error: open: {PROJECT_PATH}: Operation not permitted
+- resolved with watchman watch-del-all && watchman shutdown-server in cmd
+</details>
 
 ### Tests
 
