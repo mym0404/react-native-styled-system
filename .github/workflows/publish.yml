@@ -74,10 +74,9 @@ jobs:
 
       - name: Deploy Docs
         uses: peaceiris/actions-gh-pages@v3
-        working-directory: doc
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./doc/build
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
