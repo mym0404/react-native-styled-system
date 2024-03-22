@@ -7,13 +7,15 @@
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "t": "yarn lint --cache && yarn check:type && yarn test",
-    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint": "eslint src example --ext .ts,.tsx,.js,.jsx --max-warnings=0",
     "check:type": "yarn tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "build": "yarn t && bob build",
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "example": "yarn --cwd example",
+    "bootstrap": "yarn example && yarn install"
   },
   "repository": {
     "type": "git",
@@ -53,7 +55,8 @@
     "lib",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!lib/typescript/example"
   ],
   "packageManager": "yarn@4.1.1",
   "dependencies": {
@@ -71,7 +74,12 @@
     "targets": [
       "commonjs",
       "module",
-      "typescript"
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ],
     "exclude": [
       "**/{__tests__,__fixtures__,__mocks__}/**",

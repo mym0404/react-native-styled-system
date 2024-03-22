@@ -1,0 +1,18 @@
+---
+sidebar_position: 3
+title: Txt
+---
+
+```tsx title='Txt.tsx'
+import { Text, TextProps } from 'react-native';
+import { TextSxProps, useSx } from 'react-native-themed-styled-system';
+
+type TxtProps = {} & TextSxProps & TextProps;
+const Txt = (props: TxtProps) => {
+  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
+  return <Text style={getStyle()} {...filteredProps} />;
+};
+
+export { Txt };
+export type { TxtProps };
+```

@@ -42,7 +42,7 @@ const spacing = {
   1: 1 * unit, // 4px
   2: 2 * unit, // 8px
   3: 3 * unit, // 12px
-  // others
+  /* ... */
 } as const;
 
 const AppTheme = {
@@ -53,11 +53,14 @@ const AppTheme = {
     gray50: '#F9FAFB',
     gray100: '#F3F4F6',
     gray200: '#E5E7EB',
-    // others
+    /* ... */
   },
   space: { ...spacing, sidePadding: 0 /* injected from outer */ },
   sizes: { ...spacing, sidePadding: 0 /* injected from outer */ },
   radii: { sm: 4, md: 8, ... },
+  typography: {
+    title: { fontSize: 18, textAlign: 'center', /* ... */ }
+  }
 }
 
 export default AppTheme;

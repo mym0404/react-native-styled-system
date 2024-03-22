@@ -1,0 +1,70 @@
+---
+sidebar_position: 3.5
+title: Text & Typography
+---
+
+# Text & Typography
+
+The useSx hook takes an option as the second argument, and there is `styleType` there.
+
+If you set it to `TextStyle`, you can apply the style of `TextStyle` in addition to all the styles included in `ViewStyle`.
+
+:::info
+For TypeScript users, the `TextSxProps` type exists.
+
+This is text version of `SxProps`. It includes all kinds of properties in SxProps and text properties.
+:::
+
+## Define theme typographies
+
+We can set our typographies in theme from `ThemedDict` passing to `StyledSystemProvider`.
+
+```tsx
+const AppTheme = {
+  /* ... */
+  typography: {
+    title: { fontSize: 18, textAlign: 'center', /* ... */ }
+  }
+}
+
+export default AppTheme;
+```
+
+In typography value, the supported properties are followings.
+
+- `fontFamily`
+- `fontSize`
+- `fontWeight`
+- `lineHeight`
+- `letterSpacing`
+- `textAlign`
+- `fontStyle`
+
+
+## Create styled Text component
+
+We can define our new Text component like this.
+
+```tsx title='Txt.tsx'
+import { Text, TextProps } from 'react-native';
+import { TextSxProps, useSx } from 'react-native-themed-styled-system';
+
+type TxtProps = {} & TextSxProps & TextProps;
+const Txt = (props: TxtProps) => {
+  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
+  return <Text style={getStyle()} {...filteredProps} />;
+};
+
+export { Txt };
+export type { TxtProps };
+```
+
+## Use it!
+
+```tsx
+<Box p={8} radius={'lg'}>
+  <Txt mt={4} t={'title'}>
+    React Native
+  </Txt>
+</Box>
+```

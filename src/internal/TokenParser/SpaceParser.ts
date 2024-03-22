@@ -1,8 +1,7 @@
-import type { DimensionValue } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
 import type { ThemedDict } from '../../@types/ThemedDict';
-import type { Token } from '../../@types/Token';
+import type { SpaceValue, Token } from '../../@types/Token';
 import { parsePxSuffixNumber } from '../util/parsePxSuffixNumber';
 
 export const createSpaceParser = (theme: ThemedDict) => {
@@ -16,7 +15,7 @@ export const createSpaceAsNumberOnlyParser = (theme: ThemedDict) => {
 /**
  * Space should be handle negative string like '-1' as well
  */
-const parseSpace = (theme: ThemedDict, token?: Token<'space'>): DimensionValue | undefined => {
+const parseSpace = (theme: ThemedDict, token?: Token<'space'>): SpaceValue | undefined => {
   if (is.nullOrUndefined(token)) {
     return;
   }
@@ -34,14 +33,14 @@ const parseSpace = (theme: ThemedDict, token?: Token<'space'>): DimensionValue |
   const spaces = theme.space;
 
   if ((is.string(token) || is.number(token)) && token in spaces) {
-    return spaces[token] as DimensionValue;
+    return spaces[token];
   }
 
   // Parse is number
   if (is.number(token)) {
     const stringKey = `${token}`;
     if (stringKey in spaces) {
-      return spaces[stringKey] as DimensionValue;
+      return spaces[stringKey];
     }
 
     const negativeNumberKey = -token;
@@ -74,7 +73,7 @@ const parseSpace = (theme: ThemedDict, token?: Token<'space'>): DimensionValue |
       // not invert sign percent string yet(will be supported).
     }
 
-    // don't return malformed string. It is not acceptable as DimensionValue
+    // don't return malformed string. It is not acceptable as SpaceValue
     return;
   }
 

@@ -1,15 +1,14 @@
-import type { DimensionValue } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
 import type { ThemedDict } from '../../@types/ThemedDict';
-import type { Token } from '../../@types/Token';
+import type { SizesValue, Token } from '../../@types/Token';
 import { parsePxSuffixNumber } from '../util/parsePxSuffixNumber';
 
 export const createSizesParser = (theme: ThemedDict) => {
   return (token?: Token<'sizes'>) => parseSizes(theme, token);
 };
 
-const parseSizes = (theme: ThemedDict, token?: Token<'sizes'>): DimensionValue | undefined => {
+const parseSizes = (theme: ThemedDict, token?: Token<'sizes'>): SizesValue | undefined => {
   if (is.nullOrUndefined(token)) {
     return;
   }
@@ -27,13 +26,13 @@ const parseSizes = (theme: ThemedDict, token?: Token<'sizes'>): DimensionValue |
   const sizes = theme.sizes;
 
   if ((is.string(token) || is.number(token)) && token in sizes) {
-    return sizes[token] as DimensionValue;
+    return sizes[token];
   }
 
   if (is.number(token)) {
     const stringKey = `${token}`;
     if (stringKey in sizes) {
-      return sizes[stringKey] as DimensionValue;
+      return sizes[stringKey];
     }
   }
 
