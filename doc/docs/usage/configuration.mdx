@@ -84,7 +84,7 @@ import theme from './AppTheme'
 const sidePadding = useResponsiveSidePadding();
 
 <App>
-  <StyledSystemProvider theme={{ ...theme, sidePadding }}>
+  <StyledSystemProvider theme={{ ...theme, space: { ...theme.space, sidePadding }, sizes: { ...theme.sizes, sidePadding } }}>
      {...others}
   </StyledSystemProvider>
 </App>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./src/App\";","map":{"version":3,"names":["default"],"sources":["/Users/mj/Desktop/react-native-styled-system/example/App.js"],"sourcesContent":["export { default } from './src/App';\n"],"mappings":"AAAA,SAASA,OAAO","ignoreList":[]},"metadata":{},"sourceType":"module","externalDependencies":[]}
