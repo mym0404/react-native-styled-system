@@ -1,8 +1,8 @@
-Thank you for contributing `react-native-themed-styled-system` package 🤗
+<!-- Thank you for contributing `react-native-themed-styled-system` package 🤗 -->
 
 ## Type of change
 
-Please delete options that are not relevant.
+<!-- Please delete options that are not relevant. -->
 
 - [ ] Release (merge into main branch)
 - [ ] Bug fix (non-breaking change which fixes an issue)
@@ -12,8 +12,8 @@ Please delete options that are not relevant.
 
 ## What does this change?
 
-Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
+<!-- Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change. -->
+<!-- Please delete section if it is not a PR changes feature. -->
 
 Fixes #<issue_number_goes_here> 🎯
 
-Please delete section if it is not a PR changes feature.
