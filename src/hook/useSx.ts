@@ -3,7 +3,7 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
-import type { TextSxProps, TextSxPropsKey } from '../@types/SxProps';
+import type { SxPropsKeys, TextSxProps } from '../@types/SxProps';
 import { _textStylePropList, _viewStylePropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
@@ -74,15 +74,15 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     }
   });
 
-  const filteredProps: Omit<P, TextSxPropsKey | 'style'> = useMemo(() => {
-    const ret = { ...props };
+  const filteredProps: Omit<P, SxPropsKeys | 'style'> = useMemo(() => {
+    const ret = { ...props } as Omit<P, SxPropsKeys | 'style'>;
 
     _viewStylePropList.forEach((keyName) => delete ret[keyName]);
     if (styleType === 'TextStyle') {
       _textStylePropList.forEach((keyName) => delete ret[keyName]);
     }
 
-    return ret as any;
+    return ret;
   }, [props, styleType]);
 
   return { getStyle, filteredProps };
