@@ -13,4 +13,5 @@ module.exports = {
   ],
   cache: true,
   cacheDirectory: '.jest/cache',
+  modulePathIgnorePatterns: ['<rootDir>/example/node_modules', '<rootDir>/lib/'],
 };

@@ -96,6 +96,44 @@ https://www.conventionalcommits.org/ or check out the
 
 4. You should base branch of PR as `develop`.
 
+### Example Project
+
+While developing, you can run the example app to test your changes.
+Any changes you make in your library's JavaScript code will be reflected in the example app without a rebuild.
+If you change any native code, then you'll need to rebuild the example app.
+
+To start the packager:
+```
+yarn example start
+```
+
+To run the example app on Android:
+```
+yarn example android
+```
+
+To run the example app on iOS:
+```
+yarn example ios
+```
+
+> [!NOTE]
+> Currently, the example project doesn't support type for themed tokens. If you feel it is a serious proble, please PR for it!
+
+<details>
+<summary>Issue on running example project?</summary>
+
+> In yarn example ios,
+
+- Command failed: osascript -e tell app “System Events” to count processes whose name is “Simulator”
+- resolved with turning on System settings > Privacy & Security > Automation > WebStorm(or terminal?) - System Events
+
+> In yarn example android
+
+- Watchman error: std::__1::system_error: open: {PROJECT_PATH}: Operation not permitted
+- resolved with watchman watch-del-all && watchman shutdown-server in cmd
+</details>
+
 ### Tests
 
 All commits that fix bugs or add features need a test.

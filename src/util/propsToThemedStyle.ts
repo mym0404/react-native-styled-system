@@ -1,7 +1,7 @@
 /* eslint-disable padding-line-between-statements */
-import type { TextStyle, ViewStyle } from 'react-native';
+import type { TextStyle } from 'react-native';
 
-import type { SxProps, TextSxProps } from '../@types/SxProps';
+import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { createTokenParsers } from '../internal/TokenParser/TokenParser';
 import {
@@ -11,12 +11,6 @@ import {
 import { printWarning } from '../internal/util/printWarning';
 
 export type ThemedStyleType = 'ViewStyle' | 'TextStyle';
-export type InferStyleType<T extends ThemedStyleType | undefined | null> = T extends 'TextStyle'
-  ? TextStyle
-  : ViewStyle;
-export type InferSxPropsType<T extends ThemedStyleType | undefined | null> = T extends 'TextStyle'
-  ? TextSxProps
-  : SxProps;
 export const propsToThemedStyle = ({
   theme,
   sx,
@@ -25,8 +19,8 @@ export const propsToThemedStyle = ({
   theme?: ThemedDict;
   sx?: TextSxProps;
   styleType?: ThemedStyleType;
-}): InferStyleType<typeof styleType> | undefined => {
-  const ret: InferStyleType<typeof styleType> = {};
+}): TextStyle | undefined => {
+  const ret: TextStyle = {};
 
   if (!theme) {
     printWarning('theme not found');

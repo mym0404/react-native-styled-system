@@ -1,15 +1,15 @@
 import { useContext, useMemo } from 'react';
-import type { StyleProp, TextStyle } from 'react-native';
+import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
-import type { SxProps, SxPropsKeys, TextSxProps } from '../@types/SxProps';
+import type { TextSxProps, TextSxPropsKey } from '../@types/SxProps';
 import { _textStylePropList, _viewStylePropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
 import { printWarning } from '../internal/util/printWarning';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
-import type { InferStyleType, InferSxPropsType, ThemedStyleType } from '../util/propsToThemedStyle';
+import type { ThemedStyleType } from '../util/propsToThemedStyle';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 type Props = { style?: StyleProp<any> } & TextSxProps;
@@ -32,9 +32,7 @@ export const useSx = <P extends Props>(
   const styledSystemContext = useContext(StyledSystemContext);
 
   const getStyle = useStableCallback(
-    (
-      sx?: Omit<InferSxPropsType<typeof styleType>, 'sx'>,
-    ): StyleProp<InferStyleType<typeof styleType>> | undefined => {
+    (sx?: Omit<TextSxProps, 'sx'>): StyleProp<ViewStyle> | undefined => {
       const skip = !props && !sx;
 
       if (skip) {
@@ -51,7 +49,7 @@ export const useSx = <P extends Props>(
 
       // todo handle default style
       // causion: priority should be ordered correctly.
-      const mergedSx: SxProps = { ...sx, ...props, ...props?.sx };
+      const mergedSx: TextSxProps = { ...sx, ...props, ...props?.sx };
 
       const computedStyle = propsToThemedStyle({
         theme,
@@ -78,7 +76,7 @@ export const useSx = <P extends Props>(
     },
   );
 
-  const filteredProps: Omit<P, SxPropsKeys | 'style'> = useMemo(() => {
+  const filteredProps: Omit<P, TextSxPropsKey | 'style'> = useMemo(() => {
     const ret = { ...props };
 
     _viewStylePropList.forEach((keyName) => delete ret[keyName]);
@@ -86,7 +84,7 @@ export const useSx = <P extends Props>(
       _textStylePropList.forEach((keyName) => delete ret[keyName]);
     }
 
-    return ret as Omit<P, keyof SxProps | 'style'>;
+    return ret as any;
   }, [props, styleType]);
 
   return { getStyle, filteredProps };

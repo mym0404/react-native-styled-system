@@ -134,6 +134,7 @@ const go = async () => {
     result = result.replace(/\|[\s ]*\n/g, ';');
 
     write(tmpFile, result);
+    fs.mkdirSync(path.dirname(outputFile), { recursive: true });
     fs.renameSync(tmpFile, outputFile);
     // await fixLint(outputFile);
     printSuccess(`🎉 Theme Typing Generated in '${outputFile}'`);
