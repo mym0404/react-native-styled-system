@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import type { StyleProp, TextStyle } from 'react-native';
-import type { TextSxProps, ThemedDict } from 'react-native-themed-styled-system';
-import { propsToThemedStyle, StyledSystemContext } from 'react-native-themed-styled-system';
 
+import type { TextSxProps } from '../@types/SxProps';
+import type { ThemedDict } from '../@types/ThemedDict';
 import { printWarning } from '../internal/util/printWarning';
+import { StyledSystemContext } from '../provider/StyledSystemProvider';
+import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 export type UseSxStyleOptions = {
   theme?: ThemedDict;
