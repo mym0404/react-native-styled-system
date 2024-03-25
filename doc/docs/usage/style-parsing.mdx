@@ -11,51 +11,46 @@ Let me show the following snippet.
 
 ```tsx
 const props = {
-  style: { marginTop: 24 }, // #3
-  sx: { mt: '24px' }, // #4
-  mt: '24px', // #5
+  style: { marginTop: 24 }, // #2
+  sx: { mt: '24px' }, // #3
+  mt: '24px', // #4
 }
 
 const { getStyle, filteredProps } = useSx(props, {
-  transform: ({ /* ... */ }) => ({ mt: 4 }), // #2
-  fallback: { mt: 8 }, // #6
+  transform: ({ /* ... */ }) => ({ mt: 4 }), // #1
+  fallback: { mt: 8 }, // #5
 });
 
-return <View style={getStyle({ mt: 2 } /* #1 */ )} />
+return <View style={getStyle()} />
 ```
 
-1. Argument `sx` of `getStyle(sx?: TextSxProps)`
-2. Parsed result of `transform` in the `useSx` options
-3. Plain old `style` prop
-4. `sx` in props
-5. Plain properties in props, such as `ml` or `color`
-6. `fallback` in the `useSx` options (To be added)
+1. Parsed result of `transform` in the `useSx` options
+2. Plain old `style` prop
+3. `sx` in props
+4. Plain properties in props, such as `ml` or `color`
+5. `fallback` in the `useSx` options (To be added)
 
-**The priority is calculated as  1 > 2 > 3 > 4 > 5 > 6.**
+**The priority is calculated as  1 > 2 > 3 > 4 > 5.**
 
 > 1 has the highest priority.
 
 The reasons for this priority are as follows:
 
-**First of all, #6 should always have the lowest priority.**
+**First of all, #5 should always have the lowest priority.**
 
 As the name suggests, it means `fallback`.
 
-**And #2 should have at least a higher priority than #3-5.**
+**And #1 should have at least a higher priority than #2-4.**
 
-In the aspect of user of this component, they can only set #3-5.
+In the aspect of user of this component, they can only set #2-4.
 
 The reason `transform` is created is to calculate the value of another property based on the result of these or to change the value of the passed property. .
 
-**#3 should have higher priority than #4 and #5.**
+**#2 should have higher priority than #3 and #4.**
 
 This is because when integrating this package, we want to maximize stability when refactoring existing code.
 
-:::warning To Be Discussed
-**We should decide that #1 is really needed in this package later**
-:::
-
 :::tip
 If you are not sure what to write and are confused,
-we recommend removing all of the code that was #3 in the beginning and introducing only #5 and #2 first.
+we recommend removing all of the code that was #3 in the begining and introducing only #5 and #2 first.
 :::

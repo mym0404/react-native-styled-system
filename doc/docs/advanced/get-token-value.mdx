@@ -18,7 +18,7 @@ const MyView = (
     readonly?: boolean;
   }) => {
   const [backgroundColor, error] = useSxTokens('colors', [readonly || disabled ? 'gray500' : 'gray200', 'red500']);
-g
+
   return <View style={{ backgroundColor, borderColor: error, ... }} />
 }
 ```

@@ -7,9 +7,12 @@ import { useSx } from 'react-native-themed-styled-system';
 type TxtProps = {} & TextSxProps & TextProps;
 
 const Txt = (props: TxtProps) => {
-  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
+  const { getStyle, filteredProps } = useSx(props, {
+    styleType: 'TextStyle',
+    fallback: { color: 'text', includeFontPadding: false },
+  });
 
-  return <Text style={getStyle({ color: 'text', includeFontPadding: false })} {...filteredProps} />;
+  return <Text style={getStyle()} {...filteredProps} />;
 };
 
 export { Txt };

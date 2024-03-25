@@ -23,7 +23,17 @@ export default function Home(): JSX.Element {
               {'Getting Started ⏱️'}
             </Link>
           </div>
-          <div style={{ marginTop: 64 }}>
+          <img
+            src={'img/main_code.png'}
+            width={400}
+            alt={'main_code'}
+            style={{
+              marginTop: 40,
+              borderRadius: 4,
+              boxShadow: '0px 0px 24px #eee2',
+            }}
+          />
+          <div style={{ marginTop: 24 }}>
             <code style={{ borderWidth: 1, padding: 5, whiteSpace: 'pre-wrap' }}>
               {'npm install react-native-themed-styled-system'}
             </code>
