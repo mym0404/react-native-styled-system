@@ -3,38 +3,39 @@ import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 import { renderHook } from '@testing-library/react-hooks';
 
-import type { SxProps, TextSxProps } from '../@types/SxProps';
+import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { emptyThemedDict } from '../@types/ThemedDict';
 import type { ThemedStyleType } from '../util/propsToThemedStyle';
 
-import type { StyleTransform } from './useSx';
+import type { StyleFallback, StyleTransform } from './useSx';
 import { useSx } from './useSx';
 
 export function expectResult(
   theme: ThemedDict,
-  props: { style?: StyleProp<any>; getStyleSx?: SxProps & TextSxProps } & TextSxProps &
-    Record<string, any>,
+  props: { style?: StyleProp<any> } & TextSxProps & Record<string, any>,
   {
     expectation,
     filteredPropsExpectation,
     styleType,
     transform,
+    fallback,
   }: {
     expectation: object;
     filteredPropsExpectation?: object;
     styleType?: ThemedStyleType;
     transform?: StyleTransform;
+    fallback?: StyleFallback;
   },
 ) {
   const {
     result: {
       current: { getStyle, filteredProps },
     },
-  } = renderHook(() => useSx(props, { theme, styleType, transform }));
+  } = renderHook(() => useSx(props, { theme, styleType, transform, fallback }));
 
   if (expectation) {
-    expect(StyleSheet.flatten(getStyle(props.getStyleSx))).toEqual(expectation);
+    expect(StyleSheet.flatten(getStyle())).toEqual(expectation);
   }
 
   if (filteredPropsExpectation) {
@@ -116,14 +117,14 @@ describe('edge case', () => {
     return expect(getStyle()).toEqual(undefined);
   });
 
-  it('if prop is nullish and getStyle sx parameter is not nullish, return style', () => {
+  it('if prop is nullish and fallback parameter is not nullish, return fallback style', () => {
     const {
       result: {
         current: { getStyle },
       },
-    } = renderHook(() => useSx(null, { theme: baseTheme }));
+    } = renderHook(() => useSx(null, { theme: baseTheme, fallback: { w: 1 } }));
 
-    return expect(getStyle({ width: 1 })).toEqual({ width: 4 });
+    return expect(getStyle()).toEqual({ width: 4 });
   });
 
   it("gap doesn't accept not number value", () => {
@@ -209,20 +210,25 @@ describe('shortcut priority', () => {
 });
 
 describe('style parse priority', () => {
+  it('prop property > fallback property', () => {
+    expectResult(
+      emptyTheme,
+      { w: 1 },
+      {
+        fallback: {
+          w: 2,
+        },
+        expectation: { width: 1 },
+      },
+    );
+  });
+
   it('sx prop property > prop property', () => {
     expectResult(emptyTheme, { w: 1, sx: { w: 2 } }, { expectation: { width: 2 } });
   });
 
-  it('prop property > getStyle parameter', () => {
-    expectResult(emptyTheme, { w: 1, getStyleSx: { w: 2 } }, { expectation: { width: 1 } });
-  });
-
-  it('style prop property > getStyle parameter', () => {
-    expectResult(
-      emptyTheme,
-      { style: { width: 1 }, getStyleSx: { w: 2 } },
-      { expectation: { width: 1 } },
-    );
+  it('style prop property > sx prop property', () => {
+    expectResult(emptyTheme, { style: { width: 1 }, sx: { w: 2 } }, { expectation: { width: 1 } });
   });
 });
 
@@ -331,5 +337,12 @@ describe('transform', () => {
         }),
       },
     );
+  });
+
+  it('transform output should be honored even all props are null', () => {
+    expectResult(baseTheme, undefined as any, {
+      expectation: { marginHorizontal: 4 },
+      transform: () => ({ mx: 1 }),
+    });
   });
 });

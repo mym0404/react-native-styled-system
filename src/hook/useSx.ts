@@ -15,10 +15,12 @@ import { propsToThemedStyle } from '../util/propsToThemedStyle';
 type Props = { style?: StyleProp<any> } & TextSxProps;
 
 export type StyleTransform = (style: TextStyle) => TextSxProps;
+export type StyleFallback = Omit<TextSxProps, 'sx'>;
 export type UseSxOptions = {
   theme?: ThemedDict;
   styleType?: ThemedStyleType;
   transform?: StyleTransform;
+  fallback?: StyleFallback;
 };
 const defaultUseSxOptions: UseSxOptions = { styleType: 'ViewStyle' };
 export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
@@ -27,18 +29,22 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     theme: optionTheme,
     styleType = defaultUseSxOptions.styleType,
     transform = defaultUseSxOptions.transform,
+    fallback,
   }: UseSxOptions = defaultUseSxOptions,
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
-  const getStyle = useStableCallback((sx?: Omit<TextSxProps, 'sx'>): StyleProp<S> | undefined => {
-    const skip = !props && !sx;
+  const getStyle = useStableCallback((): StyleProp<S> | undefined => {
+    const skip = !props && !fallback;
+    const theme = optionTheme ?? styledSystemContext?.theme;
 
     if (skip) {
-      return;
+      if (is.function(transform)) {
+        return propsToThemedStyle({ theme, sx: transform({}) }) as S;
+      } else {
+        return;
+      }
     }
-
-    const theme = optionTheme ?? styledSystemContext?.theme;
 
     if (!theme) {
       printWarning('theme not found from useSx, undefined will be returned.');
@@ -46,24 +52,23 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
       return;
     }
 
-    // todo handle default style
-    // causion: priority should be ordered correctly.
-    const mergedSx: TextSxProps = { ...sx, ...props, ...props?.sx };
+    // caution: priority should be ordered correctly.
+    const mergedSx: TextSxProps = { ...fallback, ...props, ...props?.sx };
 
-    const computedStyle = propsToThemedStyle({
+    const mergedSxStyle = propsToThemedStyle({
       theme,
       sx: mergedSx,
       styleType,
     });
 
-    const composedStyle = !computedStyle
+    const composedStyle = !mergedSxStyle
       ? props?.style
       : props?.style
-        ? StyleSheet.compose(computedStyle, props.style)
-        : computedStyle;
+        ? StyleSheet.compose(mergedSxStyle, props.style)
+        : mergedSxStyle;
 
     if (is.function(transform)) {
-      const transformedSx = transform(computedStyle ?? {});
+      const transformedSx = transform(StyleSheet.flatten(composedStyle));
 
       return StyleSheet.compose(
         composedStyle,

@@ -97,16 +97,17 @@ type Props = {
   title?: string;
   body?: string;
 //highlight-next-line
-} &SxProps;
+} & SxProps;
 const ScreenErrorFallback = (props: Props) => {
 //highlight-next-line
   const { title, body } = props;
 //highlight-next-line
   const { getStyle } = useSx(props);
+  const getSxStyle = useSxStyle();
   return (
     <View
 //highlight-next-line
-      style={getStyle({ center: true })}
+      style={[getStyle(), getSxStyle({ center: true })]}
       pointerEvents={'box-none'}
     >
 ```
@@ -117,7 +118,7 @@ There are a few things to keep in mind.
 There is no need to add `style` as a prop to `style` of `View`.
 2. Always pass all `props` objects themselves to `useSx` to avoid missing any properties. `useSx`
 Properties that are not used internally are ignored and not changed.
-3. `getStyle` can receive `SxProps` as an argument and consider it in the result.
+3. Fixed style overwriting `props` can be applied with `getSxStyle`.
 4. `center` is a shortcut for `justifyContent: center`, `alignItems: center`.
 
 ## Example without Props destruction
