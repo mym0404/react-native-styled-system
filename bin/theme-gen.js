@@ -115,21 +115,21 @@ const go = async () => {
 
     result = result.replace(
       'space:',
-      'space: SpaceValue | `${number}` | `${number}px` | `${any}px` | ',
+      'space: (SpaceValue & {}) | (`${number}` & {}) | (`${any}px` & {}) | ',
     );
 
     result = result.replace(
       'sizes:',
-      'sizes: SizesValue | `${number}` | `${number}px` | `${any}px` | ',
+      'sizes: (SizesValue & {}) | (`${number}` & {}) | (`${any}px` & {}) | ',
     );
 
     result = result.replace(
       'radii:',
-      'radii: RadiiValue | `${number}` | `${number}px` | `${any}px` | ',
+      'radii: (RadiiValue & {}) | (`${number}` & {}) | (`${any}px` & {}) | ',
     );
 
-    result = result.replace('colors:', 'colors: ColorsValue | ');
-    result = result.replace(/typography:\W*?\n/, 'typography: string;');
+    result = result.replace('colors:', 'colors: (ColorsValue & {}) | ');
+    result = result.replace(/typography:\W*?\n/, 'typography: (string & {});');
 
     result = result.replace(/\|[\s ]*\n/g, ';');
 
