@@ -60,14 +60,17 @@ function addLine(str, added, backward = false) {
 }
 
 function print(...args) {
+  // eslint-disable-next-line no-console
   console.log(`\x1B[35m[${_printTag}]`, ...args, '\x1B[0m');
 }
 
 function printSuccess(...args) {
+  // eslint-disable-next-line no-console
   console.log(`\x1B[32m[${_printTag}]`, ...args);
 }
 
 function printError(...args) {
+  // eslint-disable-next-line no-console
   console.log(`⚠️ [${_printTag}]`, ...args);
 }
 
