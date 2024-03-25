@@ -338,4 +338,11 @@ describe('transform', () => {
       },
     );
   });
+
+  it('transform output should be honored even all props are null', () => {
+    expectResult(baseTheme, undefined as any, {
+      expectation: { marginHorizontal: 4 },
+      transform: () => ({ mx: 1 }),
+    });
+  });
 });

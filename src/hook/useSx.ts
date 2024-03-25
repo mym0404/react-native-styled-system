@@ -36,12 +36,15 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
 
   const getStyle = useStableCallback((): StyleProp<S> | undefined => {
     const skip = !props && !fallback;
+    const theme = optionTheme ?? styledSystemContext?.theme;
 
     if (skip) {
-      return;
+      if (is.function(transform)) {
+        return propsToThemedStyle({ theme, sx: transform({}) }) as S;
+      } else {
+        return;
+      }
     }
-
-    const theme = optionTheme ?? styledSystemContext?.theme;
 
     if (!theme) {
       printWarning('theme not found from useSx, undefined will be returned.');
