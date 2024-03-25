@@ -67,12 +67,32 @@ Then it is created as follows:
 import type { ColorsValue, RadiiValue, SizesValue, SpaceValue } from './Token';
 
 export interface ThemedTypings {
-  colors: ColorsValue |  "white" | "black" | "red" | "blue" | "green"
-radii: RadiiValue | `${number}` | `${number}px` | `${any}px` |  "sm" | "md" | "lg"
-sizes: SizesValue | `${number}` | `${number}px` | `${any}px` |  "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" | "20" | "24" | "28" | "30" | "32" | "40" | "48" | "px" | "0.5"
-space: SpaceValue | `${number}` | `${number}px` | `${any}px` |  "0" | "-0" | "1" | "-1" | "2" | "-2" | "3" | "-3" | "4" | "-4" | "5" | "-5" | "6" | "-6" | "7" | "-7" | "8" | "-8" | "9" | "-9" | "10" | "-10" | "11" | "-11" | "12" | "-12" | "13" | "-13" | "14" | "-14" | "15" | "-15" | "16" | "-16" | "17" | "-17" | "18" | "-18" | "19" | "-19" | "20" | "-20" | "24" | "-24" | "28" | "-28" | "30" | "-30" | "32" | "-32" | "40" | "-40" | "48" | "-48" | "px" | "-px" | "0.5" | "-0.5" | "sfTop" | "-sfTop" | "sfRight" | "-sfRight" | "sfBottom" | "-sfBottom" | "sfLeft" | "-sfLeft"
-typography: "h1" | "title" | "body" | "small"
+  colors:
+    | (ColorsValue & {})
+    | 'white'
+    | 'black'
+    | 'transparent'
+    | 'gray50'
+    /* ... */
+    | 'blue900';
+  radii: (RadiiValue & {}) | (`${number}` & {}) | (`${any}px` & {}) | '1' | '2' | 'sm' | 'md';
+  sizes:
+    | (SizesValue & {})
+    | (`${number}` & {})
+    | (`${any}px` & {})
+    | '0'
+    /* ... */
+    | 'px'
+    | '0.5';
+  space:
+    | (SpaceValue & {})
+    | (`${number}` & {})
+    | (`${any}px` & {})
+    | '0'
+    /* ... */
+    | '0.5'
+    | '-0.5';
+  typography: 'h1';
 }
-```
 
-Type creation is performed internally using `@chakra-ui/cli`.
+```
