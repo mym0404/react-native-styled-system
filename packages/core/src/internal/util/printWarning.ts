@@ -6,6 +6,6 @@ function isTestEnv() {
 
 export const printWarning = (msg: string) => {
   if (!isTestEnv()) {
-    console.warn('[⚠️react-native-themed-styled-system]', msg);
+    console.warn('[⚠️@react-native-styled-system/core]', msg);
   }
 };

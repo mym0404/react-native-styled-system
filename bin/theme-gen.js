@@ -88,13 +88,13 @@ const go = async () => {
   const tmpFile = '.tmpThemeGen.ts';
   const outputFile =
     process.argv[3] ||
-    './node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts';
+    './node_modules/@react-native-styled-system/core/lib/typescript/@types/ThemedTypings.d.ts';
 
   try {
     await execa(
       'npx',
       '-y',
-      'react-native-themed-styled-system-cli',
+      '@react-native-styled-system/core-cli',
       'generate',
       '--out',
       tmpFile,

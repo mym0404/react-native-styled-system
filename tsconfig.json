@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "jsx": "react",
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     "noImplicitAny": false,
     "removeComments": false,
     "sourceMap": true,
@@ -15,7 +20,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "paths": {
-      "react-native-themed-styled-system": ["packages/core/src/index"]
+      "@react-native-styled-system/core": [
+        "packages/core/src/index"
+      ]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false
@@ -26,5 +33,8 @@
     "example/**/*.ts",
     "example/**/*.tsx"
   ],
-  "exclude": ["**/*.test.*", "node_modules"]
+  "exclude": [
+    "**/*.test.*",
+    "node_modules"
+  ]
 }

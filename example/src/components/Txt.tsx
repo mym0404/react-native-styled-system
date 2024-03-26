@@ -1,8 +1,8 @@
 import React from 'react';
 import type { TextProps } from 'react-native';
 import { Text } from 'react-native';
-import type { TextSxProps } from 'react-native-themed-styled-system';
-import { useSx } from 'react-native-themed-styled-system';
+import type { TextSxProps } from '@react-native-styled-system/core';
+import { useSx } from '@react-native-styled-system/core';
 
 type TxtProps = {} & TextSxProps & TextProps;
 

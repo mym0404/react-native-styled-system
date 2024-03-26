@@ -2,8 +2,8 @@ import type { PropsWithChildren, Ref } from 'react';
 import React, { forwardRef } from 'react';
 import type { ViewProps } from 'react-native';
 import { View } from 'react-native';
-import type { SxProps } from 'react-native-themed-styled-system';
-import { useSx } from 'react-native-themed-styled-system';
+import type { SxProps } from '@react-native-styled-system/core';
+import { useSx } from '@react-native-styled-system/core';
 
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 

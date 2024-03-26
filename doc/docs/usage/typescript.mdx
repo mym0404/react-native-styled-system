@@ -16,7 +16,7 @@ React Native Styled System aims for type-safe use.
 Please enter the path to the module where `ThemedDict` is `default exported` as an argument to the command.
 
 ```shell
-react-native-themed-styled-system src/AppTheme.ts
+@react-native-styled-system/core src/AppTheme.ts
 ```
 
 More convenient use is possible with `scripts` in `package.json`.
@@ -25,7 +25,7 @@ More convenient use is possible with `scripts` in `package.json`.
 {
   ...
   "scripts": {
-    "theme:gen": "react-native-themed-styled-system src/AppTheme.ts"
+    "theme:gen": "@react-native-styled-system/core src/AppTheme.ts"
   }
 }
 ```
@@ -58,12 +58,12 @@ We recommend using the `postinstall` script so that it can operate without probl
 ## How it works
 
 used internally in the package
-File in the path `node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts`
+File in the path `node_modules/@react-native-styled-system/core/lib/typescript/@types/ThemedTypings.d.ts`
 Regenerate it yourself.
 
 Then it is created as follows:
 
-```ts title="node_modules/react-native-themed-styled-system/lib/typescript/@types/ThemedTypings.d.ts"
+```ts title="node_modules/@react-native-styled-system/core/lib/typescript/@types/ThemedTypings.d.ts"
 import type { ColorsValue, RadiiValue, SizesValue, SpaceValue } from './Token';
 
 export interface ThemedTypings {

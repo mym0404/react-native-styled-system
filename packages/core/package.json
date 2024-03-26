@@ -6,12 +6,7 @@
   "types": "lib/typescript/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
-    "check:all": "yarn check:lint && yarn check:type && yarn check:test",
-    "check:lint": "eslint src --ext .ts,.tsx,.js,.jsx --max-warnings=0 --cache",
-    "check:type": "tsc --noEmit",
-    "check:test": "jest",
-    "check:test:coverage": "jest --coverage",
-    "build": "yarn t && bob build",
+    "build": "bob build",
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts"
   },
   "repository": {
@@ -22,14 +17,14 @@
   "license": "MIT",
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.1",
-    "@types/eslint": "^8",
     "@types/react": "^18.2.65",
     "@types/react-test-renderer": "^18",
     "prettier": "^3.2.5",
     "react": "*",
     "react-native": "^0.73.6",
     "react-native-builder-bob": "^0.23.2",
-    "react-test-renderer": "^18.2.0"
+    "react-test-renderer": "^18.2.0",
+    "typescript": "*"
   },
   "peerDependencies": {
     "react": "*",
@@ -54,6 +49,7 @@
   "react-native-builder-bob": {
     "declarationMap": false,
     "source": "src",
+    "typescript": "",
     "output": "lib",
     "targets": [
       "commonjs",
