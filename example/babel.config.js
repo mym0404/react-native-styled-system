@@ -1,8 +1,23 @@
 const path = require('path');
-const pak = require('../package.json');
+
+const packages = [
+  {
+    name: 'core',
+    pak: require('../packages/core/package.json'),
+  },
+];
+
+const alias = {
+  ...Object.fromEntries(
+    packages.map(({ name, pak }) => [
+      pak.name,
+      path.join(__dirname, '..', 'packages', name, pak.source),
+    ]),
+  ),
+};
 
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(false);
 
   return {
     presets: ['babel-preset-expo'],
@@ -11,10 +26,8 @@ module.exports = function (api) {
         'module-resolver',
         {
           extensions: ['.tsx', '.ts', '.js', '.json'],
-          alias: {
-            // For development, we want to alias the library to the source
-            [pak.name]: path.join(__dirname, '..', pak.source),
-          },
+          // For development, we want to alias the library to the source
+          alias,
         },
       ],
     ],
