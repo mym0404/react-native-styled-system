@@ -3,5 +3,15 @@
   "packages": ["packages/*"],
   "version": "0.0.2",
   "npmClient": "yarn",
-  "ignoreChanges": ["**/doc/**", "**/example/**"]
+  "ignoreChanges": ["**/doc/**", "**/example/**"],
+  "command": {
+    "version": {
+      "message": "chore(release): release packages",
+      "conventionalCommits": true,
+      "private": false
+    },
+    "publish": {
+      "private": false
+    }
+  }
 }

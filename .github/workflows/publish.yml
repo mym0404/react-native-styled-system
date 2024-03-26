@@ -79,5 +79,14 @@ jobs:
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
+      - name: Check
+        run: yarn check:all
+
       - name: Build
         run: lerna run build
+
+      - name: Version
+        run: lerna run version --yes
+
+      - name: Publish
+        run: lerna publish
