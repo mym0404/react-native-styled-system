@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@mj-studio/eslint-config-react"
+  ]
+}

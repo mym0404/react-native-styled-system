@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React, { useContext, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { StyledSystemProvider } from '../../../src';
+import { StyledSystemProvider } from '../../../packages/core/src';
 
 import AppTheme, { darkColors, lightColors } from './AppTheme';
 

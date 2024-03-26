@@ -1,13 +1,13 @@
 # tsc outDir, build directory
-dist/
-esm/
-lib/
+**/dist/
+**/esm/
+**/lib/
 
 # Webstorm(or any other Intellij IDE) config
 .idea/
 
 # Node modules
-node_modules/
+**/node_modules/
 
 # Built files
 tsconfig.tsbuildinfo
@@ -177,3 +177,4 @@ android/keystores/debug.keystore
 # VSCode
 .vscode/
 jsconfig.json
+.nx/cache

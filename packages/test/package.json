@@ -1,0 +1,27 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "mym0404 <mym0404@gmail.com>",
+  "homepage": "https://github.com/mj-studio-library/react-native-styled-system#readme",
+  "license": "ISC",
+  "main": "lib/test.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mj-studio-library/react-native-styled-system.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/test.test.js",
+    "check:lint": "eslint src example --ext .ts,.tsx,.js,.jsx --max-warnings=0"
+  },
+  "bugs": {
+    "url": "https://github.com/mj-studio-library/react-native-styled-system/issues"
+  }
+}
