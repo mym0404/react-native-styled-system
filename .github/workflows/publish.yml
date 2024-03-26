@@ -23,6 +23,13 @@ jobs:
         with:
           node-version: 20
 
+      - name: Set git config
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
