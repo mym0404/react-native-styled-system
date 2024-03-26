@@ -5,9 +5,9 @@
     "prepare": "husky",
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn install",
-    "check:all": "yarn check:lint && yarn check:tsc && yarn check:test",
+    "check:all": "yarn check:lint && yarn check:type && yarn check:test",
     "check:lint": "eslint packages --ext .ts,.tsx,.js,.jsx --max-warnings=0 --cache",
-    "check:tsc": "tsc --noEmit",
+    "check:type": "tsc --noEmit",
     "check:test": "jest",
     "build": "lerna run check:all"
   },
