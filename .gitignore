@@ -22,6 +22,9 @@ package/
 # Yarn
 yarn-error.log
 
+# Lerna
+**/lerna-debug.log
+
 # bundled assets
 
 android/app/src/main/assets/*.bundle

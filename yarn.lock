@@ -3072,10 +3072,8 @@ __metadata:
     "@mj-studio/js-util": "npm:^1.0.29"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@types/eslint": "npm:^8"
-    "@types/invariant": "npm:^2.2.37"
     "@types/react": "npm:^18.2.65"
     "@types/react-test-renderer": "npm:^18"
-    eslint: "npm:^8.57.0"
     invariant: "npm:^2.2.4"
     prettier: "npm:^3.2.5"
     react: "npm:*"
@@ -3544,13 +3542,6 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/235d2fc69741448e853333b7c3d1180a966dd2b8972c8cbcd6b2a0c6cd7f8d582ab2b8e58219dbc62cce8f1b40aa317ff78ea2201cdd8249da5025adebed6f0b
-  languageName: node
-  linkType: hard
-
-"@types/invariant@npm:^2.2.37":
-  version: 2.2.37
-  resolution: "@types/invariant@npm:2.2.37"
-  checksum: 10c0/f57ed8445036ebda8bc93804f088c2a13050bbeef4e4bc6ed531a70e2869250dbe59413f2a9ed7d8f3efa960f191e8dfca9d25414d63cbf604d348428f8c5b75
   languageName: node
   linkType: hard
 
@@ -12961,12 +12952,6 @@ __metadata:
   checksum: 10c0/019d33d81adff3f9f1bfcff18125fb2d3c65564f437d9be539270ee74b994986abb8260c7c2ce90e8f30162178b09dbbce33c6389273afac4f36069c48521f57
   languageName: node
   linkType: hard
-
-"test@workspace:packages/test":
-  version: 0.0.0-use.local
-  resolution: "test@workspace:packages/test"
-  languageName: unknown
-  linkType: soft
 
 "text-extensions@npm:^1.0.0":
   version: 1.9.0

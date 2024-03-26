@@ -4,7 +4,8 @@
   "scripts": {
     "prepare": "husky",
     "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn install"
+    "bootstrap": "yarn example && yarn install",
+    "check:all": "lerna run check:all"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.1.0",
