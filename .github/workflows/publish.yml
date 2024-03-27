@@ -106,4 +106,4 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           cat .npmrc
       - name: Publish
-        run: yarn lerna publish from-package --yes --loglevel debug
+        run: yarn lerna publish from-package --yes
