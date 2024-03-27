@@ -3453,7 +3453,7 @@ __metadata:
     react: "*"
     react-native: "*"
   bin:
-    core: ./bin/theme-gen.js
+    generate-theme-type: ./bin/theme-gen.js
   languageName: unknown
   linkType: soft
 
