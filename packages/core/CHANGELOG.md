@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.11...v0.0.12) (2024-03-27)
+
+### Bug Fixes
+
+- downgrade core typescript version ([8651738](https://github.com/mj-studio-library/react-native-styled-system/commit/86517387ee630989a24999dafe1fc0f74803b600))
+
 ## [0.0.11](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.10...v0.0.11) (2024-03-27)
 
 **Note:** Version bump only for package @react-native-styled-system/core
