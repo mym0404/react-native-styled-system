@@ -19,5 +19,8 @@
       "private": false
     }
   },
-  "createRelease": "github"
+  "createRelease": "github",
+  "allowBranch": [
+    "main"
+  ]
 }
