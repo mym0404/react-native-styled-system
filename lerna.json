@@ -5,10 +5,7 @@
   ],
   "version": "0.0.7",
   "npmClient": "yarn",
-  "ignoreChanges": [
-    "**/doc/**",
-    "**/example/**"
-  ],
+  "ignoreChanges": ["**/doc/**", "**/example/**"],
   "command": {
     "version": {
       "message": "chore: release packages [skip ci]",
