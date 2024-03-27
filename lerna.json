@@ -6,13 +6,14 @@
   "ignoreChanges": ["**/doc/**", "**/example/**"],
   "command": {
     "version": {
-      "message": "chore(release): release packages",
+      "message": "chore: release packages [skip ci]",
       "conventionalCommits": true,
       "private": false
     },
     "publish": {
       "private": false,
-      "registry": "https://registry.npmjs.org/"
+      "registry": "https://registry.npmjs.org/",
+      "verifyAccess": false
     }
   },
   "createRelease": "github",
