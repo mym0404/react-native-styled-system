@@ -101,5 +101,7 @@ jobs:
 
       - name: Build
         run: yarn lerna run build
+      - name: Version
+        run: yarn lerna version --force-publish --yes
       - name: Publish
-        run: yarn lerna publish --force-publish --yes
+        run: yarn lerna publish from-package --yes
