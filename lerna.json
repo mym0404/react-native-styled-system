@@ -1,9 +1,14 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "version": "0.0.7",
   "npmClient": "yarn",
-  "ignoreChanges": ["**/doc/**", "**/example/**"],
+  "ignoreChanges": [
+    "**/doc/**",
+    "**/example/**"
+  ],
   "command": {
     "version": {
       "message": "chore: release packages [skip ci]",
@@ -14,6 +19,5 @@
       "private": false,
       "registry": "https://registry.npmjs.org/"
     }
-  },
-  "createRelease": "github"
+  }
 }
