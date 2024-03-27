@@ -98,4 +98,4 @@ jobs:
         run: npm config set registry http://registry.npmjs.org
 
       - name: Publish
-        run: yarn lerna publish --yes
+        run: yarn lerna publish --force-publish --yes
