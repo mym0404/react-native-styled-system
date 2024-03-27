@@ -1,4 +1,4 @@
-import type { ThemedDict } from 'react-native-themed-styled-system';
+import type { ThemedDict } from '@react-native-styled-system/core';
 
 const unit = 4;
 const space = {

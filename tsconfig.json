@@ -20,16 +20,16 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "paths": {
-      "react-native-themed-styled-system": [
-        "./src/index"
+      "@react-native-styled-system/core": [
+        "packages/core/src/index"
       ]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "packages/**/src/**/*.ts",
+    "packages/**/src/**/*.tsx",
     "example/**/*.ts",
     "example/**/*.tsx"
   ],

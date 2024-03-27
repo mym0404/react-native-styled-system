@@ -6,7 +6,7 @@ title: StyledView
 ```tsx title='StyledView.tsx'
 import { forwardRef, Ref, PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';
-import { SxProps, useSx } from 'react-native-themed-styled-system';
+import { SxProps, useSx } from '@react-native-styled-system/core';
 
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {

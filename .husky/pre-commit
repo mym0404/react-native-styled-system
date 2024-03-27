@@ -1,1 +1,2 @@
-yarn t
+echo "🚀 pre-commit hook running..."
+yarn check:all

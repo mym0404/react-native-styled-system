@@ -35,7 +35,7 @@ export default function Home(): JSX.Element {
           />
           <div style={{ marginTop: 24 }}>
             <code style={{ borderWidth: 1, padding: 5, whiteSpace: 'pre-wrap' }}>
-              {'npm install react-native-themed-styled-system'}
+              {'npm install @react-native-styled-system/core'}
             </code>
           </div>
         </div>

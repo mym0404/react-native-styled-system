@@ -22,13 +22,13 @@ The following steps will get you up and running to contribute to Chakra UI:
 
 **`yarn install`**: bootstraps the entire project, symlinks all dependencies.
 
-**`yarn build`**: Run static checks & build with `react-native-builder-bob`
+**`leran run build`**: Run static checks & build with `react-native-builder-bob`
 
-**`yarn lint`**: Check ESLint
+**`yarn check:lint`**: Check ESLint
 
 **`yarn check:type`**: Check typescript without noEmit
 
-**`yarn test`**: Run test with jest
+**`yarn check:test`**: Run test with jest
 
 ## Think you found a bug?
 
@@ -92,7 +92,7 @@ https://www.conventionalcommits.org/ or check out the
 
 3. Make and commit your changes following the
    [commit convention](https://github.com/mj-studio-library/react-native-styled-system/blob/main/CONTRIBUTING.md#commit-convention).
-   As you develop, you can run `yarn t` and to make sure everything works as expected.
+   As you develop, you can run `yarn check:all` and to make sure everything works as expected.
 
 4. You should base branch of PR as `develop`.
 
