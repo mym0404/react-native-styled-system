@@ -156,7 +156,7 @@ Our docsite lives in a `doc` directory in project. If you're
 interested in contributing to the documentation, create pr as manual.
 
 > [!TIP]
-> Currently, the documentation project will be deployed if main branch pushed(released).
+> The documentation website will be deployed if main branch pushed(released).
 
 ## License
 
