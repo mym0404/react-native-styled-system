@@ -9,6 +9,7 @@ on:
 jobs:
   publish-packages:
     name: Publish packages to NPM
+    if: ${{ github.actor != 'github-actions[bot]' && github.event_name != 'push' || github.event.pusher.name != 'github-actions[bot]' }}
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -29,8 +30,8 @@ jobs:
 
       - name: Set git config
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
