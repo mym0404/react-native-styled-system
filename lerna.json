@@ -16,7 +16,8 @@
       "private": false
     },
     "publish": {
-      "private": false
+      "private": false,
+      "registry": "https://npm.pkg.github.com"
     }
   },
   "createRelease": "github",
