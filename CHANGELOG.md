@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.23 (2024-03-27)
+
+### Bug Fixes
+
+- cli fix ([719deae](https://github.com/mj-studio-library/react-native-styled-system/commit/719deaed97c74d53e7790699063e75791b69d1f6))
+- cli use npx ([e79409d](https://github.com/mj-studio-library/react-native-styled-system/commit/e79409d75a608e5e7282c96c728844960d300667))
+- drop zx for bin ([eb4e93b](https://github.com/mj-studio-library/react-native-styled-system/commit/eb4e93bf8701303c304251f821dcc48cf7b442dc))
+- fix build output ([15582fe](https://github.com/mj-studio-library/react-native-styled-system/commit/15582fef2910eaae7271f71656928c194e3676e6))
+- fix ci ([e8ba25f](https://github.com/mj-studio-library/react-native-styled-system/commit/e8ba25f4fb177591c085cfe25d4a24c72089c010))
+- fix cli ([2ecff8f](https://github.com/mj-studio-library/react-native-styled-system/commit/2ecff8f0deca7693580b558c47f7e755a9735881))
+- fix cli ([e97b034](https://github.com/mj-studio-library/react-native-styled-system/commit/e97b0347eeffc88e50efff91e5cd1cbffbea64e3))
+- fix cli finally ([db6b36a](https://github.com/mj-studio-library/react-native-styled-system/commit/db6b36a2e5b7182f49b7726823053e3216509b21))
+- fix filteredProps type ([51a4071](https://github.com/mj-studio-library/react-native-styled-system/commit/51a4071005a9d67dc8ef14b804c7f70b1324a3e0))
+- fix TextSxProps typing ([14a112e](https://github.com/mj-studio-library/react-native-styled-system/commit/14a112e374a17d6af7124b36d375dfa82e6ae524))
+- fix typing ([c61adf7](https://github.com/mj-studio-library/react-native-styled-system/commit/c61adf7a8af6d06dbb2c5129a028a218ab710258))
+- fix useSxStyle import path ([f32671d](https://github.com/mj-studio-library/react-native-styled-system/commit/f32671db7acd49fa26b8aadfe2736a2555e2c282))
+- fix vscode theme token typing ([e3ede99](https://github.com/mj-studio-library/react-native-styled-system/commit/e3ede99343cf17b51535c5231e6927fd4da1ca7b))
+- handle invalid px suffix token values ([4dfa1cc](https://github.com/mj-studio-library/react-native-styled-system/commit/4dfa1cc8aae9d232440d39065b73e1e223c7ebd9))
+- rename theme type generation script ([253b624](https://github.com/mj-studio-library/react-native-styled-system/commit/253b62409d3dcfbab2d2cc21d2e536ca49475a54))
+- separate cli package ([8e979fa](https://github.com/mj-studio-library/react-native-styled-system/commit/8e979fa8e0dac778aef9139acbe33f483db4cdd2))
+- silent cli ([cb978ea](https://github.com/mj-studio-library/react-native-styled-system/commit/cb978ea2b8665c3c91a00b2732462c39351d5cbf))
+- test release ([ab8026e](https://github.com/mj-studio-library/react-native-styled-system/commit/ab8026e9926ef5b2ee86485c55fcbf11080d6b9f))
+- theme-gen uses cjs ([92c4c10](https://github.com/mj-studio-library/react-native-styled-system/commit/92c4c1031be7d97f2d47f0701adfd2a71c545d90))
+- transform output should be honored even all props are null ([fe8184e](https://github.com/mj-studio-library/react-native-styled-system/commit/fe8184e7a6668612d2ca794359c84bfd4bc211f7))
+- typing ([449ebb2](https://github.com/mj-studio-library/react-native-styled-system/commit/449ebb22a8fc12964ee61f8070b50df9f160e377))
+- **typing:** fix typing ([07f5387](https://github.com/mj-studio-library/react-native-styled-system/commit/07f53871c53b4571b117dcfd05670b76df14817b))
+- useSx get Style type from generic parameter + Enhance Example ([b9e9ca3](https://github.com/mj-studio-library/react-native-styled-system/commit/b9e9ca36bb0161d492fcca1b09e4f9450b7cf58d))
+- useSxToken typing ([3eac805](https://github.com/mj-studio-library/react-native-styled-system/commit/3eac805047bb9f05797045619ce8367c9b5cd240))
+
+### Features
+
+- [WIP] ([78c8b6d](https://github.com/mj-studio-library/react-native-styled-system/commit/78c8b6dee493c59cf5016240c0591f95ebb4effa))
+- add commitlint, commitizen ([c7459e0](https://github.com/mj-studio-library/react-native-styled-system/commit/c7459e009920f0ab388b12a8c4d4d345308e0a81))
+- add fallback option to useSx and remove getStyle-sx props ([de32386](https://github.com/mj-studio-library/react-native-styled-system/commit/de323863c9a21a0949eab5783bccdafa91b7c6b2))
+- add includeFontPadding prop ([053b9b6](https://github.com/mj-studio-library/react-native-styled-system/commit/053b9b6d30e53d578c8bca234aa22ac74baeb20a))
+- change priority of style parsing. `style` should has first priority ([1eb6c9a](https://github.com/mj-studio-library/react-native-styled-system/commit/1eb6c9a780357b81bb5293e1d8bbb07697b26eec))
+- change script output format ([1dee044](https://github.com/mj-studio-library/react-native-styled-system/commit/1dee044e3a832f88edc100aef5a04e863b445995))
+- create useSxStyle ([0b1ea92](https://github.com/mj-studio-library/react-native-styled-system/commit/0b1ea92afdba1b0fb11356d76668f4fa16de6eeb))
+- introduce `transform` option ([81f4d0e](https://github.com/mj-studio-library/react-native-styled-system/commit/81f4d0eea06442e9a398605c8a916030b8d0f9c7))
+- **radii:** add radii token, parser, props + Enhance typing of ThemedDict ([6fb4970](https://github.com/mj-studio-library/react-native-styled-system/commit/6fb4970a22cfb74615a7fabd34d98aab94752f6e))
+- remove t,r,b,l shortcut props ([5cc1413](https://github.com/mj-studio-library/react-native-styled-system/commit/5cc1413a55b1ba231c48263454dbcfc1a271e0b4))
+- remove t,r,b,l shortcut props ([68a4d32](https://github.com/mj-studio-library/react-native-styled-system/commit/68a4d3203b3da3d9990f5d74ea33fca0ae9f8d54))
+- support TextStyle & viewStyle() -> getStyle() ([772f945](https://github.com/mj-studio-library/react-native-styled-system/commit/772f945363967ad416b28584f06105f7829a7044))
+- support typography ([27a9475](https://github.com/mj-studio-library/react-native-styled-system/commit/27a94751494afcd108c678ef9e3b0306549d2380))
+- **typing:** support raw color ([1a9e385](https://github.com/mj-studio-library/react-native-styled-system/commit/1a9e385a116a1c0210c1bd138fbd4709114e13db))
+- **typing:** support raw color ([d9c94e4](https://github.com/mj-studio-library/react-native-styled-system/commit/d9c94e4104de88d5d780c5627a6f4a57a53eebca))
+- useSx accepts nullish prop ([188779c](https://github.com/mj-studio-library/react-native-styled-system/commit/188779cb094d2055c4005c67e3bce5f1aaafefc9))
+- useSxToken hook ([6af85d4](https://github.com/mj-studio-library/react-native-styled-system/commit/6af85d416bc6429416d1a2641a535b20112c46c2))
+- **usesxtokens:** useSxToken -> useSxTokens ([32b2530](https://github.com/mj-studio-library/react-native-styled-system/commit/32b2530b54e190afb7d84bc8a6da12f17d37fb88))
+
+### Reverts
+
+- Revert "Release 0.0.20" ([3ffe6b0](https://github.com/mj-studio-library/react-native-styled-system/commit/3ffe6b06fd0759884be4cae4a26a48f4d86e9c82))
+
+### BREAKING CHANGES
+
+- viewStyle is renamed to getStyle
+- **usesxtokens:** useSxToken is changed to useSxTokens
+
 ## [0.0.22](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.21...v0.0.22) (2024-03-27)
 
 **Note:** Version bump only for package react-native-styled-system
