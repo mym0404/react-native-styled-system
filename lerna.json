@@ -19,5 +19,6 @@
       "private": false,
       "registry": "https://registry.npmjs.org/"
     }
-  }
+  },
+  "createRelease": "github"
 }
