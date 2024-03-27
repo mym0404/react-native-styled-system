@@ -1,5 +1,5 @@
 {
-  "name": "react-native-styled-system",
+  "name": "@react-native-styled-system/root",
   "private": true,
   "scripts": {
     "prepare": "husky",
