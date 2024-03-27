@@ -9,6 +9,8 @@ on:
 jobs:
   publish-packages:
     name: Publish packages to NPM
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
