@@ -3457,6 +3457,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@react-native-styled-system/root@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@react-native-styled-system/root@workspace:."
+  dependencies:
+    "@commitlint/cli": "npm:^19.1.0"
+    "@commitlint/config-conventional": "npm:^19.1.0"
+    "@mj-studio/eslint-config-react": "npm:^1.0.4"
+    "@types/jest": "npm:^29.5.12"
+    cz-conventional-changelog: "npm:^3.3.0"
+    eslint: "npm:^8.57.0"
+    husky: "npm:^9.0.11"
+    jest: "npm:^29.7.0"
+    lerna: "npm:^8.1.2"
+    metro-react-native-babel-preset: "npm:^0.77.0"
+    prettier: "npm:^3.2.5"
+    ts-jest: "npm:^29.1.2"
+    typescript: "npm:5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@react-native/assets-registry@npm:0.73.1":
   version: 0.73.1
   resolution: "@react-native/assets-registry@npm:0.73.1"
@@ -12889,26 +12909,6 @@ __metadata:
   checksum: 10c0/b5e8943ce011e43dbd75c04a96a27464ad7820aaed0b35a50cabbefeb5292de0cdea8b505364bddda045a5cf0e9d72c1bf7ac0cea9c0c6e33b574b8d64c65817
   languageName: node
   linkType: hard
-
-"react-native-styled-system@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-styled-system@workspace:."
-  dependencies:
-    "@commitlint/cli": "npm:^19.1.0"
-    "@commitlint/config-conventional": "npm:^19.1.0"
-    "@mj-studio/eslint-config-react": "npm:^1.0.4"
-    "@types/jest": "npm:^29.5.12"
-    cz-conventional-changelog: "npm:^3.3.0"
-    eslint: "npm:^8.57.0"
-    husky: "npm:^9.0.11"
-    jest: "npm:^29.7.0"
-    lerna: "npm:^8.1.2"
-    metro-react-native-babel-preset: "npm:^0.77.0"
-    prettier: "npm:^3.2.5"
-    ts-jest: "npm:^29.1.2"
-    typescript: "npm:5.3.3"
-  languageName: unknown
-  linkType: soft
 
 "react-native@npm:^0.73.6":
   version: 0.73.6

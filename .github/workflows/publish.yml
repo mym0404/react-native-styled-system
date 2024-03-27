@@ -23,10 +23,6 @@ jobs:
           fetch-depth: '0'
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Set npm config
-        run: |
-          npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
-
       - name: Set node version
         uses: actions/setup-node@v4
         with:
@@ -103,5 +99,11 @@ jobs:
         run: yarn lerna run build
       - name: Version
         run: yarn lerna version --force-publish --yes
+      - name: 'NPM Identity'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          cat .npmrc
       - name: Publish
         run: yarn lerna publish from-package --yes
