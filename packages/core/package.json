@@ -1,6 +1,6 @@
 {
   "name": "@react-native-styled-system/core",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/index.d.ts",
