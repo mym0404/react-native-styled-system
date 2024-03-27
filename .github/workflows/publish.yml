@@ -94,8 +94,5 @@ jobs:
       - name: Build
         run: yarn lerna run build
 
-      - name: Version
-        run: yarn lerna version --yes
-
       - name: Publish
-        run: yarn lerna publish from-package --yes
+        run: yarn lerna publish --yes
