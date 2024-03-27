@@ -3414,6 +3414,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-styled-system/cli@workspace:packages/cli":
+  version: 0.0.0-use.local
+  resolution: "@react-native-styled-system/cli@workspace:packages/cli"
+  dependencies:
+    "@types/ora": "npm:^3.2.0"
+    "@types/update-notifier": "npm:6.0.4"
+    bundle-n-require: "npm:^1.0.1"
+    chokidar: "npm:^3.5.3"
+    cli-welcome: "npm:^2.2.2"
+    commander: "npm:^11.0.0"
+    ora: "npm:^7.0.1"
+    prettier: "npm:^3.0.2"
+    tsup: "npm:^8.0.2"
+    typescript: "npm:*"
+    update-notifier: "npm:^6.0.2"
+  bin:
+    cli: bin/index.js
+  languageName: unknown
+  linkType: soft
+
 "@react-native-styled-system/core@workspace:packages/core":
   version: 0.0.0-use.local
   resolution: "@react-native-styled-system/core@workspace:packages/core"
@@ -12887,26 +12907,6 @@ __metadata:
     prettier: "npm:^3.2.5"
     ts-jest: "npm:^29.1.2"
     typescript: "npm:5.3.3"
-  languageName: unknown
-  linkType: soft
-
-"react-native-themed-styled-system-cli@workspace:packages/cli":
-  version: 0.0.0-use.local
-  resolution: "react-native-themed-styled-system-cli@workspace:packages/cli"
-  dependencies:
-    "@types/ora": "npm:^3.2.0"
-    "@types/update-notifier": "npm:6.0.4"
-    bundle-n-require: "npm:^1.0.1"
-    chokidar: "npm:^3.5.3"
-    cli-welcome: "npm:^2.2.2"
-    commander: "npm:^11.0.0"
-    ora: "npm:^7.0.1"
-    prettier: "npm:^3.0.2"
-    tsup: "npm:^8.0.2"
-    typescript: "npm:*"
-    update-notifier: "npm:^6.0.2"
-  bin:
-    react-native-themed-styled-system-cli: bin/index.js
   languageName: unknown
   linkType: soft
 
