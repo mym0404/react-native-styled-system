@@ -17,7 +17,7 @@
     },
     "publish": {
       "private": false,
-      "registry": "https://npm.pkg.github.com"
+      "registry": "https://registry.npmjs.org/"
     }
   },
   "createRelease": "github",

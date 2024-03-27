@@ -9,11 +9,12 @@ on:
 jobs:
   publish-packages:
     name: Publish packages to NPM
-    if: ${{ github.actor != 'github-actions[bot]' && github.event_name != 'push' || github.event.pusher.name != 'github-actions[bot]' }}
+    if: ${{ github.actor != 'github-actions[bot]' && github.event.pusher.name != 'github-actions[bot]' }}
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,11 +23,14 @@ jobs:
           fetch-depth: '0'
           token: ${{ secrets.GH_TOKEN }}
 
+      - name: Set up .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+
       - name: Set node version
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org/'
 
       - name: Set git config
         run: |
@@ -96,7 +100,5 @@ jobs:
 
       - name: Build
         run: yarn lerna run build
-      - name: Set up .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
       - name: Publish
         run: yarn lerna publish --force-publish --yes
