@@ -90,10 +90,10 @@ jobs:
         run: yarn check:all
 
       - name: Build
-        run: lerna run build
+        run: yarn lerna run build
 
       - name: Version
-        run: lerna run version --yes
+        run: yarn lerna run version --yes
 
       - name: Publish
-        run: lerna publish from-package --yes
+        run: yarn lerna publish from-package --yes
