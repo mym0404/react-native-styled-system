@@ -4,7 +4,6 @@ title: TypeScript
 ---
 
 
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -23,9 +22,9 @@ More convenient use is possible with `scripts` in `package.json`.
 
 ```json title="package.json"
 {
-  ...
+  /* ... */
   "scripts": {
-    "theme:gen": "@react-native-styled-system/core src/AppTheme.ts"
+    "theme:gen": "generate-theme-type src/AppTheme.ts"
   }
 }
 ```
