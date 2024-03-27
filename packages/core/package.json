@@ -24,7 +24,7 @@
     "react-native": "^0.73.6",
     "react-native-builder-bob": "^0.23.2",
     "react-test-renderer": "^18.2.0",
-    "typescript": "*"
+    "typescript": "5.3.3"
   },
   "peerDependencies": {
     "react": "*",
