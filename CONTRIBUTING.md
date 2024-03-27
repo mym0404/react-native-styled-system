@@ -13,8 +13,10 @@ The following steps will get you up and running to contribute to Chakra UI:
 
 2. Clone your fork locally
 
-3. Setup all the dependencies and packages by running `yarn install`. This
-   command will install dependencies.
+3. Setup all the dependencies and packages by running `yarn && yarn example`. This
+   command will install dependencies and example project dependencies.
+
+4. Run `yarn check:all` anytime to ensure format, typing, test aren't broken.
 
 ## Development
 
@@ -78,7 +80,7 @@ the following categories:
   categories
 
 If you are interested in the detailed specification you can visit
-https://www.conventionalcommits.org/ or check out the
+<https://www.conventionalcommits.org/> or check out the
 [Angular Commit Message Guidelines](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines).
 
 ### Steps to PR
@@ -103,16 +105,19 @@ Any changes you make in your library's JavaScript code will be reflected in the 
 If you change any native code, then you'll need to rebuild the example app.
 
 To start the packager:
+
 ```
 yarn example start
 ```
 
 To run the example app on Android:
+
 ```
 yarn example android
 ```
 
 To run the example app on iOS:
+
 ```
 yarn example ios
 ```
@@ -132,6 +137,7 @@ yarn example ios
 
 - Watchman error: std::__1::system_error: open: {PROJECT_PATH}: Operation not permitted
 - resolved with watchman watch-del-all && watchman shutdown-server in cmd
+
 </details>
 
 ### Tests
@@ -140,7 +146,7 @@ All commits that fix bugs or add features need a test.
 
 ## Want to write a blog post or tutorial
 
-That would be amazing! Reach out to me (mym0404@gmail.com).
+That would be amazing! Reach out to me (<mym0404@gmail.com>).
 
 We would love to support you any way we can.
 

@@ -94,5 +94,8 @@ jobs:
       - name: Build
         run: yarn lerna run build
 
+      - name: Set npm config
+        run: npm config set registry http://registry.npmjs.org
+
       - name: Publish
         run: yarn lerna publish --yes
