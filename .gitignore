@@ -1,13 +1,13 @@
 # tsc outDir, build directory
-dist/
-esm/
-lib/
+**/dist/
+**/esm/
+**/lib/
 
 # Webstorm(or any other Intellij IDE) config
 .idea/
 
 # Node modules
-node_modules/
+**/node_modules/
 
 # Built files
 tsconfig.tsbuildinfo
@@ -21,6 +21,9 @@ package/
 
 # Yarn
 yarn-error.log
+
+# Lerna
+**/lerna-debug.log
 
 # bundled assets
 
@@ -177,3 +180,4 @@ android/keystores/debug.keystore
 # VSCode
 .vscode/
 jsconfig.json
+.nx/cache

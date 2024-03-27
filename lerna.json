@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.0.6",
+  "npmClient": "yarn",
+  "ignoreChanges": [
+    "**/doc/**",
+    "**/example/**"
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): release packages",
+      "conventionalCommits": true,
+      "private": false
+    },
+    "publish": {
+      "private": false
+    }
+  },
+  "createRelease": "github",
+  "allowBranch": [
+    "main"
+  ]
+}

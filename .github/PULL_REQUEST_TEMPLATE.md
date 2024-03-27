@@ -1,4 +1,4 @@
-<!-- Thank you for contributing `react-native-themed-styled-system` package 🤗 -->
+<!-- Thank you for contributing `@react-native-styled-system/core` package 🤗 -->
 
 ## Type of change
 

@@ -38,7 +38,7 @@ It can be defined as follows:
 ```tsx title="StyledView.tsx"
 import { forwardRef, Ref, PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';
-import { SxProps, useSx } from 'react-native-themed-styled-system';
+import { SxProps, useSx } from '@react-native-styled-system/core';
 
 type StyledViewProps = PropsWithChildren<ViewProps & SxProps>;
 const StyledView = forwardRef((props: StyledViewProps, ref: Ref<View>) => {
@@ -129,7 +129,7 @@ You can define a component using the `sx` prop as follows.
 ```tsx title="StyledScrollView.tsx"
 import { PropsWithChildren, forwardRef, Ref } from 'react';
 import { ScrollViewProps, ScrollView } from 'react-native';
-import { SxProps, useSx } from 'react-native-themed-styled-system';
+import { SxProps, useSx } from '@react-native-styled-system/core';
 
 type StyledScrollViewProps = PropsWithChildren<
   {
