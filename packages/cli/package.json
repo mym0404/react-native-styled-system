@@ -1,0 +1,32 @@
+{
+  "name": "@react-native-styled-system/cli",
+  "version": "0.0.4",
+  "description": "Generate theme typings for autocomplete",
+  "type": "module",
+  "main": "dist/cjs/index.cjs",
+  "module": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsup src --format esm --shims"
+  },
+  "dependencies": {
+    "bundle-n-require": "^1.0.1",
+    "chokidar": "^3.5.3",
+    "cli-welcome": "^2.2.2",
+    "commander": "^11.0.0",
+    "ora": "^7.0.1",
+    "prettier": "^3.0.2",
+    "update-notifier": "^6.0.2"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "bin": "bin/index.js",
+  "devDependencies": {
+    "@types/ora": "^3.2.0",
+    "@types/update-notifier": "6.0.4",
+    "tsup": "^8.0.2",
+    "typescript": "*"
+  }
+}

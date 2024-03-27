@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "jsx": "react",
+    "types": ["node", "jest"],
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "ESNext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["**/*.test.*", "node_modules"]
+}
