@@ -94,7 +94,7 @@ const go = async () => {
     await execa(
       'npx',
       '-y',
-      '@react-native-styled-system/core-cli',
+      '@react-native-styled-system/cli',
       'generate',
       '--out',
       tmpFile,
