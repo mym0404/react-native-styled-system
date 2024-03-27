@@ -28,5 +28,6 @@
     "@types/update-notifier": "6.0.4",
     "tsup": "^8.0.2",
     "typescript": "*"
-  }
+  },
+  "gitHead": "7c09f0fe9584d8280bdfd1f39f89525133e9a65e"
 }

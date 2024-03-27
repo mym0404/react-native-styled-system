@@ -1,9 +1,14 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "version": "0.0.5",
   "npmClient": "yarn",
-  "ignoreChanges": ["**/doc/**", "**/example/**"],
+  "ignoreChanges": [
+    "**/doc/**",
+    "**/example/**"
+  ],
   "command": {
     "version": {
       "message": "chore(release): release packages",
