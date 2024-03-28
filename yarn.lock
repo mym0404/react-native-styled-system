@@ -2714,10 +2714,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mj-studio/js-util@npm:1.0.32":
-  version: 1.0.32
-  resolution: "@mj-studio/js-util@npm:1.0.32"
-  checksum: 10c0/8b5c8754cbb98aa67cf4f1569467304d86886ae0ed29ce5ddd5d2228c0007fbd5d3fb26bb7863aece94c45ac39e0bf394ec9439faba5b8984c779eccd6a6df66
+"@mj-studio/js-util@npm:1.0.33":
+  version: 1.0.33
+  resolution: "@mj-studio/js-util@npm:1.0.33"
+  checksum: 10c0/febf23d243dee412b510352f54cf7df299d3083bfc8a13fd73a1869d7ff4f3dda70c766b686f5d432e5894153b9bd64525985cde75b549a8196437059f9563a5
   languageName: node
   linkType: hard
 
@@ -3358,7 +3358,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@react-native-styled-system/core@workspace:packages/core"
   dependencies:
-    "@mj-studio/js-util": "npm:1.0.32"
+    "@mj-studio/js-util": "npm:1.0.33"
     "@testing-library/react-hooks": "npm:^8.0.1"
     "@types/invariant": "npm:^2.2.37"
     "@types/react": "npm:^18.2.65"
