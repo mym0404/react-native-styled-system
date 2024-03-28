@@ -88,7 +88,7 @@ const go = async () => {
   const tmpFile = '.tmpThemeGen.ts';
   const outputFile =
     process.argv[3] ||
-    './node_modules/@react-native-styled-system/core/lib/typescript/@types/ThemedTypings.d.ts';
+    './node_modules/@react-native-styled-system/core/lib/typescript/src/@types/ThemedTypings.d.ts';
 
   try {
     await execa(
