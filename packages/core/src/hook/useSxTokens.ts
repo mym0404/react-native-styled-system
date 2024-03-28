@@ -27,7 +27,7 @@ export const useSxTokens = <T extends keyof ThemedTypings, V extends ThemedTypin
   const ret: Array<ThemedDict[T][keyof ThemedDict[T]]> = [];
 
   for (let i = 0; i < tokenValues.length; i++) {
-    const tokenValue = tokenValues[i];
+    const tokenValue = tokenValues[i] ?? 'undefined';
     if (!(tokenValue in theme[tokenType])) {
       printWarning(
         `tokenValue ${String(tokenValue)} at index ${i} doesn't exist in tokenType ${tokenType} from useSxTokens, undefined will be returned.`,

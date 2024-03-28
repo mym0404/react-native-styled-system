@@ -3,7 +3,7 @@
   "version": "0.0.14",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
-  "types": "lib/typescript/index.d.ts",
+  "types": "lib/typescript/src/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "build": "bob build",
