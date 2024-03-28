@@ -96,7 +96,7 @@ jobs:
         run: yarn check:all
 
       - name: Build
-        run: yarn lerna run build
+        run: yarn build
       - name: Version
         run: yarn lerna version --force-publish --yes
       - name: 'NPM Identity'

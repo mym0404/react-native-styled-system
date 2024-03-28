@@ -7,7 +7,7 @@
   "module": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsup src --format esm --shims"
+    "prepack": "rm -rf dist && tsup src --format esm --shims"
   },
   "dependencies": {
     "bundle-n-require": "^1.0.1",
