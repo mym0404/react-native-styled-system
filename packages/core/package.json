@@ -1,6 +1,6 @@
 {
   "name": "@react-native-styled-system/core",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/src/index.d.ts",
@@ -39,7 +39,7 @@
     "!**/__mocks__"
   ],
   "dependencies": {
-    "@mj-studio/js-util": "1.0.29",
+    "@mj-studio/js-util": "1.0.34",
     "invariant": "^2.2.4"
   },
   "bin": {
