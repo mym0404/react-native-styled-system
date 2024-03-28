@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.22](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.19...v0.0.22) (2024-03-28)
+
+**Note:** Version bump only for package @react-native-styled-system/cli
+
 ## [0.0.21](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.22...v0.0.21) (2024-03-28)
 
 ### Bug Fixes
