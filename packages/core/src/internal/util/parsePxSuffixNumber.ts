@@ -7,4 +7,6 @@ export function parsePxSuffixNumber(value: any): number | undefined {
       return Number(sub);
     }
   }
+
+  return;
 }

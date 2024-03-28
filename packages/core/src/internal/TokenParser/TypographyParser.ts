@@ -21,4 +21,6 @@ const parseTypography = (
   if (is.string(token) && token in theme.typography) {
     return theme.typography[token];
   }
+
+  return;
 };
