@@ -181,3 +181,5 @@ android/keystores/debug.keystore
 .vscode/
 jsconfig.json
 .nx/cache
+
+**/package.tgz
