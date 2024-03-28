@@ -17,15 +17,15 @@
   "license": "MIT",
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.1",
+    "@types/invariant": "^2.2.37",
     "@types/react": "^18.2.65",
     "@types/react-test-renderer": "^18",
-    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "^3.2.5",
     "react": "*",
     "react-native": "^0.73.6",
     "react-native-builder-bob": "^0.23.2",
     "react-test-renderer": "^18.2.0",
-    "typescript": "5.1.6"
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "react": "*",
@@ -52,7 +52,6 @@
   "react-native-builder-bob": {
     "declarationMap": false,
     "source": "src",
-    "typescript": "",
     "output": "lib",
     "targets": [
       "commonjs",
@@ -73,9 +72,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "gitHead": "7c09f0fe9584d8280bdfd1f39f89525133e9a65e"
+  }
 }
