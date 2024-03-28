@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.21](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.22...v0.0.21) (2024-03-28)
+
+### Bug Fixes
+
+- add babel config into core package ([b822fcd](https://github.com/mj-studio-library/react-native-styled-system/commit/b822fcd0fdc351a560ae4c3435da142ed81a71c6))
+- downgrade core typescript version ([8651738](https://github.com/mj-studio-library/react-native-styled-system/commit/86517387ee630989a24999dafe1fc0f74803b600))
+- fix build ([e619904](https://github.com/mj-studio-library/react-native-styled-system/commit/e61990402140a11bc21a610e7f331e67acf242ba))
+- fix typescript version ([208e5f1](https://github.com/mj-studio-library/react-native-styled-system/commit/208e5f17563901d4b6691d76e4601b8b1a3d4698))
+- try fix ([cd0da3a](https://github.com/mj-studio-library/react-native-styled-system/commit/cd0da3a59753617fa8a1dac7e5a3a888c515d36b))
+- try fix ([e6071f4](https://github.com/mj-studio-library/react-native-styled-system/commit/e6071f4301ce3b662825befd01ff4736a732914f))
+- try fix ([53996fe](https://github.com/mj-studio-library/react-native-styled-system/commit/53996fec8c477efa5dfc9883d40cbe96cfd58ac3))
+- try fix ([5df0049](https://github.com/mj-studio-library/react-native-styled-system/commit/5df004963b5192ca7bcd81b633204b9a223b773f))
+- try fix build ([cfbb9fd](https://github.com/mj-studio-library/react-native-styled-system/commit/cfbb9fdacecc5c313a315d24d1374a6262d5c59b))
+
 ## [0.0.20](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.22...v0.0.20) (2024-03-28)
 
 ### Bug Fixes
