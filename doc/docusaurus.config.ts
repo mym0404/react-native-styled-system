@@ -116,6 +116,12 @@ const config: Config = {
       theme: prismThemes.oceanicNext,
       darkTheme: prismThemes.oceanicNext,
     },
+    algolia: {
+      appId: 'WEOE4PIF80',
+      apiKey: 'a37d0c7506b3ddce1de3db0251adf14e',
+      indexName: 'react-native-styled-system',
+      contextualSearch: true,
+    },
   } satisfies Preset.ThemeConfig,
 
   plugins: ['docusaurus-plugin-sass'],
