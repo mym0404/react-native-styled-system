@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.17](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.16...v0.0.17) (2024-03-28)
+
+### Bug Fixes
+
+- try fix ([53996fe](https://github.com/mj-studio-library/react-native-styled-system/commit/53996fec8c477efa5dfc9883d40cbe96cfd58ac3))
+
 ## [0.0.16](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.15...v0.0.16) (2024-03-28)
 
 ### Bug Fixes
