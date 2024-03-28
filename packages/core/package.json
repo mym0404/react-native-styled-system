@@ -6,9 +6,8 @@
   "types": "lib/typescript/src/index.d.ts",
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
-    "build": "bob build",
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
-    "prepare": "bob build"
+    "prepack": "bob build"
   },
   "repository": {
     "type": "git",
