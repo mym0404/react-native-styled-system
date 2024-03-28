@@ -19,6 +19,7 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/react": "^18.2.65",
     "@types/react-test-renderer": "^18",
+    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "^3.2.5",
     "react": "*",
     "react-native": "^0.73.6",

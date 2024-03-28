@@ -3443,6 +3443,7 @@ __metadata:
     "@types/react": "npm:^18.2.65"
     "@types/react-test-renderer": "npm:^18"
     invariant: "npm:^2.2.4"
+    metro-react-native-babel-preset: "npm:^0.77.0"
     prettier: "npm:^3.2.5"
     react: "npm:*"
     react-native: "npm:^0.73.6"
