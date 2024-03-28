@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "packages": ["packages/*"],
-  "version": "0.0.29",
+  "version": "0.0.30",
   "npmClient": "yarn",
   "ignoreChanges": ["**/doc/**", "**/example/**"],
   "command": {
@@ -16,8 +16,8 @@
       "allowPeerDependenciesUpdate": true,
       "private": false,
       "registry": "https://registry.npmjs.org/",
-      "changelogIncludeCommitsClientLogin": " - by @%l",
-    },
+      "changelogIncludeCommitsClientLogin": " - by @%l"
+    }
   },
   "createRelease": "github"
 }
