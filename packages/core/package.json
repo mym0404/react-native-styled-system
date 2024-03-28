@@ -7,7 +7,8 @@
   "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
   "scripts": {
     "build": "bob build",
-    "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts"
+    "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,7 @@
     "lib",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__",
-    "!lib/typescript/example"
+    "!**/__mocks__"
   ],
   "dependencies": {
     "@mj-studio/js-util": "1.0.31",
@@ -50,7 +50,6 @@
   "source": "src/index.ts",
   "module": "lib/module/index.js",
   "react-native-builder-bob": {
-    "declarationMap": false,
     "source": "src",
     "output": "lib",
     "targets": [
