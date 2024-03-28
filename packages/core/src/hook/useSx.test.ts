@@ -11,7 +11,7 @@ import type { ThemedStyleType } from '../util/propsToThemedStyle';
 import type { StyleFallback, StyleTransform } from './useSx';
 import { useSx } from './useSx';
 
-export function expectResult(
+function expectResult(
   theme: ThemedDict,
   props: { style?: StyleProp<any> } & TextSxProps & Record<string, any>,
   {

@@ -25,7 +25,7 @@ const theme: ThemedDict = {
   typography: {},
 };
 
-export function expectResult<T extends keyof ThemedTypings, V extends ThemedTypings[T]>(
+function expectResult<T extends keyof ThemedTypings, V extends ThemedTypings[T]>(
   theme: ThemedDict,
   tokenGroup: T,
   tokenValues: Array<Exclude<V, null | undefined>>,

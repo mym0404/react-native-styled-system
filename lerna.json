@@ -3,6 +3,7 @@
   "packages": ["packages/*"],
   "version": "0.0.19",
   "npmClient": "yarn",
+  "useWorkspaces": true,
   "ignoreChanges": ["**/doc/**", "**/example/**"],
   "command": {
     "version": {
@@ -11,9 +12,13 @@
       "private": false
     },
     "publish": {
+      "graphType": "all",
+      "allowBranch": "main",
+      "allowPeerDependenciesUpdate": true,
       "private": false,
-      "registry": "https://registry.npmjs.org/"
+      "registry": "https://registry.npmjs.org/",
+      "createRelease": "github",
+      "changelogIncludeCommitsClientLogin": " - by @%l"
     }
-  },
-  "createRelease": "github"
+  }
 }

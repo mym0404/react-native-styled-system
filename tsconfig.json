@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "lib": [
-      "ESNext"
-    ],
+    "paths": {
+      "@react-native-styled-system/core": [
+        "./packages/core/src/index"
+      ]
+    },
+    "esModuleInterop": true,
+
+    "lib": ["ESNext"],
     "jsx": "react",
     "types": [
       "node",
@@ -17,13 +21,7 @@
     "strict": true,
     "target": "ESNext",
     "declaration": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
-    "paths": {
-      "@react-native-styled-system/core": [
-        "packages/core/src/index"
-      ]
-    },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false
   },
@@ -35,6 +33,7 @@
   ],
   "exclude": [
     "**/*.test.*",
-    "node_modules"
+    "node_modules",
+    "packages/*/lib"
   ]
 }
