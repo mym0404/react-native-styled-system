@@ -3392,6 +3392,7 @@ __metadata:
     jest: "npm:^29.7.0"
     lerna: "npm:^8.1.2"
     prettier: "npm:^3.2.5"
+    react-native: "npm:^0.73.6"
     ts-jest: "npm:^29.1.2"
     typescript: "npm:^5.2.2"
   languageName: unknown
