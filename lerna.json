@@ -16,7 +16,8 @@
       "allowPeerDependenciesUpdate": true,
       "private": false,
       "registry": "https://registry.npmjs.org/",
-      "changelogIncludeCommitsClientLogin": " - by @%l"
-    }
-  }
+      "changelogIncludeCommitsClientLogin": " - by @%l",
+    },
+  },
+  "createRelease": "github"
 }
