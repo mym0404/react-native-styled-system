@@ -9,7 +9,9 @@
     "check:lint": "eslint packages --ext .ts,.tsx,.js,.jsx --max-warnings=0 --cache",
     "check:type": "tsc --noEmit",
     "check:test": "jest",
-    "build": "lerna run prepack"
+    "build": "lerna run prepack",
+    "pub:version": "lerna version --force-publish --yes",
+    "pub:release": "lerna publish from-package --yes"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.1.0",

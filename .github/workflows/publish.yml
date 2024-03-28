@@ -95,10 +95,8 @@ jobs:
       - name: Check
         run: yarn check:all
 
-      - name: Build
-        run: yarn build
       - name: Version
-        run: yarn lerna version --force-publish --yes
+        run: yarn pub:version
       - name: 'NPM Identity'
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -106,4 +104,4 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           cat .npmrc
       - name: Publish
-        run: yarn lerna publish from-package --yes
+        run: yarn pub:release
