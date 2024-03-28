@@ -24,8 +24,6 @@ The following steps will get you up and running to contribute to Chakra UI:
 
 **`yarn install`**: bootstraps the entire project, symlinks all dependencies.
 
-**`leran run build`**: Run static checks & build with `react-native-builder-bob`
-
 **`yarn check:lint`**: Check ESLint
 
 **`yarn check:type`**: Check typescript without noEmit
