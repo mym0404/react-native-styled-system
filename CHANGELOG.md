@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.14](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.13...v0.0.14) (2024-03-28)
+
+### Bug Fixes
+
+- add babel config into core package ([b822fcd](https://github.com/mj-studio-library/react-native-styled-system/commit/b822fcd0fdc351a560ae4c3435da142ed81a71c6))
+
 ## [0.0.13](https://github.com/mj-studio-library/react-native-styled-system/compare/v0.0.12...v0.0.13) (2024-03-28)
 
 ### Bug Fixes
