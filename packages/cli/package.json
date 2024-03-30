@@ -1,6 +1,6 @@
 {
   "name": "@react-native-styled-system/cli",
-  "version": "0.0.30",
+  "version": "1.0.0",
   "description": "Generate theme typings for autocomplete",
   "type": "module",
   "main": "dist/cjs/index.cjs",
