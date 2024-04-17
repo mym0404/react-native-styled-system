@@ -37,15 +37,15 @@ report.*.json
 # react-native-config codegen
 ios/tmp.xcconfig
 
-.env
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-!.env.sample
+**/.env
+**/.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+!**/.env.sample
 
 # sentry
 .sentryclirc
