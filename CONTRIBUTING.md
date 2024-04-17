@@ -6,7 +6,7 @@ prepare your contribution.
 
 ## Setup the Project
 
-The following steps will get you up and running to contribute to Chakra UI:
+The following steps will get you up and running to contribute to this repository:
 
 1. Fork the repo (click the <kbd>Fork</kbd> button at the top right of
    [this page](https://github.com/mj-studio-library/react-native-styled-system))
@@ -158,5 +158,5 @@ interested in contributing to the documentation, create pr as manual.
 
 ## License
 
-By contributing your code to the chakra-ui GitHub repository, you agree to
+By contributing your code to the react-native-styled-system GitHub repository, you agree to
 license your contribution under the MIT license.
