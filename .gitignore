@@ -114,7 +114,8 @@ npm-debug.log
 *.main.jsbundle.map
 
 
-#npm
+#npmq
+.npmrc
 package-lock.json
 
 #Pods
