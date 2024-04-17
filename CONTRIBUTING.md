@@ -158,5 +158,5 @@ interested in contributing to the documentation, create pr as manual.
 
 ## License
 
-By contributing your code to the chakra-ui GitHub repository, you agree to
+By contributing your code to the react-native-styled-system GitHub repository, you agree to
 license your contribution under the MIT license.
