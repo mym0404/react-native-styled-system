@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const title = 'React Native Styled System';
-const description = 'styled-system mimic for React Native';
+const description = 'styled-system for React Native';
 const websiteUrl = 'https://mj-studio-library.github.io/react-native-styled-system/';
 const repoOrg = 'mj-studio-library';
 const repoName = 'react-native-styled-system';
@@ -63,7 +63,7 @@ const config: Config = {
       title: title,
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo96.png',
       },
       items: [
         {

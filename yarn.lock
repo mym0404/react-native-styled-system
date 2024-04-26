@@ -3386,11 +3386,13 @@ __metadata:
     "@commitlint/config-conventional": "npm:^19.1.0"
     "@mj-studio/eslint-config-react": "npm:^1.0.4"
     "@types/jest": "npm:^29.5.12"
+    "@types/object-hash": "npm:^3"
     cz-conventional-changelog: "npm:^3.3.0"
     eslint: "npm:^8.57.0"
     husky: "npm:^9.0.11"
     jest: "npm:^29.7.0"
     lerna: "npm:^8.1.2"
+    object-hash: "npm:^3.0.0"
     prettier: "npm:^3.2.5"
     react-native: "npm:^0.73.6"
     ts-jest: "npm:^29.1.2"
@@ -4056,6 +4058,13 @@ __metadata:
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4"
   checksum: 10c0/aef7bb9b015883d6f4119c423dd28c4bdc17b0e8a0ccf112c78b4fe0e91fbc4af7c6204b04bba0e199a57d2f3fbbd5b4a14bf8739bf9d2a39b2a0aad545e0f86
+  languageName: node
+  linkType: hard
+
+"@types/object-hash@npm:^3":
+  version: 3.0.6
+  resolution: "@types/object-hash@npm:3.0.6"
+  checksum: 10c0/a5450cafdbc33c840be2c36fb1ace96cce7aa580177cf68dbdbda80f18938207692d74c76403321c99f43460ac31981c4af7fe8b49eca1570f8e9a4c01eaf33d
   languageName: node
   linkType: hard
 
@@ -11749,6 +11758,13 @@ __metadata:
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10c0/1f4df9945120325d041ccf7b86f31e8bcc14e73d29171e37a7903050e96b81323784ec59f93f102ec635bcf6fa8034ba3ea0a8c7e69fa202b87ae3b6cec5a414
+  languageName: node
+  linkType: hard
+
+"object-hash@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "object-hash@npm:3.0.0"
+  checksum: 10c0/a06844537107b960c1c8b96cd2ac8592a265186bfa0f6ccafe0d34eabdb526f6fa81da1f37c43df7ed13b12a4ae3457a16071603bcd39d8beddb5f08c37b0f47
   languageName: node
   linkType: hard
 
