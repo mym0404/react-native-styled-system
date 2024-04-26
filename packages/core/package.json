@@ -40,7 +40,8 @@
   ],
   "dependencies": {
     "@mj-studio/js-util": "1.0.34",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "object-hash": "^3.0.0"
   },
   "bin": {
     "generate-theme-type": "./bin/theme-gen.js"
