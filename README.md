@@ -22,7 +22,7 @@ of the `styled-system` package commonly used on the web.
 
 ## Highlights
 
-- ⚡️ All styles are cached. So it doesn't cause any rerender if result is consistent.
+- ⚡️ All styles are allowed to be cached. So it doesn't cause any rerender if result is consistent.
 - ⭐️ Allows arguments such as `m, px, py, bg, flex, flexDirection, position` to be passed directly to Props according to the grammar of `styled-system`.
 - 🎨 Users can define the design system by directly defining and delivering themes.
 - ❤️ TypeScript can be fully used through the Type Generation process using CLI.

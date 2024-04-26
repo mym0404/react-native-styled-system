@@ -10,10 +10,11 @@ import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 export type UseSxStyleOptions = {
   theme?: ThemedDict;
+  cache?: boolean;
 };
 const defaultOptions: UseSxStyleOptions = {};
 
-export const useSxStyle = ({ theme: optionTheme }: UseSxStyleOptions = defaultOptions) => {
+export const useSxStyle = ({ theme: optionTheme, cache }: UseSxStyleOptions = defaultOptions) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
   return (sx: TextSxProps): StyleProp<TextStyle> => {
@@ -25,11 +26,18 @@ export const useSxStyle = ({ theme: optionTheme }: UseSxStyleOptions = defaultOp
       return {};
     }
 
-    return getCachedStyle(
-      propsToThemedStyle({
+    if (cache) {
+      return getCachedStyle(
+        propsToThemedStyle({
+          theme,
+          sx,
+        }),
+      );
+    } else {
+      return propsToThemedStyle({
         theme,
         sx,
-      }),
-    );
+      });
+    }
   };
 };

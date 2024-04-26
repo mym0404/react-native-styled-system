@@ -20,19 +20,21 @@ function expectResult(
     styleType,
     transform,
     fallback,
+    cache,
   }: {
     expectation: object;
     filteredPropsExpectation?: object;
     styleType?: ThemedStyleType;
     transform?: StyleTransform;
     fallback?: StyleFallback;
+    cache?: boolean;
   },
 ) {
   const {
     result: {
       current: { getStyle, filteredProps },
     },
-  } = renderHook(() => useSx(props, { theme, styleType, transform, fallback }));
+  } = renderHook(() => useSx(props, { theme, styleType, transform, fallback, cache }));
 
   if (expectation) {
     expect(StyleSheet.flatten(getStyle())).toEqual(expectation);
@@ -362,6 +364,7 @@ describe('cache', () => {
       emptyTheme,
       { bg: 'red', mt: 2 },
       {
+        cache: true,
         expectation: { marginTop: 2, backgroundColor: 'red' },
       },
     );
@@ -370,6 +373,7 @@ describe('cache', () => {
       emptyTheme,
       { mt: 2, sx: { bg: 'red' } },
       {
+        cache: true,
         expectation: { marginTop: 2, backgroundColor: 'red' },
       },
     );
