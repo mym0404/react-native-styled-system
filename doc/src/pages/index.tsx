@@ -13,14 +13,14 @@ export default function Home(): JSX.Element {
     <Layout title={`${siteConfig.title}`} description={'Mimic styled-system for React Native'}>
       <main style={{ flex: 1, justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
         <div className={clsx(styles.heroBanner, 'container')} style={{ paddingBottom: '120px' }}>
-          <img src={'img/logo.svg'} width={64} height={64} alt={'logo'} />
+          <img src={'img/logo.png'} width={256} height={256} alt={'logo'} />
           <Heading as={'h1'} className={'hero__title'}>
             {siteConfig.title}
           </Heading>
           <p className={'hero__subtitle'}>{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link className={'button button--secondary button--lg'} to={'/docs/intro'}>
-              {'Getting Started ⏱️'}
+              {'Getting Started'}
             </Link>
           </div>
           <img
@@ -35,7 +35,7 @@ export default function Home(): JSX.Element {
           />
           <div style={{ marginTop: 24 }}>
             <code style={{ borderWidth: 1, padding: 5, whiteSpace: 'pre-wrap' }}>
-              {'npm install @react-native-styled-system/core'}
+              {'yarn add @react-native-styled-system/core'}
             </code>
           </div>
         </div>

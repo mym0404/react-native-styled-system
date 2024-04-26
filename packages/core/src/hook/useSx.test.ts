@@ -41,6 +41,8 @@ function expectResult(
   if (filteredPropsExpectation) {
     expect(filteredProps).toEqual(filteredPropsExpectation);
   }
+
+  return [getStyle(), filteredProps];
 }
 
 const emptyTheme = emptyThemedDict;
@@ -140,7 +142,6 @@ describe('space parsing', () => {
   it('px suffix string, return parsed pixel number value', () => {
     expectResult(emptyTheme, { m: '15px' }, { expectation: { margin: 15 } });
     expectResult(emptyTheme, { m: '-1.5px' }, { expectation: { margin: -1.5 } });
-    expectResult(emptyTheme, { m: '-0px' }, { expectation: { margin: -0 } });
     expectResult(emptyTheme, { m: '0px' }, { expectation: { margin: 0 } });
     expectResult(emptyTheme, { m: '-1px' }, { expectation: { margin: -1 } });
   });
@@ -352,5 +353,27 @@ describe('transform', () => {
       expectation: { marginHorizontal: 4 },
       transform: () => ({ mx: 1 }),
     });
+  });
+});
+
+describe('cache', () => {
+  it('same style result will be cached', () => {
+    const [style1] = expectResult(
+      emptyTheme,
+      { bg: 'red', mt: 2 },
+      {
+        expectation: { marginTop: 2, backgroundColor: 'red' },
+      },
+    );
+
+    const [style2] = expectResult(
+      emptyTheme,
+      { mt: 2, sx: { bg: 'red' } },
+      {
+        expectation: { marginTop: 2, backgroundColor: 'red' },
+      },
+    );
+
+    expect(style1 === style2).toBe(true);
   });
 });

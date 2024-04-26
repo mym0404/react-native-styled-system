@@ -4,6 +4,7 @@ import type { StyleProp, TextStyle } from 'react-native';
 import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { printWarning } from '../internal/util/printWarning';
+import { getCachedStyle } from '../internal/util/StyleHash';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
@@ -24,9 +25,11 @@ export const useSxStyle = ({ theme: optionTheme }: UseSxStyleOptions = defaultOp
       return {};
     }
 
-    return propsToThemedStyle({
-      theme,
-      sx,
-    });
+    return getCachedStyle(
+      propsToThemedStyle({
+        theme,
+        sx,
+      }),
+    );
   };
 };

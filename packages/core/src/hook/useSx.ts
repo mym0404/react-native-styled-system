@@ -9,6 +9,7 @@ import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
 import { mutateShortcutPropToOriginalKeys } from '../internal/util/mutateShortcutPropToOriginalKeys';
 import { printWarning } from '../internal/util/printWarning';
+import { getCachedStyle } from '../internal/util/StyleHash';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import type { ThemedStyleType } from '../util/propsToThemedStyle';
 import { propsToThemedStyle } from '../util/propsToThemedStyle';
@@ -75,12 +76,14 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     if (is.function(transform)) {
       const transformedSx = transform(StyleSheet.flatten(composedStyle));
 
-      return StyleSheet.compose(
-        composedStyle,
-        propsToThemedStyle({ theme, sx: transformedSx, styleType }) as S,
+      return getCachedStyle(
+        StyleSheet.compose(
+          composedStyle,
+          propsToThemedStyle({ theme, sx: transformedSx, styleType }) as S,
+        ),
       );
     } else {
-      return composedStyle;
+      return getCachedStyle(composedStyle);
     }
   });
 
