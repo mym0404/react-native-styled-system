@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.1...v1.2.0) (2024-04-26)
+
+### Features
+
+- makes cache opt-in ([261e8f4](https://github.com/mj-studio-library/react-native-styled-system/commit/261e8f42b363a34a7787ec5af140de7c1336f68d))
+
 ## [1.1.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.0...v1.1.1) (2024-04-26)
 
 ### Bug Fixes
