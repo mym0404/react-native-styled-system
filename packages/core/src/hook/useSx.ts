@@ -23,6 +23,7 @@ export type UseSxOptions = {
   styleType?: ThemedStyleType;
   transform?: StyleTransform;
   fallback?: StyleFallback;
+  cache?: boolean;
 };
 const defaultUseSxOptions: UseSxOptions = { styleType: 'ViewStyle' };
 export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
@@ -32,6 +33,7 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     styleType = defaultUseSxOptions.styleType,
     transform = defaultUseSxOptions.transform,
     fallback,
+    cache,
   }: UseSxOptions = defaultUseSxOptions,
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
@@ -76,14 +78,22 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     if (is.function(transform)) {
       const transformedSx = transform(StyleSheet.flatten(composedStyle));
 
-      return getCachedStyle(
-        StyleSheet.compose(
-          composedStyle,
-          propsToThemedStyle({ theme, sx: transformedSx, styleType }) as S,
-        ),
+      const ret = StyleSheet.compose(
+        composedStyle,
+        propsToThemedStyle({ theme, sx: transformedSx, styleType }),
       );
+
+      if (cache) {
+        return getCachedStyle(ret);
+      } else {
+        return ret as StyleProp<S>;
+      }
     } else {
-      return getCachedStyle(composedStyle);
+      if (cache) {
+        return getCachedStyle(composedStyle);
+      } else {
+        return composedStyle as StyleProp<S>;
+      }
     }
   });
 
