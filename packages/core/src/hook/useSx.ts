@@ -7,6 +7,7 @@ import type { SxPropsKeys, TextSxProps } from '../@types/SxProps';
 import { _textStylePropList, _viewStylePropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { useStableCallback } from '../internal/useStableCallback';
+import { mutateShortcutPropToOriginalKeys } from '../internal/util/mutateShortcutPropToOriginalKeys';
 import { printWarning } from '../internal/util/printWarning';
 import { StyledSystemContext } from '../provider/StyledSystemProvider';
 import type { ThemedStyleType } from '../util/propsToThemedStyle';
@@ -53,7 +54,11 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     }
 
     // caution: priority should be ordered correctly.
-    const mergedSx: TextSxProps = { ...fallback, ...props, ...props?.sx };
+    const mergedSx: TextSxProps = {
+      ...mutateShortcutPropToOriginalKeys(fallback),
+      ...mutateShortcutPropToOriginalKeys(props),
+      ...mutateShortcutPropToOriginalKeys(props?.sx),
+    };
 
     const mergedSxStyle = propsToThemedStyle({
       theme,

@@ -253,3 +253,36 @@ type BaseTextSxProps = BaseSxProps & Partial<ThemedColorTokenTextProps & ThemedT
 
 export type SxProps = BaseSxProps & { sx?: BaseSxProps };
 export type TextSxProps = BaseTextSxProps & { sx?: BaseTextSxProps };
+
+export const SHORTCUT_NAME_MAP: Record<string, string> = {
+  bg: 'backgroundColor',
+  m: 'margin',
+  mt: 'marginTop',
+  mr: 'marginRight',
+  mb: 'marginBottom',
+  ml: 'marginLeft',
+  mx: 'marginX',
+  my: 'marginY',
+  p: 'padding',
+  pt: 'paddingTop',
+  pr: 'paddingRight',
+  pb: 'paddingBottom',
+  pl: 'paddingLeft',
+  px: 'paddingX',
+  py: 'paddingY',
+  w: 'width',
+  minW: 'minWidth',
+  maxW: 'maxWidth',
+  h: 'height',
+  minH: 'minHeight',
+  maxH: 'maxHeight',
+  radius: 'borderRadius',
+  topLeftRadius: 'borderTopLeftRadius',
+  topRightRadius: 'borderTopRightRadius',
+  bottomLeftRadius: 'borderBottomLeftRadius',
+  bottomRightRadius: 'borderBottomRightRadius',
+  pos: 'position',
+  weight: 'fontWeight',
+  align: 'textAlign',
+  t: 'typography',
+};
