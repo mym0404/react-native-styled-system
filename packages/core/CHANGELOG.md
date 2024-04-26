@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.0...v1.1.1) (2024-04-26)
+
+### Bug Fixes
+
+- **core:** wrong object-hash package import path ([979eef7](https://github.com/mj-studio-library/react-native-styled-system/commit/979eef79b95b8c8b62a211d9afb2f5baad8a3ab2))
+
 # [1.1.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.0.4...v1.1.0) (2024-04-26)
 
 ### Features
