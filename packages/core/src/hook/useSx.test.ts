@@ -230,6 +230,14 @@ describe('style parse priority', () => {
   it('style prop property > sx prop property', () => {
     expectResult(emptyTheme, { style: { width: 1 }, sx: { w: 2 } }, { expectation: { width: 1 } });
   });
+
+  it('sx > fallback', () => {
+    expectResult(
+      emptyTheme,
+      { sx: { w: 2 }, mx: 4 },
+      { fallback: { width: 1, marginX: 5 }, expectation: { width: 2, marginHorizontal: 4 } },
+    );
+  });
 });
 
 describe('radii', () => {
