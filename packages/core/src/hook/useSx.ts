@@ -72,16 +72,13 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
     const composedStyle = !mergedSxStyle
       ? props?.style
       : props?.style
-        ? StyleSheet.compose(mergedSxStyle, props.style)
+        ? [mergedSxStyle, props.style]
         : mergedSxStyle;
 
     if (is.function(transform)) {
       const transformedSx = transform(StyleSheet.flatten(composedStyle));
 
-      const ret = StyleSheet.compose(
-        composedStyle,
-        propsToThemedStyle({ theme, sx: transformedSx, styleType }),
-      );
+      const ret = [composedStyle, propsToThemedStyle({ theme, sx: transformedSx, styleType })];
 
       if (cache) {
         return getCachedStyle(ret);
