@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.2.0...v1.2.1) (2024-05-02)
+
+### Bug Fixes
+
+- convert StyleSheet.compose => array literal ([b8090f5](https://github.com/mj-studio-library/react-native-styled-system/commit/b8090f57022f11a12babf3356f30f8fa3958cbbe))
+
 # [1.2.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.1...v1.2.0) (2024-04-26)
 
 ### Features
