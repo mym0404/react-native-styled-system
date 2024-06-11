@@ -6,13 +6,15 @@ export function mutateShortcutPropToOriginalKeys(sx?: TextSxProps | null) {
     return sx;
   }
 
+  const ret = { ...sx };
+
   for (const key of Object.keys(sx)) {
     if (SHORTCUT_NAME_MAP[key]) {
-      if (!(SHORTCUT_NAME_MAP[key] in sx)) {
-        sx[SHORTCUT_NAME_MAP[key]] = sx[key];
+      if (!(SHORTCUT_NAME_MAP[key] in ret)) {
+        ret[SHORTCUT_NAME_MAP[key]] = sx[key];
       }
     }
   }
 
-  return sx;
+  return ret;
 }
