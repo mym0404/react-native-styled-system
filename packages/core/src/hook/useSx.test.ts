@@ -74,6 +74,12 @@ const baseTheme: ThemedDict = {
       fontStyle: 'normal',
       fontWeight: '400',
     },
+    body: {
+      fontFamily: 'Noto Sans',
+      fontSize: 12,
+      fontStyle: 'normal',
+      fontWeight: '400',
+    },
   },
 };
 
@@ -239,6 +245,23 @@ describe('style parse priority', () => {
       emptyTheme,
       { sx: { w: 2 }, mx: 4 },
       { fallback: { width: 1, marginX: 5 }, expectation: { width: 2, marginHorizontal: 4 } },
+    );
+  });
+
+  it('sx typography > fallback', () => {
+    expectResult(
+      baseTheme,
+      { t: 'title' },
+      {
+        fallback: { typography: 'body' },
+        expectation: {
+          fontFamily: 'Noto Sans',
+          fontSize: 14,
+          fontStyle: 'normal',
+          fontWeight: '400',
+        },
+        styleType: 'TextStyle',
+      },
     );
   });
 });
