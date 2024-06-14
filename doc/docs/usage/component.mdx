@@ -35,6 +35,24 @@ How to use the completed `StyledView` component is as follows.
 
 It can be defined as follows:
 
+
+### Method 1 - use `createSxComponent` HOC
+
+```tsx title="StyledView.tsx"
+import type { ComponentProps } from 'react';
+import { View } from 'react-native';
+import { createSxComponent } from '@react-native-styled-system/core';
+
+export const StyledView = createSxComponent(View)();
+export type StyledViewProps = ComponentProps<typeof StyledView>;
+```
+
+`createSxComponent` and `createSxTextComponent` are simple but may have limitations in their usage.
+
+These HOCs simply add style-related fields to the Props and create a style object to pass to the passed view.
+
+### Method 2 - use `useSx` hook manually
+
 ```tsx title="StyledView.tsx"
 import { forwardRef, Ref, PropsWithChildren } from 'react';
 import { View, ViewProps } from 'react-native';

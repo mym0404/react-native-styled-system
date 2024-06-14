@@ -6,3 +6,4 @@ export * from './hook/useSxStyle';
 export * from './hook/useSxTokens';
 export * from './provider/StyledSystemProvider';
 export * from './util/propsToThemedStyle';
+export * from './util/createSxComponent';
