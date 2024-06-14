@@ -2,9 +2,8 @@ import React from 'react';
 import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
 
 import { StyledButton } from '../components/StyledButton';
-import { StyledImage } from '../components/StyledImage';
 import { StyledScrollView } from '../components/StyledScrollView';
-import { StyledView } from '../components/StyledView';
+import { StyledImage, StyledView } from '../components/StyledViews';
 import { Txt } from '../components/Txt';
 import { useDarkTheme } from '../theme/AppThemeProvider';
 
