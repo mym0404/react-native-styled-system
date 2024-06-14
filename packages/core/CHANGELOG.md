@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.4.0...v1.4.1) (2024-06-14)
+
+**Note:** Version bump only for package @react-native-styled-system/core
+
 # [1.4.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.3.1...v1.4.0) (2024-06-14)
 
 ### Features
