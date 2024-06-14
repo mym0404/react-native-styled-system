@@ -114,18 +114,18 @@ export const _textStylePropList = [
   'typography',
   't',
 ] satisfies (Omit<TextSxPropsKey, keyof TextSxPropsKey> | 'style')[];
-type ThemedColorTokenProps = {
+interface ThemedColorTokenProps {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
   borderColor: Token<'colors'>;
-};
-type ThemedColorTokenTextProps = {
+}
+interface ThemedColorTokenTextProps {
   color: Token<'colors'>;
   textDecorationColor: Token<'colors'>;
   textShadowColor: Token<'colors'>;
-};
+}
 
-type ThemedSpaceTokenProps = {
+interface ThemedSpaceTokenProps {
   margin: Token<'space'>;
   m: Token<'space'>; // margin
   marginTop: Token<'space'>;
@@ -161,9 +161,9 @@ type ThemedSpaceTokenProps = {
   gap: Token<'space'>; // only works if parsed result is number
   gapX: Token<'space'>; // only works if parsed result is number
   gapY: Token<'space'>; // only works if parsed result is number
-};
+}
 
-type ThemedSizeTokenProps = {
+interface ThemedSizeTokenProps {
   width: Token<'sizes'>;
   w: Token<'sizes'>; // width
   minWidth: Token<'sizes'>;
@@ -176,9 +176,9 @@ type ThemedSizeTokenProps = {
   minH: Token<'sizes'>; // minHeight
   maxHeight: Token<'sizes'>;
   maxH: Token<'sizes'>; // maxHeight
-};
+}
 
-type ThemedRadiiTokenProps = {
+interface ThemedRadiiTokenProps {
   borderRadius: Token<'radii'>;
   radius: Token<'radii'>; // borderRadius
   borderTopLeftRadius: Token<'radii'>;
@@ -189,9 +189,9 @@ type ThemedRadiiTokenProps = {
   bottomLeftRadius: Token<'radii'>; // borderBottomLeftRadius
   borderBottomRightRadius: Token<'radii'>;
   bottomRightRadius: Token<'radii'>; // borderBottomRightRadius
-};
+}
 
-type ThemedViewStyleProps = {
+interface ThemedViewStyleProps {
   flex: ViewStyle['flex'];
   alignItems: ViewStyle['alignItems'];
   alignContent: ViewStyle['alignContent'];
@@ -218,9 +218,9 @@ type ThemedViewStyleProps = {
   zIndex: ViewStyle['zIndex'];
   absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0
   center?: boolean; // shortcut - justifyContent, alignItems: center
-};
+}
 
-type ThemedTextStyleProps = {
+interface ThemedTextStyleProps {
   fontFamily: TextStyle['fontFamily'];
   fontSize: TextStyle['fontSize'];
   fontStyle: TextStyle['fontStyle'];
@@ -239,7 +239,7 @@ type ThemedTextStyleProps = {
   includeFontPadding: TextStyle['includeFontPadding'];
   typography: Token<'typography'>;
   t: Token<'typography'>; // typography
-};
+}
 
 type BaseSxProps = Partial<
   ThemedViewStyleProps &
@@ -251,8 +251,12 @@ type BaseSxProps = Partial<
 
 type BaseTextSxProps = BaseSxProps & Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
 
-export type SxProps = BaseSxProps & { sx?: BaseSxProps };
-export type TextSxProps = BaseTextSxProps & { sx?: BaseTextSxProps };
+export interface SxProps extends BaseSxProps {
+  sx?: BaseSxProps;
+}
+export interface TextSxProps extends BaseTextSxProps {
+  sx?: BaseTextSxProps;
+}
 
 export const SHORTCUT_NAME_MAP: Record<string, string> = {
   bg: 'backgroundColor',
