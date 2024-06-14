@@ -5,11 +5,11 @@ import type { SxProps, TextSxProps } from '../@types/SxProps';
 import type { UseSxOptions } from '../hook/useSx';
 import { useSx } from '../hook/useSx';
 
-export function createSxComponent<Props extends object, Ref>(
-  Base: ComponentType<Props>,
-  { defaultProps, sxOptions }: { defaultProps?: Props & SxProps; sxOptions?: UseSxOptions } = {},
-) {
-  return () => {
+export function createSxComponent<Props extends object, Ref>(Base: ComponentType<Props>) {
+  return ({
+    defaultProps,
+    sxOptions,
+  }: { defaultProps?: Props & SxProps; sxOptions?: UseSxOptions } = {}) => {
     const Transformed = forwardRef<Ref, Props & SxProps>(function (props, ref) {
       const { filteredProps, getStyle } = useSx({ ...defaultProps, ...props }, sxOptions);
 
@@ -22,14 +22,11 @@ export function createSxComponent<Props extends object, Ref>(
   };
 }
 
-export function createSxTextComponent<Props extends object, Ref>(
-  Base: ComponentType<Props>,
-  {
+export function createSxTextComponent<Props extends object, Ref>(Base: ComponentType<Props>) {
+  return ({
     defaultProps,
     sxOptions,
-  }: { defaultProps?: Props & TextSxProps; sxOptions?: UseSxOptions } = {},
-) {
-  return () => {
+  }: { defaultProps?: Props & TextSxProps; sxOptions?: UseSxOptions } = {}) => {
     const Transformed = forwardRef<Ref, Props & TextSxProps>(function (props, ref) {
       const { filteredProps, getStyle } = useSx(
         { ...defaultProps, ...props },
