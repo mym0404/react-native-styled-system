@@ -1,7 +1,9 @@
 import type { TextSxProps } from '../../@types/SxProps';
 import { SHORTCUT_NAME_MAP } from '../../@types/SxProps';
 
-export function mutateShortcutPropToOriginalKeys(sx?: TextSxProps | null) {
+export function mutateShortcutPropToOriginalKeys(
+  sx?: TextSxProps | null,
+): TextSxProps | undefined | null {
   if (!sx) {
     return sx;
   }
