@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mj-studio-library.github.io/react-native-naver-map/">
+  <a href="https://mym0404.github.io/react-native-naver-map/">
     <img width="160px" src="https://raw.githubusercontent.com/mym0404/image-archive/master/202404261501218.webp"><br/>
   </a>
   <h1 align="center">React Native Styled System</h1>
@@ -17,7 +17,7 @@
 yarn add @react-native-styled-system/core
 ```
 
-- [Documentation](https://mj-studio-library.github.io/react-native-styled-system/)
+- [Documentation](https://mym0404.github.io/react-native-styled-system/)
 
 `React Native Styled System` is a React Native implementation
 of the `styled-system` package commonly used on the web.

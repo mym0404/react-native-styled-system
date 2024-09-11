@@ -9,7 +9,7 @@ prepare your contribution.
 The following steps will get you up and running to contribute to this repository:
 
 1. Fork the repo (click the <kbd>Fork</kbd> button at the top right of
-   [this page](https://github.com/mj-studio-library/react-native-styled-system))
+   [this page](https://github.com/mym0404/react-native-styled-system))
 
 2. Clone your fork locally
 
@@ -91,7 +91,7 @@ If you are interested in the detailed specification you can visit
    commit type. `scope` is just a short id that describes the scope of work.
 
 3. Make and commit your changes following the
-   [commit convention](https://github.com/mj-studio-library/react-native-styled-system/blob/main/CONTRIBUTING.md#commit-convention).
+   [commit convention](https://github.com/mym0404/react-native-styled-system/blob/main/CONTRIBUTING.md#commit-convention).
    As you develop, you can run `yarn check:all` and to make sure everything works as expected.
 
 4. You should base branch of PR as `develop`.
