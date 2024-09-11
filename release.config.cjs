@@ -3,5 +3,5 @@
  */
 module.exports = {
   branches: ["main"],
-  repositoryUrl: 'https://github.com/mj-studio-library/react-native-styled-system'
+  repositoryUrl: 'https://github.com/mym0404/react-native-styled-system'
 };
