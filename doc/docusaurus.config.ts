@@ -4,10 +4,10 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 const title = 'React Native Styled System';
 const description = 'styled-system for React Native';
-const websiteUrl = 'https://mj-studio-library.github.io/react-native-styled-system/';
-const repoOrg = 'mj-studio-library';
+const websiteUrl = 'https://mym0404.github.io/react-native-styled-system/';
+const repoOrg = 'mym0404';
 const repoName = 'react-native-styled-system';
-const repoUrl = 'https://github.com/mj-studio-library/react-native-styled-system';
+const repoUrl = 'https://github.com/mym0404/react-native-styled-system';
 const coverImage = 'img/ogimage.png';
 
 const config: Config = {
@@ -16,7 +16,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://mj-studio-library.github.io',
+  url: 'https://mym0404.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/react-native-styled-system/',

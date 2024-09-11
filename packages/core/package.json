@@ -4,14 +4,14 @@
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/src/index.d.ts",
-  "homepage": "https://github.com/mj-studio-library/react-native-styled-system",
+  "homepage": "https://github.com/mym0404/react-native-styled-system",
   "scripts": {
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
     "prepack": "bob build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mj-studio-library/react-native-styled-system"
+    "url": "https://github.com/mym0404/react-native-styled-system"
   },
   "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
