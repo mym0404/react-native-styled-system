@@ -13,9 +13,11 @@
 
 ---
 
+```
+yarn add @react-native-styled-system/core
+```
+
 - [Documentation](https://mj-studio-library.github.io/react-native-styled-system/)
-
-
 
 `React Native Styled System` is a React Native implementation
 of the `styled-system` package commonly used on the web.
