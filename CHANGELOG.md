@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.4.0...v1.4.1) (2024-06-14)
+
+**Note:** Version bump only for package @react-native-styled-system/root
+
+# [1.4.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.3.1...v1.4.0) (2024-06-14)
+
+### Features
+
+- add defaultProps, sxOptions into createSxComponent param ([fd2e57d](https://github.com/mj-studio-library/react-native-styled-system/commit/fd2e57d5608e5bf0ed6663aaaf3d0fe2f2eb2740))
+
+## [1.3.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.3.0...v1.3.1) (2024-06-14)
+
+### Bug Fixes
+
+- typing ([4cbb3e4](https://github.com/mj-studio-library/react-native-styled-system/commit/4cbb3e41edacdd442964d4bbc3405aede79a7162))
+
+# [1.3.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.2.2...v1.3.0) (2024-06-14)
+
+### Features
+
+- **util:** createSxComponent ([63acffb](https://github.com/mj-studio-library/react-native-styled-system/commit/63acffba2745d6e5ba3642f8b3c98b9d4502df19))
+
+## [1.2.2](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.2.1...v1.2.2) (2024-06-11)
+
+### Bug Fixes
+
+- sx prop merge immutability ([25f177d](https://github.com/mj-studio-library/react-native-styled-system/commit/25f177d1bf6bedc311e3034df22acea6cbc05633))
+
+## [1.2.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.2.0...v1.2.1) (2024-05-02)
+
+### Bug Fixes
+
+- convert StyleSheet.compose => array literal ([b8090f5](https://github.com/mj-studio-library/react-native-styled-system/commit/b8090f57022f11a12babf3356f30f8fa3958cbbe))
+
+# [1.2.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.1...v1.2.0) (2024-04-26)
+
+### Features
+
+- makes cache opt-in ([261e8f4](https://github.com/mj-studio-library/react-native-styled-system/commit/261e8f42b363a34a7787ec5af140de7c1336f68d))
+
+## [1.1.1](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.1.0...v1.1.1) (2024-04-26)
+
+### Bug Fixes
+
+- **core:** wrong object-hash package import path ([979eef7](https://github.com/mj-studio-library/react-native-styled-system/commit/979eef79b95b8c8b62a211d9afb2f5baad8a3ab2))
+
+# [1.1.0](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.0.4...v1.1.0) (2024-04-26)
+
+### Features
+
+- resolve [#94](https://github.com/mj-studio-library/react-native-styled-system/issues/94) ([092f5f2](https://github.com/mj-studio-library/react-native-styled-system/commit/092f5f2f93c548891a707afa3ab6e5dec21403b0))
+
+## [1.0.4](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.0.3...v1.0.4) (2024-04-26)
+
+### Bug Fixes
+
+- fix [#93](https://github.com/mj-studio-library/react-native-styled-system/issues/93) ([6fe4345](https://github.com/mj-studio-library/react-native-styled-system/commit/6fe43459ed90430d5bf6e3bea4d518944b084786))
+
 ## [1.0.3](https://github.com/mj-studio-library/react-native-styled-system/compare/v1.0.2...v1.0.3) (2024-04-17)
 
 **Note:** Version bump only for package @react-native-styled-system/root
