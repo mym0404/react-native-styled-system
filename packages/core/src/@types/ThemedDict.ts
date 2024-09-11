@@ -1,5 +1,8 @@
 import type { ColorsValue, RadiiValue, SizesValue, SpaceValue, TypographyValue } from './Token';
 
+/**
+ * Theme type from developer
+ */
 export interface ThemedDict {
   space: Record<string | number, SpaceValue>;
   sizes: Record<string | number, SizesValue>;

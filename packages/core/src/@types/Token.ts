@@ -6,6 +6,9 @@ export type Token<ThemeKey extends keyof ThemedTypings> = ThemeKey extends keyof
   ? ThemedTypings[ThemeKey]
   : never;
 
+/**
+ * Types passed to React Native style prop.
+ */
 export type SpaceValue = number | 'auto' | `${number}%` | null;
 export type SizesValue = number | 'auto' | `${number}%` | null;
 export type ColorsValue = string;
