@@ -4,8 +4,8 @@
   <ShortName>React Native Styled System</ShortName>
   <Description>Search React Native Styled System</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://mj-studio-library.github.io/react-native-styled-system/img/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://mj-studio-library.github.io/react-native-styled-system/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://mj-studio-library.github.io/react-native-styled-system/opensearch.xml" />
-  <moz:SearchForm>https://mj-studio-library.github.io/react-native-styled-system/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://mym0404.github.io/react-native-styled-system/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://mym0404.github.io/react-native-styled-system/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://mym0404.github.io/react-native-styled-system/opensearch.xml" />
+  <moz:SearchForm>https://mym0404.github.io/react-native-styled-system/</moz:SearchForm>
 </OpenSearchDescription>
