@@ -62,9 +62,6 @@
         }
       ]
     ],
-    "exclude": [
-      "**/{__tests__,__fixtures__,__mocks__}/**",
-      "**/*.test.*"
-    ]
+    "exclude": "**/*.test.*"
   }
 }
