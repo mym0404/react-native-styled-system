@@ -12,7 +12,7 @@ const Txt = (props: TxtProps) => {
     fallback: { color: 'text', includeFontPadding: false },
   });
 
-  return <Text style={getStyle()} {...filteredProps} />;
+  return <Text style={[getStyle(), {}]} {...filteredProps} />;
 };
 
 export { Txt };

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/user1/Desktop/mj/react-native-styled-system/**)",
+      "Bash(yarn add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

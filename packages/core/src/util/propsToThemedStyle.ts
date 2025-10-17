@@ -1,6 +1,4 @@
-/* eslint-disable padding-line-between-statements */
-import type { TextStyle } from 'react-native';
-
+import type { AnyStyle } from '../@types/AnyStyle';
 import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { createTokenParsers } from '../internal/TokenParser/TokenParser';
@@ -19,11 +17,12 @@ export const propsToThemedStyle = ({
   theme?: ThemedDict;
   sx?: TextSxProps;
   styleType?: ThemedStyleType;
-}): TextStyle | undefined => {
-  const ret: TextStyle = {};
+}): AnyStyle | undefined => {
+  const ret: AnyStyle = {};
 
   if (!theme) {
     printWarning('theme not found');
+
     return;
   }
 
@@ -82,16 +81,19 @@ export const propsToThemedStyle = ({
     'borderTopLeftRadius',
     radii(sx.borderTopLeftRadius ?? sx.topLeftRadius),
   );
+
   fillViewStyleIfNotNullish(
     ret,
     'borderTopRightRadius',
     radii(sx.borderTopRightRadius ?? sx.topRightRadius),
   );
+
   fillViewStyleIfNotNullish(
     ret,
     'borderBottomLeftRadius',
     radii(sx.borderBottomLeftRadius ?? sx.bottomLeftRadius),
   );
+
   fillViewStyleIfNotNullish(
     ret,
     'borderBottomRightRadius',

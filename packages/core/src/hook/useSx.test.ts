@@ -1,7 +1,7 @@
 import type { StyleProp } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-native';
 
 import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';

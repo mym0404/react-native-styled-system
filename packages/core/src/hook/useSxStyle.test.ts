@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-native';
 
 import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';

@@ -7,7 +7,8 @@
   "homepage": "https://github.com/mym0404/react-native-styled-system",
   "scripts": {
     "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
-    "prepack": "bob build"
+    "prepack": "bob build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -16,16 +17,15 @@
   "author": "zmin9 <lucy@teamturing.com>",
   "license": "MIT",
   "devDependencies": {
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/invariant": "^2.2.37",
-    "@types/react": "^18.2.65",
-    "@types/react-test-renderer": "^18",
-    "prettier": "^3.2.5",
+    "@types/react": "^19.2.2",
+    "@types/react-test-renderer": "^19",
+    "prettier": "^3.6.2",
     "react": "*",
-    "react-native": "^0.73.6",
-    "react-native-builder-bob": "^0.23.2",
-    "react-test-renderer": "^18.2.0",
-    "typescript": "^5.2.2"
+    "react-native": "0.81.4",
+    "react-native-builder-bob": "^0.40.13",
+    "react-test-renderer": "^19.2.0",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "react": "*",
