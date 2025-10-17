@@ -1,5 +1,5 @@
 import React from 'react';
-import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 
 import { StyledButton } from '../components/StyledButton';
 import { StyledScrollView } from '../components/StyledScrollView';

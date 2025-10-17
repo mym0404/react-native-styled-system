@@ -1,8 +1,9 @@
 import { useContext, useMemo } from 'react';
-import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
+import type { StyleProp } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 
+import type { AnyStyle } from '../@types/AnyStyle';
 import type { SxPropsKeys, TextSxProps } from '../@types/SxProps';
 import { _textStylePropList, _viewStylePropList } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
@@ -16,7 +17,7 @@ import { propsToThemedStyle } from '../util/propsToThemedStyle';
 
 type Props = { style?: StyleProp<any> } & TextSxProps;
 
-export type StyleTransform = (style: TextStyle) => TextSxProps;
+export type StyleTransform = (style: AnyStyle) => TextSxProps;
 export type StyleFallback = Omit<TextSxProps, 'sx'>;
 export type UseSxOptions = {
   theme?: ThemedDict;
@@ -26,7 +27,7 @@ export type UseSxOptions = {
   cache?: boolean;
 };
 const defaultUseSxOptions: UseSxOptions = { styleType: 'ViewStyle' };
-export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
+export const useSx = <P extends Props = Props>(
   props?: P | null,
   {
     theme: optionTheme,
@@ -38,13 +39,13 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
 
-  const getStyle = useStableCallback((): StyleProp<S> | undefined => {
+  const getStyle = useStableCallback((): StyleProp<AnyStyle> | undefined => {
     const skip = !props && !fallback;
     const theme = optionTheme ?? styledSystemContext?.theme;
 
     if (skip) {
       if (is.function(transform)) {
-        return propsToThemedStyle({ theme, sx: transform({}) }) as S;
+        return propsToThemedStyle({ theme, sx: transform({}) });
       } else {
         return;
       }
@@ -83,13 +84,13 @@ export const useSx = <S extends ViewStyle = ViewStyle, P extends Props = Props>(
       if (cache) {
         return getCachedStyle(ret);
       } else {
-        return ret as StyleProp<S>;
+        return ret;
       }
     } else {
       if (cache) {
         return getCachedStyle(composedStyle);
       } else {
-        return composedStyle as StyleProp<S>;
+        return composedStyle;
       }
     }
   });
