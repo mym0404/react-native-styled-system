@@ -184,3 +184,6 @@ jsconfig.json
 .nx/cache
 
 **/package.tgz
+
+# Git worktrees
+.worktrees/

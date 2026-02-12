@@ -1,0 +1,180 @@
+---
+sidebar_position: 3
+title: Dark Mode
+---
+
+# Dark Mode
+
+React Native Styled System makes it straightforward to implement dark mode by swapping color tokens in your theme.
+
+The core idea is simple: define separate color sets for light and dark modes, then pass the active set to `StyledSystemProvider`. Your components reference semantic color tokens (like `bg`, `text`, `primary`) instead of hard-coded values, so the entire UI updates automatically when the theme changes.
+
+## 1. Define color sets
+
+Create a shared color type and define both light and dark color mappings.
+
+```ts title="AppTheme.ts"
+const palette = {
+  white: '#FFFFFF',
+  black: '#000000',
+  gray50: '#ECEDF0',
+  gray400: '#93979B',
+  gray700: '#5A5D63',
+  gray900: '#37393D',
+  blue500: '#497CEE',
+  violet800: '#4C4575',
+  // ...
+};
+
+type ThemeColors = {
+  bg: string;
+  text: string;
+  subText: string;
+  primary: string;
+  onPrimary: string;
+};
+
+export const lightColors = {
+  bg: palette.white,
+  text: palette.gray900,
+  subText: palette.gray700,
+  primary: palette.blue500,
+  onPrimary: palette.white,
+} satisfies ThemeColors;
+
+export const darkColors = {
+  bg: palette.black,
+  text: palette.gray50,
+  subText: palette.gray400,
+  primary: palette.violet800,
+  onPrimary: palette.white,
+} satisfies ThemeColors;
+```
+
+Both `lightColors` and `darkColors` share the same keys. This ensures every component referencing `bg` or `text` gets the correct value regardless of mode.
+
+## 2. Create a theme provider with dark mode state
+
+Wrap `StyledSystemProvider` with your own provider that manages the dark mode state and merges the active color set into the theme.
+
+```tsx title="AppThemeProvider.tsx"
+import React, { useContext, useState } from 'react';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import AppTheme, { darkColors, lightColors } from './AppTheme';
+
+type ContextType = {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+};
+
+const DarkThemeContext = React.createContext<ContextType>({
+  isDarkMode: false,
+  toggleDarkMode: () => {},
+});
+
+export const useDarkTheme = () => useContext(DarkThemeContext);
+
+export const AppThemeProvider = ({ children }: React.PropsWithChildren) => {
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  return (
+    <DarkThemeContext.Provider
+      value={{ isDarkMode, toggleDarkMode: () => setDarkMode((v) => !v) }}
+    >
+      <StyledSystemProvider
+        theme={{
+          ...AppTheme,
+          colors: {
+            ...AppTheme.colors,
+            ...(isDarkMode ? darkColors : lightColors),
+          },
+        }}
+      >
+        {children}
+      </StyledSystemProvider>
+    </DarkThemeContext.Provider>
+  );
+};
+```
+
+When `isDarkMode` changes, `StyledSystemProvider` receives a new theme and all components using sx props re-resolve their tokens.
+
+## 3. Use semantic tokens in components
+
+Components reference semantic color tokens instead of raw palette values. This makes them theme-aware without any conditional logic.
+
+```tsx title="Home.tsx"
+const Home = () => {
+  const { toggleDarkMode, isDarkMode } = useDarkTheme();
+
+  return (
+    <StyledView flex={1} bg={'bg'}>
+      <StyledView bg={'primary'} alignItems={'center'} px={4}>
+        <Txt t={'title'} color={'onPrimary'}>
+          Header
+        </Txt>
+      </StyledView>
+      <Txt t={'body'} color={'text'}>
+        This text color changes with the theme.
+      </Txt>
+      <Button
+        title={isDarkMode ? 'Dark' : 'Light'}
+        onPress={toggleDarkMode}
+      />
+    </StyledView>
+  );
+};
+```
+
+:::tip
+Keep raw palette colors (like `gray500`, `blue300`) in `colors` alongside your semantic tokens. This way you can still reference specific colors when needed, while semantic tokens handle theme-dependent styling.
+:::
+
+## 4. TypeScript support
+
+If you use the CLI for type generation, make sure your base theme definition includes all semantic color keys so they appear in autocompletion.
+
+```ts title="AppTheme.ts"
+const theme = {
+  colors: {
+    ...palette,
+    ...lightColors, // includes bg, text, subText, primary, onPrimary
+  },
+  // ...
+};
+
+export default theme;
+```
+
+Running the CLI against this file will generate types that include both palette and semantic color tokens.
+
+## Integrating with system appearance
+
+You can use React Native's `Appearance` API or `useColorScheme` hook to sync with the device's system theme.
+
+```tsx
+import { useColorScheme } from 'react-native';
+
+export const AppThemeProvider = ({ children }: React.PropsWithChildren) => {
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
+
+  return (
+    <StyledSystemProvider
+      theme={{
+        ...AppTheme,
+        colors: {
+          ...AppTheme.colors,
+          ...(isDarkMode ? darkColors : lightColors),
+        },
+      }}
+    >
+      {children}
+    </StyledSystemProvider>
+  );
+};
+```
+
+:::info
+You can also combine manual toggle with system detection, letting the user override the system preference when needed.
+:::
