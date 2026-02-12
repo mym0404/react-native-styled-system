@@ -1,49 +1,149 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #d69b6b;
-  --ifm-color-primary-dark: #cf8a52;
-  --ifm-color-primary-darker: #cc8245;
-  --ifm-color-primary-darkest: #b06a31;
-  --ifm-color-primary-light: #ddac84;
-  --ifm-color-primary-lighter: #e0b491;
-  --ifm-color-primary-lightest: #ebceb6;
+  --ifm-color-primary: #615fff;
+  --ifm-color-primary-dark: #4f39f6;
+  --ifm-color-primary-darker: #432dd7;
+  --ifm-color-primary-darkest: #372aac;
+  --ifm-color-primary-light: #7c86ff;
+  --ifm-color-primary-lighter: #a3b3ff;
+  --ifm-color-primary-lightest: #c7d2ff;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #dfa553;
-  --ifm-color-primary-dark: #da9839;
-  --ifm-color-primary-darker: #d8912c;
-  --ifm-color-primary-darkest: #b57822;
-  --ifm-color-primary-light: #e4b36d;
-  --ifm-color-primary-lighter: #e6b97a;
-  --ifm-color-primary-lightest: #edcea0;
+  --ifm-color-primary: #7c86ff;
+  --ifm-color-primary-dark: #615fff;
+  --ifm-color-primary-darker: #4f39f6;
+  --ifm-color-primary-darkest: #432dd7;
+  --ifm-color-primary-light: #a3b3ff;
+  --ifm-color-primary-lighter: #c7d2ff;
+  --ifm-color-primary-lightest: #e0e7ff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+/* ===== Global docs background ===== */
+[data-theme='light'] .main-wrapper {
+  background: linear-gradient(180deg, #f8f9ff 0%, #ffffff 30%, #f5f0ff 70%, #ffffff 100%);
+}
+
+[data-theme='dark'] .main-wrapper {
+  background: linear-gradient(180deg, #0d0d1a 0%, #111118 30%, #0f0d1a 70%, #111118 100%);
+}
+
+/* ===== Navbar ===== */
+[data-theme='light'] .navbar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(97, 95, 255, 0.08);
+  box-shadow: 0 1px 12px rgba(97, 95, 255, 0.04);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(13, 13, 26, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(124, 134, 255, 0.1);
+  box-shadow: 0 1px 12px rgba(124, 134, 255, 0.04);
+}
+
+.navbar__title {
+  font-weight: 700;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* ===== Sidebar (docs only, not mobile drawer) ===== */
+[data-theme='light'] aside.theme-doc-sidebar-container .menu {
+  background: linear-gradient(180deg, #fafaff 0%, #ffffff 100%);
+}
+
+[data-theme='dark'] aside.theme-doc-sidebar-container .menu {
+  background: linear-gradient(180deg, #0e0e1c 0%, #111118 100%);
+}
+
+.menu__link:hover {
+  color: var(--ifm-color-primary);
+  background: rgba(97, 95, 255, 0.06);
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background: rgba(124, 134, 255, 0.08);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  color: var(--ifm-color-primary);
+  background: rgba(97, 95, 255, 0.08);
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - 3px);
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  background: rgba(124, 134, 255, 0.1);
+}
+
+/* ===== Footer ===== */
+.footer--dark {
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+  border-top: 1px solid rgba(124, 134, 255, 0.12);
+}
+
+.footer--dark .footer__title {
+  color: #c7d2ff;
+  font-weight: 700;
+}
+
+.footer--dark .footer__link-item {
+  color: rgba(199, 210, 255, 0.7);
+  transition: color 0.15s;
+}
+
+.footer--dark .footer__link-item:hover {
+  color: #a3b3ff;
+}
+
+.footer--dark .footer__copyright {
+  color: rgba(163, 179, 255, 0.4);
+}
+
+/* ===== Mobile sidebar drawer ===== */
+[data-theme='light'] .navbar-sidebar {
+  background: linear-gradient(180deg, #f8f9ff, #ffffff);
+  border-right: 1px solid rgba(97, 95, 255, 0.1);
+}
+
+[data-theme='dark'] .navbar-sidebar {
+  background: linear-gradient(180deg, #0d0d1a, #111118);
+  border-right: 1px solid rgba(124, 134, 255, 0.12);
+}
+
+.navbar-sidebar__brand {
+  border-bottom: 1px solid rgba(97, 95, 255, 0.08);
+}
+
+[data-theme='dark'] .navbar-sidebar__brand {
+  border-bottom-color: rgba(124, 134, 255, 0.1);
+}
+
+/* ===== TOC (table of contents) ===== */
+.table-of-contents__link:hover,
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* ===== DocSearch ===== */
 [data-theme='light'] .DocSearch {
-  /* --docsearch-primary-color: var(--ifm-color-primary); */
-  /* --docsearch-text-color: var(--ifm-font-color-base); */
   --docsearch-muted-color: var(--ifm-color-secondary-darkest);
   --docsearch-container-background: rgba(94, 100, 112, 0.7);
-  /* Modal */
   --docsearch-modal-background: var(--ifm-color-secondary-lighter);
-  /* Search box */
   --docsearch-searchbox-background: var(--ifm-color-secondary);
   --docsearch-searchbox-focus-background: var(--ifm-color-white);
-  /* Hit */
   --docsearch-hit-color: var(--ifm-font-color-base);
   --docsearch-hit-active-color: var(--ifm-color-white);
   --docsearch-hit-background: var(--ifm-color-white);
-  /* Footer */
   --docsearch-footer-background: var(--ifm-color-white);
 }
 
@@ -51,20 +151,37 @@
   --docsearch-text-color: var(--ifm-font-color-base);
   --docsearch-muted-color: var(--ifm-color-secondary-darkest);
   --docsearch-container-background: rgba(47, 55, 69, 0.7);
-  /* Modal */
   --docsearch-modal-background: var(--ifm-background-color);
-  /* Search box */
   --docsearch-searchbox-background: var(--ifm-background-color);
   --docsearch-searchbox-focus-background: var(--ifm-color-black);
-  /* Hit */
   --docsearch-hit-color: var(--ifm-font-color-base);
   --docsearch-hit-active-color: var(--ifm-color-white);
   --docsearch-hit-background: var(--ifm-color-emphasis-100);
-  /* Footer */
   --docsearch-footer-background: var(--ifm-background-surface-color);
   --docsearch-key-gradient: linear-gradient(
-          -26.5deg,
-          var(--ifm-color-emphasis-200) 0%,
-          var(--ifm-color-emphasis-100) 100%
+    -26.5deg,
+    var(--ifm-color-emphasis-200) 0%,
+    var(--ifm-color-emphasis-100) 100%
   );
+}
+
+/* ===== DocSearch button ===== */
+.DocSearch-Button {
+  border-radius: 8px !important;
+  border: 1px solid rgba(97, 95, 255, 0.15) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+.DocSearch-Button:hover {
+  border-color: rgba(97, 95, 255, 0.3) !important;
+  box-shadow: 0 0 12px rgba(97, 95, 255, 0.08) !important;
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  border-color: rgba(124, 134, 255, 0.15) !important;
+}
+
+[data-theme='dark'] .DocSearch-Button:hover {
+  border-color: rgba(124, 134, 255, 0.3) !important;
+  box-shadow: 0 0 12px rgba(124, 134, 255, 0.1) !important;
 }

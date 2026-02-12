@@ -3,24 +3,25 @@ sidebar_position: 1
 title: Getting Started
 ---
 
-# Get Started
+# Getting Started
 
-`React Native Styled System` is a React Native implementation
-of the `styled-system` package commonly used on the web.
+React Native Styled System brings token-driven styling to React Native. Pass design tokens as props, resolve them from a centralized theme, and ship consistent UI faster.
 
-## Highlights
+## Features
 
-- ⚡️ All styles are allowed to be cached. So it doesn't cause any rerender if result is consistent.
-- ⭐️ Allows arguments such as `m, px, py, bg, flex, flexDirection, position` to be passed directly to Props according to the grammar of `styled-system`.
-- 🎨 Users can define the design system by directly defining and delivering themes.
-- ❤️ TypeScript can be fully used through the Type Generation process using CLI.
-- 🚀 Logical or responsive values such as `safeAreaTop` and `sidePadding` can be injected into the theme and used as token values.
-- 💬 Text Typography
-- 🎉 Integrate Dark Theme easily.
+- Pass style props like `m`, `px`, `py`, `bg`, `flex`, `flexDirection`, `position` directly to components
+- All styles are cacheable, preventing unnecessary re-renders when values haven't changed
+- Define and deliver custom design systems through themes
+- Full TypeScript support via CLI-generated type augmentations
+- Inject logical or responsive values (e.g. `safeAreaTop`, `sidePadding`) into theme tokens
+- Text typography support
+- Dark theme integration
+- Built-in Tailwind CSS v4 palette + shadcn/ui semantic colors via `defaultTheme`
+- Responsive breakpoint arrays for adaptive layouts
 
-## Why we need styled-system
+## Why
 
-Let me show this code.
+Typical React Native styling requires manually referencing theme values everywhere:
 
 ```tsx
 const Sample = () => {
@@ -28,8 +29,8 @@ const Sample = () => {
 
   return (
     <View style={{
-      backgroundColor: theme.colors.red500,
-      borderRadius: theme.radii.lg
+      backgroundColor: theme.colors['red.500'],
+      borderRadius: theme.radii.lg,
     }}>
       <Text style={[theme.typography.h1, { marginTop: theme.spaces[4] }]}>
         React Native
@@ -39,14 +40,12 @@ const Sample = () => {
 };
 ```
 
-This is quite verbose.
-
-**With Styled System! 👇**
+With Styled System, design tokens become props:
 
 ```tsx
 const Sample = () => {
   return (
-    <Box bg={'red500'} radius={'lg'}>
+    <Box bg={'red.500'} radius={'lg'}>
       <Txt t={'h1'} mt={4}>
         React Native
       </Txt>
@@ -55,18 +54,7 @@ const Sample = () => {
 };
 ```
 
-`styled-system` is useful for rapid UI development by providing a consistent approach to styling in React applications.
-
-It offers a design system with predefined style props that streamline component styling, ensuring scalability, consistency, and responsive design.
-
-But original `styled-system` is for CSS not in React Native.
-
-We introduce **React Native Styled System** 🎉
-
-&nbsp;
-
 :::info
-It does not fully support the grammar of `styled-system` and there are some grammars that are not currently supported, but this is not a technical limitation and will be added as needed.
-
-Styles such as `justifySelf` that are not yet supported in React Native obviously cannot be added in the future.
+Not all `styled-system` grammar is supported yet. Unsupported grammar is not a technical limitation and can be added as needed.
+Styles like `justifySelf` that React Native does not support cannot be added.
 :::

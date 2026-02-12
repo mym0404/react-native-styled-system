@@ -1,0 +1,174 @@
+---
+sidebar_position: 1
+title: v2.0
+---
+
+# v2.0
+
+React Native Styled System v2.0 ships built-in design tokens, semantic color generation, theme utilities, and responsive breakpoints.
+
+## Built-in Design Tokens
+
+`defaultTheme` provides a ready-to-use theme with the full [Tailwind CSS v4 color palette](https://tailwindcss.com/docs/colors) and [shadcn/ui semantic colors](https://ui.shadcn.com/docs/theming). No configuration required.
+
+```tsx
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+const App = () => (
+  <StyledSystemProvider theme={defaultTheme}>
+    {/* your app */}
+  </StyledSystemProvider>
+);
+```
+
+`defaultTheme` includes:
+- **Palette colors** - All Tailwind CSS v4 colors (`red.50`~`red.950`, `blue.50`~`blue.950`, etc.)
+- **Semantic colors** - shadcn/ui tokens (`primary`, `secondary`, `muted`, `destructive`, `border`, etc.)
+- **Space & sizes** - 4px unit scale (`0`~`48`, `px`, `0.5`, plus `full`/`half` for sizes)
+- **Radii** - `none`, `sm`, `md`, `lg`, `xl`, `2xl`, `full`
+- **Typography** - `h1`, `h2`, `h3`, `body`, `caption`, `small`
+
+See [Default Tokens](/docs/references/default-tokens) for the full reference.
+
+## Semantic Colors
+
+`createThemeColors` generates light and dark semantic color sets following the shadcn/ui convention.
+
+```tsx
+import { createThemeColors } from '@react-native-styled-system/core';
+
+const lightColors = createThemeColors({ base: 'slate', theme: 'blue' });
+const darkColors = createThemeColors({ base: 'slate', theme: 'blue', dark: true });
+```
+
+Parameters:
+- `base` - Gray scale for neutral tones: `'slate'` | `'gray'` | `'zinc'` | `'neutral'` | `'stone'`
+- `theme` - Accent color from any Tailwind color name (e.g. `'blue'`, `'rose'`, `'emerald'`)
+- `dark` - Set to `true` for dark mode variant
+
+Generated tokens: `background`, `foreground`, `primary`, `primary-foreground`, `secondary`, `secondary-foreground`, `muted`, `muted-foreground`, `accent`, `accent-foreground`, `destructive`, `destructive-foreground`, `border`, `input`, `ring`, `card`, `card-foreground`, `popover`, `popover-foreground`, `chart-1`~`chart-5`.
+
+## Theme Utilities
+
+`createTheme` has two overloads:
+
+**Create a theme with defaults filled in:**
+
+```tsx
+import { createTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme({
+  colors: { brand: '#615fff' },
+  space: { sm: 8, md: 16, lg: 24 },
+});
+```
+
+Missing token categories (`sizes`, `radii`, `typography`, `breakpoints`) are filled with empty defaults.
+
+**Merge a base theme with overrides:**
+
+```tsx
+import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+
+const customTheme = createTheme(defaultTheme, {
+  colors: { brand: '#615fff' },
+});
+```
+
+All tokens from the base theme are preserved, with overrides merged on top.
+
+## Responsive Values
+
+All style props (except `transform`) accept responsive arrays. Values are applied based on screen width and the theme's `breakpoints` (default: `[480, 768, 1024]`).
+
+```tsx
+<Box
+  flexDirection={['column', 'row']}
+  p={[2, 4, 6]}
+  w={['full', 'half']}
+/>
+```
+
+Array indices map to breakpoints:
+- Index 0: base value (all screen widths)
+- Index 1: `screenWidth >= 480`
+- Index 2: `screenWidth >= 768`
+- Index 3: `screenWidth >= 1024`
+
+Custom breakpoints can be set in the theme:
+
+```tsx
+const theme = createTheme({
+  breakpoints: [640, 1024, 1440],
+});
+```
+
+`StyledSystemProvider` automatically reads `screenWidth` via `useWindowDimensions()`. You can also pass a custom `screenWidth` prop to override it.
+
+---
+
+## Breaking Changes
+
+### 1. `fillNullishThemeKey` removed
+
+The internal utility `fillNullishThemeKey` has been removed. Use `createTheme()` instead.
+
+```tsx
+// Before (v1)
+import { fillNullishThemeKey } from '@react-native-styled-system/core';
+const theme = fillNullishThemeKey(myTheme);
+
+// After (v2)
+import { createTheme } from '@react-native-styled-system/core';
+const theme = createTheme(myTheme);
+```
+
+### 2. `StyledSystemProvider` uses `useWindowDimensions()`
+
+`StyledSystemProvider` now internally calls `useWindowDimensions()` to detect `screenWidth` for responsive value resolution. This is transparent to most apps, but if you are mocking or controlling window dimensions in tests, be aware of this change.
+
+An optional `screenWidth` prop is available to override the detected value.
+
+### 3. `SxProps` type expanded with `Responsive<T>`
+
+All style props in `SxProps` and `TextSxProps` are now typed as `Responsive<T>` (i.e. `T | T[]`). Existing single values continue to work without changes since `Responsive<T>` is a union type.
+
+### 4. `createSxComponent` / `createSxTextComponent` type change
+
+The component type changed from `Props & SxProps` to `Omit<Props, keyof SxProps> & SxProps`. This resolves type conflicts when a base component's props overlap with `SxProps` keys (e.g. a component with its own `flex` prop).
+
+If you have custom type assertions or wrappers around these HOCs, review them after upgrading.
+
+---
+
+## Migration Guide (v1 to v2)
+
+**1. Update the package:**
+
+```
+yarn add @react-native-styled-system/core@2
+```
+
+**2. Replace `fillNullishThemeKey` (if used):**
+
+```tsx
+// createTheme() is a drop-in replacement
+import { createTheme } from '@react-native-styled-system/core';
+const theme = createTheme(myPartialTheme);
+```
+
+**3. Consider switching to `defaultTheme`:**
+
+If you were manually defining Tailwind colors or basic design tokens, `defaultTheme` provides them out of the box.
+
+```tsx
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+<StyledSystemProvider theme={defaultTheme}>
+```
+
+**4. Existing code continues to work:**
+
+- `StyledSystemProvider` usage is the same (new `screenWidth` prop is optional)
+- All existing style prop values work as-is (`Responsive<T>` accepts single values)
+- No changes needed to `useSx`, `createSxComponent`, or `createSxTextComponent` call sites

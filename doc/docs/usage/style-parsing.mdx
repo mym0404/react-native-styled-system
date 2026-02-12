@@ -1,13 +1,11 @@
 ---
 sidebar_position: 5
-title: Pass styles and parsing priorities
+title: Style Parsing Priority
 ---
 
-# Pass styles and parsing priorities
+# Style Parsing Priority
 
-There are **various ways** in which `useSx` is used to parse styles and produce output.
-
-Let me show the following snippet.
+`useSx` accepts styles from multiple sources. When the same property is defined in more than one source, the following priority order determines which value wins.
 
 ```tsx
 const props = {
@@ -24,33 +22,16 @@ const { getStyle, filteredProps } = useSx(props, {
 return <View style={getStyle()} />
 ```
 
-1. Parsed result of `transform` in the `useSx` options
-2. Plain old `style` prop
-3. `sx` in props
-4. Plain properties in props, such as `ml` or `color`
-5. `fallback` in the `useSx` options (To be added)
+**Priority (highest to lowest): 1 > 2 > 3 > 4 > 5**
 
-**The priority is calculated as  1 > 2 > 3 > 4 > 5.**
-
-> 1 has the highest priority.
-
-The reasons for this priority are as follows:
-
-**First of all, #5 should always have the lowest priority.**
-
-As the name suggests, it means `fallback`.
-
-**And #1 should have at least a higher priority than #2-4.**
-
-In the aspect of user of this component, they can only set #2-4.
-
-The reason `transform` is created is to calculate the value of another property based on the result of these or to change the value of the passed property. .
-
-**#2 should have higher priority than #3 and #4.**
-
-This is because when integrating this package, we want to maximize stability when refactoring existing code.
+| Priority | Source | Description |
+|---|---|---|
+| 1 | `transform` in `useSx` options | Computed values based on resolved props. Highest priority because it overrides user-facing props intentionally. |
+| 2 | `style` prop | Plain React Native `style` prop. Higher than sx/token props for stability during incremental migration. |
+| 3 | `sx` prop | Object of token-aware style properties. |
+| 4 | Direct props | Token props passed directly (e.g. `ml`, `color`). |
+| 5 | `fallback` in `useSx` options | Default values applied when no other source provides a value. |
 
 :::tip
-If you are not sure what to write and are confused,
-we recommend removing all of the code that was #2 in the begining and introducing only #4 and #1 first.
+If priority ordering is confusing, start with direct props (#4) and `transform` (#1) only. Add `style` (#2) and `sx` (#3) as needed during migration.
 :::

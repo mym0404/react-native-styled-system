@@ -1,0 +1,42 @@
+.palette {
+  margin-bottom: 2rem;
+}
+
+.paletteName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.shades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.shade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+}
+
+.shadeBlock {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.shadeLabel {
+  font-size: 0.7rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 2px;
+}
+
+.shadeHex {
+  font-size: 0.65rem;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-color-emphasis-500);
+}

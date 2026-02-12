@@ -6,9 +6,7 @@ title: SxProps References
 
 # SxProps References
 
-Short name fields have lower priority than full name fields.
-
-In other words, when `marginTop` and `mt` are used together, the value of `marginTop` win.
+All available style props for `SxProps` and `TextSxProps`. When both a shortcut and its full name are provided (e.g. `marginTop` and `mt`), the full name takes priority.
 
 All props except `transform` support responsive arrays (`Responsive<T> = T | T[]`).
 Pass an array to apply different values at each breakpoint. See [Responsive Breakpoints](/docs/usage/responsive) for details.

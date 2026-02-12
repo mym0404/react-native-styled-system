@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const title = 'React Native Styled System';
-const description = 'styled-system for React Native';
+const description = 'Deadly Simple Style Library';
 const websiteUrl = 'https://mym0404.github.io/react-native-styled-system/';
 const repoOrg = 'mym0404';
 const repoName = 'react-native-styled-system';
@@ -62,7 +62,7 @@ const config: Config = {
     navbar: {
       title: title,
       logo: {
-        alt: 'My Site Logo',
+        alt: 'React Native Styled System',
         src: 'img/logo96.png',
       },
       items: [
@@ -70,7 +70,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docs',
         },
         // { to: '/blog', label: 'Blog', position: 'left' },
         // {
@@ -91,7 +91,7 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Getting Started',
               to: '/docs/intro',
             },
           ],
@@ -99,22 +99,26 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            // {
-            //   label: 'Blog',
-            //   to: '/blog',
-            // },
             {
               label: 'GitHub',
               href: repoUrl,
+            },
+            {
+              label: 'NPM',
+              href: 'https://www.npmjs.com/package/@react-native-styled-system/core',
             },
           ],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} MJ Studio.`,
     },
+    colorMode: {
+      defaultMode: 'dark',
+      respectPrefersColorScheme: true,
+    },
     prism: {
-      theme: prismThemes.oceanicNext,
-      darkTheme: prismThemes.oceanicNext,
+      theme: prismThemes.duotoneDark,
+      darkTheme: prismThemes.duotoneDark,
     },
     algolia: {
       appId: 'WEOE4PIF80',

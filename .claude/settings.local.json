@@ -9,7 +9,9 @@
       "Bash(yarn check:test:*)",
       "Bash(yarn check:type:*)",
       "Bash(yarn eslint:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(python3:*)",
+      "Bash(npx playwright:*)"
     ]
   }
 }
