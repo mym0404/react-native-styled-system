@@ -3,7 +3,7 @@ module.exports = {
   preset: 'react-native',
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  testPathIgnorePatterns: ['node_modules', 'lib', 'cli'],
+  testPathIgnorePatterns: ['node_modules', 'lib', 'cli', '\\.worktrees'],
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)?$': 'babel-jest',
@@ -13,5 +13,5 @@ module.exports = {
   ],
   cache: true,
   cacheDirectory: '.jest/cache',
-  modulePathIgnorePatterns: ['<rootDir>/example/node_modules', '<rootDir>/lib/'],
+  modulePathIgnorePatterns: ['<rootDir>/example/node_modules', '<rootDir>/lib/', '<rootDir>/.worktrees'],
 };

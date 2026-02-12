@@ -1,5 +1,5 @@
 import React from 'react';
-import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
+import { StatusBar } from 'expo-status-bar';
 
 import { StyledButton } from '../components/StyledButton';
 import { StyledScrollView } from '../components/StyledScrollView';
@@ -14,7 +14,7 @@ const Home = ({}: HomeProps) => {
 
   return (
     <StyledView flex={1} bg={'bg'}>
-      <ExpoStatusBar hidden />
+      <StatusBar hidden />
       <StyledView
         pt={'sfTop' as any}
         flexDirection={'row'}

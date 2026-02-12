@@ -18,13 +18,13 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.1",
     "@types/invariant": "^2.2.37",
-    "@types/react": "^18.2.65",
-    "@types/react-test-renderer": "^18",
+    "@types/react": "^19",
+    "@types/react-test-renderer": "^19",
     "prettier": "^3.2.5",
     "react": "*",
-    "react-native": "^0.73.6",
+    "react-native": "0.81.5",
     "react-native-builder-bob": "^0.23.2",
-    "react-test-renderer": "^18.2.0",
+    "react-test-renderer": "^19",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
