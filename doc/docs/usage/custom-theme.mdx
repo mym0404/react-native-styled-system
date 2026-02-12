@@ -1,0 +1,138 @@
+---
+sidebar_position: 6
+title: Custom Theme
+---
+
+# Custom Theme
+
+## Theme shape
+
+A theme is a plain object matching `ThemedDict`:
+
+```ts
+type ThemedDict = {
+  space: Record<string, SpaceValue>;
+  sizes: Record<string, SizesValue>;
+  colors: Record<string, ColorsValue>;
+  radii: Record<string, RadiiValue>;
+  typography: Record<string, TypographyValue>;
+  breakpoints?: number[];
+};
+```
+
+Use `createTheme` to build a theme from scratch or extend an existing one.
+
+## Overriding tokens
+
+`createTheme(base, overrides)` shallow-merges each token group. `breakpoints` is replaced, not merged.
+
+```ts
+import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme(defaultTheme, {
+  colors: { brand: '#FF6600' },
+  radii: { card: 20 },
+});
+```
+
+## Semantic colors with `createThemeColors`
+
+`createThemeColors` generates **light** and **dark** semantic color sets following the [shadcn/ui convention](https://ui.shadcn.com/docs/theming).
+
+```ts
+import { createThemeColors } from '@react-native-styled-system/core';
+
+const { light, dark } = createThemeColors({
+  base: 'zinc',    // gray scale: 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+  theme: 'blue',   // any Tailwind color name
+});
+```
+
+Both `light` and `dark` share the same keys:
+
+| Token | Description |
+|---|---|
+| `background` / `foreground` | Page background and default text |
+| `card` / `card-foreground` | Card surfaces |
+| `primary` / `primary-foreground` | Primary actions and buttons |
+| `secondary` / `secondary-foreground` | Secondary surfaces |
+| `muted` / `muted-foreground` | Subdued backgrounds and helper text |
+| `accent` / `accent-foreground` | Highlighted content areas |
+| `destructive` / `destructive-foreground` | Error states and dangerous actions |
+| `popover` / `popover-foreground` | Popover surfaces |
+| `border` / `input` / `ring` | Borders, input outlines, focus rings |
+| `chart-1` ~ `chart-5` | Chart colors |
+
+## Dark mode
+
+Since `light` and `dark` share the same keys, toggling dark mode is just swapping the active color set in your provider.
+
+```tsx title="AppThemeProvider.tsx"
+import React, { useContext, useMemo, useState } from 'react';
+import { createTheme, defaultTheme, createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+
+const { light, dark } = createThemeColors({ base: 'neutral', theme: 'blue' });
+
+const DarkModeContext = React.createContext({
+  isDarkMode: false,
+  toggleDarkMode: () => {},
+});
+
+export const useDarkMode = () => useContext(DarkModeContext);
+
+export const AppThemeProvider = ({ children }: React.PropsWithChildren) => {
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  const theme = useMemo(
+    () => createTheme(defaultTheme, { colors: isDarkMode ? dark : light }),
+    [isDarkMode],
+  );
+
+  return (
+    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode: () => setDarkMode((v) => !v) }}>
+      <StyledSystemProvider theme={theme}>
+        {children}
+      </StyledSystemProvider>
+    </DarkModeContext.Provider>
+  );
+};
+```
+
+:::tip
+Wrap `createTheme` in `useMemo` when the theme depends on dynamic values (e.g. dark mode, safe area insets). This avoids creating a new object every render.
+:::
+
+Components reference semantic tokens (`bg={'background'}`, `color={'foreground'}`) and automatically adapt to the active mode.
+
+### System appearance
+
+Use `useColorScheme` to sync with the device theme:
+
+```tsx
+import { useColorScheme } from 'react-native';
+
+const colorScheme = useColorScheme();
+const isDarkMode = colorScheme === 'dark';
+```
+
+## Building a theme from scratch
+
+```ts
+import { createTheme } from '@react-native-styled-system/core';
+
+const myTheme = createTheme({
+  space: { '0': 0, '1': 4, '2': 8, '3': 12, '4': 16 },
+  sizes: { '0': 0, '1': 4, '2': 8, full: '100%' },
+  colors: { primary: '#3B82F6', background: '#FFFFFF', text: '#111827' },
+  radii: { sm: 4, md: 8, lg: 16 },
+  typography: {
+    h1: { fontSize: 32, fontWeight: 'bold', lineHeight: 40 },
+    body: { fontSize: 16, lineHeight: 24 },
+  },
+  breakpoints: [480, 768, 1024],
+});
+```
+
+:::tip
+Use `defaultTheme` as a starting point and override only what you need. Building from scratch means you lose the Tailwind palette and default spacing scale.
+:::

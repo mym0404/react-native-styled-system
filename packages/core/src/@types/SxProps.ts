@@ -1,5 +1,6 @@
 import type { TextStyle, ViewStyle } from 'react-native';
 
+import type { Responsive, ResponsiveExcludedKey } from './Responsive';
 import type { Token } from './Token';
 
 export type SxPropsKeys = keyof SxProps;
@@ -114,6 +115,11 @@ export const _textStylePropList = [
   'typography',
   't',
 ] satisfies (Omit<TextSxPropsKey, keyof TextSxPropsKey> | 'style')[];
+
+// =================
+// Resolved types (internal, no Responsive wrapping)
+// =================
+
 interface ThemedColorTokenProps {
   backgroundColor: Token<'colors'>;
   bg: Token<'colors'>; // backgroundColor
@@ -158,9 +164,9 @@ interface ThemedSpaceTokenProps {
   right: Token<'space'>;
   bottom: Token<'space'>;
   left: Token<'space'>;
-  gap: Token<'space'>; // only works if parsed result is number
-  gapX: Token<'space'>; // only works if parsed result is number
-  gapY: Token<'space'>; // only works if parsed result is number
+  gap: Token<'space'>;
+  gapX: Token<'space'>;
+  gapY: Token<'space'>;
 }
 
 interface ThemedSizeTokenProps {
@@ -216,8 +222,8 @@ interface ThemedViewStyleProps {
   display: ViewStyle['display'];
   elevation: ViewStyle['elevation'];
   zIndex: ViewStyle['zIndex'];
-  absoluteFill?: boolean; // shortcut - position: absoulte, t,r,b,l: 0
-  center?: boolean; // shortcut - justifyContent, alignItems: center
+  absoluteFill?: boolean;
+  center?: boolean;
 }
 
 interface ThemedTextStyleProps {
@@ -241,7 +247,7 @@ interface ThemedTextStyleProps {
   t: Token<'typography'>; // typography
 }
 
-type BaseSxProps = Partial<
+type ResolvedBaseSxProps = Partial<
   ThemedViewStyleProps &
     ThemedSpaceTokenProps &
     ThemedSizeTokenProps &
@@ -249,7 +255,30 @@ type BaseSxProps = Partial<
     ThemedRadiiTokenProps
 >;
 
-type BaseTextSxProps = BaseSxProps & Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
+type ResolvedBaseTextSxProps = ResolvedBaseSxProps &
+  Partial<ThemedColorTokenTextProps & ThemedTextStyleProps>;
+
+export interface ResolvedSxProps extends ResolvedBaseSxProps {
+  sx?: ResolvedBaseSxProps;
+}
+export interface ResolvedTextSxProps extends ResolvedBaseTextSxProps {
+  sx?: ResolvedBaseTextSxProps;
+}
+
+// =================
+// Public types (with Responsive wrapping)
+// =================
+
+type WithResponsive<T> = {
+  [K in keyof T]: K extends ResponsiveExcludedKey
+    ? T[K]
+    : undefined extends T[K]
+      ? Responsive<Exclude<T[K], undefined>> | undefined
+      : Responsive<T[K]>;
+};
+
+type BaseSxProps = WithResponsive<ResolvedBaseSxProps>;
+type BaseTextSxProps = WithResponsive<ResolvedBaseTextSxProps>;
 
 export interface SxProps extends BaseSxProps {
   sx?: BaseSxProps;

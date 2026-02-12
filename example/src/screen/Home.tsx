@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { TouchableOpacity, useWindowDimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { TouchableOpacity } from 'react-native';
 
 import { StyledScrollView } from '../components/StyledScrollView';
 import { StyledImage, StyledView } from '../components/StyledViews';
@@ -33,22 +33,22 @@ const Home = () => {
         bg={'primary'}
         alignItems={'center'}
         justifyContent={'center'}
-        px={4}
+        px={[4, 6, 8]}
       >
         <Txt py={4} t={'h3'} color={'primary-foreground'}>
           {'Styled System'}
         </Txt>
-        <TouchableOpacity
-          style={{ position: 'absolute', right: 16, paddingTop: 48 }}
-          onPress={toggleDarkMode}
-        >
+        <TouchableOpacity style={{ position: 'absolute', right: 16 }} onPress={toggleDarkMode}>
           <Txt t={'caption'} color={'primary-foreground'} fontWeight={'600'}>
             {isDarkMode ? 'Dark' : 'Light'}
           </Txt>
         </TouchableOpacity>
       </StyledView>
 
-      <StyledScrollView flex={1} contentContainerSx={{ p: 5, pb: '80px', gap: 6 }}>
+      <StyledScrollView
+        flex={1}
+        contentContainerSx={{ pt: [4, 6, 8], px: [0, 100, 200], pb: '80px', gap: [5, 6, 8] }}
+      >
         {/* Hero */}
         <StyledView>
           <Txt t={'h1'} color={'foreground'}>
@@ -74,8 +74,8 @@ const Home = () => {
         {/* Image */}
         <StyledImage
           w={'100%'}
-          maxH={'160px'}
-          borderRadius={12}
+          maxH={['160px', '240px', '320px']}
+          borderRadius={[8, 12, 16]}
           resizeMode={'cover'}
           source={require('../../assets/cabin.jpg')}
         />
@@ -92,7 +92,7 @@ const Home = () => {
               borderColor={'border'}
               borderWidth={1}
               borderRadius={12}
-              p={4}
+              p={[3, 4, 5]}
               flexDirection={'row'}
               alignItems={'center'}
               justifyContent={'space-between'}
@@ -131,7 +131,7 @@ const Home = () => {
               borderColor={'border'}
               borderWidth={1}
               borderRadius={12}
-              p={4}
+              p={[3, 4, 5]}
               flexDirection={'row'}
               alignItems={'center'}
               gap={3}
@@ -147,11 +147,11 @@ const Home = () => {
                   alignItems={'center'}
                   justifyContent={'center'}
                 >
-                  {checked && (
+                  {checked ? (
                     <Txt t={'small'} color={'primary-foreground'} fontWeight={'bold'}>
                       {'v'}
                     </Txt>
-                  )}
+                  ) : null}
                 </StyledView>
               </TouchableOpacity>
               <StyledView>
@@ -170,7 +170,7 @@ const Home = () => {
               borderColor={'border'}
               borderWidth={1}
               borderRadius={12}
-              p={4}
+              p={[3, 4, 5]}
               gap={2}
             >
               <Txt t={'caption'} color={'card-foreground'} fontWeight={'600'}>
@@ -199,7 +199,14 @@ const Home = () => {
           </Txt>
           <StyledView flexDirection={'row'} flexWrap={'wrap'} gap={3}>
             {colorCards.map(({ label, bg, light }) => (
-              <StyledView key={label} bg={light} borderRadius={12} p={4} w={'47%'} flexGrow={1}>
+              <StyledView
+                key={label}
+                bg={light}
+                borderRadius={12}
+                p={[3, 4]}
+                w={['47%', '22%']}
+                flexGrow={1}
+              >
                 <StyledView bg={bg} w={10} h={10} borderRadius={9999} mb={2} />
                 <Txt t={'caption'} color={bg} fontWeight={'600'}>
                   {label}
@@ -210,7 +217,7 @@ const Home = () => {
         </StyledView>
 
         {/* Typography */}
-        <StyledView bg={'secondary'} borderRadius={12} p={5} gap={2}>
+        <StyledView bg={'secondary'} borderRadius={[8, 12, 16]} p={[4, 5, 6]} gap={2}>
           <Txt t={'h3'} color={'foreground'} mb={1}>
             {'Typography'}
           </Txt>
@@ -244,8 +251,8 @@ const Home = () => {
               <StyledView
                 key={r}
                 bg={['sky.400', 'indigo.400', 'purple.400', 'fuchsia.400', 'rose.400'][i]}
-                w={12}
-                h={12}
+                w={[10, 12, 14]}
+                h={[10, 12, 14]}
                 borderRadius={[4, 8, 12, 16, 9999][i]}
                 alignItems={'center'}
                 justifyContent={'center'}
@@ -259,11 +266,11 @@ const Home = () => {
         </StyledView>
 
         {/* Feature Cards */}
-        <StyledView gap={3}>
-          <Txt t={'h3'} color={'foreground'} mb={1}>
+        <StyledView gap={3} flexDirection={['column', 'row']} flexWrap={'wrap'}>
+          <Txt t={'h3'} color={'foreground'} mb={1} w={'100%'}>
             {'Feature Cards'}
           </Txt>
-          <StyledView bg={'primary'} borderRadius={16} p={5}>
+          <StyledView bg={'primary'} borderRadius={[12, 16]} p={[4, 5]} flex={[undefined, 1]}>
             <Txt t={'h2'} color={'primary-foreground'}>
               {'Tokens'}
             </Txt>
@@ -271,7 +278,7 @@ const Home = () => {
               {'Space, sizes, colors, radii, and typography \u2014 all from one theme object.'}
             </Txt>
           </StyledView>
-          <StyledView bg={'destructive'} borderRadius={16} p={5}>
+          <StyledView bg={'destructive'} borderRadius={[12, 16]} p={[4, 5]} flex={[undefined, 1]}>
             <Txt t={'h2'} color={'destructive-foreground'}>
               {'Destructive'}
             </Txt>
@@ -283,8 +290,9 @@ const Home = () => {
             bg={'card'}
             borderColor={'border'}
             borderWidth={1}
-            borderRadius={16}
-            p={5}
+            borderRadius={[12, 16]}
+            p={[4, 5]}
+            flex={[undefined, 1]}
           >
             <Txt t={'h2'} color={'card-foreground'}>
               {'Card'}
@@ -293,7 +301,7 @@ const Home = () => {
               {'Semantic tokens adapt automatically to light and dark themes.'}
             </Txt>
           </StyledView>
-          <StyledView bg={'accent'} borderRadius={16} p={5}>
+          <StyledView bg={'accent'} borderRadius={[12, 16]} p={[4, 5]} flex={[undefined, 1]}>
             <Txt t={'h2'} color={'accent-foreground'}>
               {'Accent'}
             </Txt>

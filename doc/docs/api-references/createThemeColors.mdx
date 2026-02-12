@@ -75,14 +75,11 @@ const { light, dark } = createThemeColors({ base: 'zinc', theme: 'blue' });
 ### With defaultTheme
 
 ```tsx
-import { defaultTheme, createThemeColors } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme, createThemeColors } from '@react-native-styled-system/core';
 
 const { light, dark } = createThemeColors({ base: 'slate', theme: 'violet' });
 
-const theme = {
-  ...defaultTheme,
-  colors: { ...defaultTheme.colors, ...light },
-};
+const theme = createTheme(defaultTheme, { colors: light });
 ```
 
 ### Dark mode switching
@@ -95,13 +92,10 @@ const { light: lightColors, dark: darkColors } = createThemeColors({
 
 const isDark = useColorScheme() === 'dark';
 
-<StyledSystemProvider
-  theme={{
-    ...defaultTheme,
-    colors: {
-      ...defaultTheme.colors,
-      ...(isDark ? darkColors : lightColors),
-    },
-  }}
->
+const theme = useMemo(
+  () => createTheme(defaultTheme, { colors: isDark ? darkColors : lightColors }),
+  [isDark],
+);
+
+<StyledSystemProvider theme={theme}>
 ```
