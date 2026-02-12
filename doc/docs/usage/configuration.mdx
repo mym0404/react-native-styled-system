@@ -25,11 +25,51 @@ If you try to use a theme in a Render Context where `StyledSystemProvider` does 
 
 :::
 
-## 2. Creating a custom `ThemedDict` object
+## 2. Setting up a theme
 
 `ThemedDict` is a set of design token values that you need to pass to your theme.
 
-These include `space`, `sizes`, `colors`, etc.
+These include `space`, `sizes`, `colors`, `radii`, and `typography`.
+
+### Using `defaultTheme`
+
+The simplest way to get started is to use the built-in `defaultTheme`. It provides a comprehensive set of design tokens inspired by Tailwind CSS v4, including:
+
+- **space / sizes**: 4px unit-based scale (0, px, 0.5, 1, 2, ... 48)
+- **colors**: Full Tailwind v4 color palette (22 color groups with shades 50–950) plus semantic colors (`primary`, `text`, `subText`, etc.)
+- **radii**: `sm`(4), `md`(8), `lg`(12), `xl`(16), `2xl`(24), `full`(9999)
+- **typography**: `h1`, `h2`, `h3`, `body`, `caption`, `small`
+
+```tsx title="App.tsx"
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+<App>
+  <StyledSystemProvider theme={defaultTheme}>
+     {...others}
+  </StyledSystemProvider>
+</App>
+```
+
+You can also extend or override specific tokens:
+
+```tsx title="App.tsx"
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+const theme = {
+  ...defaultTheme,
+  colors: { ...defaultTheme.colors, primary: '#9067E8' },
+};
+
+<App>
+  <StyledSystemProvider theme={theme}>
+     {...others}
+  </StyledSystemProvider>
+</App>
+```
+
+### Creating a custom theme from scratch
+
+If you need full control, you can define your own `ThemedDict` object.
 
 Since a module that `default exports` `ThemedDict` is needed in the Type Generation process using CLI in the future, it is recommended to define it as follows.
 
