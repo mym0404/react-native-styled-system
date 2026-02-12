@@ -9,7 +9,7 @@ type TxtProps = {} & TextSxProps & TextProps;
 const Txt = (props: TxtProps) => {
   const { getStyle, filteredProps } = useSx(props, {
     styleType: 'TextStyle',
-    fallback: { color: 'text', includeFontPadding: false },
+    fallback: { color: 'foreground', includeFontPadding: false },
   });
 
   return <Text style={[getStyle(), {}]} {...filteredProps} />;

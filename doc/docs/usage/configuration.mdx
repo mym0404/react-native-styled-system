@@ -33,10 +33,11 @@ These include `space`, `sizes`, `colors`, `radii`, and `typography`.
 
 ### Using `defaultTheme`
 
-The simplest way to get started is to use the built-in `defaultTheme`. It provides a comprehensive set of design tokens inspired by Tailwind CSS v4, including:
+The simplest way to get started is to use the built-in `defaultTheme`. It includes:
 
+- **Tailwind CSS v4 color palette**: All 22 color groups (slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose) with shades 50–950
+- **shadcn/ui semantic colors**: `background`, `foreground`, `card`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `border`, `input`, `ring`, and their `-foreground` pairs
 - **space / sizes**: 4px unit-based scale (0, px, 0.5, 1, 2, ... 48)
-- **colors**: Full Tailwind v4 color palette (22 color groups with shades 50–950) plus semantic colors (`primary`, `text`, `subText`, etc.)
 - **radii**: `sm`(4), `md`(8), `lg`(12), `xl`(16), `2xl`(24), `full`(9999)
 - **typography**: `h1`, `h2`, `h3`, `body`, `caption`, `small`
 
@@ -50,21 +51,78 @@ import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/
 </App>
 ```
 
-You can also extend or override specific tokens:
+### Using `createThemeColors`
 
-```tsx title="App.tsx"
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+`createThemeColors` is a convenience helper that generates a complete set of semantic color tokens following the [shadcn/ui theming convention](https://ui.shadcn.com/docs/theming). You can pick a **base** gray scale and a **theme** color for primary/accent.
+
+:::tip
+Using `createThemeColors` is entirely optional. You can define your own color objects manually — just make sure both light and dark sets share the same keys so token references resolve correctly in either mode.
+:::
+
+```tsx title="AppTheme.ts"
+import { defaultTheme, createThemeColors } from '@react-native-styled-system/core';
+
+const { light, dark } = createThemeColors({
+  base: 'zinc',    // 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+  theme: 'blue',   // any color name (e.g. 'blue', 'violet', 'rose', or gray scales)
+});
 
 const theme = {
   ...defaultTheme,
-  colors: { ...defaultTheme.colors, primary: '#9067E8' },
+  colors: { ...defaultTheme.colors, ...light },
 };
 
-<App>
-  <StyledSystemProvider theme={theme}>
-     {...others}
-  </StyledSystemProvider>
-</App>
+export { light as lightColors, dark as darkColors };
+export default theme;
+```
+
+The generated tokens follow the shadcn/ui naming convention:
+
+| Token | Description |
+|---|---|
+| `background` / `foreground` | Page background and default text |
+| `card` / `card-foreground` | Card surfaces |
+| `popover` / `popover-foreground` | Popover/modal surfaces |
+| `primary` / `primary-foreground` | Primary actions and emphasis |
+| `secondary` / `secondary-foreground` | Secondary actions |
+| `muted` / `muted-foreground` | Muted backgrounds and text |
+| `accent` / `accent-foreground` | Accented surfaces |
+| `destructive` / `destructive-foreground` | Destructive/error states |
+| `border` | Default border color |
+| `input` | Input border color |
+| `ring` | Focus ring color |
+| `chart-1` ~ `chart-5` | Chart colors |
+
+### Dark mode
+
+Swap the semantic colors in your provider based on the current color scheme:
+
+```tsx title="AppThemeProvider.tsx"
+import { StyledSystemProvider, defaultTheme, createThemeColors } from '@react-native-styled-system/core';
+
+const { light: lightColors, dark: darkColors } = createThemeColors({
+  base: 'neutral',
+  theme: 'blue',
+});
+
+const AppThemeProvider = ({ children }) => {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
+  return (
+    <StyledSystemProvider
+      theme={{
+        ...defaultTheme,
+        colors: {
+          ...defaultTheme.colors,
+          ...(isDark ? darkColors : lightColors),
+        },
+      }}
+    >
+      {children}
+    </StyledSystemProvider>
+  );
+};
 ```
 
 ### Creating a custom theme from scratch
