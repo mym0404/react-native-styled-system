@@ -5,8 +5,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['node_modules', 'lib', 'cli', '\\.worktrees'],
   transform: {
-    '^.+\\.(ts|tsx)?$': 'ts-jest',
-    '^.+\\.(js|jsx)?$': 'babel-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*|@dooboo-ui|@mj-studio|@sentry/react-native|@react-native-seoul/naver-login)',

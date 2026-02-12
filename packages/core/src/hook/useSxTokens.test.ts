@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-native';
 
 import type { ThemedDict } from '../@types/ThemedDict';
 import type { ThemedTypings } from '../@types/ThemedTypings';
