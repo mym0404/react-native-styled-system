@@ -6,11 +6,13 @@ import type { UseSxOptions } from '../hook/useSx';
 import { useSx } from '../hook/useSx';
 
 export function createSxComponent<Props extends object, Ref>(Base: ComponentType<Props>) {
+  type MergedProps = Omit<Props, keyof SxProps> & SxProps;
+
   return ({
     defaultProps,
     sxOptions,
-  }: { defaultProps?: Props & SxProps; sxOptions?: UseSxOptions } = {}) => {
-    const Transformed = forwardRef<Ref, Props & SxProps>(function (props, ref) {
+  }: { defaultProps?: MergedProps; sxOptions?: UseSxOptions } = {}) => {
+    const Transformed = forwardRef<Ref, MergedProps>(function (props, ref) {
       const { filteredProps, getStyle } = useSx({ ...defaultProps, ...props }, sxOptions);
 
       return <Base {...(filteredProps as any)} style={getStyle()} ref={ref as any} />;
@@ -23,11 +25,13 @@ export function createSxComponent<Props extends object, Ref>(Base: ComponentType
 }
 
 export function createSxTextComponent<Props extends object, Ref>(Base: ComponentType<Props>) {
+  type MergedProps = Omit<Props, keyof TextSxProps> & TextSxProps;
+
   return ({
     defaultProps,
     sxOptions,
-  }: { defaultProps?: Props & TextSxProps; sxOptions?: UseSxOptions } = {}) => {
-    const Transformed = forwardRef<Ref, Props & TextSxProps>(function (props, ref) {
+  }: { defaultProps?: MergedProps; sxOptions?: UseSxOptions } = {}) => {
+    const Transformed = forwardRef<Ref, MergedProps>(function (props, ref) {
       const { filteredProps, getStyle } = useSx(
         { ...defaultProps, ...props },
         { styleType: 'TextStyle', ...sxOptions },

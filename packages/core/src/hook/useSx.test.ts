@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native';
 import { is } from '@mj-studio/js-util';
 import { renderHook } from '@testing-library/react-native';
 
+import { baseTheme, emptyTheme, responsiveTheme } from '../__testUtils__/testTheme';
 import type { TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
-import { emptyThemedDict } from '../@types/ThemedDict';
 import type { ThemedStyleType } from '../util/propsToThemedStyle';
 
 import type { StyleFallback, StyleTransform } from './useSx';
@@ -21,6 +21,7 @@ function expectResult(
     transform,
     fallback,
     cache,
+    screenWidth,
   }: {
     expectation: object;
     filteredPropsExpectation?: object;
@@ -28,13 +29,14 @@ function expectResult(
     transform?: StyleTransform;
     fallback?: StyleFallback;
     cache?: boolean;
+    screenWidth?: number;
   },
 ) {
   const {
     result: {
       current: { getStyle, filteredProps },
     },
-  } = renderHook(() => useSx(props, { theme, styleType, transform, fallback, cache }));
+  } = renderHook(() => useSx(props, { theme, styleType, transform, fallback, cache, screenWidth }));
 
   if (expectation) {
     expect(StyleSheet.flatten(getStyle())).toEqual(expectation);
@@ -46,42 +48,6 @@ function expectResult(
 
   return [getStyle(), filteredProps];
 }
-
-const emptyTheme = emptyThemedDict;
-
-const baseTheme: ThemedDict = {
-  colors: {
-    red: 'red',
-    blue: 'blue',
-    green: 'green',
-  },
-  sizes: {
-    1: 4,
-    2: 8,
-    pagePadding: 20,
-    full: '100%',
-  },
-  space: { 1: 4, 2: 8, pagePadding: 20, full: '100%' },
-  radii: {
-    sm: 8,
-    md: 12,
-    lg: 20,
-  },
-  typography: {
-    title: {
-      fontFamily: 'Noto Sans',
-      fontSize: 14,
-      fontStyle: 'normal',
-      fontWeight: '400',
-    },
-    body: {
-      fontFamily: 'Noto Sans',
-      fontSize: 12,
-      fontStyle: 'normal',
-      fontWeight: '400',
-    },
-  },
-};
 
 describe('simple usages', () => {
   it('handle empty', () => {
@@ -402,5 +368,118 @@ describe('cache', () => {
     );
 
     expect(style1 === style2).toBe(true);
+  });
+});
+
+describe('responsive', () => {
+  it.each([
+    { label: 'base', screenWidth: 320, expected: 100 },
+    { label: 'first breakpoint', screenWidth: 480, expected: 200 },
+    { label: 'second breakpoint', screenWidth: 768, expected: 300 },
+    { label: 'third breakpoint', screenWidth: 1024, expected: 400 },
+  ])('resolves responsive array based on screenWidth - $label', ({ screenWidth, expected }) => {
+    expectResult(
+      responsiveTheme,
+      { w: [100, 200, 300, 400] as any },
+      { expectation: { width: expected }, screenWidth },
+    );
+  });
+
+  it('handles mixed array and single values', () => {
+    expectResult(
+      responsiveTheme,
+      { w: [100, 200] as any, h: 50 },
+      { expectation: { width: 200, height: 50 }, screenWidth: 500 },
+    );
+  });
+
+  it('resolves color token arrays', () => {
+    expectResult(
+      responsiveTheme,
+      { bg: ['red', 'blue'] as any },
+      { expectation: { backgroundColor: 'blue' }, screenWidth: 500 },
+    );
+  });
+
+  it('uses base value when no breakpoints defined', () => {
+    expectResult(
+      baseTheme,
+      { w: [100, 200, 300] as any },
+      { expectation: { width: 100 }, screenWidth: 9999 },
+    );
+  });
+
+  it('uses base value when screenWidth is 0 (default)', () => {
+    expectResult(
+      responsiveTheme,
+      { w: [100, 200] as any },
+      { expectation: { width: 100 }, screenWidth: 0 },
+    );
+  });
+
+  it('resolves space token arrays', () => {
+    expectResult(
+      responsiveTheme,
+      { m: [1, 2] as any },
+      { expectation: { margin: 8 }, screenWidth: 500 },
+    );
+  });
+
+  it('works with transform + responsive', () => {
+    expectResult(
+      responsiveTheme,
+      { mt: [1, 2] as any },
+      {
+        expectation: { marginTop: 8, marginHorizontal: 8 },
+        screenWidth: 500,
+        transform: ({ marginTop }) => ({
+          mx: is.number(marginTop) ? marginTop : 0,
+        }),
+      },
+    );
+  });
+
+  it('resolves responsive values in sx prop', () => {
+    expectResult(
+      responsiveTheme,
+      { sx: { w: [100, 200] as any } },
+      { expectation: { width: 200 }, screenWidth: 500 },
+    );
+  });
+
+  it('resolves responsive values in fallback', () => {
+    expectResult(
+      responsiveTheme,
+      {},
+      { fallback: { w: [100, 200] as any }, expectation: { width: 200 }, screenWidth: 500 },
+    );
+  });
+
+  it('resolves responsive radii token arrays', () => {
+    expectResult(
+      responsiveTheme,
+      { radius: ['sm', 'lg'] as any },
+      { expectation: { borderRadius: 20 }, screenWidth: 500 },
+    );
+  });
+
+  it('prop responsive overrides fallback responsive', () => {
+    expectResult(
+      responsiveTheme,
+      { w: [300, 400] as any },
+      {
+        fallback: { w: [100, 200] as any },
+        expectation: { width: 400 },
+        screenWidth: 500,
+      },
+    );
+  });
+
+  it('sx responsive overrides prop responsive', () => {
+    expectResult(
+      responsiveTheme,
+      { w: [100, 200] as any, sx: { w: [300, 400] as any } },
+      { expectation: { width: 400 }, screenWidth: 500 },
+    );
   });
 });

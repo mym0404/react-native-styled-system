@@ -1,0 +1,83 @@
+---
+sidebar_position: 7
+title: Responsive Breakpoints
+---
+
+# Responsive Breakpoints
+
+Apply different style values based on the screen width using responsive arrays.
+
+## Setting up breakpoints
+
+Add a `breakpoints` array to your theme. The values represent minimum screen widths in ascending order (mobile-first).
+
+```tsx title="AppTheme.ts"
+import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme(defaultTheme, {
+  breakpoints: [480, 768, 1024],
+});
+```
+
+`defaultTheme` includes `breakpoints: [480, 768, 1024]` by default.
+
+If `breakpoints` is not defined or is an empty array, only the first element (base value) of any responsive array is used.
+
+## Usage
+
+Pass an array instead of a single value to any style prop. The array indices map to breakpoints:
+
+```
+[base, >=bp1, >=bp2, >=bp3, ...]
+```
+
+```tsx
+// breakpoints: [480, 768, 1024]
+<Box w={[100, 200, 300, 400]} bg={['red', 'blue']} />
+```
+
+| Screen width | `w`   | `bg`   |
+|---|---|---|
+| < 480        | 100   | `red`  |
+| >= 480       | 200   | `blue` |
+| >= 768       | 300   | `blue` |
+| >= 1024      | 400   | `blue` |
+
+When the array has fewer elements than breakpoints + 1, the last matched value persists for larger screens.
+
+Single values and responsive arrays can be mixed freely:
+
+```tsx
+<Box w={[100, 200]} h={50} bg={['red.500', 'blue.500']} />
+```
+
+## Custom `screenWidth`
+
+By default, `StyledSystemProvider` uses `useWindowDimensions().width` to determine the current screen width.
+
+You can override this with the `screenWidth` prop for testing, SSR, or container query scenarios:
+
+```tsx
+<StyledSystemProvider theme={theme} screenWidth={customWidth}>
+  <App />
+</StyledSystemProvider>
+```
+
+## Excluded props
+
+`transform` does not support responsive arrays because its original type is already an array. All other props support responsive values.
+
+## Token support
+
+Responsive arrays work with all token types. Each element in the array is resolved through the same token parsing as single values:
+
+```tsx
+// space tokens
+<Box m={['1', '2', '4']} />
+
+// color tokens
+<Box bg={['red.500', 'blue.500']} />
+
+// radii tokens
+<Box radius={['sm', 'md', 'lg']} />
+```

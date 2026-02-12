@@ -40,6 +40,7 @@ If `null` or `undefined`, returns `undefined` from `getStyle()` unless `fallback
 | `transform` | `(style: TextStyle) => TextSxProps` | `undefined` | Compute additional `SxProps` from the resolved style |
 | `fallback` | `Omit<TextSxProps, 'sx'>` | `undefined` | Default `SxProps` values used when props don't specify them |
 | `cache` | `boolean` | `undefined` | Enable style caching. Same style result returns the same reference |
+| `screenWidth` | `number` | Context value | Override `screenWidth` for responsive breakpoint resolution |
 
 ## Return Value
 

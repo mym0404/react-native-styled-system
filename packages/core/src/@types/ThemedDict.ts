@@ -9,6 +9,7 @@ export interface ThemedDict {
   colors: Record<string | number, ColorsValue>;
   radii: Record<string | number, RadiiValue>;
   typography: Record<string | number, TypographyValue>;
+  breakpoints?: number[];
 }
 export const emptyThemedDict = {
   space: {},
@@ -16,6 +17,7 @@ export const emptyThemedDict = {
   sizes: {},
   radii: {},
   typography: {},
+  breakpoints: [],
 } satisfies ThemedDict;
 
 const defaultSpace: Record<string, SpaceValue> = {
@@ -425,4 +427,5 @@ export const defaultTheme = {
   colors: { ...defaultColors, ...defaultSemanticColors.light },
   radii: defaultRadii,
   typography: defaultTypography,
+  breakpoints: [480, 768, 1024],
 } satisfies ThemedDict;

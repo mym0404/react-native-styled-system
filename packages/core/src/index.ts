@@ -1,3 +1,4 @@
+export * from './@types/Responsive';
 export * from './@types/SxProps';
 export * from './@types/ThemedDict';
 export * from './@types/ThemedTypings';
@@ -7,3 +8,4 @@ export * from './hook/useSxTokens';
 export * from './provider/StyledSystemProvider';
 export * from './util/propsToThemedStyle';
 export * from './util/createSxComponent';
+export * from './util/createTheme';
