@@ -1,7 +1,77 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # useSxTokens
 
-WIP
+A hook that retrieves raw token values from the theme by token type and keys.
+
+Useful when you need the actual token values (e.g. color strings, spacing numbers) rather than style objects.
+
+## Import
+
+```tsx
+import { useSxTokens } from '@react-native-styled-system/core';
+```
+
+## Signature
+
+```tsx
+const values = useSxTokens(tokenType, tokenValues, options?);
+```
+
+## Parameters
+
+### `tokenType`
+
+| Type | Required |
+|---|---|
+| `keyof ThemedTypings` | Yes |
+
+The token category to look up. One of: `'colors'`, `'space'`, `'sizes'`, `'radii'`, `'typography'`.
+
+### `tokenValues`
+
+| Type | Required |
+|---|---|
+| `Array<ThemedTypings[T]>` | Yes |
+
+An array of token keys to resolve.
+
+### `options`
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `theme` | `ThemedDict` | Context theme | Override the theme from `StyledSystemProvider` |
+
+## Return Value
+
+Returns an array of resolved token values in the same order as `tokenValues`.
+
+- If the theme is not available, all positions return `undefined`.
+- If a token key doesn't exist in the theme, that position returns `undefined`.
+
+## Usage
+
+### Basic
+
+```tsx
+const [bgColor, errorColor] = useSxTokens('colors', ['gray200', 'red500']);
+
+return <View style={{ backgroundColor: bgColor, borderColor: errorColor }} />;
+```
+
+### Conditional tokens
+
+```tsx
+const [backgroundColor] = useSxTokens('colors', [
+  disabled ? 'gray500' : 'gray200',
+]);
+```
+
+### Multiple token types
+
+```tsx
+const [sm, md] = useSxTokens('radii', ['sm', 'md']);
+const [primary] = useSxTokens('colors', ['primary']);
+```
