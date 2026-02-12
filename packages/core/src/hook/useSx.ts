@@ -25,6 +25,7 @@ export type UseSxOptions = {
   transform?: StyleTransform;
   fallback?: StyleFallback;
   cache?: boolean;
+  screenWidth?: number;
 };
 const defaultUseSxOptions: UseSxOptions = { styleType: 'ViewStyle' };
 export const useSx = <P extends Props = Props>(
@@ -35,6 +36,7 @@ export const useSx = <P extends Props = Props>(
     transform = defaultUseSxOptions.transform,
     fallback,
     cache,
+    screenWidth: optionScreenWidth,
   }: UseSxOptions = defaultUseSxOptions,
 ) => {
   const styledSystemContext = useContext(StyledSystemContext);
@@ -42,10 +44,12 @@ export const useSx = <P extends Props = Props>(
   const getStyle = useStableCallback((): StyleProp<AnyStyle> | undefined => {
     const skip = !props && !fallback;
     const theme = optionTheme ?? styledSystemContext?.theme;
+    const breakpoints = theme?.breakpoints ?? [];
+    const screenWidth = optionScreenWidth ?? styledSystemContext?.screenWidth ?? 0;
 
     if (skip) {
       if (is.function(transform)) {
-        return propsToThemedStyle({ theme, sx: transform({}) });
+        return propsToThemedStyle({ theme, sx: transform({}), breakpoints, screenWidth });
       } else {
         return;
       }
@@ -68,6 +72,8 @@ export const useSx = <P extends Props = Props>(
       theme,
       sx: mergedSx,
       styleType,
+      breakpoints,
+      screenWidth,
     });
 
     const composedStyle = !mergedSxStyle
@@ -79,7 +85,10 @@ export const useSx = <P extends Props = Props>(
     if (is.function(transform)) {
       const transformedSx = transform(StyleSheet.flatten(composedStyle));
 
-      const ret = [composedStyle, propsToThemedStyle({ theme, sx: transformedSx, styleType })];
+      const ret = [
+        composedStyle,
+        propsToThemedStyle({ theme, sx: transformedSx, styleType, breakpoints, screenWidth }),
+      ];
 
       if (cache) {
         return getCachedStyle(ret);

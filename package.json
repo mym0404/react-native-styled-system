@@ -11,7 +11,9 @@
     "check:test": "jest",
     "build": "lerna run prepack",
     "pub:version": "lerna version --force-publish --yes",
-    "pub:release": "lerna publish from-package --yes"
+    "pub:release": "lerna publish from-package --yes",
+    "dev": "yarn example start",
+    "docs": "cd doc && yarn dev"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.1.0",

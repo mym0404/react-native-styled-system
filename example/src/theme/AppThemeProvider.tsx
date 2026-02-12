@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BaseColor, ThemeColor } from '@react-native-styled-system/core';
-import { createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+import { createTheme, createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
 
 import AppTheme from './AppTheme';
 
@@ -70,20 +70,15 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
       }}
     >
       <StyledSystemProvider
-        theme={{
-          ...AppTheme,
-          colors: {
-            ...AppTheme.colors,
-            ...(isDarkMode ? dark : light),
-          },
+        theme={createTheme(AppTheme, {
+          colors: isDarkMode ? dark : light,
           space: {
-            ...AppTheme.space,
             sfTop: safeArea.top,
             bottom: safeArea.bottom,
             left: safeArea.left,
             right: safeArea.right,
           },
-        }}
+        })}
       >
         {children}
       </StyledSystemProvider>
