@@ -47,12 +47,6 @@ const defaultColors: Record<string, ColorsValue> = {
   'black': '#000000',
   'transparent': 'transparent',
 
-  'bg': '#FFFFFF',
-  'text': '#030712',
-  'subText': '#6a7282',
-  'primary': '#2b7fff',
-  'onPrimary': '#FFFFFF',
-
   'slate.50': '#f8fafc',
   'slate.100': '#f1f5f9',
   'slate.200': '#e2e8f0',
@@ -337,10 +331,98 @@ const defaultTypography: Record<string, TypographyValue> = {
   small: { fontSize: 12, lineHeight: 16 },
 };
 
+const grayScales = ['slate', 'gray', 'zinc', 'neutral', 'stone'] as const;
+
+export type BaseColor = (typeof grayScales)[number];
+
+export type ThemeColor =
+  | BaseColor
+  | 'red'
+  | 'orange'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'green'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'blue'
+  | 'indigo'
+  | 'violet'
+  | 'purple'
+  | 'fuchsia'
+  | 'pink'
+  | 'rose';
+
+export const createThemeColors = ({ base, theme }: { base: BaseColor; theme: ThemeColor }) => {
+  const b = (shade: number) => defaultColors[`${base}.${shade}`]!;
+  const t = (shade: number) => defaultColors[`${theme}.${shade}`]!;
+  const isGray = (grayScales as readonly string[]).includes(theme);
+
+  const light: Record<string, ColorsValue> = {
+    'background': '#FFFFFF',
+    'foreground': b(950),
+    'card': '#FFFFFF',
+    'card-foreground': b(950),
+    'popover': '#FFFFFF',
+    'popover-foreground': b(950),
+    'primary': isGray ? t(900) : t(600),
+    'primary-foreground': isGray ? t(50) : '#FFFFFF',
+    'secondary': b(100),
+    'secondary-foreground': b(900),
+    'muted': b(100),
+    'muted-foreground': b(500),
+    'accent': b(100),
+    'accent-foreground': b(900),
+    'destructive': defaultColors['red.600']!,
+    'destructive-foreground': b(50),
+    'border': b(200),
+    'input': b(200),
+    'ring': isGray ? b(400) : t(400),
+    'chart-1': defaultColors['orange.600']!,
+    'chart-2': defaultColors['teal.600']!,
+    'chart-3': defaultColors['cyan.900']!,
+    'chart-4': defaultColors['amber.400']!,
+    'chart-5': defaultColors['amber.500']!,
+  };
+
+  const dark: Record<string, ColorsValue> = {
+    'background': b(950),
+    'foreground': b(50),
+    'card': b(900),
+    'card-foreground': b(50),
+    'popover': b(900),
+    'popover-foreground': b(50),
+    'primary': isGray ? t(200) : t(500),
+    'primary-foreground': isGray ? t(900) : '#FFFFFF',
+    'secondary': b(800),
+    'secondary-foreground': b(50),
+    'muted': b(800),
+    'muted-foreground': b(400),
+    'accent': b(800),
+    'accent-foreground': b(50),
+    'destructive': defaultColors['red.400']!,
+    'destructive-foreground': b(50),
+    'border': b(800),
+    'input': b(800),
+    'ring': isGray ? b(500) : t(500),
+    'chart-1': defaultColors['blue.700']!,
+    'chart-2': defaultColors['emerald.500']!,
+    'chart-3': defaultColors['amber.500']!,
+    'chart-4': defaultColors['purple.500']!,
+    'chart-5': defaultColors['rose.500']!,
+  };
+
+  return { light, dark };
+};
+
+const defaultSemanticColors = createThemeColors({ base: 'neutral', theme: 'neutral' });
+
 export const defaultTheme = {
   space: defaultSpace,
   sizes: { ...defaultSpace, full: '100%' as const, half: '50%' as const },
-  colors: defaultColors,
+  colors: { ...defaultColors, ...defaultSemanticColors.light },
   radii: defaultRadii,
   typography: defaultTypography,
 } satisfies ThemedDict;
