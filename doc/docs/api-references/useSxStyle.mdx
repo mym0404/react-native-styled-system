@@ -4,4 +4,76 @@ sidebar_position: 2
 
 # useSxStyle
 
-WIP
+A hook that returns a function to convert `SxProps` into a React Native style object on demand.
+
+Unlike `useSx` which extracts styles from component props, `useSxStyle` is useful for creating inline style objects from `SxProps` anywhere in your component.
+
+## Import
+
+```tsx
+import { useSxStyle } from '@react-native-styled-system/core';
+```
+
+## Signature
+
+```tsx
+const getSxStyle = useSxStyle(options?);
+const style = getSxStyle(sx);
+```
+
+## Parameters
+
+### `options`
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `theme` | `ThemedDict` | Context theme | Override the theme from `StyledSystemProvider` |
+| `cache` | `boolean` | `undefined` | Enable style caching. Same style result returns the same reference |
+
+## Return Value
+
+Returns a function with the following signature:
+
+```tsx
+(sx: TextSxProps) => StyleProp<TextStyle>
+```
+
+Pass `SxProps` to the returned function and get a resolved React Native style object.
+
+If no theme is available (neither from options nor from `StyledSystemProvider`), an empty object `{}` is returned.
+
+## Usage
+
+### Basic
+
+```tsx
+const MyComponent = () => {
+  const getSxStyle = useSxStyle();
+
+  return (
+    <View style={getSxStyle({ bg: 'red', mt: 2, radius: 'sm' })} />
+  );
+};
+```
+
+### Fixed styles alongside useSx
+
+```tsx
+const Card = (props: ViewProps & SxProps) => {
+  const { getStyle } = useSx(props);
+  const getSxStyle = useSxStyle();
+
+  return (
+    <View style={[getStyle(), getSxStyle({ center: true })]}>
+      {/* ... */}
+    </View>
+  );
+};
+```
+
+### With cache
+
+```tsx
+const getSxStyle = useSxStyle({ cache: true });
+// Same sx input will return the same style reference
+```

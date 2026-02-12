@@ -6,13 +6,129 @@ title: Theme Token References
 
 # Theme Token References
 
+Theme tokens are the design values you define in your `ThemedDict` object and pass to `StyledSystemProvider`.
+
+Token values are resolved when you use `SxProps` fields like `bg`, `m`, `w`, etc.
 
 ## colors
 
+| Value Type | Description |
+|---|---|
+| `string` | Any valid color string (e.g. `'#FFFFFF'`, `'rgba(0,0,0,0.5)'`, `'red'`) |
+
+Colors tokens are used for `backgroundColor`(`bg`), `borderColor`, `color`, `textDecorationColor`, `textShadowColor`.
+
+If the value passed to a color prop is not found as a token key, it is used as a raw color value directly.
+
+```ts
+colors: {
+  white: '#FFFFFF',
+  black: '#000000',
+  primary: '#3B82F6',
+  gray50: '#F9FAFB',
+  gray100: '#F3F4F6',
+}
+```
+
 ## space
+
+| Value Type | Description |
+|---|---|
+| `number` | Pixel value |
+| `'auto'` | Auto layout |
+| `` `${number}%` `` | Percentage string |
+| `null` | No value |
+
+Space tokens are used for `margin`(`m`), `padding`(`p`), `top`, `right`, `bottom`, `left`, `gap`, and their variants.
+
+Token resolution rules:
+- **Token key match**: If the value matches a token key, the token value is returned. Negative number keys return the negated token value.
+- **`px` suffix**: `'15px'` is parsed as the number `15`.
+- **Percentage**: `'100%'` is passed through as-is.
+- **Negative string prefix**: `'-pagePadding'` resolves the `pagePadding` token and negates it.
+- **Raw number**: If no token key matches, the number is used as-is.
+
+```ts
+const unit = 4;
+space: {
+  0: 0,
+  px: 1,
+  0.5: 2,
+  1: 4,
+  2: 8,
+  3: 12,
+  pagePadding: 20,
+}
+```
 
 ## sizes
 
+| Value Type | Description |
+|---|---|
+| `number` | Pixel value |
+| `'auto'` | Auto layout |
+| `` `${number}%` `` | Percentage string |
+| `null` | No value |
+
+Size tokens are used for `width`(`w`), `height`(`h`), `minWidth`(`minW`), `maxWidth`(`maxW`), `minHeight`(`minH`), `maxHeight`(`maxH`).
+
+Resolution rules are the same as space tokens, except negation is not supported.
+
+```ts
+sizes: {
+  1: 4,
+  2: 8,
+  pagePadding: 20,
+  full: '100%',
+}
+```
+
 ## radii
 
+| Value Type | Description |
+|---|---|
+| `number` | Pixel value for border radius |
+
+Radii tokens are used for `borderRadius`(`radius`), `borderTopLeftRadius`(`topLeftRadius`), `borderTopRightRadius`(`topRightRadius`), `borderBottomLeftRadius`(`bottomLeftRadius`), `borderBottomRightRadius`(`bottomRightRadius`).
+
+Supports `px` suffix and numeric string resolution similar to space tokens.
+
+```ts
+radii: {
+  sm: 4,
+  md: 8,
+  lg: 16,
+  full: 9999,
+}
+```
+
 ## typography
+
+| Value Type | Description |
+|---|---|
+| `TypographyValue` | Object with text style properties |
+
+Typography tokens are used for `typography`(`t`). When applied, individual text style fields from the typography token are spread into the style.
+
+Individual text style props (e.g. `fontFamily`, `fontSize`) have **higher priority** than the values from the typography token.
+
+`TypographyValue` fields:
+
+| Field | Type |
+|---|---|
+| `fontFamily` | `TextStyle['fontFamily']` |
+| `fontSize` | `TextStyle['fontSize']` |
+| `fontWeight` | `TextStyle['fontWeight']` |
+| `lineHeight` | `TextStyle['lineHeight']` |
+| `letterSpacing` | `TextStyle['letterSpacing']` |
+| `textAlign` | `TextStyle['textAlign']` |
+| `fontStyle` | `TextStyle['fontStyle']` |
+
+```ts
+typography: {
+  h1: { fontSize: 32, fontWeight: '700', lineHeight: 40 },
+  h2: { fontSize: 24, fontWeight: '600', lineHeight: 32 },
+  body: { fontSize: 16, fontWeight: '400', lineHeight: 24 },
+  caption: { fontSize: 12, fontWeight: '400', lineHeight: 16 },
+}
+```

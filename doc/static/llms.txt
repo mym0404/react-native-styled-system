@@ -1,0 +1,224 @@
+# React Native Styled System
+
+> A styled-system implementation for React Native. Converts theme tokens into React Native styles via hooks and HOC patterns.
+
+Package: `@react-native-styled-system/core`
+
+## Installation
+
+```sh
+npm install @react-native-styled-system/core
+```
+
+## Quick Start
+
+Wrap your app with `StyledSystemProvider` and pass a theme:
+
+```tsx
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+const App = () => (
+  <StyledSystemProvider theme={defaultTheme}>
+    <MyApp />
+  </StyledSystemProvider>
+);
+```
+
+Create styled components using `useSx` hook or `createSxComponent` HOC:
+
+```tsx
+import { View, ViewProps } from 'react-native';
+import { SxProps, useSx } from '@react-native-styled-system/core';
+
+const Box = (props: ViewProps & SxProps) => {
+  const { getStyle, filteredProps } = useSx(props);
+  return <View style={getStyle()} {...filteredProps} />;
+};
+
+// Usage
+<Box bg={'blue.500'} p={'4'} radius={'md'} />
+```
+
+## Theme
+
+A theme is an object matching `ThemedDict`:
+
+```ts
+type ThemedDict = {
+  space: Record<string, SpaceValue>;
+  sizes: Record<string, SizesValue>;
+  colors: Record<string, ColorsValue>;
+  radii: Record<string, RadiiValue>;
+  typography: Record<string, TypographyValue>;
+  breakpoints?: number[];
+};
+```
+
+### defaultTheme
+
+Pre-built theme with Tailwind CSS v4 full palette (22 color groups, shades 50-950), shadcn/ui semantic colors, 4px spacing scale, radii (sm/md/lg/xl/2xl/full), typography presets (h1-h3, body, caption, small), and breakpoints [480, 768, 1024].
+
+### createTheme
+
+Build a theme from scratch or extend an existing one.
+
+Extend mode (two arguments) - each token group is shallow-merged, breakpoints is replaced:
+
+```ts
+import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme(defaultTheme, {
+  colors: { brand: '#FF6600' },
+  space: { pagePadding: 20 },
+  breakpoints: [480, 1024],
+});
+```
+
+Create mode (single argument) - missing groups default to `{}`, breakpoints to `[]`:
+
+```ts
+const theme = createTheme({
+  colors: { primary: '#3B82F6' },
+  space: { '1': 4, '2': 8 },
+});
+```
+
+### createThemeColors
+
+Generates light/dark semantic color sets following shadcn/ui convention:
+
+```ts
+import { createThemeColors } from '@react-native-styled-system/core';
+
+const { light, dark } = createThemeColors({
+  base: 'zinc',   // 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
+  theme: 'blue',  // any Tailwind color name
+});
+```
+
+Semantic tokens: background, foreground, card, card-foreground, popover, popover-foreground, primary, primary-foreground, secondary, secondary-foreground, muted, muted-foreground, accent, accent-foreground, destructive, destructive-foreground, border, input, ring, chart-1 through chart-5.
+
+## Hooks
+
+### useSx
+
+Primary hook. Takes component props and options, returns `{ getStyle, filteredProps }`.
+
+```ts
+const { getStyle, filteredProps } = useSx(props, {
+  styleType: 'ViewStyle' | 'TextStyle',
+  fallback: { bg: 'white', p: 4 },
+  transform: (style) => ({ mx: style.marginTop }),
+  cache: true,
+});
+```
+
+Style priority (highest to lowest): style prop > sx prop > direct props > fallback.
+
+### useSxStyle
+
+Creates inline style objects from SxProps:
+
+```ts
+const getSxStyle = useSxStyle();
+const style = getSxStyle({ bg: 'red', mt: 2 });
+```
+
+### useSxTokens
+
+Retrieves raw token values:
+
+```ts
+const [bgColor, errorColor] = useSxTokens('colors', ['gray200', 'red500']);
+```
+
+## Style Props (SxProps)
+
+All props except `transform` support responsive arrays.
+
+### Color Props
+- `backgroundColor` / `bg` - Token<'colors'>
+- `borderColor` - Token<'colors'>
+- `color` (TextStyle) - Token<'colors'>
+
+### Space Props
+- Margin: `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my`
+- Padding: `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py`
+- Position: `top`, `right`, `bottom`, `left`
+- Gap: `gap`, `gapX`, `gapY`
+
+### Size Props
+- `w`, `minW`, `maxW`, `h`, `minH`, `maxH`
+
+### Radii Props
+- `radius`, `topLeftRadius`, `topRightRadius`, `bottomLeftRadius`, `bottomRightRadius`
+
+### Typography
+- `t` - Token<'typography'> (applies font properties)
+- TextStyle props: `color`, `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`, `fontFamily`, `fontStyle`, `textDecorationLine`, `textDecorationColor`
+
+### View Props
+- Flex: `flex`, `alignItems`, `alignContent`, `justifyContent`, `flexWrap`, `flexDirection`, `flexGrow`, `flexShrink`, `flexBasis`, `alignSelf`
+- Position: `position` / `pos`
+- Border: `borderWidth`, `borderTopWidth`, `borderRightWidth`, `borderBottomWidth`, `borderLeftWidth`
+- Other: `opacity`, `overflow`, `transform`, `aspectRatio`, `display`, `elevation`, `zIndex`
+
+### Shortcuts
+- `absoluteFill` - position: absolute + top/right/bottom/left: 0
+- `center` - justifyContent: center + alignItems: center
+
+## Responsive Breakpoints
+
+Pass arrays to apply different values at each breakpoint (mobile-first):
+
+```tsx
+// breakpoints: [480, 768, 1024]
+<Box w={[100, 200, 300, 400]} bg={['red.500', 'blue.500']} />
+```
+
+Array indices: [base, >=bp1, >=bp2, >=bp3]. Last value persists for larger screens.
+
+## Component Patterns
+
+### HOC Pattern
+
+```tsx
+import { createSxComponent } from '@react-native-styled-system/core';
+const StyledView = createSxComponent(View)();
+```
+
+### Text Component
+
+```tsx
+const Txt = (props: TextProps & TextSxProps) => {
+  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
+  return <Text style={getStyle()} {...filteredProps} />;
+};
+
+<Txt t={'h1'} color={'primary'} mt={'4'}>Hello</Txt>
+```
+
+## Dark Mode
+
+Wrap `createTheme` in `useMemo` when the theme depends on dynamic values to avoid creating a new object every render:
+
+```tsx
+const { light, dark } = createThemeColors({ base: 'neutral', theme: 'blue' });
+
+const theme = useMemo(
+  () => createTheme(defaultTheme, { colors: isDarkMode ? dark : light }),
+  [isDarkMode],
+);
+
+<StyledSystemProvider theme={theme}>
+```
+
+## TypeScript
+
+Generate type-safe token keys via CLI:
+
+```sh
+npx generate-theme-type src/AppTheme.ts
+```
+
+This generates interface augmentation for `ThemedTypings`, enabling autocomplete for all token keys.

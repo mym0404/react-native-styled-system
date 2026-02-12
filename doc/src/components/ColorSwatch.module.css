@@ -1,0 +1,9 @@
+.swatch {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  vertical-align: middle;
+  margin-right: 6px;
+}

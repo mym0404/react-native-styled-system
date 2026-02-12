@@ -187,3 +187,9 @@ jsconfig.json
 
 # Git worktrees
 .worktrees/
+
+# Vitest
+.vitest/
+
+# Claude Code
+.claude/

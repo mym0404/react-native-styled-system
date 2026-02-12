@@ -5,87 +5,69 @@ title: Configuration
 
 # Configuration
 
-## 1. `StyledSystemProvider` declaration
+## Provider
 
-`StyledSystemProvider` is a `React.Provider` that accepts a custom theme similar to the `ThemeProvider` of other design packages as an argument and allows you to retrieve values from components or hooks within the app.
+Wrap your app with `StyledSystemProvider` to make theme tokens available to all styled components.
 
 ```tsx title="App.tsx"
-<App>
-  <StyledSystemProvider theme={theme}>
-     {...others}
+import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+
+const App = () => (
+  <StyledSystemProvider theme={defaultTheme}>
+    <MyApp />
   </StyledSystemProvider>
-</App>
+);
 ```
 
-The `theme` passed as an argument is described in the next paragraph.
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `theme` | `Partial<ThemedDict>` | — | Theme tokens (colors, space, sizes, radii, typography, breakpoints) |
+| `screenWidth` | `number` | `useWindowDimensions().width` | Override screen width for [responsive breakpoints](/docs/usage/responsive) |
 
 :::warning
-
-If you try to use a theme in a Render Context where `StyledSystemProvider` does not exist, an error will not occur, but the style may not be applied properly.
-
+Without `StyledSystemProvider`, styles won't resolve properly. No error is thrown.
 :::
 
-## 2. Creating a custom `ThemedDict` object
+## `defaultTheme`
 
-`ThemedDict` is a set of design token values that you need to pass to your theme.
+The quickest way to start. Includes a production-ready token set:
 
-These include `space`, `sizes`, `colors`, etc.
+| Category | Included |
+|---|---|
+| **colors** | Tailwind CSS v4 full palette (22 groups, shades 50–950) + shadcn/ui semantic colors |
+| **space / sizes** | 4px unit scale: `0`, `px`, `0.5`, `1`, `2` ... `48`, plus `full`(`100%`), `half`(`50%`) |
+| **radii** | `sm`(4), `md`(8), `lg`(12), `xl`(16), `2xl`(24), `full`(9999) |
+| **typography** | `h1`, `h2`, `h3`, `body`, `caption`, `small` |
+| **breakpoints** | `[480, 768, 1024]` |
 
-Since a module that `default exports` `ThemedDict` is needed in the Type Generation process using CLI in the future, it is recommended to define it as follows.
+## `createTheme`
 
-```ts title="Theme.ts"
-const unit = 4;
-const spacing = {
-  0: 0 * unit, // 0px
-  px: 1, // 1px
-  0.5: 0.5 * unit, // 2px
-  1: 1 * unit, // 4px
-  2: 2 * unit, // 8px
-  3: 3 * unit, // 12px
-  /* ... */
-} as const;
+Use `createTheme` to build or extend a theme.
 
-const AppTheme = {
-  colors: {
-    white: '#FFFFFF',
-    black: '#000000',
-    transparent: '#FFFFFF00',
-    gray50: '#F9FAFB',
-    gray100: '#F3F4F6',
-    gray200: '#E5E7EB',
-    /* ... */
-  },
-  space: { ...spacing, sidePadding: 0 /* injected from outer */ },
-  sizes: { ...spacing, sidePadding: 0 /* injected from outer */ },
-  radii: { sm: 4, md: 8, ... },
-  typography: {
-    title: { fontSize: 18, textAlign: 'center', /* ... */ }
-  }
-}
+**Extend `defaultTheme`** — each token group is shallow-merged, `breakpoints` is replaced:
 
-export default AppTheme;
+```tsx
+import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme(defaultTheme, {
+  colors: { brand: '#FF6600' },
+  breakpoints: [480, 1024],
+});
 ```
 
-:::info
-In fact, this `ThemedDict` object is used as a value passed to `StyledSystemProvider`,
-but since Type Generation using CLI creates a type based on this object,
-it exists to ensure that values injected later exist in the created type.
+**Build from scratch** — missing groups default to `{}`, breakpoints to `[]`:
 
-For values among the keys that are not immediately known, you can put any value in them and inject them later.
-:::
+```tsx
+import { createTheme } from '@react-native-styled-system/core';
 
-## 3. Passing `ThemedDict` object to `StyledSystemProvider`
-
-```tsx title="App.tsx"
-import theme from './AppTheme'
-
-...
-
-const sidePadding = useResponsiveSidePadding();
-
-<App>
-  <StyledSystemProvider theme={{ ...theme, space: { ...theme.space, sidePadding }, sizes: { ...theme.sizes, sidePadding } }}>
-     {...others}
-  </StyledSystemProvider>
-</App>
+const theme = createTheme({
+  colors: { primary: '#3B82F6', background: '#FFFFFF' },
+  space: { '1': 4, '2': 8, '3': 12 },
+});
 ```
+
+## Next steps
+
+- [Custom Theme](/docs/usage/custom-theme) — `createThemeColors`, dark mode, building a theme from scratch
+- [Responsive Breakpoints](/docs/usage/responsive) — array-based responsive values
+- [TypeScript](/docs/usage/typescript) — type-safe token keys via CLI

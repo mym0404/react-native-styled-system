@@ -1,5 +1,5 @@
 import type { AnyStyle } from '../@types/AnyStyle';
-import type { TextSxProps } from '../@types/SxProps';
+import type { ResolvedTextSxProps, TextSxProps } from '../@types/SxProps';
 import type { ThemedDict } from '../@types/ThemedDict';
 import { createTokenParsers } from '../internal/TokenParser/TokenParser';
 import {
@@ -7,16 +7,21 @@ import {
   fillViewStyleIfNotNullish,
 } from '../internal/util/fillStyleIfNotNullish';
 import { printWarning } from '../internal/util/printWarning';
+import { resolveResponsiveSx } from '../internal/util/resolveResponsiveValue';
 
 export type ThemedStyleType = 'ViewStyle' | 'TextStyle';
 export const propsToThemedStyle = ({
   theme,
-  sx,
+  sx: rawSx,
   styleType = 'ViewStyle',
+  breakpoints = [],
+  screenWidth = 0,
 }: {
   theme?: ThemedDict;
   sx?: TextSxProps;
   styleType?: ThemedStyleType;
+  breakpoints?: number[];
+  screenWidth?: number;
 }): AnyStyle | undefined => {
   const ret: AnyStyle = {};
 
@@ -26,9 +31,11 @@ export const propsToThemedStyle = ({
     return;
   }
 
-  if (!sx) {
+  if (!rawSx) {
     return;
   }
+
+  const sx: ResolvedTextSxProps = resolveResponsiveSx({ sx: rawSx, breakpoints, screenWidth });
 
   const { colors, radii, sizes, space, spaceAsNumberOnly, typography } = createTokenParsers(theme);
 

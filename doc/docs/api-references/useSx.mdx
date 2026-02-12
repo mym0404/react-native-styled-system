@@ -4,4 +4,111 @@ sidebar_position: 1
 
 # useSx
 
-WIP
+A hook that converts `SxProps` into a React Native style object.
+
+This is the primary hook for applying themed styles to components.
+
+## Import
+
+```tsx
+import { useSx } from '@react-native-styled-system/core';
+```
+
+## Signature
+
+```tsx
+const { getStyle, filteredProps } = useSx(props, options?);
+```
+
+## Parameters
+
+### `props`
+
+| Type | Required |
+|---|---|
+| `P & TextSxProps` \| `null` | No |
+
+The component props object containing `SxProps` fields (e.g. `bg`, `m`, `w`) and optionally a `style` prop.
+If `null` or `undefined`, returns `undefined` from `getStyle()` unless `fallback` or `transform` is provided.
+
+### `options`
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `theme` | `ThemedDict` | Context theme | Override the theme from `StyledSystemProvider` |
+| `styleType` | `'ViewStyle'` \| `'TextStyle'` | `'ViewStyle'` | Parse text-specific props (e.g. `color`, `fontSize`, `typography`) when set to `'TextStyle'` |
+| `transform` | `(style: TextStyle) => TextSxProps` | `undefined` | Compute additional `SxProps` from the resolved style |
+| `fallback` | `Omit<TextSxProps, 'sx'>` | `undefined` | Default `SxProps` values used when props don't specify them |
+| `cache` | `boolean` | `undefined` | Enable style caching. Same style result returns the same reference |
+| `screenWidth` | `number` | Context value | Override `screenWidth` for responsive breakpoint resolution |
+
+## Return Value
+
+| Property | Type | Description |
+|---|---|---|
+| `getStyle` | `() => StyleProp<S> \| undefined` | Returns the computed style. Call this and pass to the component's `style` prop |
+| `filteredProps` | `Omit<P, SxPropsKeys \| 'style'>` | Props with all style-related keys removed. Safe to spread onto the underlying component |
+
+## Style Priority
+
+Priority is applied in this order (highest wins):
+
+1. `style` prop (highest)
+2. `sx` prop
+3. Direct props (e.g. `bg`, `mt`)
+4. `fallback` option (lowest)
+
+For shortcut props, the full name has higher priority than the short name:
+
+```tsx
+// backgroundColor will be 'blue' because full name wins
+<StyledView bg={'red'} backgroundColor={'blue'} />
+```
+
+## Usage
+
+### Basic
+
+```tsx
+const StyledView = forwardRef((props: ViewProps & SxProps, ref: Ref<View>) => {
+  const { getStyle, filteredProps } = useSx(props);
+  return <View ref={ref} style={getStyle()} {...filteredProps} />;
+});
+```
+
+### With TextStyle
+
+```tsx
+const StyledText = forwardRef((props: TextProps & TextSxProps, ref: Ref<Text>) => {
+  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
+  return <Text ref={ref} style={getStyle()} {...filteredProps} />;
+});
+```
+
+### With fallback
+
+```tsx
+const Card = (props: ViewProps & SxProps) => {
+  const { getStyle, filteredProps } = useSx(props, {
+    fallback: { bg: 'white', radius: 'md', p: 4 },
+  });
+  return <View style={getStyle()} {...filteredProps} />;
+};
+```
+
+### With transform
+
+```tsx
+const { getStyle } = useSx(props, {
+  transform: ({ marginTop, marginBottom }) => ({
+    mx: (marginTop ?? 0) + (marginBottom ?? 0),
+  }),
+});
+```
+
+### With cache
+
+```tsx
+const { getStyle } = useSx(props, { cache: true });
+// Same style result will return the same reference across renders
+```

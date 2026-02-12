@@ -1,0 +1,101 @@
+---
+sidebar_position: 4
+---
+
+# createThemeColors
+
+A utility function that generates a complete set of semantic color tokens for light and dark modes, following the [shadcn/ui theming convention](https://ui.shadcn.com/docs/theming).
+
+## Import
+
+```tsx
+import { createThemeColors } from '@react-native-styled-system/core';
+```
+
+## Signature
+
+```tsx
+const { light, dark } = createThemeColors({ base, theme });
+```
+
+## Parameters
+
+| Parameter | Type | Description |
+|---|---|---|
+| `base` | `BaseColor` | The gray scale used for neutral UI surfaces. One of: `'slate'`, `'gray'`, `'zinc'`, `'neutral'`, `'stone'` |
+| `theme` | `ThemeColor` | The color used for primary/accent. Any of the 22 Tailwind color names or the 5 gray scales |
+
+`ThemeColor` includes all values of `BaseColor` plus: `'red'`, `'orange'`, `'amber'`, `'yellow'`, `'lime'`, `'green'`, `'emerald'`, `'teal'`, `'cyan'`, `'sky'`, `'blue'`, `'indigo'`, `'violet'`, `'purple'`, `'fuchsia'`, `'pink'`, `'rose'`.
+
+## Return Value
+
+Returns `{ light: Record<string, string>, dark: Record<string, string> }`.
+
+Each record contains the following semantic color tokens:
+
+| Token | Light | Dark |
+|---|---|---|
+| `background` | `#FFFFFF` | `base.950` |
+| `foreground` | `base.950` | `base.50` |
+| `card` | `#FFFFFF` | `base.900` |
+| `card-foreground` | `base.950` | `base.50` |
+| `popover` | `#FFFFFF` | `base.900` |
+| `popover-foreground` | `base.950` | `base.50` |
+| `primary` | `theme.900` (gray) / `theme.600` (color) | `theme.200` (gray) / `theme.500` (color) |
+| `primary-foreground` | `theme.50` (gray) / `#FFFFFF` (color) | `theme.900` (gray) / `#FFFFFF` (color) |
+| `secondary` | `base.100` | `base.800` |
+| `secondary-foreground` | `base.900` | `base.50` |
+| `muted` | `base.100` | `base.800` |
+| `muted-foreground` | `base.500` | `base.400` |
+| `accent` | `base.100` | `base.800` |
+| `accent-foreground` | `base.900` | `base.50` |
+| `destructive` | `red.600` | `red.400` |
+| `destructive-foreground` | `base.50` | `base.50` |
+| `border` | `base.200` | `base.800` |
+| `input` | `base.200` | `base.800` |
+| `ring` | `base.400` (gray) / `theme.400` (color) | `base.500` (gray) / `theme.500` (color) |
+| `chart-1` ~ `chart-5` | Fixed chart palette | Fixed chart palette |
+
+When `theme` is a gray scale (same type as `base`), primary maps to darker/lighter shades of that gray. When `theme` is a saturated color, primary uses the vibrant shade directly.
+
+## Usage
+
+### Basic
+
+```tsx
+const { light, dark } = createThemeColors({ base: 'neutral', theme: 'neutral' });
+```
+
+### With colored primary
+
+```tsx
+const { light, dark } = createThemeColors({ base: 'zinc', theme: 'blue' });
+```
+
+### With defaultTheme
+
+```tsx
+import { createTheme, defaultTheme, createThemeColors } from '@react-native-styled-system/core';
+
+const { light, dark } = createThemeColors({ base: 'slate', theme: 'violet' });
+
+const theme = createTheme(defaultTheme, { colors: light });
+```
+
+### Dark mode switching
+
+```tsx
+const { light: lightColors, dark: darkColors } = createThemeColors({
+  base: 'neutral',
+  theme: 'blue',
+});
+
+const isDark = useColorScheme() === 'dark';
+
+const theme = useMemo(
+  () => createTheme(defaultTheme, { colors: isDark ? darkColors : lightColors }),
+  [isDark],
+);
+
+<StyledSystemProvider theme={theme}>
+```

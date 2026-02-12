@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(wc:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git rm:*)",
+      "Bash(yarn jest:*)",
+      "Bash(yarn check:all:*)",
+      "Bash(yarn check:test:*)",
+      "Bash(yarn check:type:*)",
+      "Bash(yarn eslint:*)",
+      "Bash(gh pr create:*)",
+      "Bash(python3:*)",
+      "Bash(npx playwright:*)"
     ]
   }
 }
