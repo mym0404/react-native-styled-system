@@ -1,6 +1,7 @@
 const path = require('path');
 const escape = require('escape-string-regexp');
-const { getDefaultConfig } = require('@expo/metro-config');
+const { getDefaultConfig, MetroConfig } = require('@expo/metro-config');
+const exclusionList = require('metro-config/private/defaults/exclusionList').default;
 
 const packages = [
   {
@@ -8,8 +9,6 @@ const packages = [
     pak: require('../packages/core/package.json'),
   },
 ];
-
-// const corePackage = require('../packages/core/package.json');
 
 const root = path.resolve(__dirname, '..');
 
@@ -28,11 +27,11 @@ const extraNodeModules = excludedModules.reduce((acc, name) => {
   return acc;
 }, {});
 
-const blacklistRE = excludedModules.map(
-  (m) => new RegExp(`^${escape(path.join(root, 'node_modules', m))}\\/.*$`),
+const blockList = exclusionList(
+  excludedModules.map((m) => new RegExp(`^${escape(path.join(root, 'node_modules', m))}\\/.*$`)),
 );
 
-/** @type {import('metro-config').MetroConfig} */
+/** @type {import('@expo/metro-config').MetroConfig} */
 module.exports = {
   ...defaultConfig,
 
@@ -44,7 +43,7 @@ module.exports = {
   resolver: {
     ...defaultConfig.resolver,
 
-    blacklistRE,
+    blockList,
     extraNodeModules,
   },
 };
