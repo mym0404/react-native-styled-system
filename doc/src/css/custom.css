@@ -244,3 +244,31 @@ body[data-theme='dark'] .aa-ItemContent mark {
   background: rgba(124, 134, 255, 0.15);
 }
 
+/* ===== Copy Markdown Button ===== */
+.copy-markdown-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.copy-markdown-button {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(97, 95, 255, 0.2);
+  background: transparent;
+  color: var(--ifm-color-primary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.copy-markdown-button:hover {
+  border-color: var(--ifm-color-primary);
+  background: rgba(97, 95, 255, 0.06);
+}
+
+.copy-markdown-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

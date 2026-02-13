@@ -131,7 +131,7 @@ const config: Config = {
     ],
   ],
 
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: ['docusaurus-plugin-sass', './plugins/raw-docs-plugin.js'],
 };
 
 export default config;
