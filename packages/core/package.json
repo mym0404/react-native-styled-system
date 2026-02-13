@@ -1,6 +1,6 @@
 {
   "name": "@react-native-styled-system/core",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/src/index.d.ts",
@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "@mj-studio/js-util": "1.0.34",
-    "@react-native-styled-system/util": "^2.2.0",
+    "@react-native-styled-system/util": "^2.2.1",
     "invariant": "^2.2.4",
     "object-hash": "^3.0.0"
   },
