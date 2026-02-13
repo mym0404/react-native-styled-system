@@ -11,7 +11,13 @@
       "Bash(yarn eslint:*)",
       "Bash(gh pr create:*)",
       "Bash(python3:*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "Bash(npm view:*)",
+      "Bash(yarn build:*)",
+      "Bash(yarn remove:*)",
+      "Bash(yarn add:*)",
+      "mcp__playwright__playwright_navigate"
     ]
   }
 }
