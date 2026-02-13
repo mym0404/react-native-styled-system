@@ -11,7 +11,7 @@
     "check:test": "jest",
     "build": "lerna run prepack",
     "release:version": "lerna version --force-publish --yes",
-    "release:lib": "lerna publish from-package --yes",
+    "release:lib": "yarn check:all && lerna publish from-package --yes",
     "release:doc": "cd doc && yarn deploy",
     "release": "yarn release:lib && yarn release:doc",
     "dev": "yarn example start",
