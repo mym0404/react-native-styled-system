@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/mym0404/react-native-styled-system/compare/v2.1.0...v2.1.1) (2026-02-13)
+
+### Bug Fixes
+
+- **doc:** improve responsive layout on landing page ([888bb9e](https://github.com/mym0404/react-native-styled-system/commit/888bb9e7f495ce64db243266b41de8df469db4ee))
+
+### Features
+
+- **doc:** replace Algolia with local search plugin ([ead920a](https://github.com/mym0404/react-native-styled-system/commit/ead920a6c95d9f7935209abf4f7f5b7fb3b3aaee))
+
 # [2.1.0](https://github.com/mym0404/react-native-styled-system/compare/v1.4.5...v2.1.0) (2026-02-12)
 
 ### Features
