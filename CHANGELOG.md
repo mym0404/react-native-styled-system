@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/mym0404/react-native-styled-system/compare/v1.4.5...v2.1.2) (2026-02-13)
+
+### Bug Fixes
+
+- **doc:** improve responsive layout on landing page ([888bb9e](https://github.com/mym0404/react-native-styled-system/commit/888bb9e7f495ce64db243266b41de8df469db4ee))
+
+### Features
+
+- **core:** add createTheme, responsive breakpoints, and docs overhaul ([b5f77c8](https://github.com/mym0404/react-native-styled-system/commit/b5f77c829eb8e87a861c2fdc23a1ffa9260d5c47))
+- **core:** add defaultTheme with Tailwind CSS v4 design tokens ([df60ee8](https://github.com/mym0404/react-native-styled-system/commit/df60ee82e0c72308feca5f614af8c35bec7060b7))
+- **core:** add defaultTheme, createThemeColors and shadcn/ui semantic tokens ([871a9cc](https://github.com/mym0404/react-native-styled-system/commit/871a9cc2b5f07d64fd5470478454c26bdaec5b8a))
+- **doc:** replace Algolia with local search plugin ([ead920a](https://github.com/mym0404/react-native-styled-system/commit/ead920a6c95d9f7935209abf4f7f5b7fb3b3aaee))
+
 ## [2.1.1](https://github.com/mym0404/react-native-styled-system/compare/v1.4.5...v2.1.1) (2026-02-13)
 
 ### Bug Fixes
