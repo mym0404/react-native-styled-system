@@ -12,7 +12,7 @@
     },
     "publish": {
       "graphType": "all",
-      "allowBranch": "main,develop",
+      "allowBranch": "develop",
       "allowPeerDependenciesUpdate": true,
       "private": false,
       "registry": "https://registry.npmjs.org/",
