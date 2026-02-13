@@ -33,18 +33,24 @@
 /* ===== Navbar ===== */
 [data-theme='light'] .navbar {
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(97, 95, 255, 0.08);
   box-shadow: 0 1px 12px rgba(97, 95, 255, 0.04);
 }
 
-[data-theme='dark'] .navbar {
-  background: rgba(13, 13, 26, 0.8);
+[data-theme='light'] .navbar__inner {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(13, 13, 26, 0.8);
   border-bottom: 1px solid rgba(124, 134, 255, 0.1);
   box-shadow: 0 1px 12px rgba(124, 134, 255, 0.04);
+}
+
+[data-theme='dark'] .navbar__inner {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .navbar__title {
@@ -128,60 +134,113 @@
   border-bottom-color: rgba(124, 134, 255, 0.1);
 }
 
+.navbar-sidebar__item {
+  overflow-y: auto;
+}
+
 /* ===== TOC (table of contents) ===== */
 .table-of-contents__link:hover,
 .table-of-contents__link--active {
   color: var(--ifm-color-primary);
 }
 
-/* ===== DocSearch ===== */
-[data-theme='light'] .DocSearch {
-  --docsearch-muted-color: var(--ifm-color-secondary-darkest);
-  --docsearch-container-background: rgba(94, 100, 112, 0.7);
-  --docsearch-modal-background: var(--ifm-color-secondary-lighter);
-  --docsearch-searchbox-background: var(--ifm-color-secondary);
-  --docsearch-searchbox-focus-background: var(--ifm-color-white);
-  --docsearch-hit-color: var(--ifm-font-color-base);
-  --docsearch-hit-active-color: var(--ifm-color-white);
-  --docsearch-hit-background: var(--ifm-color-white);
-  --docsearch-footer-background: var(--ifm-color-white);
+/* ===== Local Search ===== */
+:root {
+  --aa-search-input-height: 38px;
+  --aa-primary-color-rgb: 97, 95, 255;
+  --aa-primary-color-alpha: 1;
+  --aa-muted-color-rgb: 128, 126, 163;
+  --aa-muted-color-alpha: 0.7;
+  --aa-input-border-color-rgb: 97, 95, 255;
+  --aa-input-border-color-alpha: 0.2;
+  --aa-selected-color-rgb: 97, 95, 255;
+  --aa-selected-color-alpha: 0.08;
+  --aa-icon-color-rgb: 97, 95, 255;
+  --aa-icon-color-alpha: 0.6;
 }
 
-[data-theme='dark'] .DocSearch {
-  --docsearch-text-color: var(--ifm-font-color-base);
-  --docsearch-muted-color: var(--ifm-color-secondary-darkest);
-  --docsearch-container-background: rgba(47, 55, 69, 0.7);
-  --docsearch-modal-background: var(--ifm-background-color);
-  --docsearch-searchbox-background: var(--ifm-background-color);
-  --docsearch-searchbox-focus-background: var(--ifm-color-black);
-  --docsearch-hit-color: var(--ifm-font-color-base);
-  --docsearch-hit-active-color: var(--ifm-color-white);
-  --docsearch-hit-background: var(--ifm-color-emphasis-100);
-  --docsearch-footer-background: var(--ifm-background-surface-color);
-  --docsearch-key-gradient: linear-gradient(
-    -26.5deg,
-    var(--ifm-color-emphasis-200) 0%,
-    var(--ifm-color-emphasis-100) 100%
-  );
+body[data-theme='dark'] {
+  --aa-primary-color-rgb: 124, 134, 255;
+  --aa-muted-color-rgb: 146, 138, 255;
+  --aa-muted-color-alpha: 0.8;
+  --aa-input-border-color-rgb: 124, 134, 255;
+  --aa-input-border-color-alpha: 0.2;
+  --aa-background-color-rgb: 17, 17, 24;
+  --aa-input-background-color-rgb: 13, 13, 26;
+  --aa-selected-color-rgb: 124, 134, 255;
+  --aa-selected-color-alpha: 0.12;
+  --aa-icon-color-rgb: 124, 134, 255;
+  --aa-icon-color-alpha: 0.7;
+  --aa-panel-border-color-rgb: 124, 134, 255;
+  --aa-panel-border-color-alpha: 0.15;
 }
 
-/* ===== DocSearch button ===== */
-.DocSearch-Button {
+.aa-Autocomplete .aa-Form {
+  border-radius: 8px;
+  border: 1px solid rgba(97, 95, 255, 0.15);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.aa-Autocomplete .aa-Form:focus-within {
+  border-color: rgba(97, 95, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(97, 95, 255, 0.08);
+}
+
+body[data-theme='dark'] .aa-Autocomplete .aa-Form {
+  border-color: rgba(124, 134, 255, 0.15);
+}
+
+body[data-theme='dark'] .aa-Autocomplete .aa-Form:focus-within {
+  border-color: rgba(124, 134, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(124, 134, 255, 0.1);
+}
+
+.aa-DetachedSearchButton {
   border-radius: 8px !important;
   border: 1px solid rgba(97, 95, 255, 0.15) !important;
-  transition: border-color 0.15s, box-shadow 0.15s !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  padding: 0 12px !important;
+  gap: 8px;
 }
 
-.DocSearch-Button:hover {
+.aa-DetachedSearchButton:hover {
   border-color: rgba(97, 95, 255, 0.3) !important;
-  box-shadow: 0 0 12px rgba(97, 95, 255, 0.08) !important;
+  box-shadow: 0 0 12px rgba(97, 95, 255, 0.06) !important;
 }
 
-[data-theme='dark'] .DocSearch-Button {
+body[data-theme='dark'] .aa-DetachedSearchButton {
   border-color: rgba(124, 134, 255, 0.15) !important;
 }
 
-[data-theme='dark'] .DocSearch-Button:hover {
+body[data-theme='dark'] .aa-DetachedSearchButton:hover {
   border-color: rgba(124, 134, 255, 0.3) !important;
-  box-shadow: 0 0 12px rgba(124, 134, 255, 0.1) !important;
+  box-shadow: 0 0 12px rgba(124, 134, 255, 0.08) !important;
 }
+
+.aa-DetachedSearchButtonIcon {
+  color: rgba(97, 95, 255, 0.5);
+}
+
+body[data-theme='dark'] .aa-DetachedSearchButtonIcon {
+  color: rgba(124, 134, 255, 0.6);
+}
+
+.aa-DetachedContainer .aa-Panel {
+  border-radius: 0 0 12px 12px;
+}
+
+.aa-Item[aria-selected='true'] {
+  border-radius: 6px;
+}
+
+.aa-ItemContent mark {
+  color: var(--ifm-color-primary);
+  background: rgba(97, 95, 255, 0.1);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+body[data-theme='dark'] .aa-ItemContent mark {
+  background: rgba(124, 134, 255, 0.15);
+}
+
