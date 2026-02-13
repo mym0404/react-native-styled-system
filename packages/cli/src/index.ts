@@ -23,8 +23,23 @@ export async function run() {
         const filePath = resolve(themeFile);
         const { mod, dependencies } = await bundleNRequire(filePath, {
           esbuildOptions: {
-            external: ['react-native', 'react-native/*'],
+            external: [
+              'react-native',
+              'react-native/*',
+              '@react-native-styled-system/core',
+              '@react-native-styled-system/core/*',
+              '@react-native-styled-system/util',
+              '@react-native-styled-system/util/*',
+            ],
           },
+          external: [
+            'react-native',
+            'react-native/*',
+            '@react-native-styled-system/core',
+            '@react-native-styled-system/core/*',
+            '@react-native-styled-system/util',
+            '@react-native-styled-system/util/*',
+          ],
         });
         const theme = mod.default || mod.theme || mod;
 
