@@ -2,7 +2,8 @@ import type { PropsWithChildren } from 'react';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BaseColor, ThemeColor } from '@react-native-styled-system/core';
-import { createTheme, createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+import { createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 
 import AppTheme from './AppTheme';
 

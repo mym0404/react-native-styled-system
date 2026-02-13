@@ -27,7 +27,7 @@ Use `createTheme` to build a theme from scratch or extend an existing one.
 `createTheme(base, overrides)` shallow-merges each token group. `breakpoints` is replaced, not merged.
 
 ```ts
-import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme(defaultTheme, {
   colors: { brand: '#FF6600' },
@@ -69,7 +69,8 @@ Since `light` and `dark` share the same keys, toggling dark mode is just swappin
 
 ```tsx title="AppThemeProvider.tsx"
 import React, { useContext, useMemo, useState } from 'react';
-import { createTheme, defaultTheme, createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+import { createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const { light, dark } = createThemeColors({ base: 'neutral', theme: 'blue' });
 
@@ -118,7 +119,7 @@ const isDarkMode = colorScheme === 'dark';
 ## Building a theme from scratch
 
 ```ts
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 
 const myTheme = createTheme({
   space: { '0': 0, '1': 4, '2': 8, '3': 12, '4': 16 },

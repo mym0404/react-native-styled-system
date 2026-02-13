@@ -8,11 +8,15 @@ const packages = [
     name: 'core',
     pak: require('../packages/core/package.json'),
   },
+  {
+    name: 'util',
+    pak: require('../packages/util/package.json'),
+  },
 ];
 
 const root = path.resolve(__dirname, '..');
 
-const excludedModules = [...packages.flatMap((p) => Object.keys(p.pak.peerDependencies))];
+const excludedModules = [...packages.flatMap((p) => Object.keys(p.pak.peerDependencies || {}))];
 
 const defaultConfig = getDefaultConfig(__dirname);
 

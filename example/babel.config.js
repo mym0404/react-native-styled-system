@@ -5,6 +5,10 @@ const packages = [
     name: 'core',
     pak: require('../packages/core/package.json'),
   },
+  {
+    name: 'util',
+    pak: require('../packages/util/package.json'),
+  },
 ];
 
 const alias = {

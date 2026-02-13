@@ -10,7 +10,8 @@ title: Configuration
 Wrap your app with `StyledSystemProvider` to make theme tokens available to all styled components.
 
 ```tsx title="App.tsx"
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { defaultTheme } from '@react-native-styled-system/util';
 
 const App = () => (
   <StyledSystemProvider theme={defaultTheme}>
@@ -47,7 +48,7 @@ Use `createTheme` to build or extend a theme.
 **Extend `defaultTheme`** — each token group is shallow-merged, `breakpoints` is replaced:
 
 ```tsx
-import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme(defaultTheme, {
   colors: { brand: '#FF6600' },
@@ -58,7 +59,7 @@ const theme = createTheme(defaultTheme, {
 **Build from scratch** — missing groups default to `{}`, breakpoints to `[]`:
 
 ```tsx
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme({
   colors: { primary: '#3B82F6', background: '#FFFFFF' },

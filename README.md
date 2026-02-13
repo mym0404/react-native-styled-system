@@ -18,7 +18,7 @@ Token-driven styling for React Native. Pass design tokens as props, resolve them
 ## Install
 
 ```
-yarn add @react-native-styled-system/core
+yarn add @react-native-styled-system/core @react-native-styled-system/util
 ```
 
 ## Why
@@ -80,7 +80,8 @@ See the full [v2.0 release notes](https://mym0404.github.io/react-native-styled-
 **1. Wrap your app with the provider:**
 
 ```tsx
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { defaultTheme } from '@react-native-styled-system/util';
 
 const App = () => (
   <StyledSystemProvider theme={defaultTheme}>

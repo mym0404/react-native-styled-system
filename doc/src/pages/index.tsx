@@ -152,7 +152,9 @@ const Home = () => {
                 {'GitHub'}
               </Link>
             </div>
-            <code className={styles.installBar}>{'yarn add @react-native-styled-system/core'}</code>
+            <code className={styles.installBar}>
+              {'yarn add @react-native-styled-system/core @react-native-styled-system/util'}
+            </code>
           </div>
         </section>
 

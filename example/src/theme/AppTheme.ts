@@ -1,4 +1,4 @@
-import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme(defaultTheme, {
   space: {

@@ -75,7 +75,8 @@ const { light, dark } = createThemeColors({ base: 'zinc', theme: 'blue' });
 ### With defaultTheme
 
 ```tsx
-import { createTheme, defaultTheme, createThemeColors } from '@react-native-styled-system/core';
+import { createThemeColors } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const { light, dark } = createThemeColors({ base: 'slate', theme: 'violet' });
 

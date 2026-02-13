@@ -12,7 +12,8 @@ React Native Styled System v2.0 ships built-in design tokens, semantic color gen
 `defaultTheme` provides a ready-to-use theme with the full [Tailwind CSS v4 color palette](https://tailwindcss.com/docs/colors) and [shadcn/ui semantic colors](https://ui.shadcn.com/docs/theming). No configuration required.
 
 ```tsx
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { defaultTheme } from '@react-native-styled-system/util';
 
 const App = () => (
   <StyledSystemProvider theme={defaultTheme}>
@@ -55,7 +56,7 @@ Generated tokens: `background`, `foreground`, `primary`, `primary-foreground`, `
 **Create a theme with defaults filled in:**
 
 ```tsx
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme({
   colors: { brand: '#615fff' },
@@ -68,7 +69,7 @@ Missing token categories (`sizes`, `radii`, `typography`, `breakpoints`) are fil
 **Merge a base theme with overrides:**
 
 ```tsx
-import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const customTheme = createTheme(defaultTheme, {
   colors: { brand: '#615fff' },
@@ -119,7 +120,7 @@ import { fillNullishThemeKey } from '@react-native-styled-system/core';
 const theme = fillNullishThemeKey(myTheme);
 
 // After (v2)
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 const theme = createTheme(myTheme);
 ```
 
@@ -146,14 +147,14 @@ If you have custom type assertions or wrappers around these HOCs, review them af
 **1. Update the package:**
 
 ```
-yarn add @react-native-styled-system/core@2
+yarn add @react-native-styled-system/core@2 @react-native-styled-system/util@2
 ```
 
 **2. Replace `fillNullishThemeKey` (if used):**
 
 ```tsx
 // createTheme() is a drop-in replacement
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 const theme = createTheme(myPartialTheme);
 ```
 
@@ -162,7 +163,8 @@ const theme = createTheme(myPartialTheme);
 If you were manually defining Tailwind colors or basic design tokens, `defaultTheme` provides them out of the box.
 
 ```tsx
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { defaultTheme } from '@react-native-styled-system/util';
 
 <StyledSystemProvider theme={defaultTheme}>
 ```

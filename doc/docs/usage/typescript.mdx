@@ -42,6 +42,19 @@ More convenient use is possible with `scripts` in `package.json`.
   </TabItem>
 </Tabs>
 
+## Theme File Import Rules
+
+Keep your `theme.ts` file focused on tokens only.
+
+- Import only theme utilities you actually use (`createTheme`, `defaultTheme`, `createThemeColors`)
+- Avoid importing UI components, hooks, screens, or any unrelated runtime modules
+- Extra imports can break CLI theme type generation during bundling
+
+```ts title="theme.ts"
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
+import { createThemeColors } from '@react-native-styled-system/core';
+```
+
 :::tip
 When changing the version of a package or installing a new one, you must always execute the type creation command.
 
