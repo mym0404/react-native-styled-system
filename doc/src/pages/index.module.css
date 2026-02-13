@@ -181,6 +181,7 @@
 /* ===== Install bar ===== */
 .installBar {
   display: inline-block;
+  max-width: 100%;
   background: rgba(97, 95, 255, 0.06);
   border: 1px solid rgba(97, 95, 255, 0.15);
   border-radius: 10px;
@@ -190,6 +191,9 @@
   user-select: all;
   backdrop-filter: blur(8px);
   transition: border-color 0.25s, box-shadow 0.25s;
+  overflow-x: auto;
+  box-sizing: border-box;
+  word-break: break-all;
 }
 
 .installBar:hover {
@@ -238,6 +242,12 @@
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.codeColumn {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .codeArrow {
@@ -273,7 +283,7 @@
   border-color: rgba(124, 134, 255, 0.25);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 996px) {
   .codeComparison {
     grid-template-columns: 1fr;
   }
@@ -482,26 +492,52 @@
 /* ===== Responsive ===== */
 @media screen and (max-width: 768px) {
   .hero {
-    padding: 4rem 1.5rem 3rem;
+    padding: 4rem 1rem 3rem;
   }
 
   .heroTitle {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    word-break: keep-all;
   }
 
   .tagline {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .heroButtons {
     flex-direction: column;
   }
 
+  .sectionAlt {
+    padding: 3rem 1rem;
+  }
+
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .v2Banner {
+    padding: 2.5rem 1rem;
+  }
+
   .v2BannerInner {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .v2BannerInner p {
+    font-size: 0.95rem;
+  }
+
+  .installBar {
+    font-size: 0.82rem;
+    padding: 0.6rem 1rem;
   }
 }
