@@ -21,7 +21,11 @@ export async function run() {
 
       const read = async () => {
         const filePath = resolve(themeFile);
-        const { mod, dependencies } = await bundleNRequire(filePath);
+        const { mod, dependencies } = await bundleNRequire(filePath, {
+          esbuildOptions: {
+            external: ['react-native', 'react-native/*'],
+          },
+        });
         const theme = mod.default || mod.theme || mod;
 
         return { theme, dependencies };
