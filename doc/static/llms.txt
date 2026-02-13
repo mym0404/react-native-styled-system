@@ -1,18 +1,32 @@
 # React Native Styled System
 
-> A styled-system implementation for React Native. Converts theme tokens into React Native styles via hooks and HOC patterns.
+> Token-driven styling for React Native. Pass design tokens as props, resolve them from a centralized theme, and ship consistent UI faster.
 
-Package: `@react-native-styled-system/core`
+- Docs: https://mym0404.github.io/react-native-styled-system/
+- GitHub: https://github.com/mym0404/react-native-styled-system
+- Package: `@react-native-styled-system/core` (v2.0)
+- CLI: `@react-native-styled-system/cli` (v2.0)
+- License: MIT
+
+---
 
 ## Installation
 
 ```sh
 npm install @react-native-styled-system/core
+# or
+yarn add @react-native-styled-system/core
 ```
+
+Peer dependencies: `react`, `react-native`
+
+---
 
 ## Quick Start
 
-Wrap your app with `StyledSystemProvider` and pass a theme:
+### 1. Provider Setup
+
+Wrap your app root with `StyledSystemProvider` and pass a theme object:
 
 ```tsx
 import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
@@ -24,7 +38,25 @@ const App = () => (
 );
 ```
 
-Create styled components using `useSx` hook or `createSxComponent` HOC:
+`StyledSystemProvider` props:
+- `theme: Partial<ThemedDict>` (required) - The theme object. Automatically filled with `createTheme()` internally.
+- `screenWidth?: number` (optional) - Override screen width for responsive resolution. Defaults to `useWindowDimensions().width`.
+- `children: ReactNode`
+
+### 2. Create Styled Components
+
+**HOC pattern** (recommended for simple components):
+
+```tsx
+import { View, Text, Image } from 'react-native';
+import { createSxComponent, createSxTextComponent } from '@react-native-styled-system/core';
+
+const Box = createSxComponent(View)();
+const Txt = createSxTextComponent(Text)();
+const StyledImage = createSxComponent(Image)();
+```
+
+**Hook pattern** (for custom logic):
 
 ```tsx
 import { View, ViewProps } from 'react-native';
@@ -34,173 +66,230 @@ const Box = (props: ViewProps & SxProps) => {
   const { getStyle, filteredProps } = useSx(props);
   return <View style={getStyle()} {...filteredProps} />;
 };
-
-// Usage
-<Box bg={'blue.500'} p={'4'} radius={'md'} />
 ```
 
-## Theme
+### 3. Use Token Props
 
-A theme is an object matching `ThemedDict`:
+```tsx
+<Box bg={'primary'} p={4} radius={'lg'}>
+  <Txt t={'h1'} color={'primary-foreground'}>
+    Hello World
+  </Txt>
+</Box>
+
+<Box bg={'red.500'} m={2} w={10} h={10} radius={'full'} />
+
+<Txt t={'caption'} color={'muted-foreground'} align={'center'}>
+  Styled System
+</Txt>
+```
+
+---
+
+## ThemedDict (Theme Shape)
 
 ```ts
 type ThemedDict = {
-  space: Record<string, SpaceValue>;
-  sizes: Record<string, SizesValue>;
-  colors: Record<string, ColorsValue>;
-  radii: Record<string, RadiiValue>;
-  typography: Record<string, TypographyValue>;
+  space: Record<string | number, SpaceValue>;
+  sizes: Record<string | number, SizesValue>;
+  colors: Record<string | number, ColorsValue>;
+  radii: Record<string | number, RadiiValue>;
+  typography: Record<string | number, TypographyValue>;
   breakpoints?: number[];
 };
 ```
 
-### defaultTheme
-
-Pre-built theme with Tailwind CSS v4 full palette (22 color groups, shades 50-950), shadcn/ui semantic colors, 4px spacing scale, radii (sm/md/lg/xl/2xl/full), typography presets (h1-h3, body, caption, small), and breakpoints [480, 768, 1024].
-
-### createTheme
-
-Build a theme from scratch or extend an existing one.
-
-Extend mode (two arguments) - each token group is shallow-merged, breakpoints is replaced:
+### Token Value Types
 
 ```ts
-import { createTheme, defaultTheme } from '@react-native-styled-system/core';
+type SpaceValue = number | 'auto' | `${number}%` | null;
+type SizesValue = number | 'auto' | `${number}%` | null;
+type ColorsValue = string;
+type RadiiValue = number;
+type TypographyValue = {
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: TextStyle['fontWeight'];
+  lineHeight?: number;
+  letterSpacing?: number;
+  textAlign?: TextStyle['textAlign'];
+  fontStyle?: TextStyle['fontStyle'];
+};
+```
 
+---
+
+## defaultTheme
+
+Pre-built production-ready theme included with the library. Contains:
+
+### Space Tokens (4px unit scale)
+
+| Key    | Value | Key    | Value | Key    | Value |
+|--------|-------|--------|-------|--------|-------|
+| `0`    | 0     | `5`    | 20    | `14`   | 56    |
+| `px`   | 1     | `6`    | 24    | `16`   | 64    |
+| `0.5`  | 2     | `7`    | 28    | `20`   | 80    |
+| `1`    | 4     | `8`    | 32    | `24`   | 96    |
+| `2`    | 8     | `9`    | 36    | `32`   | 128   |
+| `3`    | 12    | `10`   | 40    | `40`   | 160   |
+| `4`    | 16    | `12`   | 48    | `48`   | 192   |
+
+### Size Tokens
+
+Same as space tokens plus:
+- `full` = `'100%'`
+- `half` = `'50%'`
+
+### Color Palette (Tailwind CSS v4)
+
+22 color groups, each with 11 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950):
+- Gray scales: `slate`, `gray`, `zinc`, `neutral`, `stone`
+- Colors: `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`
+- Special: `white` (#FFFFFF), `black` (#000000), `transparent`
+
+Color format: `{color}.{shade}` (e.g., `red.500`, `blue.200`, `neutral.900`)
+
+The default theme also includes semantic colors generated by `createThemeColors({ base: 'neutral', theme: 'neutral' })` in light mode.
+
+### Semantic Color Tokens (shadcn/ui convention)
+
+Light mode defaults:
+- `background`: #FFFFFF
+- `foreground`: neutral.950 (#0a0a0a)
+- `card`: #FFFFFF
+- `card-foreground`: neutral.950
+- `popover`: #FFFFFF
+- `popover-foreground`: neutral.950
+- `primary`: neutral.900 (#171717)
+- `primary-foreground`: neutral.50 (#fafafa)
+- `secondary`: neutral.100 (#f5f5f5)
+- `secondary-foreground`: neutral.900
+- `muted`: neutral.100
+- `muted-foreground`: neutral.500 (#737373)
+- `accent`: neutral.100
+- `accent-foreground`: neutral.900
+- `destructive`: red.600 (#e7000b)
+- `destructive-foreground`: neutral.50
+- `border`: neutral.200 (#e5e5e5)
+- `input`: neutral.200
+- `ring`: neutral.400 (#a1a1a1)
+- `chart-1` through `chart-5`: preset chart colors
+
+### Radii Tokens
+
+| Key    | Value |
+|--------|-------|
+| `none` | 0     |
+| `sm`   | 4     |
+| `md`   | 8     |
+| `lg`   | 12    |
+| `xl`   | 16    |
+| `2xl`  | 24    |
+| `full` | 9999  |
+
+### Typography Presets
+
+| Key       | fontSize | fontWeight | lineHeight |
+|-----------|----------|------------|------------|
+| `h1`      | 32       | `'bold'`   | 40         |
+| `h2`      | 24       | `'bold'`   | 32         |
+| `h3`      | 20       | `'600'`    | 28         |
+| `body`    | 16       | -          | 24         |
+| `caption` | 14       | -          | 20         |
+| `small`   | 12       | -          | 16         |
+
+### Default Breakpoints
+
+```ts
+breakpoints: [480, 768, 1024]
+```
+
+---
+
+## createTheme
+
+Two call signatures for creating/extending themes.
+
+### Create mode (single argument)
+
+Creates a new theme. Missing token categories default to `{}`, breakpoints to `[]`:
+
+```ts
+import { createTheme } from '@react-native-styled-system/core';
+
+const theme = createTheme({
+  colors: { primary: '#3B82F6' },
+  space: { '1': 4, '2': 8 },
+});
+// Result: { colors: { primary: '#3B82F6' }, space: { '1': 4, '2': 8 }, sizes: {}, radii: {}, typography: {}, breakpoints: [] }
+```
+
+### Extend mode (two arguments)
+
+Extends a base theme with overrides. Each token group is shallow-merged, breakpoints is replaced:
+
+```ts
 const theme = createTheme(defaultTheme, {
   colors: { brand: '#FF6600' },
   space: { pagePadding: 20 },
   breakpoints: [480, 1024],
 });
+// colors = { ...defaultTheme.colors, brand: '#FF6600' }
+// space = { ...defaultTheme.space, pagePadding: 20 }
+// breakpoints = [480, 1024]  (replaced, not merged)
 ```
 
-Create mode (single argument) - missing groups default to `{}`, breakpoints to `[]`:
+---
 
-```ts
-const theme = createTheme({
-  colors: { primary: '#3B82F6' },
-  space: { '1': 4, '2': 8 },
-});
-```
+## createThemeColors
 
-### createThemeColors
-
-Generates light/dark semantic color sets following shadcn/ui convention:
+Generates light and dark semantic color sets following shadcn/ui convention. Uses the Tailwind CSS v4 palette internally.
 
 ```ts
 import { createThemeColors } from '@react-native-styled-system/core';
 
 const { light, dark } = createThemeColors({
-  base: 'zinc',   // 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
-  theme: 'blue',  // any Tailwind color name
+  base: 'zinc',
+  theme: 'blue',
 });
 ```
 
-Semantic tokens: background, foreground, card, card-foreground, popover, popover-foreground, primary, primary-foreground, secondary, secondary-foreground, muted, muted-foreground, accent, accent-foreground, destructive, destructive-foreground, border, input, ring, chart-1 through chart-5.
+### Parameters
 
-## Hooks
+- `base: BaseColor` - Gray scale for neutral UI elements. One of: `'slate'` | `'gray'` | `'zinc'` | `'neutral'` | `'stone'`
+- `theme: ThemeColor` - Accent color for primary/branded elements. One of: `BaseColor` | `'red'` | `'orange'` | `'amber'` | `'yellow'` | `'lime'` | `'green'` | `'emerald'` | `'teal'` | `'cyan'` | `'sky'` | `'blue'` | `'indigo'` | `'violet'` | `'purple'` | `'fuchsia'` | `'pink'` | `'rose'`
 
-### useSx
+### Return Value
 
-Primary hook. Takes component props and options, returns `{ getStyle, filteredProps }`.
+Returns `{ light: Record<string, ColorsValue>, dark: Record<string, ColorsValue> }`.
 
-```ts
-const { getStyle, filteredProps } = useSx(props, {
-  styleType: 'ViewStyle' | 'TextStyle',
-  fallback: { bg: 'white', p: 4 },
-  transform: (style) => ({ mx: style.marginTop }),
-  cache: true,
-});
-```
+Both contain these semantic token keys:
+`background`, `foreground`, `card`, `card-foreground`, `popover`, `popover-foreground`, `primary`, `primary-foreground`, `secondary`, `secondary-foreground`, `muted`, `muted-foreground`, `accent`, `accent-foreground`, `destructive`, `destructive-foreground`, `border`, `input`, `ring`, `chart-1`, `chart-2`, `chart-3`, `chart-4`, `chart-5`
 
-Style priority (highest to lowest): style prop > sx prop > direct props > fallback.
+### Color Generation Rules
 
-### useSxStyle
+For **light** mode:
+- `background`: #FFFFFF
+- `foreground`: base.950
+- `primary`: theme.600 (or theme.900 for gray-scale themes)
+- `primary-foreground`: #FFFFFF (or theme.50 for gray-scale themes)
+- `secondary`, `muted`, `accent`: base.100
+- `destructive`: red.600
+- `border`, `input`: base.200
+- `ring`: theme.400 (or base.400 for gray-scale themes)
 
-Creates inline style objects from SxProps:
+For **dark** mode:
+- `background`: base.950
+- `foreground`: base.50
+- `primary`: theme.500 (or theme.200 for gray-scale themes)
+- `primary-foreground`: #FFFFFF (or theme.900 for gray-scale themes)
+- `secondary`, `muted`, `accent`: base.800
+- `destructive`: red.400
+- `border`, `input`: base.800
+- `ring`: theme.500 (or base.500 for gray-scale themes)
 
-```ts
-const getSxStyle = useSxStyle();
-const style = getSxStyle({ bg: 'red', mt: 2 });
-```
-
-### useSxTokens
-
-Retrieves raw token values:
-
-```ts
-const [bgColor, errorColor] = useSxTokens('colors', ['gray200', 'red500']);
-```
-
-## Style Props (SxProps)
-
-All props except `transform` support responsive arrays.
-
-### Color Props
-- `backgroundColor` / `bg` - Token<'colors'>
-- `borderColor` - Token<'colors'>
-- `color` (TextStyle) - Token<'colors'>
-
-### Space Props
-- Margin: `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my`
-- Padding: `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py`
-- Position: `top`, `right`, `bottom`, `left`
-- Gap: `gap`, `gapX`, `gapY`
-
-### Size Props
-- `w`, `minW`, `maxW`, `h`, `minH`, `maxH`
-
-### Radii Props
-- `radius`, `topLeftRadius`, `topRightRadius`, `bottomLeftRadius`, `bottomRightRadius`
-
-### Typography
-- `t` - Token<'typography'> (applies font properties)
-- TextStyle props: `color`, `fontSize`, `fontWeight`, `lineHeight`, `letterSpacing`, `textAlign`, `fontFamily`, `fontStyle`, `textDecorationLine`, `textDecorationColor`
-
-### View Props
-- Flex: `flex`, `alignItems`, `alignContent`, `justifyContent`, `flexWrap`, `flexDirection`, `flexGrow`, `flexShrink`, `flexBasis`, `alignSelf`
-- Position: `position` / `pos`
-- Border: `borderWidth`, `borderTopWidth`, `borderRightWidth`, `borderBottomWidth`, `borderLeftWidth`
-- Other: `opacity`, `overflow`, `transform`, `aspectRatio`, `display`, `elevation`, `zIndex`
-
-### Shortcuts
-- `absoluteFill` - position: absolute + top/right/bottom/left: 0
-- `center` - justifyContent: center + alignItems: center
-
-## Responsive Breakpoints
-
-Pass arrays to apply different values at each breakpoint (mobile-first):
-
-```tsx
-// breakpoints: [480, 768, 1024]
-<Box w={[100, 200, 300, 400]} bg={['red.500', 'blue.500']} />
-```
-
-Array indices: [base, >=bp1, >=bp2, >=bp3]. Last value persists for larger screens.
-
-## Component Patterns
-
-### HOC Pattern
-
-```tsx
-import { createSxComponent } from '@react-native-styled-system/core';
-const StyledView = createSxComponent(View)();
-```
-
-### Text Component
-
-```tsx
-const Txt = (props: TextProps & TextSxProps) => {
-  const { getStyle, filteredProps } = useSx(props, { styleType: 'TextStyle' });
-  return <Text style={getStyle()} {...filteredProps} />;
-};
-
-<Txt t={'h1'} color={'primary'} mt={'4'}>Hello</Txt>
-```
-
-## Dark Mode
-
-Wrap `createTheme` in `useMemo` when the theme depends on dynamic values to avoid creating a new object every render:
+### Dark Mode Pattern
 
 ```tsx
 const { light, dark } = createThemeColors({ base: 'neutral', theme: 'blue' });
@@ -213,12 +302,694 @@ const theme = useMemo(
 <StyledSystemProvider theme={theme}>
 ```
 
-## TypeScript
+---
 
-Generate type-safe token keys via CLI:
+## Hooks
 
-```sh
-npx generate-theme-type src/AppTheme.ts
+### useSx
+
+Primary hook for resolving style props. Takes component props and options, returns a style getter and filtered props.
+
+```ts
+import { useSx } from '@react-native-styled-system/core';
+
+const { getStyle, filteredProps } = useSx(props, options);
 ```
 
-This generates interface augmentation for `ThemedTypings`, enabling autocomplete for all token keys.
+**Parameters:**
+
+- `props?: P | null` - Component props containing SxProps. Can be null/undefined.
+- `options?: UseSxOptions` - Configuration object:
+
+```ts
+type UseSxOptions = {
+  theme?: ThemedDict;        // Override context theme
+  styleType?: 'ViewStyle' | 'TextStyle';  // Default: 'ViewStyle'
+  transform?: (style: AnyStyle) => TextSxProps;  // Post-process computed style
+  fallback?: Omit<TextSxProps, 'sx'>;  // Default style props (lowest priority)
+  cache?: boolean;           // Enable object-hash based caching
+  screenWidth?: number;      // Override context screen width
+};
+```
+
+**Return value:**
+
+- `getStyle(): StyleProp<AnyStyle> | undefined` - Stable callback that computes and returns the merged style. Call in the component's render.
+- `filteredProps: Omit<P, SxPropsKeys | 'style'>` - Original props with all style-related props removed. Spread onto the base component.
+
+**Style merge priority** (highest to lowest):
+1. `style` prop (React Native inline style)
+2. `sx` prop (SxProps object)
+3. Direct props (e.g., `bg`, `p`, `mt` passed directly)
+4. `fallback` option
+
+Within each level, when both shortcut and full name are provided, the full name takes priority (e.g., `backgroundColor` overrides `bg`).
+
+**Usage with View:**
+
+```tsx
+const Box = (props: ViewProps & SxProps) => {
+  const { getStyle, filteredProps } = useSx(props);
+  return <View style={getStyle()} {...filteredProps} />;
+};
+```
+
+**Usage with Text:**
+
+```tsx
+const Txt = (props: TextProps & TextSxProps) => {
+  const { getStyle, filteredProps } = useSx(props, {
+    styleType: 'TextStyle',
+    fallback: { color: 'foreground', includeFontPadding: false },
+  });
+  return <Text style={getStyle()} {...filteredProps} />;
+};
+```
+
+**Usage with transform:**
+
+```tsx
+const { getStyle } = useSx(props, {
+  transform: (computedStyle) => ({
+    // Derive additional styles from the computed result
+    borderColor: computedStyle.backgroundColor,
+  }),
+});
+```
+
+**Usage with cache:**
+
+```tsx
+const { getStyle } = useSx(props, { cache: true });
+// Style objects with same token values return the same reference (via object-hash),
+// preventing unnecessary re-renders in PureComponent/React.memo consumers.
+```
+
+### useSxStyle
+
+Returns a function that converts SxProps into a TextStyle. Useful for ad-hoc style computation without component props.
+
+```ts
+import { useSxStyle } from '@react-native-styled-system/core';
+
+const getSxStyle = useSxStyle({ cache: true });
+const headerStyle = getSxStyle({ bg: 'primary', p: 4, radius: 'lg' });
+const textStyle = getSxStyle({ color: 'foreground', t: 'h1' });
+```
+
+**Options:**
+
+```ts
+type UseSxStyleOptions = {
+  theme?: ThemedDict;     // Override context theme
+  cache?: boolean;        // Enable caching
+  screenWidth?: number;   // Override screen width
+};
+```
+
+### useSxTokens
+
+Resolves raw token values by type. Returns an array of resolved values matching the input array.
+
+```ts
+import { useSxTokens } from '@react-native-styled-system/core';
+
+const [bgColor, textColor] = useSxTokens('colors', ['red.500', 'blue.700']);
+// bgColor = '#fb2c36', textColor = '#1447e6'
+
+const [spaceSm, spaceLg] = useSxTokens('space', [2, 8]);
+// spaceSm = 8, spaceLg = 32
+
+const [radiusMd] = useSxTokens('radii', ['md']);
+// radiusMd = 8
+```
+
+**Parameters:**
+
+- `tokenType: keyof ThemedTypings` - One of: `'colors'`, `'space'`, `'sizes'`, `'radii'`, `'typography'`
+- `tokenValues: Array<TokenValue>` - Array of token keys to resolve
+- `options?: { theme?: ThemedDict }` - Optional theme override
+
+---
+
+## Component Factories (HOC)
+
+### createSxComponent
+
+Wraps any React Native component with `SxProps` support (ViewStyle only). Returns a curried factory.
+
+```ts
+import { createSxComponent } from '@react-native-styled-system/core';
+
+// Basic usage
+const Box = createSxComponent(View)();
+
+// With default props
+const Card = createSxComponent(View)({
+  defaultProps: { bg: 'card', p: 4, radius: 'lg' },
+});
+
+// With options
+const CachedBox = createSxComponent(View)({
+  sxOptions: { cache: true },
+});
+```
+
+**Signature:**
+
+```ts
+function createSxComponent<Props, Ref>(Base: ComponentType<Props>):
+  (config?: { defaultProps?: MergedProps; sxOptions?: UseSxOptions }) =>
+    ForwardRefComponent<Ref, Omit<Props, keyof SxProps> & SxProps>;
+```
+
+The returned component:
+- Accepts all original component props plus `SxProps`
+- Supports `ref` forwarding
+- Has `displayName` set to `Sx.{Base.displayName || Base.name}`
+
+### createSxTextComponent
+
+Same as `createSxComponent` but uses `TextSxProps` and `styleType: 'TextStyle'` by default.
+
+```ts
+import { createSxTextComponent } from '@react-native-styled-system/core';
+
+const Txt = createSxTextComponent(Text)();
+
+// With default text styling
+const Label = createSxTextComponent(Text)({
+  defaultProps: { t: 'caption', color: 'muted-foreground' },
+});
+```
+
+---
+
+## Style Props Reference
+
+### SxProps (ViewStyle)
+
+All props accept `Responsive<T>` (value or array) except `transform`.
+
+#### Color Token Props
+
+| Prop | Shortcut | Token Type | Description |
+|------|----------|------------|-------------|
+| `backgroundColor` | `bg` | `Token<'colors'>` | Background color |
+| `borderColor` | - | `Token<'colors'>` | Border color |
+
+#### Space Token Props
+
+| Prop | Shortcut | Token Type | Maps To |
+|------|----------|------------|---------|
+| `margin` | `m` | `Token<'space'>` | `margin` |
+| `marginTop` | `mt` | `Token<'space'>` | `marginTop` |
+| `marginRight` | `mr` | `Token<'space'>` | `marginRight` |
+| `marginBottom` | `mb` | `Token<'space'>` | `marginBottom` |
+| `marginLeft` | `ml` | `Token<'space'>` | `marginLeft` |
+| `marginX` | `mx` | `Token<'space'>` | `marginHorizontal` |
+| `marginY` | `my` | `Token<'space'>` | `marginVertical` |
+| `padding` | `p` | `Token<'space'>` | `padding` |
+| `paddingTop` | `pt` | `Token<'space'>` | `paddingTop` |
+| `paddingRight` | `pr` | `Token<'space'>` | `paddingRight` |
+| `paddingBottom` | `pb` | `Token<'space'>` | `paddingBottom` |
+| `paddingLeft` | `pl` | `Token<'space'>` | `paddingLeft` |
+| `paddingX` | `px` | `Token<'space'>` | `paddingHorizontal` |
+| `paddingY` | `py` | `Token<'space'>` | `paddingVertical` |
+| `top` | - | `Token<'space'>` | `top` |
+| `right` | - | `Token<'space'>` | `right` |
+| `bottom` | - | `Token<'space'>` | `bottom` |
+| `left` | - | `Token<'space'>` | `left` |
+| `gap` | - | `Token<'space'>` | `gap` (number only) |
+| `gapX` | - | `Token<'space'>` | `columnGap` (number only) |
+| `gapY` | - | `Token<'space'>` | `rowGap` (number only) |
+
+#### Size Token Props
+
+| Prop | Shortcut | Token Type |
+|------|----------|------------|
+| `width` | `w` | `Token<'sizes'>` |
+| `minWidth` | `minW` | `Token<'sizes'>` |
+| `maxWidth` | `maxW` | `Token<'sizes'>` |
+| `height` | `h` | `Token<'sizes'>` |
+| `minHeight` | `minH` | `Token<'sizes'>` |
+| `maxHeight` | `maxH` | `Token<'sizes'>` |
+
+#### Radii Token Props
+
+| Prop | Shortcut | Token Type |
+|------|----------|------------|
+| `borderRadius` | `radius` | `Token<'radii'>` |
+| `borderTopLeftRadius` | `topLeftRadius` | `Token<'radii'>` |
+| `borderTopRightRadius` | `topRightRadius` | `Token<'radii'>` |
+| `borderBottomLeftRadius` | `bottomLeftRadius` | `Token<'radii'>` |
+| `borderBottomRightRadius` | `bottomRightRadius` | `Token<'radii'>` |
+
+#### View Style Props (no token resolution)
+
+| Prop | Shortcut | Type |
+|------|----------|------|
+| `flex` | - | `ViewStyle['flex']` |
+| `alignItems` | - | `ViewStyle['alignItems']` |
+| `alignContent` | - | `ViewStyle['alignContent']` |
+| `justifyContent` | - | `ViewStyle['justifyContent']` |
+| `flexWrap` | - | `ViewStyle['flexWrap']` |
+| `flexDirection` | - | `ViewStyle['flexDirection']` |
+| `flexGrow` | - | `ViewStyle['flexGrow']` |
+| `flexShrink` | - | `ViewStyle['flexShrink']` |
+| `flexBasis` | - | `ViewStyle['flexBasis']` |
+| `alignSelf` | - | `ViewStyle['alignSelf']` |
+| `position` | `pos` | `ViewStyle['position']` |
+| `borderWidth` | - | `ViewStyle['borderWidth']` |
+| `borderTopWidth` | - | `ViewStyle['borderTopWidth']` |
+| `borderRightWidth` | - | `ViewStyle['borderRightWidth']` |
+| `borderBottomWidth` | - | `ViewStyle['borderBottomWidth']` |
+| `borderLeftWidth` | - | `ViewStyle['borderLeftWidth']` |
+| `opacity` | - | `ViewStyle['opacity']` |
+| `overflow` | - | `ViewStyle['overflow']` |
+| `transform` | - | `ViewStyle['transform']` |
+| `aspectRatio` | - | `ViewStyle['aspectRatio']` |
+| `display` | - | `ViewStyle['display']` |
+| `elevation` | - | `ViewStyle['elevation']` |
+| `zIndex` | - | `ViewStyle['zIndex']` |
+
+#### Boolean Convenience Props
+
+| Prop | Effect |
+|------|--------|
+| `absoluteFill` | Sets `position: 'absolute'` and `top/right/bottom/left: 0` |
+| `center` | Sets `alignItems: 'center'` and `justifyContent: 'center'` |
+
+### TextSxProps (extends SxProps)
+
+Includes all SxProps plus text-specific props. Used with `styleType: 'TextStyle'`.
+
+#### Text Color Props
+
+| Prop | Token Type |
+|------|------------|
+| `color` | `Token<'colors'>` |
+| `textDecorationColor` | `Token<'colors'>` |
+| `textShadowColor` | `Token<'colors'>` |
+
+#### Typography Token Props
+
+| Prop | Shortcut | Description |
+|------|----------|-------------|
+| `typography` | `t` | `Token<'typography'>` - Applies all typography properties (fontFamily, fontSize, fontWeight, lineHeight, letterSpacing, textAlign, fontStyle) from the matched preset |
+
+When `t`/`typography` is set, individual text props can still override:
+
+```tsx
+// Uses h1 preset but overrides fontWeight
+<Txt t={'h1'} weight={'normal'}>Light Heading</Txt>
+```
+
+#### Text Style Props
+
+| Prop | Shortcut | Type |
+|------|----------|------|
+| `fontFamily` | - | `TextStyle['fontFamily']` |
+| `fontSize` | - | `TextStyle['fontSize']` |
+| `fontStyle` | - | `TextStyle['fontStyle']` |
+| `fontWeight` | `weight` | `TextStyle['fontWeight']` |
+| `letterSpacing` | - | `TextStyle['letterSpacing']` |
+| `lineHeight` | - | `TextStyle['lineHeight']` |
+| `textAlign` | `align` | `TextStyle['textAlign']` |
+| `textDecorationLine` | - | `TextStyle['textDecorationLine']` |
+| `textDecorationStyle` | - | `TextStyle['textDecorationStyle']` |
+| `textShadowOffset` | - | `TextStyle['textShadowOffset']` |
+| `textShadowRadius` | - | `TextStyle['textShadowRadius']` |
+| `textTransform` | - | `TextStyle['textTransform']` |
+| `userSelect` | - | `TextStyle['userSelect']` |
+| `includeFontPadding` | - | `TextStyle['includeFontPadding']` (Android) |
+
+### The sx Prop
+
+Both `SxProps` and `TextSxProps` accept an `sx` prop for grouping styles:
+
+```tsx
+<Box sx={{ bg: 'primary', p: 4, radius: 'lg' }} />
+```
+
+Priority: direct props are applied first, then `sx` overrides them.
+
+### Complete Shortcut Map
+
+| Shortcut | Full Name |
+|----------|-----------|
+| `bg` | `backgroundColor` |
+| `m` | `margin` |
+| `mt` | `marginTop` |
+| `mr` | `marginRight` |
+| `mb` | `marginBottom` |
+| `ml` | `marginLeft` |
+| `mx` | `marginX` |
+| `my` | `marginY` |
+| `p` | `padding` |
+| `pt` | `paddingTop` |
+| `pr` | `paddingRight` |
+| `pb` | `paddingBottom` |
+| `pl` | `paddingLeft` |
+| `px` | `paddingX` |
+| `py` | `paddingY` |
+| `w` | `width` |
+| `minW` | `minWidth` |
+| `maxW` | `maxWidth` |
+| `h` | `height` |
+| `minH` | `minHeight` |
+| `maxH` | `maxHeight` |
+| `radius` | `borderRadius` |
+| `topLeftRadius` | `borderTopLeftRadius` |
+| `topRightRadius` | `borderTopRightRadius` |
+| `bottomLeftRadius` | `borderBottomLeftRadius` |
+| `bottomRightRadius` | `borderBottomRightRadius` |
+| `pos` | `position` |
+| `weight` | `fontWeight` |
+| `align` | `textAlign` |
+| `t` | `typography` |
+
+---
+
+## Responsive Values
+
+Any style prop (except `transform`) accepts an array for responsive breakpoint-based values. Uses a mobile-first approach.
+
+### How It Works
+
+```ts
+type Responsive<T> = T | (T | undefined)[];
+```
+
+Array indices map to breakpoints:
+- Index 0: base value (all screen sizes)
+- Index 1: applied when `screenWidth >= breakpoints[0]`
+- Index 2: applied when `screenWidth >= breakpoints[1]`
+- Index N: applied when `screenWidth >= breakpoints[N-1]`
+
+### Examples
+
+```tsx
+// Default breakpoints: [480, 768, 1024]
+
+// Width: 100 (base), 200 (>=480px), 300 (>=768px), 400 (>=1024px)
+<Box w={[100, 200, 300, 400]} />
+
+// Direction: column (base), row (>=480px)
+<Box flexDirection={['column', 'row']} />
+
+// Background: red on mobile, blue on tablet+
+<Box bg={['red.500', 'blue.500']} />
+
+// Padding: 4 (base), 6 (>=480px), 8 (>=768px)
+<Box px={[4, 6, 8]} />
+
+// Skip a breakpoint with undefined
+<Box w={[100, undefined, 300]} />
+// 100 for <480px, undefined for >=480px, 300 for >=768px
+```
+
+### Resolution Algorithm
+
+```
+resolveResponsiveValue({ value, breakpoints, screenWidth }):
+  if value is not an array → return value as-is
+  resolved = value[0]  (base)
+  for each breakpoint[i]:
+    if screenWidth >= breakpoint[i] AND value[i+1] exists:
+      resolved = value[i+1]
+  return resolved
+```
+
+If the array is shorter than breakpoints+1, the last matched value persists for larger screens.
+
+---
+
+## Token Resolution
+
+### How Tokens Are Parsed
+
+Each token type has its own parser that resolves token keys to concrete values.
+
+#### Colors Parser
+
+1. If the token key exists in `theme.colors` → return the mapped value
+2. Otherwise → return the token value as-is (passthrough, allows raw CSS color strings)
+
+```tsx
+<Box bg={'red.500'} />        // Resolved from theme: '#fb2c36'
+<Box bg={'primary'} />        // Resolved from theme: semantic color
+<Box bg={'#custom123'} />     // Passthrough: '#custom123'
+<Box bg={'rgba(0,0,0,0.5)'} /> // Passthrough: 'rgba(0,0,0,0.5)'
+```
+
+#### Space Parser
+
+1. If the value has a `px` suffix and is a valid number → parse as number (e.g., `'16px'` → `16`)
+2. If the token key exists in `theme.space` → return the mapped value
+3. If the value is a number, also try its string representation as a key
+4. Negative values: `-4` looks up `4` in theme and negates the result
+5. String starting with `-`: `'-4'` looks up `'4'` and negates
+6. If it's a numeric string → parse as number
+7. Otherwise → return as-is
+
+```tsx
+<Box p={4} />          // Looks up '4' in theme.space → 16
+<Box p={'4'} />        // Same: looks up '4' → 16
+<Box m={-4} />         // Looks up '4' → 16, negates → -16
+<Box m={'16px'} />     // Parsed as px suffix → 16
+<Box p={'auto'} />     // Passthrough: 'auto'
+```
+
+#### Sizes Parser
+
+Similar to space parser but without negative value handling:
+1. `px` suffix parsing
+2. Theme lookup
+3. Numeric string parsing
+4. Passthrough
+
+#### Radii Parser
+
+1. `px` suffix parsing
+2. Theme lookup
+3. Numeric string parsing
+4. Passthrough (must be number)
+
+```tsx
+<Box radius={'lg'} />    // Looks up 'lg' → 12
+<Box radius={'8px'} />   // Parsed as px → 8
+<Box radius={16} />      // Looks up '16' in theme, or passthrough → 16
+```
+
+#### Typography Parser
+
+Token must be a string. Looks up in `theme.typography` and returns the `TypographyValue` object. Non-matching keys return undefined.
+
+```tsx
+<Txt t={'h1'} />     // Returns { fontSize: 32, fontWeight: 'bold', lineHeight: 40 }
+<Txt t={'body'} />   // Returns { fontSize: 16, lineHeight: 24 }
+```
+
+Individual text style props override typography preset values:
+
+```tsx
+<Txt t={'h1'} fontSize={20} />  // fontSize=20 overrides preset's 32
+```
+
+---
+
+## propsToThemedStyle
+
+Pure function that converts SxProps to React Native style objects. Used internally by `useSx` and `useSxStyle`.
+
+```ts
+import { propsToThemedStyle } from '@react-native-styled-system/core';
+
+const style = propsToThemedStyle({
+  theme: myTheme,
+  sx: { bg: 'primary', p: 4 },
+  styleType: 'ViewStyle',    // or 'TextStyle'
+  breakpoints: [480, 768],
+  screenWidth: 600,
+});
+```
+
+---
+
+## CLI: Type Generation
+
+The `@react-native-styled-system/cli` package generates TypeScript type augmentations from your theme file, enabling autocomplete for all token keys.
+
+### Installation
+
+```sh
+npm install -D @react-native-styled-system/cli
+```
+
+### Usage
+
+```sh
+npx generate-theme-type generate src/AppTheme.ts --out src/theme.d.ts
+```
+
+**Options:**
+- `generate <source>` - Path to your theme file (JS or TS). The file should export the theme as `default`, `theme`, or module.
+- `--out <path>` - Output path for the generated type file
+- `--no-format` - Disable auto formatting with Prettier
+
+### What It Generates
+
+The CLI reads your theme file via `bundle-n-require`, extracts token keys from each category, and generates a TypeScript interface that augments `ThemedTypings`:
+
+```ts
+// Generated file
+import { BaseThemeTypings } from "./shared.types.js"
+export interface ThemeTypings extends BaseThemeTypings {
+  colors: "white" | "black" | "red.50" | "red.100" | ... | "primary" | "background" | ...
+  space: "0" | "px" | "0.5" | "1" | "-1" | "2" | "-2" | ...
+  sizes: "0" | "px" | "full" | "half" | ...
+  radii: "none" | "sm" | "md" | "lg" | ...
+  typography: "h1" | "h2" | "h3" | "body" | "caption" | "small"
+}
+```
+
+### Configuration
+
+Token extraction config:
+- `colors`: max scan depth 3 (supports nested like `red.500`)
+- `radii`: default scan depth
+- `sizes`: max scan depth 2
+- `space`: generates negative variants (e.g., `'4'` also generates `'-4'`)
+
+---
+
+## Advanced Patterns
+
+### Dynamic Theme Values
+
+Inject runtime values (like safe area insets) into theme tokens:
+
+```tsx
+const safeArea = useSafeAreaInsets();
+
+const theme = useMemo(
+  () => createTheme(defaultTheme, {
+    space: {
+      sfTop: safeArea.top,
+      sfBottom: safeArea.bottom,
+      sfLeft: safeArea.left,
+      sfRight: safeArea.right,
+    },
+  }),
+  [safeArea],
+);
+
+// Then use as tokens:
+<Box pt={'sfTop'} pb={'sfBottom'} />
+```
+
+### ScrollView with Content Container Styles
+
+```tsx
+const StyledScrollView = forwardRef((props, ref) => {
+  const { getStyle, filteredProps } = useSx(props);
+  const { getStyle: getContentStyle } = useSx(props.contentContainerSx);
+
+  return (
+    <ScrollView
+      ref={ref}
+      style={getStyle()}
+      contentContainerStyle={getContentStyle()}
+      {...filteredProps}
+    />
+  );
+});
+```
+
+### Theme Presets
+
+```tsx
+const presets = [
+  { base: 'neutral', theme: 'neutral' },
+  { base: 'zinc', theme: 'blue' },
+  { base: 'slate', theme: 'violet' },
+  { base: 'stone', theme: 'rose' },
+];
+
+const { light, dark } = createThemeColors(presets[selectedIndex]);
+```
+
+---
+
+## Exported API Summary
+
+All exports from `@react-native-styled-system/core`:
+
+### Types
+- `ThemedDict` - Theme shape interface
+- `SxProps` - View style props with responsive wrapping
+- `TextSxProps` - Text style props (extends SxProps) with responsive wrapping
+- `ResolvedSxProps` - SxProps after responsive resolution
+- `ResolvedTextSxProps` - TextSxProps after responsive resolution
+- `SxPropsKeys` - Union of all SxProps key names
+- `TextSxPropsKey` - Union of all TextSxProps key names
+- `ThemedTypings` - Token type mapping (augmentable via CLI)
+- `Responsive<T>` - `T | (T | undefined)[]`
+- `ResponsiveExcludedKey` - `'transform'`
+- `Token<ThemeKey>` - Token value type for a given theme key
+- `SpaceValue`, `SizesValue`, `ColorsValue`, `RadiiValue`, `TypographyValue` - Raw token value types
+- `BaseColor` - `'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'`
+- `ThemeColor` - BaseColor plus all Tailwind color names
+- `UseSxOptions` - Options for useSx hook
+- `UseSxStyleOptions` - Options for useSxStyle hook
+- `UseSxTokensOptions` - Options for useSxTokens hook
+- `StyleTransform` - Transform function type `(style: AnyStyle) => TextSxProps`
+- `StyleFallback` - Fallback type `Omit<TextSxProps, 'sx'>`
+- `ThemedStyleType` - `'ViewStyle' | 'TextStyle'`
+- `StyledSystemContextValue` - `{ theme: ThemedDict; screenWidth: number }`
+
+### Components
+- `StyledSystemProvider` - React Context provider
+
+### Hooks
+- `useSx` - Primary style resolution hook
+- `useSxStyle` - Ad-hoc style computation
+- `useSxTokens` - Raw token value access
+
+### Functions
+- `createTheme` - Create or extend themes
+- `createThemeColors` - Generate semantic color sets
+- `createSxComponent` - HOC factory for View-style components
+- `createSxTextComponent` - HOC factory for Text-style components
+- `propsToThemedStyle` - Pure style resolution function
+
+### Constants
+- `defaultTheme` - Pre-built theme with Tailwind CSS v4 + shadcn/ui
+- `emptyThemedDict` - Empty theme (all categories `{}`, breakpoints `[]`)
+- `SHORTCUT_NAME_MAP` - Shortcut to full prop name mapping
+- `RESPONSIVE_EXCLUDED_KEYS` - Set of keys excluded from responsive resolution (`transform`)
+- `_viewStylePropList` - Array of view-related SxProps keys
+- `_textStylePropList` - Array of text-related SxProps keys
+
+---
+
+## Architecture Overview
+
+```
+StyledSystemProvider (React Context)
+  ├── Provides: ThemedDict + screenWidth
+  └── Wraps theme with createTheme() to fill defaults
+
+useSx(props, options)
+  ├── Reads theme + screenWidth from context (or options override)
+  ├── mutateShortcutPropToOriginalKeys() - expands shortcuts
+  ├── Merges: fallback < props < sx (shortcut-expanded)
+  ├── propsToThemedStyle() - resolves tokens to RN styles
+  │   ├── resolveResponsiveSx() - resolves responsive arrays
+  │   └── TokenParsers (colors, space, sizes, radii, typography)
+  ├── Appends style prop on top (highest priority)
+  ├── Optional: transform() post-processing
+  ├── Optional: getCachedStyle() via object-hash
+  └── Returns: { getStyle, filteredProps }
+```

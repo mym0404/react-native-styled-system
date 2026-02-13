@@ -57,10 +57,12 @@ Test utilities: `packages/core/src/__testUtils__/testTheme.ts` (provides `emptyT
 
 1. **StyledSystemProvider** (`provider/StyledSystemProvider.tsx`) - React Context providing `ThemedDict` + `screenWidth` (from `useWindowDimensions`) to the tree. Wraps the raw theme with `createTheme()` to fill defaults.
 2. **useSx** hook (`hook/useSx.ts`) - Main API. Takes component props + options, returns `{ getStyle, filteredProps }`. Handles shortcut prop expansion, token resolution, style merging, and optional caching via object-hash.
-3. **propsToThemedStyle** (`util/propsToThemedStyle.ts`) - Pure function converting SxProps to React Native TextStyle/ViewStyle using TokenParsers. Central mapping of all style properties. Resolves responsive arrays before parsing.
-4. **TokenParser** (`internal/TokenParser/`) - Factory functions creating parsers for each token type (colors, space, sizes, radii, typography). Each parser resolves theme token keys to concrete values.
-5. **createSxComponent / createSxTextComponent** (`util/createSxComponent.tsx`) - HOC wrapping any RN component with sx prop support via `forwardRef`.
-6. **createTheme** (`util/createTheme.ts`) - Overloaded: `createTheme(partial?)` fills empty token categories; `createTheme(base, overrides)` merges two themes.
+3. **useSxStyle** hook (`hook/useSxStyle.ts`) - Returns a function `(sx: TextSxProps) => StyleProp<TextStyle>` for ad-hoc style computation without component props.
+4. **useSxTokens** hook (`hook/useSxTokens.ts`) - Resolves raw token values by type (e.g., `useSxTokens('colors', ['red.500'])` returns the resolved color values).
+5. **propsToThemedStyle** (`util/propsToThemedStyle.ts`) - Pure function converting SxProps to React Native TextStyle/ViewStyle using TokenParsers. Central mapping of all style properties. Resolves responsive arrays before parsing.
+6. **TokenParser** (`internal/TokenParser/`) - Factory functions creating parsers for each token type (colors, space, sizes, radii, typography). Each parser resolves theme token keys to concrete values.
+7. **createSxComponent / createSxTextComponent** (`util/createSxComponent.tsx`) - HOC wrapping any RN component with sx prop support via `forwardRef`.
+8. **createTheme** (`util/createTheme.ts`) - Overloaded: `createTheme(partial?)` fills empty token categories; `createTheme(base, overrides)` merges two themes.
 
 ### Style Resolution Priority
 
@@ -97,9 +99,22 @@ Style props accept `Responsive<T> = T | T[]` arrays. Resolution (`resolveRespons
 
 `generate-theme-type <sourceFile>` reads a theme file via `bundle-n-require`, extracts token keys, and generates TypeScript interface augmentation for type-safe theme tokens.
 
+## Git Hooks
+
+Husky pre-commit hook runs `yarn check:all` (lint + type + test) before every commit. Commit messages are validated by commitlint.
+
+## TypeScript
+
+Root `tsconfig.json`: `strict: true`, `target: ESNext`, `module: ESNext`. Path alias `@react-native-styled-system/core` maps to `packages/core/src/index` for cross-package imports during development.
+
+## Jest
+
+Preset: `react-native`, environment: `node`, transform: `ts-jest`. Ignores `node_modules`, `lib`, `cli`, and `.worktrees` directories.
+
 ## Conventions
 
 - Conventional commits enforced via commitlint (`feat:`, `fix:`, `docs:`, etc.)
-- PR base branch: `develop`. Publish from `main`.
-- Prettier: single quotes, trailing commas, 100 char print width.
+- PR base branch: `develop`. Publish from `main` (Lerna `pub:version` + `pub:release`).
+- Branch naming: `[type/scope]` (e.g., `fix/accordion-hook`, `feat/new-token`).
+- Prettier: single quotes, trailing commas, 100 char print width, `arrowParens: always`, `jsxSingleQuote: false`.
 - ESLint: `@mj-studio/eslint-config-react`.
