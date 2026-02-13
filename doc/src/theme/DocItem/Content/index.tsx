@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
-import Content from '@theme-original/DocItem/Content';
-import type ContentType from '@theme/DocItem/Content';
-import type { WrapperProps } from '@docusaurus/types';
+import React, { useCallback, useState } from 'react';
 import { useDoc } from '@docusaurus/theme-common/internal';
+import type { WrapperProps } from '@docusaurus/types';
 import { usePluginData } from '@docusaurus/useGlobalData';
+import type ContentType from '@theme/DocItem/Content';
+import Content from '@theme-original/DocItem/Content';
 
 type Props = WrapperProps<typeof ContentType>;
 
@@ -15,7 +15,10 @@ const CopyMarkdownButton = () => {
   const rawSource = rawDocs?.[metadata.source];
 
   const handleCopy = useCallback(async () => {
-    if (!rawSource) return;
+    if (!rawSource) {
+      return;
+    }
+
     try {
       await navigator.clipboard.writeText(rawSource);
       setStatus('copied');
@@ -26,12 +29,14 @@ const CopyMarkdownButton = () => {
     }
   }, [rawSource]);
 
-  if (!rawSource) return null;
+  if (!rawSource) {
+    return null;
+  }
 
   const label = { idle: 'Copy Markdown', copied: 'Copied!', error: 'Failed' }[status];
 
   return (
-    <button className="copy-markdown-button" onClick={handleCopy}>
+    <button className={'copy-markdown-button'} onClick={handleCopy}>
       {label}
     </button>
   );
@@ -39,7 +44,7 @@ const CopyMarkdownButton = () => {
 
 const ContentWrapper = (props: Props) => (
   <>
-    <div className="copy-markdown-container">
+    <div className={'copy-markdown-container'}>
       <CopyMarkdownButton />
     </div>
     <Content {...props} />
