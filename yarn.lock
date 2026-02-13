@@ -3285,7 +3285,7 @@ __metadata:
   dependencies:
     "@mj-studio/js-util": "npm:1.0.34"
     "@react-native-styled-system/cli": "workspace:*"
-    "@react-native-styled-system/util": "npm:2.1.2"
+    "@react-native-styled-system/util": "npm:^2.2.0"
     "@testing-library/react-native": "npm:^13.3.3"
     "@types/invariant": "npm:^2.2.37"
     "@types/react": "npm:^19"
@@ -3329,7 +3329,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@react-native-styled-system/util@npm:2.1.2, @react-native-styled-system/util@workspace:packages/util":
+"@react-native-styled-system/util@npm:^2.2.0, @react-native-styled-system/util@workspace:packages/util":
   version: 0.0.0-use.local
   resolution: "@react-native-styled-system/util@workspace:packages/util"
   dependencies:
