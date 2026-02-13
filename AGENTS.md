@@ -95,7 +95,7 @@ Style props accept `Responsive<T> = T | T[]` arrays. Resolution (`resolveRespons
 - `SxProps` / `TextSxProps` (`@types/SxProps.ts`) - All supported style props. `SxProps` = view styles only, `TextSxProps` extends with text styles. Both wrap values in `Responsive<T>`.
 - `ResolvedSxProps` / `ResolvedTextSxProps` - Internal types after responsive resolution (no array wrapping).
 - `ThemedTypings` (`@types/ThemedTypings.ts`) - Auto-generated type augmentation from CLI for type-safe token keys.
-- `BaseColor` / `ThemeColor` (`@types/ThemedDict.ts`) - Type aliases for `createThemeColors` parameters.
+- `BaseColor` / `ThemeColor` (`@react-native-styled-system/util`) - Type aliases for `createThemeColors` parameters.
 - `Theme` (`@react-native-styled-system/util`) - Utility package theme type used by `createTheme` and `defaultTheme`.
 
 ### CLI
@@ -104,7 +104,7 @@ Style props accept `Responsive<T> = T | T[]` arrays. Resolution (`resolveRespons
 
 Theme source file rule:
 - Keep `theme.ts` import surface minimal.
-- Import only theme-related utilities (`createTheme`, `defaultTheme`, `createThemeColors`) and avoid unrelated runtime imports.
+- Import only theme-related utilities (`createTheme`, `defaultTheme`, `createThemeColors` from `@react-native-styled-system/util`) and avoid unrelated runtime imports.
 
 ## Git Hooks
 

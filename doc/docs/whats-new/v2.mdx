@@ -36,16 +36,17 @@ See [Default Tokens](/docs/references/default-tokens) for the full reference.
 `createThemeColors` generates light and dark semantic color sets following the shadcn/ui convention.
 
 ```tsx
-import { createThemeColors } from '@react-native-styled-system/core';
+import { createThemeColors } from '@react-native-styled-system/util';
 
-const lightColors = createThemeColors({ base: 'slate', theme: 'blue' });
-const darkColors = createThemeColors({ base: 'slate', theme: 'blue', dark: true });
+const { light: lightColors, dark: darkColors } = createThemeColors({
+  base: 'slate',
+  theme: 'blue',
+});
 ```
 
 Parameters:
 - `base` - Gray scale for neutral tones: `'slate'` | `'gray'` | `'zinc'` | `'neutral'` | `'stone'`
 - `theme` - Accent color from any Tailwind color name (e.g. `'blue'`, `'rose'`, `'emerald'`)
-- `dark` - Set to `true` for dark mode variant
 
 Generated tokens: `background`, `foreground`, `primary`, `primary-foreground`, `secondary`, `secondary-foreground`, `muted`, `muted-foreground`, `accent`, `accent-foreground`, `destructive`, `destructive-foreground`, `border`, `input`, `ring`, `card`, `card-foreground`, `popover`, `popover-foreground`, `chart-1`~`chart-5`.
 

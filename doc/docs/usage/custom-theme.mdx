@@ -49,7 +49,7 @@ const theme = createTheme(defaultTheme, {
 `createThemeColors` generates **light** and **dark** semantic color sets following the [shadcn/ui convention](https://ui.shadcn.com/docs/theming).
 
 ```ts
-import { createThemeColors } from '@react-native-styled-system/core';
+import { createThemeColors } from '@react-native-styled-system/util';
 
 const { light, dark } = createThemeColors({
   base: 'zinc',    // gray scale: 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'
@@ -78,8 +78,8 @@ Since `light` and `dark` share the same keys, toggling dark mode is just swappin
 
 ```tsx title="AppThemeProvider.tsx"
 import React, { useContext, useMemo, useState } from 'react';
-import { createThemeColors, StyledSystemProvider } from '@react-native-styled-system/core';
-import { createTheme, defaultTheme } from '@react-native-styled-system/util';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { createTheme, createThemeColors, defaultTheme } from '@react-native-styled-system/util';
 
 const { light, dark } = createThemeColors({ base: 'neutral', theme: 'blue' });
 

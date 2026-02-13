@@ -48,7 +48,7 @@ Keep your `theme.ts` file focused on tokens only.
 
 - For parser-friendly `theme.ts`, import only theme utilities you actually use:
   - `createTheme`, `defaultTheme` from `@react-native-styled-system/util`
-  - `createThemeColors` from `@react-native-styled-system/core` (if you generate semantic tokens)
+  - `createThemeColors` from `@react-native-styled-system/util` (if you generate semantic tokens)
 - Do not import from `react-native`, `react`, hooks, providers, or app runtime modules.
   `theme.ts` should behave like a static token module.
 - Extra imports can break CLI theme type generation during bundling.
@@ -61,8 +61,7 @@ Keep `theme.ts` limited to pure theme utilities and token data.
 
 ```ts title="theme.ts"
 // parser-friendly theme.ts
-import { createTheme, defaultTheme } from '@react-native-styled-system/util';
-import { createThemeColors } from '@react-native-styled-system/core';
+import { createTheme, defaultTheme, createThemeColors } from '@react-native-styled-system/util';
 ```
 
 :::tip

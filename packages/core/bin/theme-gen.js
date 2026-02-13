@@ -61,27 +61,16 @@ function printError(...args) {
   console.log(`⚠️ [${_printTag}]`, ...args);
 }
 
-function resolveCLI() {
-  try {
-    return require.resolve('@react-native-styled-system/cli/bin/index.js', {
-      paths: [__dirname],
-    });
-  } catch {}
+function getCoreVersion() {
+  const packageJsonPath = path.resolve(__dirname, '../package.json');
+  const packageJson = JSON.parse(read(packageJsonPath));
+  const version = packageJson.version;
 
-  const localCli = [
-    path.resolve(__dirname, '../../node_modules/@react-native-styled-system/cli/bin/index.js'),
-    path.resolve(__dirname, '../../packages/cli/bin/index.js'),
-    path.resolve(process.cwd(), 'packages/cli/bin/index.js'),
-    path.resolve(process.cwd(), 'node_modules/@react-native-styled-system/cli/bin/index.js'),
-  ].find((candidate) => exist(candidate));
-
-  if (!localCli) {
-    throw new Error(
-      'Theme generation requires @react-native-styled-system/cli as local dependency',
-    );
+  if (!version) {
+    throw new Error(`Cannot resolve core version from '${packageJsonPath}'`);
   }
 
-  return localCli;
+  return version;
 }
 
 // endregion
@@ -100,10 +89,10 @@ const go = async () => {
     process.argv[3] ||
     './node_modules/@react-native-styled-system/core/lib/typescript/src/@types/ThemedTypings.d.ts';
 
-  const cliCommand = resolveCLI();
-
   try {
-    execFileSync('node', [cliCommand, 'generate', '--out', tmpFile, source], {
+    const command = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+    const cliPackage = `@react-native-styled-system/cli@${getCoreVersion()}`;
+    execFileSync(command, ['-y', cliPackage, 'generate', '--out', tmpFile, source], {
       cwd: process.cwd(),
       stdio: 'inherit',
     });
