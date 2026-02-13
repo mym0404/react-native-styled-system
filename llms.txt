@@ -5,6 +5,7 @@
 - Docs: https://mym0404.github.io/react-native-styled-system/
 - GitHub: https://github.com/mym0404/react-native-styled-system
 - Package: `@react-native-styled-system/core` (v2.0)
+- Theme utilities: `@react-native-styled-system/util` (v2.0)
 - CLI: `@react-native-styled-system/cli` (v2.0)
 - License: MIT
 
@@ -13,9 +14,9 @@
 ## Installation
 
 ```sh
-npm install @react-native-styled-system/core
+npm install @react-native-styled-system/core @react-native-styled-system/util
 # or
-yarn add @react-native-styled-system/core
+yarn add @react-native-styled-system/core @react-native-styled-system/util
 ```
 
 Peer dependencies: `react`, `react-native`
@@ -29,7 +30,8 @@ Peer dependencies: `react`, `react-native`
 Wrap your app root with `StyledSystemProvider` and pass a theme object:
 
 ```tsx
-import { StyledSystemProvider, defaultTheme } from '@react-native-styled-system/core';
+import { StyledSystemProvider } from '@react-native-styled-system/core';
+import { defaultTheme } from '@react-native-styled-system/util';
 
 const App = () => (
   <StyledSystemProvider theme={defaultTheme}>
@@ -119,7 +121,7 @@ type TypographyValue = {
 
 ---
 
-## defaultTheme
+## defaultTheme (`@react-native-styled-system/util`)
 
 Pre-built production-ready theme included with the library. Contains:
 
@@ -207,7 +209,7 @@ breakpoints: [480, 768, 1024]
 
 ---
 
-## createTheme
+## createTheme (`@react-native-styled-system/util`)
 
 Two call signatures for creating/extending themes.
 
@@ -216,7 +218,7 @@ Two call signatures for creating/extending themes.
 Creates a new theme. Missing token categories default to `{}`, breakpoints to `[]`:
 
 ```ts
-import { createTheme } from '@react-native-styled-system/core';
+import { createTheme } from '@react-native-styled-system/util';
 
 const theme = createTheme({
   colors: { primary: '#3B82F6' },
@@ -838,6 +840,18 @@ npx generate-theme-type generate src/AppTheme.ts --out src/theme.d.ts
 - `--out <path>` - Output path for the generated type file
 - `--no-format` - Disable auto formatting with Prettier
 
+### Theme File Guidelines
+
+- Keep `theme.ts` focused on token construction only.
+- Import only what you need for theme composition (`createTheme`, `defaultTheme`, `createThemeColors`).
+- Do not import from `react-native`, `react`, or other app runtime modules in `theme.ts`.
+- Keep `theme.ts` parser-friendly: it should act as a static token module and avoid hooks/components/screens.
+
+:::danger
+If `theme.ts` imports runtime modules (`react-native`, `react`, hooks, providers, app services),
+`generate-theme-type` can fail to bundle the file and CLI generation stops.
+:::
+
 ### What It Generates
 
 The CLI reads your theme file via `bundle-n-require`, extracts token keys from each category, and generates a TypeScript interface that augments `ThemedTypings`:
@@ -924,7 +938,7 @@ const { light, dark } = createThemeColors(presets[selectedIndex]);
 
 ## Exported API Summary
 
-All exports from `@react-native-styled-system/core`:
+Core exports from `@react-native-styled-system/core`:
 
 ### Types
 - `ThemedDict` - Theme shape interface
@@ -958,19 +972,21 @@ All exports from `@react-native-styled-system/core`:
 - `useSxTokens` - Raw token value access
 
 ### Functions
-- `createTheme` - Create or extend themes
 - `createThemeColors` - Generate semantic color sets
 - `createSxComponent` - HOC factory for View-style components
 - `createSxTextComponent` - HOC factory for Text-style components
 - `propsToThemedStyle` - Pure style resolution function
 
 ### Constants
-- `defaultTheme` - Pre-built theme with Tailwind CSS v4 + shadcn/ui
 - `emptyThemedDict` - Empty theme (all categories `{}`, breakpoints `[]`)
 - `SHORTCUT_NAME_MAP` - Shortcut to full prop name mapping
 - `RESPONSIVE_EXCLUDED_KEYS` - Set of keys excluded from responsive resolution (`transform`)
 - `_viewStylePropList` - Array of view-related SxProps keys
 - `_textStylePropList` - Array of text-related SxProps keys
+
+Theme utilities from `@react-native-styled-system/util`:
+- `createTheme` - Create or extend themes
+- `defaultTheme` - Pre-built theme with Tailwind CSS v4 + shadcn/ui
 
 ---
 
