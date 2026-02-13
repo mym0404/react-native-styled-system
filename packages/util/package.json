@@ -43,5 +43,6 @@
       ]
     ],
     "exclude": "**/*.test.*"
-  }
+  },
+  "gitHead": "5a3de1a078418a86e83da1da8a904db6e5c6efb9"
 }
