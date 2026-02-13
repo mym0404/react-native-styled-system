@@ -15,6 +15,9 @@
   },
   "author": "MJ Studio <mym0404@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "src",
     "lib",
