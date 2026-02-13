@@ -249,7 +249,7 @@ const theme = createTheme(defaultTheme, {
 Generates light and dark semantic color sets following shadcn/ui convention. Uses the Tailwind CSS v4 palette internally.
 
 ```ts
-import { createThemeColors } from '@react-native-styled-system/core';
+import { createThemeColors } from '@react-native-styled-system/util';
 
 const { light, dark } = createThemeColors({
   base: 'zinc',
@@ -826,13 +826,13 @@ The `@react-native-styled-system/cli` package generates TypeScript type augmenta
 ### Installation
 
 ```sh
-npm install -D @react-native-styled-system/cli
+npm install @react-native-styled-system/core @react-native-styled-system/util
 ```
 
 ### Usage
 
 ```sh
-npx generate-theme-type generate src/AppTheme.ts --out src/theme.d.ts
+generate-theme-type src/AppTheme.ts
 ```
 
 **Options:**
@@ -843,7 +843,7 @@ npx generate-theme-type generate src/AppTheme.ts --out src/theme.d.ts
 ### Theme File Guidelines
 
 - Keep `theme.ts` focused on token construction only.
-- Import only what you need for theme composition (`createTheme`, `defaultTheme`, `createThemeColors`).
+- Import only what you need for theme composition (`createTheme`, `defaultTheme`, `createThemeColors` from `@react-native-styled-system/util`).
 - Do not import from `react-native`, `react`, or other app runtime modules in `theme.ts`.
 - Keep `theme.ts` parser-friendly: it should act as a static token module and avoid hooks/components/screens.
 
@@ -953,8 +953,6 @@ Core exports from `@react-native-styled-system/core`:
 - `ResponsiveExcludedKey` - `'transform'`
 - `Token<ThemeKey>` - Token value type for a given theme key
 - `SpaceValue`, `SizesValue`, `ColorsValue`, `RadiiValue`, `TypographyValue` - Raw token value types
-- `BaseColor` - `'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'`
-- `ThemeColor` - BaseColor plus all Tailwind color names
 - `UseSxOptions` - Options for useSx hook
 - `UseSxStyleOptions` - Options for useSxStyle hook
 - `UseSxTokensOptions` - Options for useSxTokens hook
@@ -972,10 +970,20 @@ Core exports from `@react-native-styled-system/core`:
 - `useSxTokens` - Raw token value access
 
 ### Functions
-- `createThemeColors` - Generate semantic color sets
 - `createSxComponent` - HOC factory for View-style components
 - `createSxTextComponent` - HOC factory for Text-style components
 - `propsToThemedStyle` - Pure style resolution function
+
+## Exported API Summary
+
+Util exports from `@react-native-styled-system/util`:
+
+### Types
+- `BaseColor` - `'slate' | 'gray' | 'zinc' | 'neutral' | 'stone'`
+- `ThemeColor` - BaseColor plus all Tailwind color names
+
+### Functions
+- `createThemeColors` - Generate semantic color sets
 
 ### Constants
 - `emptyThemedDict` - Empty theme (all categories `{}`, breakpoints `[]`)
