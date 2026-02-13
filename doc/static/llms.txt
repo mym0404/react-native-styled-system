@@ -844,7 +844,13 @@ npx generate-theme-type generate src/AppTheme.ts --out src/theme.d.ts
 
 - Keep `theme.ts` focused on token construction only.
 - Import only what you need for theme composition (`createTheme`, `defaultTheme`, `createThemeColors`).
-- Avoid unrelated imports (components, hooks, screens, app runtime modules), which can break CLI bundling.
+- Do not import from `react-native`, `react`, or other app runtime modules in `theme.ts`.
+- Keep `theme.ts` parser-friendly: it should act as a static token module and avoid hooks/components/screens.
+
+:::danger
+If `theme.ts` imports runtime modules (`react-native`, `react`, hooks, providers, app services),
+`generate-theme-type` can fail to bundle the file and CLI generation stops.
+:::
 
 ### What It Generates
 

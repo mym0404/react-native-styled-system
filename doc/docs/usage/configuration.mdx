@@ -43,6 +43,13 @@ The quickest way to start. Includes a production-ready token set:
 
 ## `createTheme`
 
+When declaring your theme file, keep it parser-friendly: avoid `react-native` imports and define tokens only with theme utilities.
+
+:::danger
+`theme.ts` is bundled by the CLI. If it imports runtime modules like `react-native`,
+`react`, or app-level hooks/providers, `generate-theme-type` can fail.
+:::
+
 Use `createTheme` to build or extend a theme.
 
 **Extend `defaultTheme`** — each token group is shallow-merged, `breakpoints` is replaced:

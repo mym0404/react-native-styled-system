@@ -7,6 +7,15 @@ title: Custom Theme
 
 ## Theme shape
 
+`theme.ts` should be parser-friendly: define only token data and avoid importing `react-native` runtime APIs.
+Handle dynamic values in `AppThemeProvider` and pass completed values into `createTheme()`.
+
+:::danger
+If `theme.ts` imports runtime modules (`react-native`, `react`, hooks, providers, app services),
+CLI theme generation can fail (`generate-theme-type` fails to bundle the theme file).
+Keep theme files as static token definitions.
+:::
+
 A theme is a plain object matching `ThemedDict`:
 
 ```ts
