@@ -1,12 +1,11 @@
 {
-  "name": "@react-native-styled-system/core",
+  "name": "@react-native-styled-system/util",
   "version": "2.1.2",
-  "description": "React Native Styled System",
+  "description": "Theme utilities for React Native Styled System",
   "main": "lib/commonjs/index.js",
   "types": "lib/typescript/src/index.d.ts",
   "homepage": "https://github.com/mym0404/react-native-styled-system",
   "scripts": {
-    "gen": "node bin/theme-gen.js bin/theme.ts bin/ret.d.ts",
     "prepack": "bob build",
     "test": "jest"
   },
@@ -16,23 +15,6 @@
   },
   "author": "MJ Studio <mym0404@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@react-native-styled-system/cli": "workspace:*",
-    "@testing-library/react-native": "^13.3.3",
-    "@types/invariant": "^2.2.37",
-    "@types/react": "^19",
-    "@types/react-test-renderer": "^19",
-    "prettier": "^3.2.5",
-    "react": "*",
-    "react-native": "0.81.5",
-    "react-native-builder-bob": "^0.23.2",
-    "react-test-renderer": "^19",
-    "typescript": "^5.2.2"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
-  },
   "files": [
     "src",
     "lib",
@@ -40,14 +22,9 @@
     "!**/__fixtures__",
     "!**/__mocks__"
   ],
-  "dependencies": {
-    "@mj-studio/js-util": "1.0.34",
-    "@react-native-styled-system/util": "2.1.2",
-    "invariant": "^2.2.4",
-    "object-hash": "^3.0.0"
-  },
-  "bin": {
-    "generate-theme-type": "./bin/theme-gen.js"
+  "devDependencies": {
+    "react-native-builder-bob": "^0.23.2",
+    "typescript": "^5.2.2"
   },
   "react-native": "src/index.ts",
   "source": "src/index.ts",

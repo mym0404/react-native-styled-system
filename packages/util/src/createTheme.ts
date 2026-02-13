@@ -1,11 +1,14 @@
-import type { ThemedDict } from '../@types/ThemedDict';
+import type { Theme } from './types';
 
-export function createTheme(config?: Partial<ThemedDict>): ThemedDict;
-export function createTheme(base: ThemedDict, overrides: Partial<ThemedDict>): ThemedDict;
-export function createTheme(
-  baseOrConfig: Partial<ThemedDict> = {},
-  overrides?: Partial<ThemedDict>,
-): ThemedDict {
+type CreateThemeType = {
+  (config?: Partial<Theme>): Theme;
+  (base: Theme, overrides: Partial<Theme>): Theme;
+};
+
+export const createTheme: CreateThemeType = (
+  baseOrConfig: Partial<Theme> = {},
+  overrides?: Partial<Theme>,
+) => {
   if (overrides !== undefined) {
     return {
       colors: { ...baseOrConfig.colors, ...overrides.colors },
@@ -26,4 +29,4 @@ export function createTheme(
     breakpoints: [],
     ...baseOrConfig,
   };
-}
+};

@@ -1,4 +1,4 @@
-import type { ThemedDict } from '../src';
+import { createTheme, defaultTheme } from '@react-native-styled-system/util';
 
 const unit = 4;
 
@@ -29,7 +29,7 @@ const space = {
   48: 48 * unit, // 192px
 };
 
-export default {
+const themeOverrides = {
   colors: {
     white: '#FFFFFF',
     black: '#000000',
@@ -100,4 +100,6 @@ export default {
       fontSize: 20,
     },
   },
-} satisfies ThemedDict;
+};
+
+export default createTheme(defaultTheme, themeOverrides);

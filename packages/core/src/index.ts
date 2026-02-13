@@ -8,4 +8,3 @@ export * from './hook/useSxTokens';
 export * from './provider/StyledSystemProvider';
 export * from './util/propsToThemedStyle';
 export * from './util/createSxComponent';
-export * from './util/createTheme';

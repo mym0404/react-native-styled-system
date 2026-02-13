@@ -3259,7 +3259,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-styled-system/cli@workspace:packages/cli":
+"@react-native-styled-system/cli@workspace:*, @react-native-styled-system/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@react-native-styled-system/cli@workspace:packages/cli"
   dependencies:
@@ -3284,6 +3284,8 @@ __metadata:
   resolution: "@react-native-styled-system/core@workspace:packages/core"
   dependencies:
     "@mj-studio/js-util": "npm:1.0.34"
+    "@react-native-styled-system/cli": "workspace:*"
+    "@react-native-styled-system/util": "npm:2.1.2"
     "@testing-library/react-native": "npm:^13.3.3"
     "@types/invariant": "npm:^2.2.37"
     "@types/react": "npm:^19"
@@ -3324,6 +3326,15 @@ __metadata:
     react-test-renderer: "npm:18.2.0"
     ts-jest: "npm:^29.4.5"
     typescript: "npm:5.2.2"
+  languageName: unknown
+  linkType: soft
+
+"@react-native-styled-system/util@npm:2.1.2, @react-native-styled-system/util@workspace:packages/util":
+  version: 0.0.0-use.local
+  resolution: "@react-native-styled-system/util@workspace:packages/util"
+  dependencies:
+    react-native-builder-bob: "npm:^0.23.2"
+    typescript: "npm:^5.2.2"
   languageName: unknown
   linkType: soft
 

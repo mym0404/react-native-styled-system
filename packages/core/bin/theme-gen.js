@@ -7,20 +7,7 @@ const path = require('path');
 const filename = path.basename(__filename);
 const _printTag = 'Theme Gen' || filename;
 
-const { exec } = require('child_process');
-
-function execa(command, ...args) {
-  return new Promise((resolve, reject) => {
-    const fullCommand = `${command} ${args.join(' ')}`;
-    exec(fullCommand, (error, stdout, stderr) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(stdout.trim());
-      }
-    });
-  });
-}
+const { execFileSync } = require('child_process');
 
 function exist(path) {
   return fs.existsSync(path);
@@ -74,6 +61,29 @@ function printError(...args) {
   console.log(`⚠️ [${_printTag}]`, ...args);
 }
 
+function resolveCLI() {
+  try {
+    return require.resolve('@react-native-styled-system/cli/bin/index.js', {
+      paths: [__dirname],
+    });
+  } catch {}
+
+  const localCli = [
+    path.resolve(__dirname, '../../node_modules/@react-native-styled-system/cli/bin/index.js'),
+    path.resolve(__dirname, '../../packages/cli/bin/index.js'),
+    path.resolve(process.cwd(), 'packages/cli/bin/index.js'),
+    path.resolve(process.cwd(), 'node_modules/@react-native-styled-system/cli/bin/index.js'),
+  ].find((candidate) => exist(candidate));
+
+  if (!localCli) {
+    throw new Error(
+      'Theme generation requires @react-native-styled-system/cli as local dependency',
+    );
+  }
+
+  return localCli;
+}
+
 // endregion
 
 const go = async () => {
@@ -90,16 +100,13 @@ const go = async () => {
     process.argv[3] ||
     './node_modules/@react-native-styled-system/core/lib/typescript/src/@types/ThemedTypings.d.ts';
 
+  const cliCommand = resolveCLI();
+
   try {
-    await execa(
-      'npx',
-      '-y',
-      '@react-native-styled-system/cli',
-      'generate',
-      '--out',
-      tmpFile,
-      source,
-    );
+    execFileSync('node', [cliCommand, 'generate', '--out', tmpFile, source], {
+      cwd: process.cwd(),
+      stdio: 'inherit',
+    });
 
     /**
      * export interface ThemedTypings {

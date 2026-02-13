@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useWindowDimensions } from 'react-native';
+import { createTheme } from '@react-native-styled-system/util';
 
 import type { ThemedDict } from '../@types/ThemedDict';
 import { emptyThemedDict } from '../@types/ThemedDict';
-import { createTheme } from '../util/createTheme';
 
 export type StyledSystemContextValue = {
   theme: ThemedDict;

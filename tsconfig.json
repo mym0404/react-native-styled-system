@@ -3,6 +3,9 @@
     "paths": {
       "@react-native-styled-system/core": [
         "./packages/core/src/index"
+      ],
+      "@react-native-styled-system/util": [
+        "./packages/util/src/index"
       ]
     },
     "esModuleInterop": true,

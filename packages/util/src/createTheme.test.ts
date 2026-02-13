@@ -1,7 +1,6 @@
-import type { ThemedDict } from '../@types/ThemedDict';
-import { defaultTheme } from '../@types/ThemedDict';
-
 import { createTheme } from './createTheme';
+import type { ThemedDict } from './defaultTheme';
+import { defaultTheme } from './defaultTheme';
 
 describe('createTheme', () => {
   describe('create mode (single argument)', () => {
